@@ -1,0 +1,18 @@
+{   
+    "/api/dbsource/saveCSVtodatabase": {
+        "target": "http://localhost:8090",
+        "secure": false
+    },
+    "/api": {
+        "target": "http://localhost:8060",
+        "secure": false
+    },
+    "/runtime": {
+        "target": "http://localhost:8060",
+        "secure": false
+    },
+    "/payment" : {
+        "target": "http://localhost:8060",
+        "secure": false
+    }
+}

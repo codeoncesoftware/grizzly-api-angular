@@ -1,0 +1,37 @@
+.headerbar {
+  background-color: #001021;
+  color: white;
+}
+.project-toolbar {
+  background-color: #fff;
+  color: black;
+  height: auto;
+}
+.toolbar-text {
+  padding: 5%;
+  font-weight: 400;
+}
+.support-email{
+  font-size: 14px;
+  color: #002659;
+  font-weight: 500;
+  margin-left: 18%;
+}
+::-webkit-scrollbar {
+  height: 30px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(196, 192, 192);
+}
+
