@@ -1,0 +1,70 @@
+
+<app-loader></app-loader>
+<div class="container-fluid" tyle="text-align: center;height:100vh;position: relative;">
+  <div>
+    <form name="form" #f="ngForm">
+
+      <h1 mat-dialog-title> <span style="margin-left: 38%;" translate>{{ data.action.msg }}</span>
+        {{ data.team?.name }}</h1>
+
+      <mat-horizontal-stepper #stepper>
+        <div class="divider divider-md"></div>
+        <mat-step #teamForm>
+          <ng-template matStepLabel style="color: #fff"><span translate>popups.team.details</span></ng-template>
+          <div class="divider divider-md"></div>
+          <div class="container" style="height: 100%">
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input required matInput #name="ngModel"
+                (keyup)="generateTrigramme(name.value)"
+                  placeholder="{{ 'popups.team.placeholder.name' | translate}}" name="name"
+                  [(ngModel)]="team.name">
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <mat-error *ngIf="name?.errors?.required && name?.touched">
+                  <span translate>popups.team.errors.nullName</span>
+                </mat-error>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <textarea matInput placeholder="{{ 'popups.team.placeholder.description' | translate}}" rows="3"
+                  name="description" [(ngModel)]="team.description"></textarea>
+              </mat-form-field>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <input required matInput #trig="ngModel"
+                placeholder="Trigramme"
+                 name="trigramme"
+                [(ngModel)]="team.trigramme">
+              </mat-form-field>
+            </div>
+          </div>
+
+        </mat-step>
+
+      </mat-horizontal-stepper>
+
+      <div class="divider divider-md"></div>
+      <div class="box-body text-right">
+
+        <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()"
+         >
+          <span translate>popups.buttons.cancel</span></button>
+        <span class="space"></span>
+        <button mat-raised-button type="button" (click)="Save()"  color="primary"
+          class="btn-w-md" id="confirm" [disabled]="f.form.invalid ">
+          <span translate>popups.buttons.confirm</span></button>
+      </div>
+
+
+
+    </form>
+  </div>
+
+</div>

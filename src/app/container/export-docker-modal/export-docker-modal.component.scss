@@ -1,0 +1,25 @@
+.click {
+    color: #0000FF;
+    cursor: pointer;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10;
+    right: 2%;
+}
+
+.actions {
+    border: none;
+    background: none;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+.kube{
+    position: relative;
+    top: -7px;
+    left: 24px;
+    width: 19%;
+}

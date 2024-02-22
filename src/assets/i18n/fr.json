@@ -1,0 +1,1332 @@
+{
+    "chat": {
+        "msg": "Besoin d'un coup de main avec Grizzly? N'hésitez pas à nous contacter, ça nous fera plaisir de vous guider",
+        "reply": "Répond généralement en quelques minutes",
+        "start": "Démarrer le chat avec :"
+    },
+    "trial": {
+        "expiredMsg": "Votre période d'essai a expiré",
+        "msg1": "Nous n'avons pas pu vous connecter car votre période d'essai a expiré.",
+        "msg2": "Toutes vos données seront en sécurité pour les prochains jours, mais personne ne pourra se connecter tant que votre compte ne sera pas mis à jour.",
+        "msg3": "Choisissez parmi ces 3 plans :",
+        "scalability": "SCALABILITÉ",
+        "limitless": "illimité",
+        "consulting": "conseil",
+        "profesionnal": "PROFESSIONNEL",
+        "scalabilityMsg": "La bonne offre si vous créez et modifiez jusqu'à 18 microservices par mois",
+        "profesionnalMsg": "Travaillez avec votre équipe sur un nombre illimité de microservices",
+        "consultingMsg": "Vous avez besoin de conseils d'experts pour créer votre architecture basée sur les microservices",
+        "requestQuote": "Demander un devis",
+        "requestActivation": "Demander Activation",
+        "limitlessPrice": "5000 € / Mois",
+        "scalabilityPrice": "290€ par microservice modifié / mois"
+    },
+    "server": "Serveurs",
+    "host": "Hôte et URL de base",
+    "hostName": "Hôte",
+    "basePath": "Chemin de base",
+    "schemes": "Schemes",
+    "sidenav": {
+        "projects": "Microservices",
+        "datasources": "Source de Données",
+        "database": "Base de données liée : ",
+        "dashboard": "Tableau de Bord",
+        "organization": "Organisation",
+        "identityprovider": "Fournisseur d'identité"
+    },
+    "resources": "Ressources",
+    "organization": {
+        "notUser": "n'est pas un utilisateur. Une demande d'inscription a déjà été envoyée par email.",
+        "alreadyAssigned": "est déjà affecté à une organisation .",
+        "noTeams": "n'a pas encore d'équipes crées .",
+        "membersTitle": "Membres",
+        "teams": "Equipes",
+        "add": "Ajouter",
+        "delete": "Supprimer",
+        "save": "Enregistrer",
+        "edit": "Mettre à jour",
+        "invite": "Inviter",
+        "members": "Membres de l'organisation",
+        "member": {
+            "invite": "Inviter Membres",
+            "msg": "Invitez les membres à rejoindre cette organisation par mail. Pour inviter plusieurs membres, séparez-les par une virgule."
+        },
+        "adminNote": "Chaque organisation doit avoir au moins un Admin",
+        "inviteFormat": "Appuyez sur entrée ou , pour valider la sélection."
+    },
+    "team": {
+        "team": "Equipe",
+        "create": "Créer Equipe",
+        "created": "Crée",
+        "add": "Ajouter",
+        "delete": "Supprimer",
+        "edit": "Mettre à jour",
+        "invite": "Inviter",
+        "members": "Membres de l'équipe",
+        "member": {
+            "invite": "Ajouter des membres dans l'équipe",
+            "msg": "Invitez les membres à rejoindre cette équipe par mail. Séparez-les par une virgule."
+        },
+        "warning": "Vous ne pouvez ajouter que des membres de votre organisation."
+    },
+    "auth": {
+        "authentication": "Authentification",
+        "signin": {
+            "title": "CONNEXION",
+            "placeholder": {
+                "email": "Email",
+                "password": "Mot de passe"
+            },
+            "account": "Vous n'avez pas un compte? ",
+            "errors": {
+                "email": "Entrez votre Email associé à votre compte Grizzly.",
+                "credentials": "Les coordonnées ne sont pas valides.",
+                "validAccount": "Votre compte n'est pas encore activé ! \nVeuillez vérifier votre email pour un lien de confirmation.",
+                "checkEmail": "Vérifier votre email pour réinitialiser votre mot de passe."
+            },
+            "reset": "Réinitialiser Mot de passe",
+            "btn": "Se Connecter",
+            "signup": "S'inscrire",
+            "forgotPass": "Mot de passe oublié ?"
+        },
+        "signup": {
+            "title": "INSCRIPTION",
+            "placeholder": {
+                "firstName": "Prénom",
+                "lastName": "Nom",
+                "email": "Email",
+                "password": "Mot de passe",
+                "confirmPassword": "Confirmer le mot de passe",
+                "phone": "Téléphone",
+                "organisation": "Organisation"
+            },
+            "errors": {
+                "emailValid": "Entrez un email valide.",
+                "phoneValid": "Entrez un numéro de téléphone valide.",
+                "password": "Entrez votre mot de passe.",
+                "passwordMatch": "Les mots de passes ne sont pas identiques.",
+                "emailUnicity": "Cet email déjà existe."
+            },
+            "welcome1": "Bienvenue ",
+            "welcome2": "Votre compte a été créé avec succès. Vous recevrez très prochainement un émail à votre adresse qui vous permettra d'activer votre compte.",
+            "welcome3": "Profitez de la création de vos microservices CODELESS et laissez",
+            "us": "nous",
+            "welcome4": "savoir s'il y a quelque chose que nous puissions faire pour vous aider.",
+            "btn": "S'inscrire",
+            "login": "Connexion",
+            "account": "Déjà membre? "
+        },
+        "reset": {
+            "title": "REINITIALISER VOTRE MOT DE PASSE",
+            "placeholder": {
+                "password": "Mot de passe",
+                "confirmPassword": "Confirmer votre mot de passe"
+            },
+            "errors": {
+                "password": "Entrez votre mot de passe.",
+                "passwordMatch": "Les mots de passes ne sont pas identiques.",
+                "notFound": "Aucun utilisateur n'est enregistré avec cet email."
+            },
+            "welcome1": "Votre mot de passe est a été changé avec succès. Vous pouvez maintenant  ",
+            "welcome2": "avec votre nouveau mot de passe.",
+            "btn": "Soumettre",
+            "signup": "S'inscrire",
+            "login": "Se connecter"
+        }
+    },
+    "header": {
+        "settings": "Paramètres",
+        "logout": "Se Déconnecter",
+        "welcome": "Bienvenue",
+        "billing": "Facturation",
+        "doc" : "Guide"
+    },
+    "project": {
+        "shared": "Microservice partagé avec succès",
+        "edit": "Mettre à jour",
+        "delete": "Supprimer",
+        "select": "Veuillez Sélectionner une source de données pour ce microservice.",
+        "required": "Ce champ est requis.",
+        "req": "Ce champ est requis.",
+        "letters": "Veuillez entrer des lettres ou des chiffres seulement.",
+        "64": "Veuillez entrer au moins 64 caractères.",
+        "creationTime": "Date de création",
+        "lastUpdate": "Dernière mise à jour",
+        "noDescription": "Félicitations! Votre nouveau microservice est créé. Vous pouvez désormais le configurer en ajoutant des Endpoints.",
+        "limit": "Limite de création de microservices atteinte",
+        "limitMsg": "Pour pouvoir rajouter plus de microservices, veuillez passer votre compte à la catégorie Limiteless ou Scalability.",
+        "authDescription" : "Félicitations! Votre nouveau microservice d'authentification est créé",
+        "share": "Partager",
+        "idpsSupported": "Les fournisseurs d'identité supportés: ",
+        "datasource": {
+            "name": "Source de données",
+            "database": "Base de données",
+            "change": "Changer"
+        },
+        "identityprovider": {
+            "idpmsg": "Choisir un fournisseur d'identité",
+            "keycloak": "Choisir un fournisseur d'identité Keycloak",
+            "google": "Choisir un fournisseur d'identité Google",
+            "userManagement": "Microservice de gestion des utilisateurs",
+            "change": "Changer",
+            "idpDefault": "Continuer avec un founisseur d'identité par défaut"
+
+        },
+        "markupType": "Microservice Markup",
+        "security": {
+            "title": "Sécurité",
+            "config": "Configuration de la Sécurité (JWT / JWS)",
+            "clientId": "ID Client",
+            "secretKey": "Clé Secrète (32 caractères)",
+            "token": "Expiration du Token (en secondes)",
+            "save": "Sauvegarder",
+            "default": "Compte par Défaut",
+            "defaultDescription": "Vous avez une compte par défaut avec le role \"admin\".",
+            "tokenConfig": "Configuration du Token",
+            "manageRoles": "Gestion des Roles",
+            "addRole": "Ajouter Role",
+            "roleExists": "Ce role déjà existe.",
+            "authMS": "Microservice d'authentification",
+            "link": "Accéder ce microservice d'authentification",
+            "apiKeys": "Clés API",
+            "addApp": "Ajouter une Application",
+            "appSecretKey": "Clé Secrète (16 caractères)",
+            "appName": "Nom de l'application"
+        },
+        "authDocumentation": {
+            "user": "Documentation de la Sécurité",
+            "description1": "Utilisez cette Endpoint pour recevoir un JWT afin de sécuriser le reste des APIs.",
+            "description2": "Vous pouvez ajouter des utilisateurs avec des roles en utilisant cette Endpoint.",
+            "description3": "Ajouter le Token dans les Headers pour utiliser les Endpoints sécurisées.",
+            "curlRequest": "Requete CURL",
+            "angularExample": "Exemple avec Angular",
+            "signinModal": "Modèle du Signin",
+            "signupModal": "Modèle du Signup",
+            "oauthModal": "Modéle du OauthAutorization",
+            "response": "Réponse",
+            "signupNotice": "Ces champs sont requis. Vous pouvez ajouter d'autres champs.",
+            "tokenNotice": "C'est un exemple d'un token qu'on l'utilise pour exécuter les Endpoints sécurisées.",
+            "oauthUserinfo": "C'est un exemple d'un token qu'on l'utilise pour exécuter les Endpoints sécurisées."
+        }
+    },
+    "datasource": {
+        "add": "Ajouter une source de données",
+        "error": "Aucune source de données trouvée, veuillez ajouter une d'abord",
+        "default": "Créer automatiquement une nouvelle base de données gratuite en MongoDB",
+        "limit": "Limite de création des sources de données atteinte",
+        "limitMsg": "Pour pouvoir rajouter plus de sources de données, veuillez passer votre compte à la catégorie Limiteless ou Scalability."
+    },
+    "dbsource-modal": {
+        "clear": "Supprimer",
+        "cancel": "Annuler",
+        "add": "Ajouter une nouvelle source de données",
+        "select": "Sélectionner un fournisseur de base de données",
+        "type": "Sélectionner le type de la base de données",
+        "fill": "Remplir la connexion",
+        "review": "Aperçu",
+        "update": "Mettre à jour la source de données",
+        "couchebase": {
+            "example": "Exemples:",
+            "description": "Pour insérer des documents dans le \"Bucket\", définissez simplement la méthode HTTP sur PUT ou POST et ajoutez le document au corps de la requête HTTP lors de l'appel. Vous n'êtes pas obligés de fournir un corps de requête.",
+            "pagination": "Exemple de Pagination :",
+            "offset": " est le numéro de la page alors que ",
+            "limit": " est la taille de la page."
+        },
+        "sql": {
+            "example": "Exemples:",
+            "description": "Pour insérer des lignes dans la \"table\", définissez simplement la méthode HTTP sur PUT ou POST et ajoutez le document au corps de la requête HTTP lors de l'appel. Vous n'êtes pas obligés de fournir un corps de requête.",
+            "pagination": "Exemple de Pagination :",
+            "offset": " est le numéro de la page alors que ",
+            "limit": " est la taille de la page."
+        }
+    },
+    "dbsource": {
+        "add": "Ajouter une nouvelle base de données",
+        "simpleAdd": "Ajouter",
+        "fetch": "Cherchons les Data Sources",
+        "creationTime": "Date de création",
+        "lastUpdate": "Dernière mise à jour"
+    },
+    "identityprovider": {
+        "add": "Ajouter un nouveau fournisseur d'identité",
+        "simpleAdd": "Ajouter",
+        "fetch": "Cherchons les fournisseurs d'identité",
+        "creationTime": "Date de création",
+        "lastUpdate": "Dernière mise à jour",
+        "error": "Aucun fournisseur d'identité trouvé, voulez vous ajouter un par défaut ?",
+        "default": "Continuer automatiquement avec un fournisseur d'identité par défaut",
+        "userManagement" : "Gestion des utilisateurs",
+        "identityprovider" : "Aucun fournisseur d'identité choisi, veuillez de choisir un fournisseur d'identité",
+        "limit": "Limite de création des fournisseurs d'identité atteinte",
+        "limitMsg": "Pour pouvoir rajouter plus de fournisseurs d'identité, veuillez passer votre compte à la catégorie Limiteless ou Scalability."
+    },
+    "identityprovider-modal": {
+        "clear": "Supprimer",
+        "cancel": "Annuler",
+        "add": "Ajouter un nouveau fournisseur d'identité",
+        "type": "Sélectionner un fournisseur d'identité",
+        "fill": "Remplir la connexion",
+        "review": "Aperçu",
+        "update": "Mettre à jour le fournisseur d'identité",
+        "next" : "Suivant",
+        "placeholder" : {
+            "clientId" : "Id client",
+            "secretKey" : "Clé Secrète ",
+            "realmName" : "Nom du realm",
+            "port": "Port",
+            "acesstype" : "Type d'accès",
+            "displayedName" : "Nom",
+            "description": "Description",
+            "protocol" : "Protocole : OpenId Connect",
+            "grantType" : "Type de grant",
+            "issuer": "Issuer (url)"
+
+        }
+    },
+    "identityprovider-details": {
+        "status": "État"
+    },
+    "identityprovider-modal-review": {
+        "review": "Aperçu de la connexion ",
+        "ip": "Fournisseur d'identité  ",
+        "displayedName": "Nom ",
+        "realm" : "Nom de Realm ",
+        "clientID" : "ID Client ",
+        "acessType" : "Type d'accés ",
+        "grantType" : "Type de grant ",
+        "issuer" : "Issuer ",
+        "connection": " Connexion : ",
+        "description": "Description ",
+        "previous": "Précédent",
+        "create": "Créer founisseur d'identité",
+        "save": "Enregistrer"
+        
+    },
+    "dbsource-details": {
+        "warning": "Seules les bases de données avec au moins une collection seront affichées.",
+        "warningSQL": "Seules les bases de données avec au moins une table seront affichées.",
+        "status": "État",
+        "replaceData": "Remplacer les données existant par les nouveaux donnés du fichier CSV"
+    },
+    "identityprovider-modal-connection": {
+        "fail": "Échec de la connexion à le fournisseur d'identité, vérifiez les paramètres! ",
+        "success": "Connexion réussie !"
+    },
+    "dbsource-modal-cloud-connection": {
+        "cloud": "Connexion Cloud",
+        "fail": "Échec de la connexion à la source de données, vérifiez les paramètres! ",
+        "placeholder": {
+            "name": "Le nom de la source de données ",
+            "mongo": "MongoDB SRV connexion String"
+        },
+        "success": "Connexion réussie !",
+        "test": "Test de connexion",
+        "previous": "Précédent",
+        "next": "Suivant"
+    },
+    "dbsource-modal-direct-connection": {
+        "connection": "Connexion",
+        "database": "Base de données",
+        "perform": "Effectuer l'authentification",
+        "auth": "Authentification",
+        "fail": "Échec de la connexion à la source de données, veuillez vérifier les paramètres!",
+        "success": "Connexion réussie !",
+        "test": "Test de connexion",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "placeholder": {
+            "name": "Nom",
+            "host": "hôte",
+            "port": "Port",
+            "username": "Nom d'utilisateur",
+            "password": "Mot de passe",
+            "authb": "Authentification à la base de données",
+            "bucketName": "Nom du \"Bucket\""
+        }
+    },
+    "dbsource-modal-free": {
+        "free": "Base de données gratuite",
+        "previous": "Précédent",
+        "next": "Suivant",
+        "placeholder": {
+            "dbname": "Le nom de la source de données"
+        }
+    },
+    "dbsource-modal-provider": {
+        "connection": "Mode de connexion",
+        "free": "Gratuit",
+        "direct": "Directe",
+        "onpremise": "Sur le site",
+        "cloud": "Cloud",
+        "info1": "Le mode \"Gratuit\" est une offre limitée et appropriée à une mise en route. Veuillez nous contacter pour plus d'informations.",
+        "info2": "Si vous n’avez pas encore créé votre base de données sur le cloud, vous pouvez utiliser MongoDB Atlas à l’adresse suivante: https://www.mongodb.com/cloud/atlas",
+        "next": "Suivant"
+    },
+    "dbsource-modal-review": {
+        "review": "Aperçu de la connexion ",
+        "datasource": "Le nom de la source de données : ",
+        "database": "Le nom de la base de données : ",
+        "mongo": "MongoDB SRV connexion String : ",
+        "connection": " Connexion : ",
+        "previous": "Précédent",
+        "create": "Créer base de données",
+        "save": "Enregistrer",
+        "unicity": "Le nom de la source de données n'est pas unique! "
+    },
+    "dashboard": {
+        "totalStored": "Total Données Stockées",
+        "dataStored": "Données stockées",
+        "fileStored": "Fichiers stockés",
+        "requestCount": "Demandes Emises",
+        "apiCount": "Nombre des Endpoints",
+        "usedData": "Données utilisées",
+        "microserviceCount": "Microservices Créés",
+        "datasourceCount": "Source de données Créées",
+        "idpCount": "fournisseurs d'identité Créés"
+    },
+    "not-found": {
+        "sorry": "Oops! Page non trouvée",
+        "go": "Veuillez Retourner à la page d'accueil"
+    },
+    "container-modal": {
+        "placeholder": {
+            "description": "Il s'agit d'une description de cette version du projet."
+        },
+        "zip": "Vous pouvez ajouter un fichier ZIP pour une version antérieure",
+        "import": "Importer le fichier ZIP",
+        "selected": "Le fichier sélectionné : "
+    },
+    "settings": {
+        "placeholder": {
+            "first": "Prénom",
+            "last": "Nom",
+            "email": "Email",
+            "org": "Organisation",
+            "current": "Mot de passe actuel",
+            "new": "Nouveau mot de passe",
+            "confirm": "Confirmer mot de passe",
+            "showChangeBtn": "Changer le mot de passe",
+            "hideChangeBtn": "Masquer la section mot de passe"
+        },
+        "user": "Profil de l'utilisateur",
+        "lock": "Verrouiller",
+        "please": "Veuillez entrer un email valide.",
+        "phone": "Téléphone",
+        "ph": "Téléphone",
+        "valid": "Veuillez entrer un numéro de téléphone valide.",
+        "home": "Accueil",
+        "password": "Veuillez entrer votre mot de passe actuel pour mettre à jour votre profil.",
+        "change": "Changer mot de passe",
+        "enter": "Veuillez entrer votre nouveau mot de passe.",
+        "match": "Les mots de passe ne correspondent pas.",
+        "thanks": "Merci",
+        "profile": ", votre profil a été mis à jour avec succès.",
+        "notvalid": "Votre mot de passe actuel n'est pas valide.",
+        "number": "Veuillez entrer un numéro de téléphone valide.",
+        "update": "Mettre à jour le profil",
+        "pwdUpdate": ", votre mot de passe a été mis à jour avec succès.",
+        "unlockBtn": "Déverrouiller pour la mise à jour du profil",
+        "confirmBtn": "Confirmer",
+        "cancelBtn": "Annuler"
+    },
+    "container": {
+        "git": "Synchronisation Git",
+        "title": "Versions",
+        "add": "Ajouter",
+        "clone": "Cloner",
+        "import": "Importer",
+        "edit": "Mettre à jour",
+        "delete": "Supprimer",
+        "deleteAll": "Supprimers toutes les versions",
+        "creationTime": "Date de création",
+        "lastUpdate": "Dernière mise à jour",
+        "enable": "Activer Version",
+        "noContainers": "Aucune version trouvée.",
+        "showFiles": "Afficher ressources",
+        "actions": "Version",
+        "export": "Exporter",
+        "load": "Importer Swagger",
+        "publish": "Publier Swagger",
+        "file": "Fichier",
+        "swagger": "Valider & Tester",
+        "transformationDesc": "Pour toute Endpoint de transformation, vous devez définir un paramètre dans 'Body' nommé 'Body' qui contiendra le contenu du modèle."
+    },
+    "group": {
+        "actions": "Groupe",
+        "add": "Ajouter groupe des Endpoints",
+        "edit": "Mettre à jour groupe",
+        "delete": "Supprimer groupe",
+        "deleteAll": "Supprimer tous les groupes",
+        "security": {
+            "action": "Sécuriser Endpoint",
+            "secure": "Activer",
+            "insecure": "Désactiver"
+        }
+    },
+    "resource": {
+        "add": "Ajouter un Endpoint",
+        "edit": "Mettre à jour",
+        "delete": "Supprimer",
+        "deleteAll": "Supprimer",
+        "noResources": "Aucun Endpoint trouvé.",
+        "method": "Méthode",
+        "path": "Chemin",
+        "invalid": "L'endpoint manque des attributs",
+        "valid": "Endpoint valide",
+        "missing": "Votre ressource manques ces attributs:",
+        "requestError": "Modèle non enregistré : Sauvegarder ou quitter l'éditeur du modèle. ",
+        "responseError": "Modèle non enregistré : Sauvegarder ou quitter l'éditeur du modèle."
+    },
+    "popups": {
+        "msLimitReached": "Vous avez ",
+        "members": {
+            "onlyBusiness": "Exclusivement pour les membres Limiteless ou Scalability",
+            "onlyBusinessMsg": "Pour bénéficier de cette fonction, veuillez passer votre compte à la catégorie Limiteless ou Scalability."
+        },
+        "organization": {
+            "type": "Type du microservice",
+            "add": "Ajouter une organisation",
+            "edit": "Mettre à jour organisation",
+            "details": "Détails de l'organisation",
+            "delete": {
+                "title": "Supprimer Organisation",
+                "msg": "Voulez-vous vraiment supprimer l'organisation {{ name }} ?"
+            },
+            "placeholder": {
+                "name": "Nom",
+                "email": "Email",
+                "description": "Description",
+                "address": "Adresse",
+                "phone": "Tel"
+            },
+            "errors": {
+                "swaggers": "Un microservice doit contenir au moins un swagger",
+                "unicity": "Une Organisation avec ce nom existe déjà",
+                "nullName": "Le nom de l'organisation est obligatoire",
+                "nullEmail": "L'email de l'organisation est obligatoire",
+                "pattern": "Les éspaces ne peuvent être utilisés qu'au milieu "
+            }
+        },
+        "member": {
+            "delete": {
+                "title": "Supprimer Membre",
+                "msg": "Voulez-vous vraiment supprimer ce membre ?"
+            },
+            "deleteAdmin": {
+                "title": "La suppression de ce membre est impossible",
+                "msg": "Ce membre est un admin de cette organisation ."
+            }
+        },
+        "team": {
+            "add": "Ajouter une équipe",
+            "edit": "Mettre à jour équipe",
+            "details": "Détails de l'équipe",
+            "delete": {
+                "title": "Supprimer Equipe",
+                "msg": "Voulez-vous vraiment supprimer cette équipe ?"
+            },
+            "placeholder": {
+                "name": "Nom de l'équipe",
+                "description": "La description de l'équipe"
+            },
+            "errors": {
+                "unicity": "Une Equipe avec ce nom existe déjà",
+                "nullName": "Le nom du l'équipe est obligatoire",
+                "pattern": "Les espaces ne peuvent être utilisés qu'au milieu "
+            }
+        },
+        "project": {
+            "git": "Git",
+            "add": "Ajouter un nouveau Microservice",
+            "edit": "Mettre à jour Microservice",
+            "editIAM": "Mettre à jour IAM",
+            "details": "Details du microservice",
+            "selectDb": "Sélectionner une base de donnée",
+            "selectIP": "Sélectionner un fournisseur d'identité",
+            "securityConfig" : "Configuration de sécurité",
+            "userManagement": "Gestion des utilisateurs",
+            "addIAM": "Ajouter un nouveau IAM",
+            "authenticationMsg" : "Créer votre service de gestion des identités et des accès (IAM) avec le support de multi fournisseurs d'identité : Keycloak, Google, Linkedin, Facebook, GitHub, Gitlab",
+            "delete": {
+                "title": "Supprimer Microservice",
+                "msg": "Voulez-vous vraiment supprimer le microservice {{ projectName }} ?"
+            },
+            "typeMicroserviceMsg": "Créer votre microservice ou API REST Low Code , en se basant sur les derniers standars Java et la base de données SQL / NoSQL qui vous convient.",
+            "markupTypeMsg": "Toute la puissance des langages de transformation ( XSLT , FreeMarker , etc.) et l'import des données numériques binaires est entre vos mains , vous permettant de concevoir des API REST modernes.",
+            "madeBy": "Votre microservice est naturellement basé sur l'ensemble des technlogies : Java , Spring Boot , Open API v3 , Docker",
+            "placeholder": {
+                "gitUrl": "Url Git",
+                "name": "Nom du Microservice",
+                "collectionName": "Nom du collection",
+                "description": "La description du microservice",
+                "database": "Base de données"
+            },
+            "errors": {
+                "unicity": "Un Microservice avec ce nom existe déjà",
+                "null": "Le nom du Microservice est obligatoire",
+                "pattern": "Vous pouvez utiliser les lettres, les numéros et _ seulement ",
+                "url": "Veuillez entrer une URL valide (par exemple https://grizzlyeditor.codeonce.fr)"
+            },
+            "role": {
+                "unicity": "Ce role n'est pas unique"
+            },
+            "shareTitle": "Cette option est réservée aux membres d'équipes",
+            "shareMsg": "Vous devez faire partie d'au moins une équipe pour partager ce microservice.",
+            "noDelete": "Ce projet ne peut pas être supprimée car elle est déjà liée au autre projet"
+        },
+        "container": {
+            "git": "Synchronisation Git",
+            "name": "Titre",
+            "version": "Version",
+            "termsOfService": "Conditions de Service",
+            "infos": "Informations du swagger",
+            "add": "Ajouter une nouvelle version",
+            "clone": "Cloner version",
+            "edit": "Mettre à jour version ",
+            "delete": {
+                "title": "Supprimer Version",
+                "msg": "Voulez-vous vraiement supprimer la version '{{version}}'"
+            },
+            "deleteAll": "Supprimer toutes les versions",
+            "placeholder": "Version",
+            "errors": {
+                "unicity": "Cette version existe déjà",
+                "null": "La version est obligatoire",
+                "pattern": "Le nom de la version est invalide. Il faut respecter la convention de nommage de ",
+                "patternExample": "Vous pouvez consulter ces exemples"
+            }
+        },
+        "docker": {
+            "git": "Synchronisation Git",
+            "name": "Titre",
+            "version": "Version",
+            "termsOfService": "Conditions de Service",
+            "infos": "Informations du swagger",
+            "add": "Ajouter une nouvelle version",
+            "clone": "Cloner version",
+            "edit": "Mettre à jour version ",
+            "delete": {
+                "title": "Supprimer docker",
+                "msg": "Voulez-vous vraiement supprimer '{{version}}'"
+            },
+            "deleteAll": "Supprimer toutes les versions",
+            "placeholder": "Version",
+            "errors": {
+                "unicity": "Cette version existe déjà",
+                "null": "La version est obligatoire",
+                "pattern": "Le nom de la version est invalide. Il faut respecter la convention de nommage de ",
+                "patternExample": "Vous pouvez consulter ces exemples"
+            }
+        },
+        "group": {
+            "add": "Ajouter un nouveau groupe",
+            "edit": "Mettre à jour groupe",
+            "delete": {
+                "title": "Supprimer groupe",
+                "msg": "Voulez-vous supprimer le groupe '{{name}}'"
+            },
+            "deleteAll": "Supprimers tous les groupes",
+            "placeholder": "Nom du groupe",
+            "errors": {
+                "unicity": "Ce groupe existe déjà",
+                "null": "Le nom du groupe est obligatoire",
+                "pattern": "Les espaces ne peuvent être utilisés qu'au milieu "
+            }
+        },
+        "resource": {
+            "add": "Ajouter une nouvelle Endpoint",
+            "edit": "Mettre à jour l'Endpoint",
+            "delete": {
+                "title": "Supprimer les Endpoints",
+                "msg": "Voulez vous supprimer les endpoints sélectionnés?"
+            },
+            "deleteAll": "Supprimer toutes les Endpoints",
+            "placeholder": "Saisir le nom de votre Endpoints",
+            "errors": {
+                "unicity": "Cette Endpoint existe déjà",
+                "null": "Le nom de l'Endpoint est obligatoire",
+                "pattern": "Les espaces ne peuvent être utilisés qu'au milieu "
+            },
+            "jwt": {
+                "title": "Json Web Token",
+                "enable": "Voulez-vous activer l'authentification JWT?",
+                "disable": "Voulez-vous désactiver l'authentification JWT?",
+                "chooseRoles": "Choisir les roles",
+                "rolesError": "Il faut choisir au moins un role"
+            },
+            "deleteAllFiles": {
+                "action": "Supprimer tous les fichiers",
+                "title": "Supprimer tous les fichiers",
+                "msg": "Tous les fichiers de la version {{containerName}} seront supprimés et ne pourront pas être récupérés"
+            },
+            "index": "Type de l'Index"
+        },
+        "dbsource": {
+            "table": {
+                "delete": {
+                    "title": "Supprimer la table",
+                    "msg": "Voulez vous supprimer la table [ {{ tableName }} ] {{ linkedTables }} ?"
+                }
+            },
+            "delete": {
+                "title": "Supprimer Source de données",
+                "msg": "Voulez vous supprimer la datasource {{ datasourceName }} ?"
+            },
+            "noDelete": "Cette source de données ne peut pas être supprimée car elle est déjà liée au projet {{ projectName }}",
+            "collection": {
+                "drop": {
+                    "title": "Supprimer Collection",
+                    "msg": "Voulez vous supprimer la collection {{ collectionName }} ?"
+                }
+            },
+            "errors": {
+                "unicity": "Une Source de données avec ce nom existe déjà",
+                "pattern": "Vous pouvez utiliser les numéros, les lettres et _ seulement "
+            }
+        },
+        "identityprovider": {
+            "delete": {
+                "title": "Supprimer Fournisseur d'identité",
+                "msg": "Voulez vous supprimer le fournisseur d'identité {{ identityproviderName }} ?"
+            },
+            "edit": {
+                "title": "Modifier Fournisseur d'identité",
+                "msg": "Vous pouvez pas modifier le fournisseur d'identité {{ identityproviderName }} !"
+            },
+            "test": "Test de connexion",
+            "noDelete": "Ce fournisseur d'identité ne peut pas être supprimée car elle est déjà liée au projet"
+           
+        },
+        "buttons": {
+            "confirm": "Confirmer",
+            "cancel": "Annuler",
+            "back": "Précédent",
+            "next": "Suivant",
+            "saveAndExit": "Enregistrer & Quitter",
+            "close": "Fermer",
+            "download": "Télécharger",
+            "selectAll": "Organisation",
+            "team": "Equipe",
+            "upgrade": "Upgrade Account"
+        },
+        "search": {
+            "showTree": "Montrer l'arborescence",
+            "hideTree": "Cacher l'arborescence",
+            "import": "Importer Fichier"
+        },
+        "domain": {
+            "open": "Ouvrir le domaine du modèle"
+        },
+        "model": {
+            "delete": {
+                "title": "Supprimer Modèle",
+                "msg": "Voulez vous supprimer le modèle {{ modelName }} ?"
+            },
+            "tsIndication": "Ajoutez votre modèle Typescript à l'aide de cet éditeur",
+            "tsEditIndication": "Modifiez votre modèle Typescript à l'aide de cet éditeur",
+            "nameNotEditable": "NB : Le nom du modéle ne peut pas être changé."
+        },
+        "contact": {
+            "name": "Le nom du contact de la personne/organisation",
+            "url": "L'URL qui pointe vers les informations du contact",
+            "email": "L'email du contact de la personne/organisation"
+        },
+        "function": {
+            "delete": {
+                "title": "Supprimer Fonction",
+                "message": "Voulez vous supprimer la function {{ name }} ?"
+            }
+        }
+
+    },
+    "actions": {
+        "importProject": "Importer ressources",
+        "pullProject": "Pull From Git",
+        "pushProject": "Push To Git",
+        "syncProject": "Synchronisation Git",
+        "importFromGit": "Importer un dépôt Git",
+        "importZipFile": "Importer un fichier .ZIP",
+        "importSwaggerFile": "Importer un fichier Swagger"
+    },
+    "git": {
+        "import": {
+            "error": "Vérifier l'URL de dépôt GIT et les informations d'identification"
+        },
+        "btn": {
+            "syncronise": "Synchroniser",
+            "addBranch": "Ajouter Branche",
+            "clone": "Cloner",
+            "check": "Vérifier Branches"
+        }
+    },
+    "api": {
+        "addHeaders": "Ajouter Headers",
+        "definition": "Définition de l'Endpoint",
+        "enumMsg": "Vous pouvez ajouter une ou plusieurs valeurs en les séparant par une virgule ou entrée .",
+        "responseDetails": "Détails de la réponse",
+        "jsonEditorMsg": "Vous pouvez utiliser cet éditeur JSON pour ajouter votre exemple de réponse.",
+        "doc": "Documentation",
+        "examples": "Exemples",
+        "view": "Voir modèle",
+        "exitEditor": "Quitter Editeur",
+        "addParams": "Ajouter Paramètre",
+        "required": "Obligatoire",
+        "addCodes": "Ajouter Réponse",
+        "emptyCollection": "La collection est requise",
+        "emptyTable": "La table est requise",
+        "emptySqlQuery": "La requête SQL est requise",
+        "emptyCode": "Le code de la réponse est obligatoire",
+        "emptyDescription": "La description de la réponse est obligatoire",
+        "headerExisting": "Ce header est déjà existant !",
+        "placeholder": {
+            "name": "Nom",
+            "http": "Méthode HTTP",
+            "endpoint": "Chemin de l'Endpoint",
+            "request": "Type de contenu de la Requête",
+            "response": "Type de contenu de la Réponse",
+            "nam": "Nom...",
+            "this": "Ceci est le contenu de la transformation",
+            "default": "Valeur par défaut...",
+            "collection": "Nom de la collection",
+            "fname": "Nom du fichier en paramètres",
+            "selectCollection": "Veuillez selectionner une collection de la base de données",
+            "selectIndex": "Veuillez selectionner un Index",
+            "uploadFile": "Importer un fichier",
+            "snippet": "Sélectionnez une requête par défaut",
+            "selectModel": "Sélectionnez un modèle",
+            "noModel": "Aucun modèle n'est encore ajouté",
+            "selectFunction": "Veuillez choisir la fonction"
+        },
+        "qtype": "Type de requête",
+        "cancel": "Annuler",
+        "close": "Fermer",
+        "query": "Requête",
+        "fichier": "Gestion de fichiers",
+        "one": "Objet",
+        "many": "Tableau",
+        "in": "Pour manipuler, récupérer ou supprimer des fichiers, veuillez fournir un paramètre appelé '",
+        "id": "id",
+        "htt": "' dans la requête HTTP avec la valeur de l'identifiant du fichier.",
+        "page": "Paginable",
+        "please": "Veuillez fournir les paramètres suivants de requête lorsque vous appelez cet Endpoint: ",
+        "hold": ": paramètre pour contenir le numéro de page",
+        "per": ": paramètre pour contenir le nombre d'éléments par page",
+        "insert": "Pour insérer un objet dans la base de données, ajoutez-le à la requête HTTP Body sur l'appel de l'Endpoint.",
+        "update": "Pour mettre à jour un objet de la base de données, définissez une requête pour l'opération de recherche et ajoutez les colonnes à mettre à jour dans la requête HTTP Body sur l'appel API.",
+        "string": "Chaine",
+        "integer": "Entier",
+        "boolean": "Booléen",
+        "char": "Caractère",
+        "ad": "Ajouter",
+        "name": "Nom",
+        "value": "Valeur",
+        "body": "Le contenu du Body ",
+        "or": "Ou",
+        "n": "Nom :",
+        "desc": "Description : ",
+        "summary": "Résumé : ",
+        "Validity": "Validité : ",
+        "http": "Méthode HTTP  : ",
+        "prod": "Produit : ",
+        "cons": "Consomme : ",
+        "selected": "Fichier sélectionné : ",
+        "path": "Chemin d'exécution : ",
+        "second": "Fichier secondaire sélectionné :",
+        "list": "Liste des paramètres : ",
+        "respo": "Liste des Réponses : ",
+        "under": "Sous chaque méthode Http, le chemin d'accès à l'Endpoint doit être unique.",
+        "add": "Ajouter Endpoint",
+        "edit": "Mettre à jour Endpoint",
+        "addCollection": "Ajouter une Collection",
+        "hideDetails": "Cacher les détails",
+        "advancedDetails": "Détails avancés",
+        "insertData": "Insérer des données",
+        "updateData": "Mise à jour des données",
+        "readData": "lire les données",
+        "parameters": "Liste des paramètres",
+        "recap": "Récapitulation",
+        "reqDetails": "Requête d'exécution",
+        "resDetails": "200 - Requête | Réponse HTTP",
+        "file": "Gestion de fichiers",
+        "importedFile": "Le fichier est importé",
+        "staticRes": "CSS, Images, Media",
+        "returnNumber": "Le type de la réponse",
+        "requestNumber": "Le type du Body de la requête",
+        "returnElementNumber": "Votre endpoint va retourner un tableau ou bien un objet ?",
+        "requestElementNumber": "Le Body de la requête est un objet ou un tableau ?",
+        "template": "Modèle de Markup",
+        "resources": "Sélectionnez votre modèle markup et toutes les ressources à injecter (CSS, Js, Images, Media...)",
+        "noSelectedFiles": "Aucun fichier sélectionné",
+        "templateStep": "Markup, CSS, Js, Images...",
+        "httpCodes": "Codes d'état de réponse HTTP",
+        "type": "Type de l'Endpoint",
+        "insertUpdate": "Veuillez choisir le type de cet Endpoint, qu'il s'agisse d'une insertion de données, d'une mise à jour ou d'une exécution de fonction",
+        "read": "Veuillez choisir le type de cet Endpoint, qu'il s'agisse d'une lecture de données ou d'une exécution de fonction",
+        "reqBody": "Vous pouvez définir le corps de la requête à éxécuter",
+        "paramList": "Liste des paramètres",
+        "emptyPath": "L'Endpoint ne peut pas être vide",
+        "copy": "Copier l'URL de l'Endpoint",
+        "requestModel": "Modèle de la requête",
+        "responseModel": "Modèle de la réponse",
+        "functions": "Fonctions",
+        "viewFunction": "Afficher la fonction",
+        "hideFunction": "Masquer la fonction",
+        "inFunction": "Fonction d'entrée ",
+        "outFunction": "Fonction de sortie",
+        "previewInFunction": "Aperçu de la fonction d'entrée",
+        "previewOutFunction": "Aperçu de la fonction de sortie",
+        "chooseFunction": "Choisissez la fonction",
+        "function": "Executer une function",
+        "previewFunction": "Aperçu de la fonction",
+        "insertFunction": "Veuillez inserer la fonction",
+        "apiFunction": "Fonction",
+        "requiredFunction": "Veuillez choisir la function ",
+        "deleteData": "Supprimer les données",
+        "createFunction": "Créer Fonction"
+
+
+
+
+    },
+    "query-api-modal": {
+        "close": "Fermer",
+        "file": "Nom du fichier",
+        "placeholder": {
+            "name": "Nom...",
+            "default": "Valeur par défaut..."
+        },
+        "string": "Chaine",
+        "integer": "Entier",
+        "boolean": "Booléen",
+        "reqType": "Type de la requête",
+        "char": "Caractère",
+        "name": "Nom",
+        "type": "Type",
+        "value": "Valeur",
+        "confirm": "Confirmer"
+    },
+    "staticresource": {
+        "add": "Ajouter Ressource Statique"
+    },
+    "reset": {
+        "resetPassword": "Réinitialiser le mot de passe",
+        "enterPassword": "Veuillez saisir votre nouveau mot de passe",
+        "passwordNotMatch": "Les mots de passe saisis ne correspondent pas",
+        "resetSuccessReset": "Votre mot de passe a été envoyé avec succès. Nous avons envoyé un lien de confirmation à votre adresse e-mail qui va expirer dans 24 heures",
+        "submit": "Valider",
+        "signup": "S'inscrire",
+        "login": "S'identifier"
+    },
+    "resource-details-modal": {
+        "resource": "Resource Paramètres",
+        "value": "Valeur",
+        "no": " Aucun paramètre attaché à cette ressource.",
+        "close": "Fermer"
+    },
+    "help": {
+        "apiPath": "Définissez la méthode de l'Endpoint (ex: GET) et le chemin (ex: '/ users / all')",
+        "collection": "Sélectionnez une collection dans la liste déroulante. Vous pouvez utiliser le bouton \"Ajouter une Collection\" pour ajouter une nouvelle collection en saisissant le nom de la nouvelle collection, puis approuvez-le.",
+        "contentTypeReq": "La propriété Content-Type est utilisé pour indiquer le type du contenu de la ressource dans la requête.",
+        "contentTypeRes": "La propriété Content-Type est utilisé pour indiquer le type du contenu de la ressource dans la réponse.",
+        "resNumber": "Retournez tous les éléments du tableau de résultat ou uniquement le premier élément.",
+        "reqNumber": "Passez un seul élément dans la requête et Sélectionnez un modèle si votre requête comprend un body de type objet à ajouter ou bien un tableau d'éléments.",
+        "fileName": "Définissez le nom du paramètre qui va contenir le fichier lors de l'appel de l'Endpoint. \n (ex: 'fileToUpload')",
+        "reqType": "Cet Endpoint peut être utilisé pour insérer ou mettre à jour des données. \n Vous devez sélectionner une option. \n Par défaut, l'option 'Insérer' est sélectionnée.",
+        "projection": "Définissez les champs à renvoyer pour tous les objets correspondants. Seules les propriétés nommées seront renvoyées.",
+        "query": "Vous pouvez définir la requête à exécuter pour manipuler les données. La requête doit respecter un format spécifique. Chaque nom de champ doit avoir un paramètre, commençant par '%', comme valeur.\n (ex: {\"name\": \"%name\"} et vous définissez un nouveau paramètre '%name' dans la section des paramètres)",
+        "addParam": "Après avoir défini le corps de la requête, ajoutez vos paramètres (commençant par '%') dans cette section. \n (ex: {\"field\": \"% val\"}, ajouter un paramétre avec les propriétés suivantes\n nom: val, type: chaîne et une valeur par défaut en cas de besoin)",
+        "addParamEditor": "Vous pouvez ajouter les paramétres nécessaires pour vos endpoints et les manipuler",
+        "httpStatus": "HTTP définit quarante codes d’état standard pouvant être utilisés pour transmettre les résultats de la demande d’un client. Vous pouvez remplacer les messages des codes d'état.",
+        "primaryRessource": "Sélectionnez le fichier de la transformation.",
+        "secondaryRessource": "Sélectionnez les fichiers statiques à injecter dans le fichier de la transformation.",
+        "requestModel": "Sélectionnez un modèle si votre requête comprend un body de type objet à ajouter.",
+        "responseModel": "Sélectionnez une réponse modèle.",
+        "outFunction": "Vous pouvez ajouter une fonction qui agit comme un intercepteur de sortie à votre API",
+        "inFunction": "Vous pouvez ajouter une fonction qui agit comme un intercepteur d'entrée à votre API, vous pouvez lui transmettre le corps inséré, les paramètres de requête et les variables de chemin"
+    },
+    "file-explorer": {
+        "noResources": "Aucune ressource truovée, pour importer cliquer ",
+        "here": "ici"
+    },
+    "import-modal": {
+        "dbError": "Il faut lier une base de données à un microservice avant de télécharger les ressources.",
+        "fromGit": "Depuis Git",
+        "clone": "Cloner",
+        "branch": "Branche",
+        "public": "Publique",
+        "private": "Privé",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "token": "Token (Pour Les Repo Github)"
+    },
+    "swagger": {
+        "placeholder": {
+            "fileUrl": "URL du fichier Swagger"
+        },
+        "inspector": "Inspecteur Swagger",
+        "open": "Ouvrir Inspecteur",
+        "errorMsg": "Le fichier Swagger ne peut pas être importé. Veuillez vérifier l'URL et réessayer"
+    },
+    "comingSoon": "Bientôt disponible",
+    "toastr": {
+        "projectUpdated": "Microservice a été mis à jour"
+    },
+    "messageBox": {
+        "model": {
+            "delete": "La suppression de ce modéle aura un impact sur les endpoints qui l'utilisent."
+        },
+        "project": {
+            "delete": "Lorsque vous supprimez un microservice, cela se produit immédiatement",
+            "msgDeleteAllVersion": "Toutes les versions de ce microservice vont être supprimées",
+            "msgDeleteAllFiles": "Tous les fichiers liés aux versions de ce microservice vont être supprimés"
+        },
+        "dbsource": {
+            "delete": "Lorsque vous supprimez une source de données, cela se produit immédiatement",
+            "msgDeleteAllcontent": "Tout le contenu va étre écrasé",
+            "msgNoBackup": "Aucune sauvegarde possible pour cette source de données"
+        },
+        "identityprovider": {
+            "delete": "Lorsque vous supprimez un fournisseur d'identité, cela se produit immédiatement",
+            "msgDeleteAllcontent": "Tout le contenu va étre écrasé",
+            "msgNoBackup": "Aucune sauvegarde possible pour ce fournisseur d'identité"
+        },
+        "table": {
+            "delete": "Lorsque vous supprimez une table, cela se produit immédiatement",
+            "msgDeleteAllcontent": "Tout les contraintes vont étre écrasé",
+            "msgNoBackup": "Aucune sauvegarde possible pour cette table",
+            "msgDeleteLinkedTables": "les tables liées avec des contraintes vont etre supprimé"
+        },
+        "organization": {
+            "delete": "Lorsque vous supprimez une organisation, cela se produit immédiatement"
+        },
+        "team": {
+            "delete": "Lorsque vous supprimez une équipe, cela se produit immédiatement"
+        },
+        "member": {
+            "delete": "Lorsque vous supprimez un membre, cela se produit immédiatement"
+        }
+    },
+    "swaggerModal": {
+        "descOpenApi": "Nous nous appuyons sur les spécifications OpenAPI (anciennement Swagger), un format de description d'API pour les API REST, afin de générer un fichier OpenAPI permettant de décrire l'intégralité de votre API.",
+        "afterConfig": "Après avoir configuré la version du microservice en définissant toutes les définitions de points de terminaison, vous disposez de plusieurs options pour valider, exécuter et partager cette version.",
+        "inspectorDesc": "Testez et validez vos points de terminaison",
+        "inscpectorVerify": "Vous pouvez utiliser cet inspecteur Swagger pour vérifier que vos API fonctionnent correctement. Cet inspecteur doit être utilisé pour tester vos API de requête uniquement.",
+        "inspectorValidate": "Si votre définition d'API contient une incohérence, l'inspecteur décrira cette erreur. Vous pouvez exécuter toute API valide directement à partir de l'inspecteur.",
+        "postmanDesc": "Importer les définitions de l'API dans Postman",
+        "executeLocal": "Tester l'API localement",
+        "executeWays": "Vous pouvez importer vos définitions d'API dans Postman de deux manières. Vous pouvez choisir d'utiliser:",
+        "json": "Contenu Swagger",
+        "file": "Ficher Swagger",
+        "jsonStep1": "Copier le contenu JSON de Swagger.",
+        "jsonStep2": "Cliquez sur le bouton 'Importer' dans le coin supérieur gauche de Postman UI.",
+        "jsonStep3": "Vous verrez plusieurs options pour importer le document d'API. Cliquez sur le bouton 'Coller le texte brut'.",
+        "jsonStep4": "Collez le format JSON dans la zone de texte et cliquez sur importer.",
+        "jsonStep5": "Vous verrez votre API comme 'Collection Postman' et vous pourrez les utiliser à partir du postman.",
+        "downloadStep1": "Téléchargez le fichier Swagger JSON.",
+        "downloadStep2": "Cliquez sur le bouton 'Importer' dans le coin supérieur gauche de Postman UI.",
+        "downloadStep3": "Vous verrez plusieurs options pour importer le document de l'API. Cliquez sur 'Importer le fichier'.",
+        "downloadStep4": "Faites glisser le fichier Swagger directement à partir de celui-ci et sélectionnez-le dans le système de fichiers",
+        "downloadStep5": "Vous verrez toutes vos API sous le nom de 'Collection Postman' et vous pourrez les utiliser à partir de Postman.",
+        "shareFile": "Partager le fichier Swagger",
+        "downloadShare": "Téléchargez et partagez votre définition de l'API",
+        "shareTwoWays": "Grizzly fournit deux méthodes pour partager les définitions de votre API en fonction de vos besoins:",
+        "withDevs": "1 - Partagez avec d'autres utilisateurs de Grizzly-API",
+        "devDesc": "Afin de partager votre travail avec d'autres utilisateurs de la plateforme Grizzly-API, il vous suffit de télécharger le fichier Swagger dédié au développement",
+        "forDev": "Télécharger Swagger pour dévelopement",
+        "openApiforDev": "Télécharger OpenApi pour dévelopement",
+        "withUsers": "2 - Partager avec les utilisateurs finaux",
+        "usersDesc": "Afin de partager votre travail avec des utilisateurs finaux ou des clients, veuillez télécharger le fichier Swagger dédié à la production",
+        "forProd": "Télécharger Swagger pour production",
+        "openApiforProd": "Télécharger OpenApi pour production",
+        "click": "cliquez ici",
+        "swagFileJson": "Swagger (JSON)",
+        "openApiFileJson": "OpenApi (JSON)",
+        "serverUrl": "Url du serveur pour ",
+        "tsExport": "Exporter les modéles swagger en classes typescript",
+        "downloadTypescript": "Téléchargez vos mdoéles swagger en format typescript",
+        "exportOption": "Grizzly vous donne la possibilité de télécharger vos modéles Swagger en fichiers Typescript pour les ajouter facilement dans vos projets.",
+        "usefulLinks": "Liens Utiles",
+        "usefulLinksMsg": "Visualisez et partagez votre microservice"
+
+    },
+    "github": {
+        "emailExists": "Votre e-mail Github est déjà lié à un compte sur Grizzly. Si vous avez oublié votre mot de passe, demandez une réinitialisation du mot de passe.",
+        "login": "Se connecter avec Github"
+    },
+    "toaster": {
+        "docker": {
+            "exported": "Docker exporté avec succés",
+            "pending": "Un autre export est en cours ..."
+        },
+        "editor": {
+            "shared": "Microservice partagé avec succès"
+        },
+        "organization": {
+            "added": "Organisation ajoutée",
+            "updated": "Organisation mise à jour",
+            "deleted": "Organisation supprimée",
+            "limit": "Limite Atteinte!"
+        },
+        "member": {
+            "added": "Membre ajouté",
+            "updated": "Membre mis à jour",
+            "deleted": "Membre supprimé",
+            "limit": "Limite Atteinte!"
+        },
+        "team": {
+
+            "added": "Equipe ajoutée",
+            "updated": "Equipe mise à jour",
+            "deleted": "Equipe supprimée",
+            "limit": "Limite Atteinte!"
+
+        },
+        "project": {
+            "added": "Microservice ajouté",
+            "updated": "Microservice mis à jour",
+            "deleted": "Microservice supprimé",
+            "limit": "Limite Atteinte!",
+            "integrated": "Projet intégré",
+            "name": "Nom du projet déjà existe"
+        },
+        "container": {
+            "git": "Syncronisation Git",
+            "added": "Version ajoutée",
+            "updated": "Version mise à jour",
+            "deleted": "Version supprimée",
+            "allDeleted": "Toutes les versions ont été supprimées",
+            "filesDeleted": "Tous les fichiers ont été supprimés",
+            "imported": "Version Importée",
+            "exported": "Version Exportée",
+            "cloned": "Version Clonée",
+            "fileLimit": "La taille du fichier dépasse la limite de votre offre.",
+            "cloneLimit": "La taille de la version clonée dépasse votre offre.",
+            "gitLimit": "La taille du repo GIT dépasse votre offre."
+
+
+        },
+        "group": {
+            "added": "Endpoint group Added",
+            "updated": "Endpoint group Updated",
+            "deleted": "Endpoint group Deleted"
+        },
+        "resource": {
+            "copy": "Copié au clipboard"
+        },
+        "datasource": {
+            "added": "Source de données ajoutée",
+            "updated": "Source de données mise à jour",
+            "deleted": "Source de données supprimée",
+            "limit": "La limite des sources de données est Atteinte!",
+            "uploadcsv": {
+                "added": "Fichier ajoutée",
+                "error": "Vérifier le type de votre fichier"
+            },
+            "collection": {
+                "added": "Collection ajoutée",
+                "error": "Collection ne peut pas être ajoutée",
+                "dropped": " Collection supprimée"
+            },
+            "table": {
+                "error": "Table ne peut pas être supprimée",
+                "dropped": "Table supprimée avec succées",
+                "added": "Table ajoutée"
+
+            }
+        },
+        "identityprovider": {
+            "added": "fournisseur d'identité ajoutée",
+            "updated": "fournisseur d'identité mise à jour",
+            "deleted": "fournisseur d'identité supprimée",
+            "limit": "La limite des fournisseurs d'identité est Atteinte!",
+            "name": "Nom du founisseur d'identité déjà existe"
+        },
+        "model": {
+            "added": "Modéle ajouté",
+            "updated": "Modéle mis à jour",
+            "deleted": "Modéle supprimée",
+            "request": "Modéle de la requête défini",
+            "response": "Modéle de la réponse défini",
+            "error": {
+                "classModel": "Vous devez fournir une classe ou une interface !",
+                "emptyName": "Vous devez fournir un nom de modèle !",
+                "undefinedName": "Il y a un attribut sans nom !",
+                "undefinedType": "Il y a un attribut sans type !",
+                "missingBraces": "Il vous manque une accolade !",
+                "typeError": "{{type}} est indéfinie !",
+                "alreadyExists": "Modèle déjà existe",
+                "noNameEdit": "Le nom de modéle ne peut pas être changé"
+            }
+        },
+        "function": {
+            "added": "La fonction a été enregistrée",
+            "updated": "La fonction mise à jour",
+            "deleted": "La fonction a été supprimée",
+            "notUnique": "Veuillze Inserer verion unique de la fonction",
+            "null": "Inserez les données",
+            "attachedFunction ": "Fonctions attachées ",
+            "selectFunctionLanguage": "Veuillez choisir le langage de votre fonction",
+            "insertFunctionName": "Veuillez choisir le nom de votre fonction ",
+            "insertFunctionVersion": "Veuillez choisir la version de votre fonction "
+
+        }
+    },
+    "editor": {
+        "history": {
+            "title": "Votre historique local",
+            "msg": "La liste des microservices sauvegardés dans votre historique"
+        },
+        "model": "Gérez vos modèles du swagger",
+        "tip1": "Il suffit de glisser les endpoints entre les tags pour les déplacer.",
+        "tip2": "Il suffit de cliquer sur le bouton Partager pour rendre la page accessible pour vos collègues.",
+        "tip3": "La prévisualisation de votre Swagger/OpenAPI est disponible en format JSON ou YAML.",
+        "tip4": "Vous pouvez ajouter des modèles avec des fichiers Typescript.",
+        "tip5": "Pour sécuriser vos endpoints, veuillez utiliser la fonctionnalité de l'intégration avec GrizzlyAPI.",
+        "tip6": "Saviez vous que GrizzlyEditor offre la possibilité d'exporter en Swagger V2 et OpenAPI V3.0.1?",
+        "btn": {
+            "history": "Historique local",
+            "model": "Modèle",
+            "integrate": "Intégrer",
+            "integrateApi": "Intégrer Grizzly API",
+            "integrateHub": "Intégrer Grizzly HUB",
+            "clear": "Réinitialiser",
+            "new": "Nouveau",
+            "share": "Partager",
+            "login": "Se Connecter",
+            "addTag": "Ajouter Tag",
+            "load": "Importer",
+            "jsonFile": "Fichier",
+            "yamlFile": "Fichier YAML",
+            "export": "Exporter",
+            "exportSwagger": "Exporter Swagger",
+            "exportOpenApi": "Exporter OpenAPI",
+            "preview": "Apperçu",
+            "deleteEndpoints": "Supprimer un Endpoint",
+            "menuTag": "Tag",
+            "editTag": "Modifier",
+            "deleteTag": "Supprimer",
+            "copyJson": "Copier contenu Json",
+            "featureGrizzlyAPI": "Intégrer votre swagger en GrizzlyAPI",
+            "featureGrizzlyHUB": "Intégrer votre swagger en GrizzlyHUB",
+            "add": "Ajouter modèle",
+            "copyYaml": "Copier contenu Yaml",
+            "generateServerClient": "Générer Serveur/Client",
+            "generate": "Générer",
+            "copyTooltip": "Copier l'URL du microservice",
+            "cloneTooltip": "Cloner une copie de votre microservice",
+            "generateTooltip": "Générer un nouveau microservice",
+            "clearTooltip": "Réinitialiser l'éditeur",
+            "addModelTootlip": "Ajouter votre modèle en utilisant Typescript",
+            "manageModelTootlip": "Gérer votre swagger modéles ",
+            "importTooltip": "Importer votre modèle typescript",
+            "saveTooltip": "Enregistrer",
+            "deleteContainer": "Supprimer Microservice",
+            "deleteContainerMsg": "Voulez-vous vraiment supprimer le microservice '{{name}}' ?"
+        },
+        "placeholder": {
+            "swaggerTitle": "Titre Swagger",
+            "swaggerVersion": "Version Swagger"
+        },
+        "description": "Saviez vous que GrizzlyEditor offre la possibilité d'exporter en Swagger V2 et OpenAPI V3.0.1?",
+        "tip": "ASTUCE: Il suffit de glisser les endpoints entre les tags pour les déplacer",
+        "msg": {
+            "importSwagger": "Importer un Swagger",
+            "importSwaggerMsg": "Lors de l'import d'un nouveau swagger, le microservice existant sera perdu. Si vous souhaitez le conserver, utilisez plutôt le bouton Nouveau ci-dessus.",
+            "tagAdded": "Tag Ajouté",
+            "tagUpdated": "Tag Modifié",
+            "tagDeleted": "Tag Supprimé",
+            "editorCleared": "Editeur Réinitialisé",
+            "clearEditor": "Réinitialiser Editeur",
+            "clearMsg": "Tous les tags, les endpoints et les modèles vont être supprimés",
+            "swaggerUpdated": "Swagger Modifié",
+            "swaggerImported": "Swagger Importé",
+            "deletedEndpoints": "Tous les endpoints selectionnés sont supprimés",
+            "endpointUpdated": "Endpoint Modifié",
+            "newProject": "Nouveau Microservice",
+            "newMsg": "Vous allez être redirigé sur une nouvelle page.",
+            "cloneProject": "Cloner Microservice",
+            "cloneMsg": "Voulez vous bien cloner le microservice."
+        },
+        "tag": {
+            "add": "Ajouter un nouveau tag",
+            "edit": "Mettre à jour tag",
+            "delete": {
+                "title": "Supprimer tag",
+                "msg": "Voulez-vous supprimer le tag '{{name}}'"
+            },
+            "deleteAll": "Supprimer tous les tags",
+            "placeholder": "Nom du tag",
+            "errors": {
+                "unicity": "Ce tag existe déjà",
+                "null": "Le nom du tag est obligatoire",
+                "pattern": "Les espaces ne peuvent être utilisés qu'au milieu"
+            }
+        },
+        "export": {
+            "title": "Exporter Swagger"
+        },
+        "share": {
+            "title": "Partager vos microservices avec plusieurs emails",
+            "msg": "Entrez les adresses e-mail en les séparant par une virgule, une entrée ou un espace.",
+            "choices": "Eléments Partagés : ",
+            "link": "Obtenir le lien"
+        },
+        "goto": "Accéder à l'Editeur",
+        "copy": "URL copié au Clipboard",
+        "server": "Serveur"
+    },
+    "function": {
+        "awsKeyId": "Veuillez choisir AWS key Id",
+        "codeEditor": "Editeur de code",
+        "testCode": "Test de code",
+        "addFunction": "Ajouter",
+        "delete": "Supprimer la fonction",
+        "save": "Enregistrer Fonction ",
+        "edit": "Mettre à jour Fonction",
+        "clone": "Cloner la fonction",
+        "test": "Tester la fonction",
+        "name": "Nom",
+        "language": "Langage",
+        "Ffe": "Nom de la fonction",
+        "programmingLanguage": "Runtime",
+        "update": "Mettre à jour",
+        "back": "Annuler",
+        "chooseFunction": "Choisissez la fonction",
+        "functionName": "Nom de la fonction",
+        "className": "Nom de la class",
+        "methodName": "Nom de la methode",
+        "modelName": "Nom du model",
+        "noFunction": "Aucune Fonction trouvée.",
+        "save&&exit": "Enregistrer & Quitter",
+        "selectFunctionLanguage": "Veuillez choisir le langage de votre fonction",
+        "insertFunctionName": "Veuillez choisir le nom de votre fonction ",
+        "insertFunctionVersion": "Veuillez choisir la version de votre fonction ",
+        "format": " Formatter",
+        "notUnique": "Veuillez choisir une combinaison unique de nom de fonction et de version ",
+        "awsFunctionName": "Veuillez choisir le nom de votre AWS Lambda fonction",
+        "openFaasPort": "Veuillez choisir le port de votre OpenFaas",
+        "openFaasURI": "Veuillez inserez l'uri de votre OpenFaas",
+        "openFaasHeaderName": "Veuillez insérer le nom de l'en-tête",
+        "openFaasHeaderValue": "Veuillez insérer la valeur de l'en-tête",
+        "openFaasHeaderType": "Veuillez insérer le type d'en-tête"
+
+    },
+    "docker": {
+        "info": {
+            "commands": "En utilisant les commandes docker",
+            "compose": "En utilisant docker compose",
+            "pull": "Pull image",
+            "run": "Run image",
+            "import": "Importer et exécuter votre image en local"
+
+        },
+        "title": "Exporter votre microservice sur docker",
+        "export": "Exporter",
+        "latest": "Derniers exports"
+    },
+    "daysLeft" : " jours restants ",
+    "plan" : "Abonnement",
+    "switchAUTH" : "Basculer vers Grizzly Auth",
+    "openFaasWarning": "Pour les endpoints basés sur les fonctions OpenFaas, il est recommandé d'utiliser un endpoint POST."
+
+}

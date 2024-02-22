@@ -1,0 +1,17 @@
+.addBtn {
+    background-color: #002659;
+    color: white;
+  }
+  #tableHead {
+    text-align: left;
+  }
+  :host ::ng-deep ngx-codemirror .CodeMirror-code{
+    text-align: left!important;
+  }
+  .json-editor-wrap {
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+  }
+  button[disabled] {
+    background: #dddddd;
+  }
