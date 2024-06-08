@@ -1,0 +1,38 @@
+<div>
+
+  <mat-toolbar class="identityprovider-toolbar">
+    <button mat-button style="background: #002659; margin-left: -15px;" (click)="openIdentityProviderModal()">
+      <strong class="nav-icon material-icons" style="color:white">add_circle</strong>
+    </button>
+    <span class="toolbar-text" style="font-size: 18px;" translate>sidenav.identityprovider</span>
+  </mat-toolbar>
+</div>
+
+<hr style="margin: auto">
+
+<div>
+  <ul class="nav list list_style">
+
+    <li class="li-small" *ngFor="let identityprovider of identityproviderList">
+      <div *ngIf="fetching" style="text-align: center">
+        <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+        <p><span translate>identityprovider.fetch</span> {{ dots }}</p>
+      </div>
+    <li class="li-small" *ngFor="let identityprovider of identityproviderList; let i = index">
+      <a mat-button [routerLink]="['/app/identityprovider', identityprovider.id ]">
+        <fa-icon style="font-size: 17px;" [icon]="faShieldAlt"></fa-icon>
+        <fa-icon *ngIf="identityprovider.active" [icon]="faCircle"
+          style="font-size: 8px; color: green; display: table-caption;"></fa-icon>
+        <fa-icon *ngIf="!identityprovider.active" [icon]="faCircle"
+          style="font-size: 8px; color: red; display: table-caption;"></fa-icon>
+        <span> {{ identityprovider.displayedName }}</span>
+
+      </a>
+    </li>
+    <div *ngIf="fetching" style="text-align: center">
+      <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+      <p><span translate>identityprovider.fetch</span> {{ dots }}</p>
+    </div>
+  </ul>
+
+</div>

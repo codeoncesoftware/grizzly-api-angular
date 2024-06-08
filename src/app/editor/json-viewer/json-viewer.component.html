@@ -1,0 +1,25 @@
+<div style="overflow-y: scroll;position: relative; ">
+  <button mat-button (click)="dialogRef.close()" style="position:absolute; top:10px; right:10px;">
+    <mat-icon>clear</mat-icon> <span translate>api.cancel</span>
+  </button>
+  <button mat-button (click)="copyYaml()" style="position:absolute; top:10px; right:110px;">
+    <mat-icon>file_copy</mat-icon> <span translate>editor.btn.copyYaml</span>
+  </button> <br>
+  <button mat-button (click)="copyJson()" style="position:absolute; top:10px; right:300px;">
+    <mat-icon>file_copy</mat-icon> <span translate>editor.btn.copyJson</span>
+  </button> <br>
+
+  <mat-tab-group mat-align-tabs="start" (selectedTabChange)="changeTab($event)" style="margin-top: 12px;">
+    <mat-tab label="Swagger">
+      <div style="background-color: #2d2d2d; margin-left: 15px;margin-bottom: 15px;margin-right: 15px;">
+        <ngx-json-viewer class="ace-dark" [json]="swaggerContent"></ngx-json-viewer>
+      </div>
+    </mat-tab>
+    <mat-tab label="OpenAPI">
+      <div style="background-color: #2d2d2d; margin-left: 15px;margin-bottom: 15px;margin-right: 15px;">
+        <ngx-json-viewer class="ace-dark" [json]="openApiContent"></ngx-json-viewer>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

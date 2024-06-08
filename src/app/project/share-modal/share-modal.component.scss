@@ -1,0 +1,54 @@
+#tableHead {
+    text-align: left;
+  }
+  
+  .share-details{
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: white
+  }
+  
+  .share-details-wrap{
+    background-color: #002659;
+     white-space: nowrap;
+    display: flex;
+    align-items: center;
+     height: 10vh
+  }
+  
+  .container{
+    padding: 24px 24px 24px 24px;
+    background-color: white
+  }
+  
+  .buttons{
+    padding-top: 0px; padding-right: 0px
+  }
+  
+  .page-wrap{
+    height: 380px;
+    margin-left: 20px;
+    margin-right: 20px
+  }
+  .cb-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    flex-flow: row;
+  }
+  
+  .mat-checkbox {
+    margin-left:20px;
+  } 
+  
+  .cb-vertival {
+    flex-flow: column;
+  }
+
+  .btn-w-md{
+    color: white;
+    background-color: #002659;
+  }

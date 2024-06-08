@@ -1,0 +1,24 @@
+<div>
+    <mat-toolbar class="project-toolbar">
+        <button mat-button style="background: #002659; margin-left: -15px;" (click)="openDialog()">
+      <strong class="material-icons" style="color:white;">add_circle</strong>
+    </button>
+        <!-- <strong style="cursor: pointer;" *ngIf="limitReached" matTooltip="{{'project.limit' | translate}}" class="material-icons" style="color:#FFC107;">report_problem</strong>&nbsp; -->
+        <span class="toolbar-text" translate>sidenav.projects</span>
+    </mat-toolbar>
+</div>
+
+<div>
+    <ul class="nav list list_style" myAccordionNav mySlimScroll myHighlightActiveItems myAppendSubmenuIcon>
+        <li *ngFor="let project of projectsList; let i = index">
+            <a mat-button [routerLink]="['/app/project', project.id]"><fa-icon *ngIf="project.type==='microservice'" style="font-size: 17px; margin-right: 5px;" [icon]="faCube"></fa-icon>
+                <fa-icon *ngIf="project.type==='authentication microservice'" style="font-size: 17px; margin-right: 5px;" [icon]="faUserShield"></fa-icon>
+                <fa-icon *ngIf="project.type==='markup microservice'" style="font-size: 18px; margin-right: 5px;" [icon]="faProjectDiagram"></fa-icon><span
+                style="color: black" class="nav-text">{{ project.name }}</span> 
+            </a>
+            <ul>
+                <li><a mat-button class="md-button prepend-icon"><span><span translate>sidenav.database </span> {{project.databaseName}}</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>

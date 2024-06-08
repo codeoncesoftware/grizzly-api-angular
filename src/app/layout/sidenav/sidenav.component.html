@@ -1,0 +1,73 @@
+<nav class="app-sidebar" myAutoCloseMobileNav [ngClass]="{'bg-color-light': ['31','32','33','34','35','36'].indexOf(AppConfig.colorOption) >= 0,
+  'bg-color-dark': ['31','32','33','34','35','36'].indexOf(AppConfig.colorOption) < 0 }">
+
+  <section class="sidebar-header headerbar">
+
+    <p [routerLink]="['/app/dashboard']" class="brand" style="color: white;"><img alt="logo"
+        src="../../../assets/images/logo/white-logo.png" style="width: 20%" />&nbsp;&nbsp; GrizzlyAPI
+      <span style="color: white;font-size: 10px;position: absolute;top: 35px;left: 75px;">V
+        <span>{{buildInfo.version}}</span> (<span> {{buildInfo.date | localizedDate}}</span>)</span>
+    </p>
+    <span [hidden]=true> {{buildInfo.date | date:'medium'}}</span>
+  </section>
+
+  <section class="sidebar-content">
+
+    <ul class="nav" myAccordionNav myAppendSubmenuIcon mySlimScroll myHighlightActiveItems>
+      <li>
+        <a mat-button [routerLink]="['/app/dashboard']">
+          <strong class="nav-icon nav-dot material-icons color-primary">dashboard</strong>
+          <span style="position: absolute;"><strong translate>sidenav.dashboard</strong></span>
+        </a>
+      </li>
+
+      <li>
+        <a mat-button [routerLink]="['/app/grizzly-ai']">
+          <i class='fas fa-robot' style="margin-right: 20px;margin-left: 4px;"></i>
+          <span style="position: absolute;"><strong>Grizzly AI</strong></span>
+        </a>
+      </li>
+
+    </ul>
+
+
+    <div>
+      <app-project-list></app-project-list>
+    </div>
+
+
+    <div>
+      <app-dbsource-list></app-dbsource-list>
+    </div>
+
+    <div>
+      <app-identityprovider-list></app-identityprovider-list>
+    </div>
+
+    <div>
+      <app-organization-menu></app-organization-menu>
+    </div>
+
+
+  </section>
+
+
+  <section class="sidebar-footer" style="height: 5%;">
+    <ul class="nav">
+
+      <li>
+        <a mat-button aria-label="menu">
+          <em class="nav-icon material-icons">copyright</em>
+          <span class="nav-text"></span>
+          <span style="position: absolute;">Powered by Code Once</span>
+          <!-- <span ><a class="support-email" href="mailto:support@codeonce.fr">support@codeonce.fr</a></span> -->
+          <span [hidden]=true>{{"v:" + buildInfo.version}} {{buildInfo.date | date:'medium'}}</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <div class="badge pulsate" [routerLink]="['/app/grizzly-ai']" *ngIf="isBullVisible">L'assistant <br>intelligent</div>
+
+
+</nav>

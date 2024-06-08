@@ -1,0 +1,22 @@
+{
+    "/api/dbsource/saveCSVtodatabase": {
+        "target": "http://localhost:8090",
+        "secure": false
+    },
+    "/api": {
+        "target": "http://localhost:8065",
+        "secure": false
+    },
+    "/runtime": {
+        "target": "http://localhost:8065",
+        "secure": false
+    },
+    "/payment": {
+        "target": "http://localhost:8065",
+        "secure": false
+    },
+    "/openai": {
+        "target": "http://localhost:3034",
+        "secure": false
+    }
+}

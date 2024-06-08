@@ -1,0 +1,115 @@
+<div class="p-3 m-3">
+    <div class="card" style="border-radius: 20px;margin-right: 30px;margin-left: 30px;">
+
+        <div class="card-body">
+            <span matTooltip="{{ 'grizzlyai.downloadConversation' | translate }}"
+            style="margin-left: 98%;cursor: pointer;">
+                <em class="material-icons copyContent" (click)="downloadConversation()">
+                    cloud_download
+                </em>
+            </span>
+
+            <div class="text-start" style="margin-top: 10px;margin-bottom: 30px;">
+
+                <div class="row">
+
+                    <div class="col-auto">
+                        <div class="alert d-inline-block" role="alert"
+                            style="margin-right: -22px; border-radius: 35%;background-color: beige;">
+                            <i class='fas fa-robot'></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="alert d-inline-block" role="alert"
+                            style="border-radius: 15px;width: 50%;background-color: beige;">
+                            <span translate>grizzlyai.message1</span> <br>
+                            <span translate>grizzlyai.message2</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="text-start" style="margin-top: -35px;margin-bottom: 30px;">
+                <div class="row">
+
+                    <div class="col-auto">
+                        <div class="alert d-inline-block" role="alert"
+                            style="margin-right: -22px; border-radius: 35%;background-color: beige;">
+                            <i class='fas fa-robot'></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="alert d-inline-block" role="alert"
+                            style="border-radius: 15px;width: 50%;background-color: beige;">
+                            <span [innerHTML]="'grizzlyai.message3' | translate"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngFor="let message of messages" class="mb-3">
+
+                <div *ngIf="message.user === 'user'" class="text-end">
+                    <div class="row">
+                        <div class="col">
+                            <div class="alert alert-info d-inline-block" role="alert"
+                                style="border-radius: 10px; text-align: left;">
+                                <ng-container *ngFor="let line of message.content.split('\n')">
+                                    {{ line }}
+                                    <br> <!-- Ajouter une balise <br> après chaque ligne, sauf la dernière -->
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="alert alert-info d-inline-block" role="alert"
+                                style="margin-left: -22px; border-radius: 35%;">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div *ngIf="message.user === 'bot'" class="row">
+                    <div class="col-auto">
+                        <div class="alert d-inline-block" role="alert"
+                            style="margin-right: -22px; border-radius: 35%;background-color: beige;">
+                            <i class='fas fa-robot'></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="alert d-inline-block" role="alert"
+                            style="border-radius: 20px;max-width: 78%;background-color: beige;">
+                            <ng-container *ngFor="let line of message.content.split('\n')">
+                                <div [innerHTML]="formatText(line)"></div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <form [formGroup]="queryFormGroup" (ngSubmit)="handleAskGPT()">
+                <div class="row">
+                    <div class="col">
+                        <textarea formControlName="query" class="form-control"
+                            placeholder="{{ 'grizzlyai.placeholder' | translate }}"
+                            (keydown.enter)="handleAskGPT(); $event.preventDefault()"></textarea>
+                    </div>
+
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-success" style="width: 150px; border-radius: 10px;"
+                            [disabled]="!queryFormGroup.controls['query'].value" translate> <i
+                                class="fas fa-paper-plane"></i>
+                            {{ 'grizzlyai.ask' | translate }}</button>
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,293 @@
+<app-loader></app-loader>
+<div class="container-fluid" style="text-align: center;overflow-y: auto;">
+  <span>
+    <button style="float: right;" mat-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon> <span translate>api.cancel</span>
+    </button>
+  </span>
+  <div>
+    <form name="form" #f="ngForm">
+
+      <h2 mat-dialog-title><span translate>api.addCodes</span></h2>
+
+      <mat-horizontal-stepper #stepper>
+        <div class="divider divider-md"></div>
+
+        <mat-step style="height: 100%;overflow-y: auto;">
+          <ng-template matStepLabel style="color: #fff"><span translate>api.responseDetails</span></ng-template>
+
+          <div class="divider divider-md"></div>
+
+          <div class="container" style="height: 100%;">
+            <div class="row">
+
+              <mat-form-field appearance="outline" class="col-md-12">
+                <mat-label>Code</mat-label>
+                <input #code="ngModel" required matInput [(ngModel)]="response.code" name="code">
+              </mat-form-field>
+
+            </div>
+            <div class="row" *ngIf="code?.errors?.required && code?.touched || errorCode">
+              <div class="col-md-12" style="text-align: left;">
+                <mat-error>
+                  <span translate>api.emptyCode</span>
+                  <br>
+                </mat-error>
+              </div>
+
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-12">
+                <h4 style="text-align: left;">Description *</h4>
+                <mat-error style="text-align: left;margin-bottom: 10px;" *ngIf="errorDescription">
+                  <span translate>api.emptyDescription</span>
+                  <br>
+                </mat-error>
+                <ckeditor [data]="response.description" #e id="editor" [editor]="Editor"
+                  [(ngModel)]="response.description" name="description"></ckeditor>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </mat-step>
+        <mat-step style="height: 100%;overflow-y: auto;">
+          <ng-template matStepLabel style="color: #fff"><span translate>Headers</span></ng-template>
+
+          <div class="divider divider-md"></div>
+
+          <div class="container" style="height: 100%;">
+            <div class="row">
+              <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                  <mat-label><span translate>api.placeholder.name</span></mat-label>
+                  <input required matInput [(ngModel)]="header.name" name="headerName">
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                  <mat-label>Description</mat-label>
+                  <input required matInput [(ngModel)]="header.description" name="headerCode">
+                </mat-form-field>
+              </div>
+              <div class="col-md-3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Type</mat-label>
+                  <mat-select matNativeControl [(ngModel)]="header.type" name="headerType">
+                    <mat-option value="string"><span translate>string</span></mat-option>
+                    <mat-option value="integer"><span translate>integer</span></mat-option>
+                    <mat-option value="integer"><span translate>number</span></mat-option>
+                    <mat-option value="boolean"><span translate>boolean</span></mat-option>
+                    <mat-option value="char"><span translate>char</span></mat-option>
+                    <mat-option value="file"><span translate>file</span></mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-2">
+                <button (click)="addHeader(header)" mat-stroked-button class="addBtn mt-2">
+                  <mat-icon class="material-icons">add</mat-icon>&nbsp; <span translate>api.ad</span>
+                </button>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-error style="margin-left: 4%;" *ngIf="headerExist">
+                  <span translate>api.headerExisting</span>
+                  <br>
+                </mat-error>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-12" *ngIf="headers?.length > 0  ">
+                <br />
+                <div style="height: 50%;width:100%;">
+                  <table class="mdl-data-table" style="width: 100%;overflow-y: auto; float: left;">
+                    <thead>
+                      <tr *ngIf="headers.length > 0">
+
+                        <th id="tableHead"><span translate>api.placeholder.name</span></th>
+                        <th id="tableHead">Description</th>
+                        <th id="tableHead">Type</th>
+                        <th style="text-align: center;" id="tableHead">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let header of headers; let i = index" class="col-md-12">
+                        <tr>
+
+                          <td class="mdl-data-table__cell--non-numeric">{{ header?.name }}
+                          </td>
+                          <td class="mdl-data-table__cell--non-numeric box-size">
+                            <span>{{header.description}}</span>
+                          </td>
+                          <td class="mdl-data-table__cell--non-numeric">{{ header?.type }}
+                          </td>
+
+
+
+                          <td style="text-align: center;" class="mdl-data-table__cell--non-numeric box-size">
+
+                            <button mat-button (click)="deleteHeader(i)">
+                              <em class="material-icons">
+                                delete_outline
+                              </em></button>
+
+
+
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </mat-step>
+        <mat-step style="overflow-y: auto;">
+          <ng-template matStepLabel style="color: #fff"><span translate>Model</span></ng-template>
+
+          <div class="divider divider-md"></div>
+
+          <div class="container" style="overflow-y: auto;max-height: 350px;">
+            <div class="row" style="width: 100%;">
+              <mat-form-field appearance="outline"
+                [ngClass]="(showResponseEditor === true ||  respModel !== null ) ? 'col-md-8' : 'col-md-10'"
+                style="width: 100%;">
+                <mat-label>
+                  <span *ngIf="containerToSave.endpointModels?.length !== 0"
+                    translate>api.placeholder.selectModel</span>
+                  <span *ngIf="containerToSave.endpointModels?.length === 0" translate>api.placeholder.noModel</span>
+                </mat-label>
+                <!-- Tooltip -->
+                <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;" matTooltipClass="test"
+                  matTooltip="{{ 'help.requestModel' | translate }}">
+                  info
+                </mat-icon>
+                <mat-select [disabled]="containerToSave.endpointModels?.length === 0" matNativeControl name="respModel"
+                  (selectionChange)="addResponseModel($event.value)" [(ngModel)]="respModel">
+                  <mat-option *ngFor="let model of containerToSave.endpointModels" [value]="model.title">
+                    {{ model.title }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <button *ngIf="!showResponseEditor  && respModel !== null" class="addBtn col-md-2"
+                style="height: revert-layer;" matSuffix mat-raised-button (click)="viewResponseModel()">
+                <mat-icon class="material-icons">remove_red_eye</mat-icon>&nbsp; <span translate>api.view</span>
+              </button>
+              <div *ngIf="!showResponseEditor" class="col-md-2">
+                <button (click)="toggleResponseEditor()" matSuffix mat-raised-button class="addBtn">
+                  <mat-icon class="material-icons">add</mat-icon>&nbsp; <span translate>api.ad</span>
+                </button>
+              </div>
+
+              <div *ngIf="showResponseEditor" class="col-md-2">
+                <button class="addBtn" matSuffix mat-raised-button (click)="toggleResponseEditor()">
+                  <mat-icon class="material-icons">cancel</mat-icon>&nbsp; <span translate>api.exitEditor</span>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <pre *ngIf="showResponseEditor">
+                    <span class="btn-group" style="float:right">
+                      <button (click)="requestModelFile.click()"  mat-button >
+                        <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                    <button mat-button (click)="saveModel()" mat-button>
+                      <mat-icon >save</mat-icon>
+                    </button>
+                    </span>
+                  <span style="margin-top: -55px;">
+                    <p style="float: left;margin-left: 10px;font-weight: bold;"><span translate>popups.model.tsIndication</span></p>
+                    <br>
+                    <ngx-codemirror
+                    name = "responseModel"
+                    [(ngModel)]="responseModel"
+                    [options]="{
+                      lineNumbers: true,
+                      theme: 'material',
+                      mode: 'javascript',
+                      lineWrapping: false,
+                      foldGutter: true,
+                      gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                      autoCloseBrackets: true,
+                      matchBrackets: true
+                    }"
+                  ></ngx-codemirror>
+                  <input #requestModelFile type="file" name="file" [style.display]="'none'"
+                  (change)="importRequestModel()"
+                  ng2FileSelect [uploader]="responseUploader">
+                  </span>
+                  </pre>
+
+
+
+
+              </div>
+            </div>
+
+          </div>
+
+        </mat-step>
+        <mat-step style="height: 100%;overflow-y: auto;">
+          <ng-template matStepLabel style="color: #fff"><span translate>api.examples</span></ng-template>
+
+          <div class="divider divider-md"></div>
+
+          <div class="container" style="height: 100%;">
+            <div class="col-md-12">
+              <h4><span translate>api.jsonEditorMsg</span></h4>
+            </div>
+
+            <div class="col-md-12">
+              <json-editor matInput [options]="editorOptions" [data]="example" (change)="getJsonChange($event)"
+                aria-placeholder="{ee}">
+              </json-editor>
+            </div>
+          </div>
+
+        </mat-step>
+
+      </mat-horizontal-stepper>
+
+      <div class="divider divider-md"></div>
+
+
+      <div class="box-body text-right">
+        <button [disabled]="!response.code || !response.description" mat-raised-button
+          [style.background-color]="(!response.code || !response.description)? null : '#002659' "
+          [style.color]="(!response.code || !response.description)? null : 'white' " type="button" class="btn-w-md"
+          (click)="addNewCode()">
+          <span translate>popups.buttons.confirm</span></button>
+
+        <span class="space"></span>
+
+        <button mat-raised-button type="button" class="btn-w-md" (click)="stepper.previous()"
+          *ngIf="stepper.selectedIndex !== 0">
+          <span translate>popups.buttons.back</span></button>
+        <span class="space"></span>
+
+        <button mat-raised-button style="background-color:  #002659; color: white" type="button" class="btn-w-md"
+          (click)="next()" *ngIf="stepper.selectedIndex !== 3">
+          <span translate>popups.buttons.next</span></button>
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+</div>

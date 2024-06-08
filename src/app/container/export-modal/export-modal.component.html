@@ -1,0 +1,40 @@
+<div class="container-fluid" style="position: relative;">
+    <span class="closeBtn">
+        <button mat-button mat-dialog-close>
+            <mat-icon>clear</mat-icon> <span translate>api.close</span>
+        </button>
+    </span><br>
+    <h1 mat-dialog-title style="text-align: center" translate>swaggerModal.downloadShare</h1>
+
+    <div class="divider divider-md"></div>
+    <div>
+        <p translate>swaggerModal.shareTwoWays</p>
+        <p class="titleShare"><b translate>swaggerModal.withDevs</b></p>
+
+        <div class="inspectorDoc">
+            <p translate>swaggerModal.devDesc</p>
+            <ul>
+                <li>
+                    <p class="click" (click)="downloadGeneratedSwagger('dev')" translate>swaggerModal.forDev</p>
+                </li>
+                <li>
+                    <p class="click" (click)="downloadGeneratedOpenApi('dev')" translate>swaggerModal.openApiforDev</p>
+                </li>
+            </ul>
+        </div>
+        <p class="titleShare"> <b translate>swaggerModal.withUsers</b> </p>
+
+        <div class="inspectorDoc">
+            <p translate>swaggerModal.usersDesc</p>
+            <ul>
+                <li>
+                    <p class="click" (click)="downloadGeneratedSwagger('prod') " translate>swaggerModal.forProd</p>
+                </li>
+                <li>
+                    <p class="click" (click)="downloadGeneratedOpenApi('prod') " translate>swaggerModal.openApiforProd
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

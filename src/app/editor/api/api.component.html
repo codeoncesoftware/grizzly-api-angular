@@ -1,0 +1,90 @@
+<div class="example-container mat-elevation-z1" *ngIf="group?.resources?.length > 0" style="margin-top:10px">
+    <mat-table #table [dataSource]="group.resources">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Check">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let element, let i = index">
+                <mat-checkbox *ngIf="group.name !== 'Authentication Grizzly' || group.name !=='Analytics Microservice'" id="{{group.name.concat('#',element.path,'#',element.httpMethod)}}" (click)="checkResource(element,group)" #myCheckBoxs></mat-checkbox>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="Method">
+            <mat-header-cell *matHeaderCellDef translate>Method</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-button style="width: 45%" [ngClass]="{post: element.httpMethod == 'POST',
+            put: element.httpMethod == 'PUT',
+            get: element.httpMethod == 'GET',
+            delete: element.httpMethod == 'DELETE',
+            patch: element.httpMethod == 'PATCH',
+            head: element.httpMethod == 'HEAD', 
+            options: element.httpMethod == 'OPTIONS'
+            }" disabled>{{element.httpMethod}}</button>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="Path">
+            <mat-header-cell *matHeaderCellDef translate>Path</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.path}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Summary">
+            <mat-header-cell *matHeaderCellDef translate>Summary</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.summary}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Params">
+            <mat-header-cell *matHeaderCellDef translate>Params</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.path}} </mat-cell>
+        </ng-container>
+
+
+        <ng-container *ngIf="this.container.exportPreference==='V3'" matColumnDef="Codes">
+            <mat-header-cell *matHeaderCellDef translate style="text-align: center;">Codes</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="overflow-x: scroll;">
+                <span *ngFor="let code of getCodes(element.openAPIResponses).success">
+                    <span class="badge badge-pill mb-1"
+                        style="background-color: #49CC90;color: white; margin-left: 10px;position: relative;bottom: 1px;font-size: 12px;">{{code}}</span>
+                </span>
+                <div *ngFor="let code of getCodes(element.openAPIResponses).fail;let i = index;">
+                    <span class="badge badge-pill mb-1" style="background-color:#F93E3E;color: white; margin-left: 10px;position: relative;bottom: 1px;font-size: 12px;">{{code}}</span>
+                </div>
+                <!-- <p style="color:green">{{getCodes(element.responses).success}}</p>
+                &nbsp; &nbsp;
+                <p style="color: red;">{{getCodes(element.responses).fail}}</p> -->
+            </mat-cell>
+        </ng-container>
+        <ng-container *ngIf="this.container.exportPreference==='V2'" matColumnDef="Codes">
+            <mat-header-cell *matHeaderCellDef translate style="text-align: center;">Codes</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="overflow-x: scroll;">
+                <span *ngFor="let code of getCodes(element.responses).success">
+                    <span class="badge badge-pill mb-1"
+                        style="background-color: #49CC90;color: white; margin-left: 10px;position: relative;bottom: 1px;font-size: 1em;">{{code}}</span>
+                </span>
+                <div *ngFor="let code of getCodes(element.responses).fail;let i = index;">
+                    <span class="badge badge-pill mb-1" style="background-color:#F93E3E;color: white; margin-left: 10px;position: relative;bottom: 1px;font-size: 1em;">{{code}}</span>
+                </div>
+                <!-- <p style="color:green">{{getCodes(element.responses).success}}</p>
+                &nbsp; &nbsp;
+                <p style="color: red;">{{getCodes(element.responses).fail}}</p> -->
+            </mat-cell>
+        </ng-container>
+        <!-- <ng-container matColumnDef="space">
+            <mat-header-cell translate *matHeaderCellDef>space</mat-header-cell>
+            <mat-cell *matCellDef="let element"></mat-cell>
+        </ng-container> -->
+        <!-- Name Column -->
+        <ng-container matColumnDef="Actions">
+            <mat-header-cell *matHeaderCellDef translate style="margin-left: 35px;">Edit</mat-header-cell>
+            <mat-cell *matCellDef="let element" style="margin-left: 35px;">
+                <mat-icon style="cursor: pointer!important;" style="float: right;" matTooltip="{{ 'api.edit' | translate }}" (click)="openResourceEditModal(element, i)">edit</mat-icon>
+                <!-- <mat-icon style="cursor: pointer;" matTooltip="{{ 'api.copy' | translate}}" (click)="copyAPIURL(element)">file_copy</mat-icon> -->
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row cdkDrag [cdkDragData]="row" matTooltipClass="test" *matRowDef="let row; columns: displayedColumns;" [matTooltip]="getParams(row)" style="cursor: move;" [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (mouseover)="row.hovered = true"
+            (mouseout)="row.hovered = false"></mat-row>
+    </mat-table>
+</div>
