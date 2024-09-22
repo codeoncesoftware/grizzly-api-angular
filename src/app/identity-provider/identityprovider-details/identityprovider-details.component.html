@@ -1,0 +1,61 @@
+<app-loader></app-loader>
+<section class="container-fluid">
+    <!-- Show a Project Details Section START -->
+    <article class="article">
+        <br>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="box" style="box-shadow: none" *ngIf="identityprovider?.id">
+                    <div class="box-header identityprovider-header radius-top">
+                        <button mat-button (click)="showIdentityProviderDetails()" style="cursor: pointer;text-decoration: none;color: white;">
+                            <mat-icon class="material-icons">
+                                {{toggleIdentityProviderDetails ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                            </mat-icon> &nbsp;
+                            <span matBadge="." class="hide-text" matBadgeSize="small"
+                                [matBadgeColor]="identityprovider?.active === false ? 'warn' : 'accent'"
+                                matBadgeOverlap="false">{{ identityprovider?.displayedName }}
+                            </span>&nbsp;&nbsp;
+
+                        </button>
+                        <span style="flex: 1 1 auto;"></span>
+                        <div style="float:right">
+
+                            <button mat-button (click)="openEditIdentityProviderModal()" style="cursor: pointer;text-decoration: none;color: white;">
+                                <mat-icon style="cursor: pointer;color: white;">edit</mat-icon>&nbsp;
+                                <span translate>project.edit</span>
+                            </button>&nbsp;
+                            <button mat-button (click)="openConfirmDeleteDialog()" style="cursor: pointer;text-decoration: none;color: white;">
+                                <mat-icon style="cursor: pointer;color: white;">delete_forever</mat-icon>&nbsp;
+                                <span translate>project.delete</span>
+                            </button>
+                            <mat-icon class="info" matTooltipClass="test" matTooltip="{{ 'identityprovider.creationTime' | translate }} : {{identityprovider?.creationTime | date: 'M/d/yy, h:mm a'}}
+              {{ 'identityprovider.lastUpdate' | translate }} : {{identityprovider?.lastUpdate | date: 'M/d/yy, h:mm a'}}">
+                                info
+                            </mat-icon>
+                        </div>
+                    </div>
+                    <div class="box-body bg-color-white radius-bottom" [@slideUpDown]="toggleIdentityProviderDetails">
+                        <div class="widget-container">
+                            <em class="material-icons" style="vertical-align: middle"> error </em> &nbsp;
+                            <h5><span translate>identityprovider-details.status</span> :
+                                <span *ngIf="identityprovider?.active " style="font-weight: 400; color: #66BB6A">OK</span>
+                                <span *ngIf="!identityprovider?.active" style="font-weight: 400; color: #EF5350">KO</span>
+                            </h5>
+                            <h5><span translate>identityprovider-modal-review.ip</span> <span style="font-weight: 400;"> : {{ identityprovider.name }}</span></h5>
+                            <h5><span translate>identityprovider-modal-review.displayedName</span> <span style="font-weight: 400;"> : {{ identityprovider.displayedName }}</span></h5>
+                            <h5 *ngIf="identityprovider.description !== null"><span translate>identityprovider-modal-review.description</span> <span style="font-weight: 400;"> : {{ identityprovider.description }}</span></h5>
+                            <div *ngIf="showKeycloakInformations">
+                                <h5><span translate>identityprovider-modal-review.acessType</span> : <span style="font-weight: 400;"> {{ identityprovider.credentials.accessType }}</span></h5>
+                                <h5><span translate>identityprovider-modal-review.clientID</span> : <span style="font-weight: 400;"> {{ identityprovider.credentials.clientId }}</span></h5>
+                                <h5><span translate>identityprovider-modal-review.grantType</span> : <span style="font-weight: 400;"> {{ identityprovider.credentials.grantType }}</span></h5>
+    
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+</section>

@@ -1,0 +1,217 @@
+<div style="height: 50vh; overflow-y: scroll;">
+    <div class="container-fluid" style="text-align: left;">
+        <div class="mt-4" *ngIf="databaseType === 'sql'">
+            <p *ngIf="resource.httpMethod==='POST' || resource.httpMethod==='PUT'">
+                <strong translate>query-api-modal.reqType</strong>
+                <!-- Tooltip -->
+            </p>
+            <div class="row">
+                <mat-form-field appearance="outline"  *ngIf="httpMethod !=='GET' && httpMethod !=='DELETE'" class="col-md-5"
+                    style="vertical-align: text-top">
+                    <mat-label>
+                        <span translate>api.insertUpdate</span>
+                    </mat-label>
+                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                        matTooltipClass="test" matTooltip="{{ 'help.reqType' | translate }}">
+                        info
+                    </mat-icon>
+                    <mat-select matNativeControl (selectionChange)="emitEndpointType($event.value)"
+                        [(ngModel)]="resource.customQuery.type" name="queryType">
+                        <mat-option value="Insert"><span translate>api.insertData</span></mat-option>
+                        <mat-option value="Update"><span translate>api.updateData</span></mat-option>
+                        <mat-option value="Execute"><span translate>api.function</span></mat-option>
+                    </mat-select>
+                </mat-form-field  >
+                <mat-form-field appearance="outline"  *ngIf="httpMethod ==='GET'" class="col-md-5" style="vertical-align: text-top">
+                    <mat-label>
+                        <span translate>api.insertUpdate</span>
+                    </mat-label>
+                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                        matTooltipClass="test" matTooltip="{{ 'help.reqType' | translate }}">
+                        info
+                    </mat-icon>
+                    <mat-select matNativeControl (selectionChange)="emitEndpointType($event.value)"
+                        [(ngModel)]="resource.customQuery.type" name="queryType">
+                        <mat-option *ngIf="resource.httpMethod === 'GET'" value="Read"><span
+                                translate>api.readData</span>
+                        </mat-option>
+                        <mat-option *ngIf="resource.httpMethod === 'DELETE'" value="Delete">
+                            <span translate>api.deleteData</span>
+                        </mat-option>
+                        <mat-option value="Execute"><span translate>api.function</span>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field  >
+                <mat-form-field appearance="outline" 
+                    *ngIf="(resource.httpMethod === 'POST' || resource.httpMethod === 'PUT') &&  resource.customQuery.type !== 'Execute'"
+                    [ngClass]="{'col-md-4': httpMethod ==='POST' || httpMethod ==='PUT' , 'col-md-12' : httpMethod ==='GET' || httpMethod ==='DELETE' }">
+                    <mat-label>
+                        <span translate *ngIf="databaseType === 'sql'">Tables</span>
+                    </mat-label>
+                    <!--  Tooltip -->
+                    <mat-icon matSuffix style="cursor: pointer; margin-right:10px;" matTooltipClass="test"
+                        matTooltip="{{ 'help.collection' | translate }}">
+                        info
+                    </mat-icon>
+                    <mat-select (selectionChange)="checkCollection($event.value)" matNativeControl name="collection"
+                        required [(ngModel)]="resource.customQuery.collectionName" *ngIf="!addCollectionBool">
+                        <mat-option disabled hidden [value]="" *ngIf="!resource.customQuery.collectionName">-- select --
+                        </mat-option>
+                        <mat-option *ngFor="let collection of buckets" [value]="collection">{{ collection }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field  >
+                <div *ngIf="resource.customQuery.type === 'Execute'"  class="col-md-7" >
+                    <div class="row" style="width: 100%;">
+                            <mat-form-field appearance="outline"  class="col-md-9"
+                                style="width: 100%;">
+                                <mat-label>
+                                    <span translate>api.placeholder.selectFunction
+                                    </span>
+                                </mat-label>
+                                <mat-select (selectionChange)="emitFunction($event.value)"  matNativeControl placeholder="select"
+                                    name="function" required [(ngModel)]="function">
+                                    <form autocomplete="off" class="example-form">
+                                        <mat-form-field appearance="outline"  style="width: 100%;"
+                                            class="example-full-width"
+                                            appearance="fill">
+                                            <input [ngModelOptions]="{standalone:true}"
+                                                [(ngModel)]="searchTxt" matInput
+                                                placeholder="Search">
+                                        </mat-form-field  >
+                                    </form>
+                                    <mat-option name="search"
+                                        *ngFor="let function of allFunctions | search : searchTxt "
+                                        [value]="function">{{function.name
+                                        }}-{{function.version }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field  >
+
+                      <div *ngIf="function && function.language!== 'AWS Lambda' && !showFunction  && function.language !== 'OpenFaas'"
+                            class="col-md-3">
+                            <button matSuffix mat-raised-button color="primary"
+                                (click)="viewFunction()">
+                                <mat-icon class="material-icons">remove_red_eye
+                                </mat-icon>&nbsp;
+                                <span translate>api.viewFunction</span>
+                            </button>&nbsp;
+                        </div>
+                        <div *ngIf="function && function.language !== 'AWS Lambda' && function.language !== 'OpenFaas' && showFunction==true"
+                            class="col-md-3">
+                            <button matSuffix mat-raised-button color="primary" (click)="viewFunction()">
+                                <mat-icon class="material-icons">cancel
+                                </mat-icon>&nbsp;
+                                <span translate>api.hideFunction</span>
+                            </button>&nbsp;
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <p *ngIf="showOpenFaasPostWarning" style="color: #ffcc00;position: relative;left: -544px;"><mat-icon style="position: relative;top: 7px;">warning</mat-icon> <span translate>openFaasWarning</span>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row" *ngIf="emptyCollection">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <p style="color:red; margin-top: -10px;">
+                        <span translate>api.emptyTable</span>
+                        <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="resource.customQuery.type !== 'Execute'">
+            <div
+                *ngIf="resource.customQuery.type==='Update' || resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE'">
+                <p>
+
+                    <strong translate>api.query</strong>
+                    <!-- Tooltip -->
+                    <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                        matTooltip="{{ 'help.query' | translate }}">
+                        info
+                    </mat-icon>
+
+                    <span class="space"></span>
+                    <span class="space"></span>
+                </p>
+
+                <p>
+                    <span translate>api.reqBody</span>
+                </p>
+
+            </div>
+            <div class="row"
+                *ngIf="(resource.customQuery.type==='Update' || resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE')">
+                <div class="col-8">
+                    <p style="color:red;" *ngIf="!emptySqlQuery">
+                        <span translate>api.emptySqlQuery</span>
+                        <br>
+                    </p>
+                    <ngx-codemirror (change)="updateQuery($event.target.value)" [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="query" [options]="options">
+                    </ngx-codemirror>
+                </div>
+                <div class="col-4"
+                    *ngIf="resource.customQuery.type==='Update' || resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE'">
+                    <span *ngIf="databaseType!=='sql'">
+                        <strong translate>dbsource-modal.couchebase.example</strong>
+                        <br>
+                        <pre>Select * from &lt;table-name&gt;</pre>
+                        <pre>DELETE from &lt;table-name&gt; WHERE id="%id"</pre>
+                        <br>
+                        <p translate>dbsource-modal.couchebase.description</p>
+                        <br>
+                        <strong translate>dbsource-modal.couchebase.pagination</strong>
+                        <pre>Select * from &lt;table-name&gt; OFFSET 0  LIMIT 10;</pre>
+                        <small><u>OFFSET</u> <span translate>dbsource-modal.couchebase.offset</span> <u>LIMIT</u> <span
+                                translate>dbsource-modal.couchebase.limit</span> </small>
+                    </span>
+                    <span *ngIf="databaseType==='sql' && resource.httpMethod !== 'POST'" class="ml-2">
+                        <strong style="font-size: 16px;" class="mb-2" translate>dbsource-modal.sql.example</strong>
+                        <br>
+                        <pre class="ml-2" style="font-size: 13px;"
+                            *ngIf="resource.httpMethod === 'GET' ">Select * from &lt;table-name&gt;</pre>
+                        <pre class="ml-2" style="font-size: 13px;"
+                            *ngIf="resource.httpMethod === 'GET' ">Select &lt;field-name&gt; from &lt;table-name&gt;</pre>
+                        <pre class="ml-2" style="font-size: 13px;"
+                            *ngIf="resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE' "><span *ngIf="resource.httpMethod === 'GET' ">Select *</span><span *ngIf="resource.httpMethod === 'DELETE' ">Delete</span> from &lt;table-name&gt; WHERE id=%id</pre>
+                        <pre class="ml-2" style="font-size: 13px;"
+                            *ngIf="resource.httpMethod === 'PUT' ">Update &lt;table-name&gt; set &lt;column-name&gt;=&lt;value&gt; <br> WHERE id=%id</pre>
+                        <br>
+                    </span>
+                </div>
+            </div>
+            <p *ngIf="databaseType==='sql' && resource.httpMethod === 'POST'" translate>
+                <mat-icon class="mt-3">info</mat-icon>&nbsp;&nbsp;&nbsp; dbsource-modal.sql.description
+            </p>
+            <br>
+        </div>
+
+        <div *ngIf="resource.customQuery.type === 'Execute'"
+                                                            class="json-editor-wrap borderRight col-md-7">
+                                                            <div class="json-editor-wrap borderRight "
+                                                                style="border:none">
+                                                                <ngx-codemirror
+                                                                    *ngIf="( resource.httpMethod) && function &&  showFunction==true"
+                                                                    class="justToRead" scrollTo
+                                                                    [(ngModel)]="function.function" [options]="{
+                                                                    lineNumbers: true,
+                                                                    theme: 'default',
+                                                                    mode: 'javascript',
+                                                                    lineWrapping: false,
+                                                                    readOnly:true,
+                                                                    foldGutter: true,
+                                                                    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                                                                    autoCloseBrackets: true,
+                                                                    matchBrackets: true
+                                                                      }"></ngx-codemirror>
+                                                            </div>
+                                                        </div>
+    </div>
+</div>

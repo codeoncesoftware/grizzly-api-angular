@@ -1,0 +1,75 @@
+<div class="container" style="max-height: 400px;overflow-y: scroll;">
+
+    <span style="float:right">
+        <button mat-button (click)="dialogRefFunction.close()">
+            <mat-icon>clear</mat-icon> <span translate>api.cancel</span>
+        </button>
+    </span>
+    
+    <h2 style="text-align: center;" mat-dialog-title><span translate>api.addHeaders</span></h2>
+
+    <div class="row">
+   
+        <div class="col-md-4">
+
+            
+
+            <mat-form-field appearance="outline" >
+                <mat-label>Type</mat-label>
+                <mat-select  [(ngModel)]="selectedType" name="type">
+                    <mat-option *ngFor="let type of types" [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <div style="text-align: left;" *ngIf="isConfirmed && !selectedType">
+                <p style="text-align:center;color:red;" translate>function.openFaasHeaderType</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="outline"  class="example-full-width" >
+                <mat-label style="text-align: center;">Name</mat-label>
+                <input matInput  [(ngModel)]="insertedName" >
+            </mat-form-field  >
+            <div *ngIf="isConfirmed && !insertedName">
+                <p style="color: red;" translate>function.openFaasHeaderName</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="outline"  class="example-full-width">
+                <mat-label>Value</mat-label>
+                <input [(ngModel)]="insertedValue" matInput  >
+            </mat-form-field  >
+            <div *ngIf="isConfirmed && !insertedValue">
+                <p style="color: red;" translate>function.openFaasHeaderValue</p>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="box-body text-right" style=" 
+    bottom:0;
+    right:0">
+        <!-- Add New Function-->
+        <button id="confirm" (click)="save()" *ngIf="!isEditMode" style=" float: right; margin-top:5px;  bottom:0;   background-color: #002659;
+        " type="button" mat-raised-button color="primary" class="btn-w-md" cdkFocusInitial>
+            <span translate> function.save&&exit </span>
+        </button>
+        <span class="space"></span>
+        <!-- Update Function-->
+        <button id="confirm" (click)="save()" *ngIf="isEditMode" style=" float:right; margin-top:5px;     background-color: #002659;
+          " type="button" mat-raised-button color="primary" class="btn-w-md" cdkFocusInitial>
+            <span translate>function.save&&exit</span>
+        </button>
+        <span class="space"></span>
+
+        
+
+    </div>
+
+
+
+</div>

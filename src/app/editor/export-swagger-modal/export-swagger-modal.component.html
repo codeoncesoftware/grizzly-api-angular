@@ -1,0 +1,41 @@
+<div class="container-fluid" style="text-align: justify;height:42vh;width: 90%;">
+  <h1 mat-dialog-title style="text-align: center;" translate>editor.export.title</h1>
+  <br>
+  <form name="form" #f="ngForm" (keydown.enter)="$event.preventDefault()">
+
+
+    <div class="container" style="height: 100%">
+      <mat-radio-group #type="ngModel" required="true" [(ngModel)]="choice" name="type">
+
+        <div class="row">
+          <mat-radio-button value="swagger" name="type">Swagger V2</mat-radio-button>
+          <mat-radio-group style="margin-left: 5%;" required="true" [(ngModel)]="format" name="format"
+            *ngIf="choice==='swagger'">
+            <mat-radio-button value="json" name="format">JSON</mat-radio-button>&nbsp;&nbsp;
+            <mat-radio-button value="yaml" name="format">YAML</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <br>
+
+        <div class="row">
+          <mat-radio-button value="OpenApi" name="type">OpenAPI V3.0.1</mat-radio-button>
+          <mat-radio-group style="margin-left: 5%;" required="true" [(ngModel)]="format" name="format"
+            *ngIf="choice==='OpenApi'">
+            <mat-radio-button value="json" name="format">JSON</mat-radio-button>&nbsp;&nbsp;
+            <mat-radio-button value="yaml" name="format">YAML</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-radio-group>
+    </div>
+  </form>
+  <br>
+  <div class="box-body text-right">
+    <button mat-raised-button (click)="dialogRef.close()" class="btn-w-md">
+      <span translate>popups.buttons.cancel</span>
+    </button>&nbsp;&nbsp;
+    <button mat-raised-button type="button" (click)="save()" style="background-color:#002659 ; color: white;"
+      class="btn-w-md" [disabled]="choice==undefined || format==undefined" id="confirm">
+      <span translate>popups.buttons.confirm</span></button>
+  </div>
+</div>

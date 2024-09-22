@@ -1,0 +1,57 @@
+.container-fluid {
+    padding: 80px 80px 80px 80px;
+    width: 95%;
+    margin-top: 40px;
+    background-color: white;
+    
+}
+.mat-fab-menu {
+    background-color: #002659;
+    width: 27px;
+    height: 27px;
+    margin-right: 20px;
+}
+.abrevName  {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    position: relative;
+    top: -8px;
+}
+.border-div {
+    border-top: 0px;
+    border-bottom: 5px solid #f7f7f7;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+mat-form-field {
+    width: 380px;
+    
+}
+.inviteButton {
+    background-color:#002659;
+    color: white;
+    
+}
+
+
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #002659!important;   /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+   border-color:#002659!important; /*outer ring color change*/
+}
+.errors {
+    margin-left: 20px;
+}
+#inviteButton:disabled {
+    border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

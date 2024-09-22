@@ -1,0 +1,136 @@
+button {
+    cursor: pointer;
+}
+
+::ng-deep .cobtn {
+    padding: 0 10px !important;
+}
+
+::ng-deep .cobtn2 {
+    padding: 0 3px !important;
+}
+
+button.mat-primary {
+    background-color: #002659;
+}
+
+.full-screen-modal .mat-dialog-container {
+    max-width: none;
+}
+
+.get:disabled {
+    background-color: #61AFFE;
+    color: white;
+}
+
+.post:disabled {
+    background-color: #49CC90;
+    color: white;
+}
+
+.put:disabled {
+    background-color: #FCA130;
+    color: white;
+}
+
+.delete:disabled {
+    background-color: #F93E3E;
+    color: white;
+}
+
+.patch:disabled {
+    background-color: #50E3C2;
+    color: white;
+}
+
+.head:disabled {
+    background-color: #9012FE;
+    color: white;
+}
+
+.options:disabled {
+    background-color: #0D5AA7;
+    color: white;
+}
+
+.badge {
+    font-size: 10px;
+    font-weight: 100;
+    vertical-align: top;
+    background-color: #B8BCC4;
+    border-radius: 20px;
+    padding: 5px;
+    color: white;
+}
+
+mat-icon {
+    cursor: pointer;
+}
+
+::ng-deep .information-container,
+::ng-deep .scheme-container {
+    display: none;
+}
+
+// ::ng-deep .wrapper > .block > .models  {
+//   display: none;
+// }
+::ng-deep .wrapper>.block>div>span>.opblock-tag-section {
+    display: none;
+}
+
+::ng-deep .swagger-ui section.models .model-container {
+    background-color: white !important;
+}
+
+::ng-deep .swagger-ui section.models h4 {
+    color: white !important;
+    background-color: #002659 !important;
+    border-radius: 5px !important;
+}
+
+::ng-deep section.block.col-12.block-desktop.col-12-desktop {
+    padding: 0px !important;
+}
+
+::ng-deep .swagger-ui .wrapper {
+    padding: 0px;
+}
+
+.contactButton {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    width: 100px;
+    background-color: #002659 !important;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    z-index: 999;
+    animation: shadow-pulse 5s infinite;
+
+    svg {
+        fill: white;
+    }
+}
+
+.contactButton:active {
+    outline: none;
+    border: none;
+}
+
+.contactButton:focus {
+    outline: 0;
+}
+
+@keyframes shadow-pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+    }
+}

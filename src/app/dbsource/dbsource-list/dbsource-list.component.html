@@ -1,0 +1,38 @@
+<div>
+
+  <mat-toolbar class="dbsource-toolbar">
+    <button mat-button style="background: #002659; margin-left: -15px;" (click)="openDBSourceModal()">
+      <strong class="nav-icon material-icons" style="color:white">add_circle</strong>
+    </button>
+    <!-- <strong style="cursor: pointer;" *ngIf="limitReachedDb" matTooltip="{{'project.limit' | translate}}" class="material-icons" style="color:#FFC107;">report_problem</strong>&nbsp; -->
+    <span class="toolbar-text" translate>sidenav.datasources</span>
+  </mat-toolbar>
+</div>
+<hr style="margin: auto">
+
+<div>
+  <ul class="nav dbsources list_style">
+
+    <li class="li-small" *ngFor="let dbsource of dbSourceList">
+      <div *ngIf="fetching" style="text-align: center">
+        <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+        <p><span translate>dbsource.fetch</span> {{ dots }}</p>
+      </div>
+    <li class="li-small" *ngFor="let dbsource of dbSourceList; let i = index">
+      <a mat-button [routerLink]="['/app/dbsource', dbsource.id ]">
+        <fa-icon style="font-size: 17px;" [icon]="faDatabase"></fa-icon>
+        <fa-icon *ngIf="dbsource.active" [icon]="faCircle"
+          style="font-size: 8px; color: green; display: table-caption;"></fa-icon>
+        <fa-icon *ngIf="!dbsource.active" [icon]="faCircle"
+          style="font-size: 8px; color: red; display: table-caption;"></fa-icon>
+        <span> {{ dbsource.name }}</span>
+
+      </a>
+    </li>
+    <div *ngIf="fetching" style="text-align: center">
+      <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+      <p><span translate>dbsource.fetch</span> {{ dots }}</p>
+    </div>
+  </ul>
+
+</div>

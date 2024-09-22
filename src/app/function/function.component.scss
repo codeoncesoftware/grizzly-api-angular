@@ -1,0 +1,534 @@
+
+@import  "font-awesome/css/font-awesome.css" ;  
+@import "jsoneditor/dist/jsoneditor.min.css";
+@import 'codemirror/lib/codemirror';
+@import 'codemirror/addon/lint/lint';
+@import "codemirror/addon/hint/show-hint.css";
+@import 'codemirror/theme/material.css';
+@import 'codemirror/addon/fold/foldgutter.css';
+
+
+
+.containers {
+    border:1px dashed #DEDDDD; 
+    padding:5vh; 
+    cursor: crosshair;
+    display: flex;
+    justify-content: center;
+}
+
+.container-header {
+    background-color: #002659; 
+    color: white
+}
+
+ mat-tab{
+    box-shadow: none !important;
+ }
+.cdk-overlay-pane {
+    width: 100%!important;
+}
+.copyContent {
+    font-size: 20px;
+    transition: all 0.3s linear;
+}
+
+.copyContent:hover {
+    cursor: pointer;
+}
+
+.mat-menu-panel {
+    max-width: 100%!important;
+    min-width: 64px!important;
+}
+
+.mat-tab-label-content {
+    background-color: red !important;
+    border: 1px solid red;
+} 
+
+::ng-deep .test {
+    white-space: pre-line;
+  }
+
+  .rotate-180 {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.flipped {
+    -o-transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+#description {
+    width: 100%;
+    padding:1em;
+    word-wrap: break-word
+}
+.border-radius-bottom {
+    border-radius: 7px;
+}
+
+button {
+    cursor: pointer;
+  
+  }
+  
+  button.mat-primary{
+    background-color: #002659;
+  }
+
+
+  table{
+      width: 100%;
+  }
+
+  .get:disabled {
+    background-color: #61AFFE;
+    color: white;
+}
+
+.post:disabled {
+    background-color: #49CC90;
+    color: white;
+}
+
+.put:disabled {
+    background-color: #FCA130;
+    color: white;
+}
+
+.delete:disabled {
+    background-color: #F93E3E;
+    color: white;
+}
+
+.patch:disabled {
+    background-color: #50E3C2;
+    color: white;
+}
+
+.head:disabled {
+    background-color: #9012FE;
+    color: white;
+}
+
+.options:disabled {
+    background-color: #0D5AA7;
+    color: white;
+}
+.fa-js{
+    color: green;
+}
+
+.fa-gem{
+    color: red;
+}
+
+.fa-python{
+    color:grey;
+}
+.fa-java{
+    color: orangered;
+}
+
+.fa-aws{
+    color: #FCA130;
+}
+ 
+.filter {
+    display: block;
+  }
+.function-full-width
+{
+    padding:10px;
+}
+
+
+
+
+.border-radius-bottom {
+    border-radius: 7px;
+}
+
+.mycontent-left {
+    border-right: 1px dashed #333;
+  }
+
+.highlight{
+    background: #42A948; /* green */
+  }
+
+  button {
+    cursor: pointer;
+  }
+  
+  button.mat-primary {
+    background-color: #002659;
+  }
+  
+  #confirm {
+    position: relative;
+    margin: 0 auto;
+    
+  }
+
+  .mat-column-check {
+    max-width: 100px !important;
+}
+
+::ng-deep .test {
+    white-space: pre-line;
+}
+
+.mat-column-Check {
+    flex: 0 0 6%;
+}
+
+.mat-column-Path {
+    flex: 0 0 25%;
+}
+
+.mat-column-Summary {
+    flex: 0 0 32%;
+}
+
+.mat-column-Method {
+    flex: 0 0 15%;
+}
+
+.mat-column-space {
+    flex: 0 0 2%;
+}
+
+.mat-column-Params {
+    flex: 0 0 14%;
+}
+
+.mat-column-Codes {
+    flex: 0 0 17%;
+    //   max-width: 50px;
+}
+
+.mat-column-Validity {
+    flex: 0 0 10%;
+    //   max-width: 50px;
+}
+
+.mat-column-Actions {
+    flex: 0 0 17%;
+}
+
+.mat-column-search {
+    flex: 0 0 6%;
+    width: 10%;
+
+}
+
+.invalid:hover {
+    opacity: 0.7;
+}
+
+.mat-column-actions{
+ text-align: center;
+ width:20%
+}
+
+.mat-column-language{
+    text-align: center;
+    width:40%  
+   }
+
+ngx-codemirror{
+    height: calc(100vh - 100px);
+    border: black;  
+    border-width: 15px;
+}
+
+.CodeMirror-linenumber {
+    padding: 1px 8px 0 5px;
+    color: #c8d2d7;
+    font-size: 10px;
+    border: black;   
+}
+
+.header {
+    padding: 5px;
+  }
+
+
+
+  .advanced-btn {
+    color: #0082e4;
+  }
+  
+  .advanced-section {
+    text-align: left;
+  }
+  
+  .addBtn {
+    background-color: #002659;
+    color: white;
+  }
+  
+  .box-size {
+    width: 60%;
+    max-width: 50px;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
+  button.mat-primary {
+    background-color: #002659;
+  }
+  
+  #confirm {
+    position: relative;
+    margin: 0 auto;
+  }
+  
+  .doc {
+    text-align: left;
+  }
+  
+  .editor{
+     width: 50%;
+  }
+  
+  
+  .drop-zone {
+    background-color: #f6f6f6;
+    border: dotted 3px #dedddd;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .file-input-container {
+    text-align: right;
+  
+    input[type="file"] {
+      display: none;
+    }
+  
+    label {
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+  }
+  .nv-file-over {
+    border: dotted 3px red;
+  }
+  // .parameters-list {
+  //   overflow: auto;
+  //   overflow-x: hidden;
+  // }
+  .jsoneditor-menu {
+    display: none;
+    display: hidden;
+    height: 0px;
+  }
+  
+  .dynamic-body {
+    margin-top: 30px;
+  }
+  
+  :host ::ng-deep json-editor,
+  :host ::ng-deep json-editor .jsoneditor,
+  :host ::ng-deep json-editor > div,
+  :host ::ng-deep json-editor jsoneditor-outer {
+    height: 100px;
+    border: none;
+  }
+  
+  .selectBtn {
+    color: white;
+  }
+  
+  #tableHead {
+    text-align: left;
+  }
+  
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+  .getAndDelete{
+    margin-right: 950px;
+  }
+  .postAndPut{
+    margin-left: -340px;
+  }
+  .uploadBtn {
+    border: 1px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  
+  .mat-list {
+    padding: 0;
+  }
+  
+  .mat-list .mat-list-item {
+    height: 25px; /* default is 72px */
+  }
+  
+  .json-editor-wrap {
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 5px;
+  }
+  
+  .snippetName {
+    transition: all .5s linear;
+  
+    .snippetAdd {
+      display: none;
+    }
+  }
+  
+  .snippetName :hover {
+    color: white;
+    background-color: #002659;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding:4px;
+    cursor: pointer;
+  
+    .snippetAdd {
+      display: block;
+    }
+  }
+  :host ::ng-deep ngx-codemirror .CodeMirror-code{
+    text-align: left!important;
+  }
+  ::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+  }
+  
+  .successCode{
+    background-color: #49CC90;
+    color: white; 
+    margin-left: 10px;
+    position: relative;
+    bottom: 1px;
+    font-size: 1em;
+  }
+  .errorCode{
+    background-color:#F93E3E;
+    color: white; 
+    margin-left: 10px;
+    position: relative;
+    bottom: 1px;
+    font-size: 1em;
+  }
+  .example-container {
+    width: 400px;
+    max-width: 100%;
+    margin: 0 25px 25px 0;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+  }
+  
+  .cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  html.cdk-global-scrollblock {
+    position: initial !important;
+  }
+  
+  html.cdk-global-scrollblock body {
+    position: fixed;
+  
+  }
+  mat-card{
+    width:100%
+  }
+  div.scroll {
+    margin:4px, 4px;
+    padding:40px;
+    width: 100%;
+    height: 55vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align:justify;
+  }
+  .justToRead{
+     width:20%
+  }
+  .example-form {
+   
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
