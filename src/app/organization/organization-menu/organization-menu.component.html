@@ -1,0 +1,53 @@
+<div [ngClass]="showAccordion == false ? 'first_acc' : 'second_acc'">
+    <mat-toolbar class="dbsource-toolbar" *ngIf="!organizationShow ; else menu">
+        <button mat-button style="background: #002659; margin-left: -15px;" (click)="openDialog()">
+            <strong class="nav-icon material-icons" style="color:white">add_circle </strong>
+        </button>
+        <span class="toolbar-text" translate>sidenav.organization</span>
+    </mat-toolbar>
+
+    <ng-template #menu>
+        <div>
+            <mat-toolbar
+                [ngStyle]="{'position': menuShow === false ?  'absolute' : null, 'width': menuShow === false ?  '250px' : null}"
+                class="dbsource-toolbar">
+                <button mat-button style="background: #002659; ">
+                    <button class="mat-fab-menu " mat-mini-fab>
+                        <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span>
+                    </button>
+                    <span style="font-size: 20px;text-align: center;">{{organizationName}}</span>
+
+                </button>
+                <mat-icon *ngIf="!showAccordion && menuShow === true" (click)="showAcc()"
+                    style="position: absolute;left: 85%;cursor: pointer;">keyboard_arrow_up</mat-icon>
+                <mat-icon *ngIf="showAccordion && menuShow === true" (click)="showAcc()"
+                    style="position: absolute;left: 85%;cursor: pointer;">keyboard_arrow_down</mat-icon>
+
+            </mat-toolbar>
+        </div>
+
+        <div *ngIf="menuShow === true && showAccordion === true;">
+            <ul style="background-color: white;" class="nav list" myAccordionNav mySlimScroll myHighlightActiveItems
+                myAppendSubmenuIcon>
+                <li>
+                    <a [routerLink]="['/app/organization' ,organizationId ,'details']" mat-button><em
+                            class="nav-icon material-icons">edit</em><span style="color: black"
+                            class="nav-text">Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/app/organization',organizationId,'members']" mat-button><em
+                            class="nav-icon material-icons">perm_identity</em><span style="color: black"
+                            class="nav-text" translate>organization.membersTitle</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/app/organization',organizationId,'teams']" mat-button><em
+                            class="nav-icon material-icons">supervisor_account</em><span style="color: black"
+                            class="nav-text" translate>organization.teams</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </ng-template>
+</div>

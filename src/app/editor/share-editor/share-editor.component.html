@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10">
+            <mat-icon style="margin-right: 25px;position: absolute; margin-top: 10px;">group_add</mat-icon>
+            <h2 mat-dialog-title> <span style="position: relative;top: -10px;margin-left: 20px;"
+                    translate>editor.share.title</span></h2>
+        </div>
+
+
+    </div>
+
+    <br>
+    <form name="form" #f="ngForm" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-10">
+                <h3 style="float: left; margin-left: 25px;" translate>editor.share.msg</h3>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-11">
+                <mat-form-field appearance="outline" style="width: 100%; margin-left: 25px;" appearance="outline">
+                    <mat-label>User Emails</mat-label>
+                    <mat-chip-grid #chipList>
+                        <mat-chip-row style="background-color: #357EC7;color: white;" *ngFor="let member of members"
+                            [selectable]="selectable" [removable]="removable" (removed)="remove(member)">
+                            {{member.name}}
+                            <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip-row>
+                        <input type="email" placeholder="E.g. user@email.com" #memberInput [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)"
+                            [formControl]="myControl" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" (click)="addOption(option)"
+                                [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-chip-grid>
+                </mat-form-field>
+                <mat-error style="float: left;" *ngIf="!emailFormatValid">
+                    <span translate>auth.signup.errors.emailValid</span>
+                </mat-error>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-3">
+                <span style="margin-left: 25px;" translate>editor.share.choices</span>
+            </div>
+            <div class="col-9">
+                <mat-checkbox checked=true #ms (click)="manageChoice($event)" style="float: left;"
+                    class="example-margin mr-4">Microservice</mat-checkbox>
+                <mat-checkbox #swagger (click)="manageChoice($event)" style="float: left;"
+                    class="example-margin  mr-4">Swagger</mat-checkbox>
+                <mat-checkbox #openapi (click)="manageChoice($event)" style="float: left;"
+                    class="example-margin  mr-4">OpenAPI</mat-checkbox>
+            </div>
+
+        </div>
+    </form>
+    <br>
+    <div class="row">
+        <div class="col-10">
+            <h2 mat-dialog-title>
+                <mat-icon style="margin-right: 25px;">link</mat-icon>
+                <span style="position: relative;top: -8px;" translate>editor.share.link</span>
+            </h2>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-2">
+            <mat-icon style="cursor: pointer;margin-left: 50px;" (click)="shareMs()">content_copy</mat-icon>&nbsp;
+        </div>
+        <div class="col-6">
+            <p style="font-size: 17.5px;font-weight: 400; margin-left: -83px;">{{microserviceLink}}
+            </p>
+        </div>
+    </div>
+
+    <br>
+    <div class="box-body text-right">
+        <button mat-raised-button (click)="dialogRef.close()" class="btn-w-md">
+            <span translate>popups.buttons.cancel</span>
+        </button>&nbsp;&nbsp;
+        <button mat-raised-button type="button" (click)="save()" color="primary" class="btn-w-md"
+            [disabled]="members.length === 0 || choices.length === 0" id="confirm">
+            <span translate>popups.buttons.confirm</span></button>
+    </div>
+</div>

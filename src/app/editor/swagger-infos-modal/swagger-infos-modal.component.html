@@ -1,0 +1,279 @@
+<app-loader></app-loader>
+<div class="container-fluid" style="text-align: center;">
+
+    <div>
+        <form name="form" #f="ngForm">
+
+            <h1 mat-dialog-title><span translate>popups.container.infos</span></h1>
+
+            <mat-horizontal-stepper #stepper>
+                <div class="divider divider-md"></div>
+                <mat-step style="height: 100%">
+                    <ng-template matStepLabel style="color: #fff"><span translate>Swagger</span></ng-template>
+
+                    <div class="divider divider-md"></div>
+
+                    <div class="container" style="height: 100%">
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <mat-label> {{ 'popups.container.name' | translate}}</mat-label>
+                            <input matInput
+                                [(ngModel)]="project.name" #projectName="ngModel" name="name" value="project?.name"
+                                pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$" required="true">
+                        </mat-form-field >
+                        <div *ngIf="projectName?.errors?.required && projectName?.touched">
+                            <ul class="error">
+                                <li translate>popups.project.errors.null</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="projectName?.errors?.pattern">
+                            <ul class="error">
+                                <li translate>popups.project.errors.pattern</li>
+                            </ul>
+                        </div>
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <mat-label>{{ 'popups.container.version' | translate}}</mat-label>
+                            <input matInput placeholder="{{ 'popups.container.version' | translate}}"
+                                [(ngModel)]="container.name" #containerName="ngModel" name="version"
+                                value="container?.name" required="true">
+                        </mat-form-field>
+
+                        <div class="col-md-12">
+                            <h4 style="text-align: left;">Description</h4>
+                            <ckeditor [data]="container.description" #e id="editor" [editor]="Editor"
+                                [(ngModel)]="container.description" name="description"></ckeditor>
+                        </div>
+                        <div class="divider divider-md"></div>
+                    </div>
+
+                </mat-step>
+                <mat-step style="height: 100%">
+                    <ng-template matStepLabel style="color: #fff"><span translate>Contact</span></ng-template>
+
+                    <div class="divider divider-md"></div>
+
+                    <div class="container" style="height: 100%">
+                        <mat-form-field appearance="outline"  class="col-md-12">
+
+                            <input matInput placeholder="{{ 'popups.contact.name' | translate}}"
+                                [(ngModel)]="contact.name" name="contactName"
+                                value="contact?.name ? contact?.name : null">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <input #contactUrl="ngModel" matInput placeholder="{{ 'popups.contact.url' | translate}}"
+                                [(ngModel)]="contact.url"
+                                pattern="^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+                                name="contactUrl" value="contact?.url">
+
+                        </mat-form-field>
+                        <div *ngIf="contactUrl?.errors?.pattern && contactUrl?.touched">
+                            <ul class="error">
+                                <li translate>popups.project.errors.url</li>
+                            </ul>
+                        </div>
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <input matInput placeholder="{{ 'popups.contact.email' | translate}}"
+                                [(ngModel)]="contact.email" name="contactEmail" value="contact?.email">
+
+                        </mat-form-field>
+
+
+
+                        <div class="divider divider-md"></div>
+
+
+                    </div>
+
+                </mat-step>
+
+                <mat-step style="height: 100%">
+                    <ng-template matStepLabel style="color: #fff"><span translate>License</span></ng-template>
+
+                    <div class="divider divider-md"></div>
+
+                    <div class="container" style="height: 100%">
+                        <mat-form-field appearance="outline"  class="col-md-12">
+
+                            <input matInput placeholder="{{ 'popups.container.name' | translate}}"
+                                [(ngModel)]="license.name" name="licenseName" value="license?.name">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <input #licenseUrl="ngModel" matInput placeholder="URL"
+                                pattern="^(http(s)?:\/\/)[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$"
+                                [(ngModel)]="license.url" name="licenseUrl" value="license?.url">
+
+                        </mat-form-field>
+                        <div *ngIf="licenseUrl?.errors?.pattern && licenseUrl?.touched">
+                            <ul class="error">
+                                <li translate>popups.project.errors.url</li>
+                            </ul>
+                        </div>
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <input matInput placeholder="{{ 'popups.container.termsOfService' | translate}}"
+                                [(ngModel)]="container.termsOfService" name="termsOfService"
+                                value="container?.termsOfService">
+
+                        </mat-form-field  >
+
+                        <div class="divider divider-md"></div>
+
+                    </div>
+
+                </mat-step>
+
+                <mat-step style="height: 100%">
+                    <ng-template matStepLabel style="color: #fff"><span translate>server</span></ng-template>
+
+                    <div class="divider divider-md"></div>
+
+                    <div class="container" style="height: 100%">
+                        <div class="row">
+                            <h3 style="font-weight: bold; margin-left: 4%;margin-left: 4%;"><span translate>host</span>
+                            </h3>
+                        </div>
+                        <div style="width: 100%;" class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline"  style="width: 80%;">
+                                    <mat-label><span translate>hostName</span></mat-label>
+                                    <input matInput [(ngModel)]="host" name="host">
+                                </mat-form-field  >
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline"  style="width: 80%;">
+                                    <mat-label><span translate>basePath</span></mat-label>
+                                    <input matInput [(ngModel)]="basePath" name="basePath">
+                                </mat-form-field  >
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline"  style="width: 80%;">
+                                    <mat-label><span translate>schemes</span></mat-label>
+                                    <mat-select matNativeControl (selectionChange)="addToSchemes($event.value)"
+                                        [(ngModel)]="hostUrl.schemes" name="schemes">
+                                        <mat-option value="http"><span translate>http</span></mat-option>
+                                        <mat-option value="https"><span translate>https</span></mat-option>
+                                        <mat-option value="ws"><span translate>ws</span></mat-option>
+                                        <mat-option value="wss"><span translate>wss</span></mat-option>
+                                    </mat-select>
+                                </mat-form-field  >
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div style="margin-left: 2.5%;" class="col-md-6">
+                                <mat-chip-grid #chipList>
+                                    <mat-chip-row style="background-color: #357EC7;color: white;"
+                                        *ngFor="let value of schemes" [selectable]="selectable" [removable]="removable"
+                                        (removed)="removeValue(value)">
+                                        {{value}}
+                                        <mat-icon style="color: white;" matChipRemove
+                                            *ngIf="removable">cancel</mat-icon>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h3 style="font-weight: bold; margin-left: 4%;"><span translate>server</span></h3>
+                        </div>
+                        <div style="width: 100%;" class="row">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline"  style="width: 80%;">
+                                    <mat-label><span translate>URL</span></mat-label>
+                                    <input matInput [(ngModel)]="server.url" name="serverURL">
+                                </mat-form-field  >
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline"  style="width: 80%;">
+                                    <mat-label><span translate>Description</span></mat-label>
+                                    <input matInput [(ngModel)]="server.description" name="serverDescription">
+                                </mat-form-field  >
+                            </div>
+
+                            <div class="col-md-2">
+                                <button (click)=" addServer(server) " mat-stroked-button class="addBtn mt-2">
+                                    <mat-icon class="material-icons">add</mat-icon>&nbsp; <span translate>api.ad</span>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" *ngIf="servers?.length > 0  ">
+                                <br />
+                                <div style="height: 50%;width:100%;">
+                                    <table class="mdl-data-table" style="width: 100%;overflow-y: auto; float: left;">
+                                        <thead>
+                                            <tr *ngIf="servers.length > 0">
+
+                                                <th id="tableHead"><span translate>URL</span></th>
+                                                <th id="tableHead">Description</th>
+                                                <th style="text-align: center;" id="tableHead">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <ng-container *ngFor="let server of servers; let i = index"
+                                                class="col-md-12">
+                                                <tr>
+
+                                                    <td class="mdl-data-table__cell--non-numeric">{{ server?.url }}
+                                                    </td>
+                                                    <td class="mdl-data-table__cell--non-numeric box-size">
+                                                        <span>{{server.description}}</span>
+                                                    </td>
+                                                    <td style="text-align: center;"
+                                                        class="mdl-data-table__cell--non-numeric box-size">
+
+                                                        <button mat-button (click)="deleteServer(i)">
+                                                            <em class="material-icons">
+                                                                delete_outline
+                                                            </em></button>
+
+
+
+                                                    </td>
+                                                </tr>
+                                            </ng-container>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="divider divider-md"></div>
+
+                    </div>
+
+                </mat-step>
+
+            </mat-horizontal-stepper>
+
+            <div class="divider divider-md"></div>
+
+
+            <div class="box-body text-right">
+                <button *ngIf="stepper.selectedIndex !== 0" mat-raised-button type="button" class="btn-w-md"
+                    (click)="goBack(stepper)">
+                    <span translate>popups.buttons.back</span></button>
+                <span class="space"></span>
+                <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()"
+                    *ngIf="stepper.selectedIndex === 0">
+                    <span translate>popups.buttons.cancel</span></button>
+                <span class="space"></span>
+                <button mat-raised-button type="button" *ngIf="stepper.selectedIndex !== stepper.steps?.length - 1"
+                    (click)="goForward(stepper)" style="background-color:  #002659; color: white" class="btn-w-md">
+                    <span translate>popups.buttons.next</span></button>
+                <span class="space"></span>
+                <button id="save" (click)="save()"
+                    [disabled]="!container.name || (licenseUrl?.errors?.pattern && licenseUrl?.touched) || contactUrl?.errors?.pattern && contactUrl?.touched"
+                    class="btn-w-md" style="background-color:  #002659; color: white" mat-raised-button type="button">
+                    <span translate>popups.buttons.saveAndExit</span></button>
+            </div>
+
+
+
+
+        </form>
+    </div>
+
+</div>

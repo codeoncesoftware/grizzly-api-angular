@@ -1,0 +1,34 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-10">
+      <h2 mat-dialog-title style="text-align: center;">
+        <mat-icon style="margin-right: 15px;">history</mat-icon>
+        <span style="position: relative;top: -8px;" translate>editor.history.title</span>
+      </h2>
+    </div>
+  </div>
+
+  <br>
+  <p style="font-size: 16px;font-weight: 500;margin-left: 5px;"><span translate>editor.history.msg</span></p>
+
+  <div class="row">
+    <div class="col-md-12" style="margin-bottom: 20px;">
+      <mat-accordion *ngFor="let ms of microservices">
+        <mat-expansion-panel class="custom-panel" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <a target="_blank" [routerLink]="['/editor' , ms.id]">{{ms.name}}</a> <span
+                class="badge ml-2 mb-2">{{ms.version}}</span>
+            </mat-panel-title>
+            <mat-panel-description>
+              <mat-icon (click)=" delete(ms.id)" style="margin-left: 90%;color: #002659;">delete_forever</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p [innerHtml]="ms.description"></p>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+</div>

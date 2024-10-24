@@ -1,0 +1,262 @@
+<div class="container-fluid" style="text-align: center;height:67vh;position: relative;">
+
+    <span style="position:absolute; top:0; right:0;">
+        <button mat-button (click)="dialogRefFunction.close()">
+            <mat-icon>clear</mat-icon> <span translate>api.cancel</span>
+        </button>
+    </span>
+
+    <h2>
+        <span *ngIf="!isEditMode" translate>function.save</span>
+        <span *ngIf="isEditMode" translate>function.edit</span>
+    </h2>
+
+
+    <div class="row" style="position:relative;">
+        <div class="col-md-12" style="overflow-y: auto">
+
+
+            <!--editor step-->
+            <form [formGroup]="secondFormGroup">
+
+                <!--Select Language-->
+                <form [formGroup]="languageFormGroup">
+                    <div class="row">
+
+                        <div class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label> <span translate>function.programmingLanguage</span> </mat-label>
+                                <mat-select formControlName="languageCtrl" (selectionChange)="changeLanguage($event)"
+                                    required>
+                                    <mat-option *ngFor="let language of languages" [value]="language">
+                                        <div *ngIf="language=='javascript'"><i class="fab fa-js "> </i> Javascript
+                                        </div>
+                                        <div *ngIf="language=='ruby'"> <i class="fas fa-gem "> </i> Ruby</div>
+
+                                        <div *ngIf="language=='java'"><i class="fab fa-java "> </i> Java
+                                        </div>
+                                        <div *ngIf="language=='python'"> <i class="fab fa-python "> </i> Python
+                                        </div>
+                                        <div *ngIf="language=='AWS Lambda'"> <i class="fab fa-aws"></i> AWS Lambda
+                                        </div>
+                                        <div *ngIf="language=='OpenFaas'"> <img style=" width: 20px ; height: 20px;"
+                                                src="../../../assets/images/open.png"> OpenFaas
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && languageFormGroup.get('languageCtrl').errors ">
+                                <p style="color: red;text-align: left" translate>function.selectFunctionLanguage</p>
+                            </div>
+                        </div>
+
+                        <!--Insert Function Name-->
+                        <div class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label><span translate>function.functionName</span></mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="functionName" matInput
+                                    placeholder="Function Name" value="Name" required>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !functionName  ">
+                                <p style="color: red;text-align: left" translate>function.insertFunctionName</p>
+                            </div>
+                        </div>
+                        <!--Insert Function Version -->
+                        <div class="col-md">
+                            <mat-form-field appearance="outline" class="col-md" style="padding:10px">
+                                <mat-label>Version</mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="functionVersion" matInput
+                                    placeholder="Version" value="Version" required>
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !functionVersion">
+                                <p style="color: red;text-align: left" translate>function.insertFunctionVersion</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div *ngIf="!isUnique">
+                        <p style="color: red;text-align: left" translate>function.notUnique</p>
+                    </div>
+
+
+                    <div class="row">
+
+                        <!--Insert Class Name -->
+                        <mat-form-field appearance="outline" class="col-md-4" style="padding:10px"
+                            *ngIf="languageFormGroup.get('languageCtrl').value=='java'">
+                            <mat-label translate>function.className</mat-label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="className" matInput
+                                placeholder="Class Name" value="className" required>
+                        </mat-form-field>
+
+                        <!--Insert Method Name -->
+                        <mat-form-field appearance="outline" class="col-md-4" style="padding:10px"
+                            *ngIf="languageFormGroup.get('languageCtrl').value=='java'">
+                            <mat-label translate>function.methodName</mat-label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="methodName" matInput
+                                placeholder="Method Name" value="methdoName" required>
+                        </mat-form-field>
+
+                        <!--Insert Model Name -->
+                        <mat-form-field appearance="outline" class="col-md-4" style="padding:10px"
+                            *ngIf="languageFormGroup.get('languageCtrl').value=='java'  ">
+                            <mat-label translate>function.modelName</mat-label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="modelName" matInput
+                                placeholder="Model Name" value="ModelName" required>
+                        </mat-form-field>
+
+
+
+
+
+                        <!--OpenFaas Info-->
+                        <div *ngIf="languageFormGroup.get('languageCtrl').value==='OpenFaas'" class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label>URI</mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="openFaasURI" matInput
+                                    placeholder="Host" value="openFaasURI" required>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !openFaasURI">
+                                <p style="color: red;text-align: left" translate>function.openFaasURI</p>
+                            </div>
+                        </div>
+
+                        <!--Insert AWS CREDENTIALS -->
+                        <div *ngIf="languageFormGroup.get('languageCtrl').value==='AWS Lambda'" class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label>AWS Function Name</mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="awsFunctionName" matInput
+                                    placeholder="AWS functionName" value="awsFunctionName" required>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !awsFunctionName">
+                                <p style="color: red;text-align: left" translate>function.awsFunctionName</p>
+                            </div>
+                        </div>
+
+                        <div *ngIf="languageFormGroup.get('languageCtrl').value==='AWS Lambda'" class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label>AWS_ACCESS_KEY_ID</mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="awsKeyId" matInput
+                                    placeholder="AWS access key id" value="awsKeyId" required>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !awsKeyId">
+                                <p style="color: red;text-align: left" translate>function.awsKeyId</p>
+                            </div>
+                        </div>
+
+
+
+                        <div *ngIf="languageFormGroup.get('languageCtrl').value==='AWS Lambda'" class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label>AWS_ACCESS_SECRET</mat-label>
+                                <input [ngModelOptions]="{standalone: true}" [(ngModel)]="awsSecretKey" matInput
+                                    placeholder=" AWS secret key" value="awsSecretKey" required>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && !awsSecretKey">
+                                <p style="color: red;text-align: left" translate>function.awsSecretKey</p>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="languageFormGroup.get('languageCtrl').value==='AWS Lambda'" class="col-md">
+                            <mat-form-field appearance="outline" class="col-md-12" style="padding:10px">
+                                <mat-label> <span translate>AWS REGION</span> </mat-label>
+                                <mat-select formControlName="awsRegionCtrl" required>
+                                    <mat-option *ngFor="let region of regions" [value]="region">
+                                        <div> {{region}}
+                                        </div>
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                            <div *ngIf="isConfirmed && languageFormGroup.get('awsRegionCtrl').errors ">
+                                <p style="color: red;text-align: left" translate>function.selectRegion</p>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <!-- <div style="padding-left:10px ;" *ngIf="languageFormGroup.get('languageCtrl').value==='AWS Lambda'"
+                        class="row">
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <mat-label>AWS_SESSION_TOKEN</mat-label>
+                            <input [ngModelOptions]="{standalone: true}" [(ngModel)]="awsSessionToken" matInput
+                                placeholder="AWS session token" value="awsSessionToken">
+
+                        </mat-form-field  >
+
+                    </div> -->
+
+                </form>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="col-sm border-right"
+        *ngIf="languageFormGroup.get('languageCtrl').value  && (languageFormGroup.get('languageCtrl').value!=='AWS Lambda' && languageFormGroup.get('languageCtrl').value!=='OpenFaas'  ) ">
+        <div class="row">
+            <div class="col-sm">
+                <div class="mycontent-right">
+
+                    <h2 style="width: bold; text-align:left  ">Code </h2>
+
+                    <ngx-codemirror style=" text-align: left;" #codeMirror [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="functionToPass" [options]="options">
+                    </ngx-codemirror>
+                </div>
+
+            </div>
+
+            <div class="col-sm" *ngIf="languageFormGroup.get('languageCtrl').value=='java'">
+                <div class="mycontent-right">
+                    <div *ngIf="languageFormGroup.get('languageCtrl').value=='java'">
+                        <h2 style="width: bold;  text-align: left; ">Model</h2>
+                    </div>
+                    <!--Codemirror Editor-->
+                    <ngx-codemirror style="text-align: left;"
+                        *ngIf="languageFormGroup.get('languageCtrl').value=='java'" #codeMirror
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="modelToSave" [options]="options">
+                    </ngx-codemirror>
+
+                </div>
+            </div>
+
+            <div>
+                <button style="float: right; padding:10px; margin:10px; border:none; border-radius:10px; background-color: #28a745;	box-shadow: none;
+                " type="button" (click)="beautifyJs();" class=" btn-success text-white"><i
+                        class="fas fa-align-left"></i>
+                    <span translate>function.format</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="box-body text-right" style=" 
+    bottom:0;
+    right:0">
+        <!-- Add New Function-->
+        <button id="confirm" (click)="createFunction()" *ngIf="!isEditMode" style=" float: right; margin-top:5px;  bottom:0;   background-color: #002659;
+        " type="button" mat-raised-button color="primary" class="btn-w-md" cdkFocusInitial>
+            <span translate> function.save&&exit </span>
+        </button>
+        <span class="space"></span>
+        <!-- Update Function-->
+        <button id="confirm" (click)="updateFunction()" *ngIf="isEditMode" style=" float:right; margin-top:5px;     background-color: #002659;
+          " type="button" mat-raised-button color="primary" class="btn-w-md" cdkFocusInitial>
+            <span translate>function.save&&exit</span>
+        </button>
+        <span class="space"></span>
+
+    </div>
+
+</div>

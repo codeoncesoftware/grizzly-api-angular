@@ -1,0 +1,26 @@
+.identityprovider-toolbar {
+  background-color: #002659;
+  color: white;
+  height: auto;
+}
+a:hover {
+  color: #002659; /*the default color*/
+}
+
+button {
+  cursor: pointer;
+}
+
+button.mat-primary {
+  background-color: #002659;
+}
+::-webkit-scrollbar {
+  height: 4px;
+}
+.list_style {
+  overflow-y: scroll;
+  height: auto;
+  max-height: 10em;
+  min-height: 9em;
+}
+

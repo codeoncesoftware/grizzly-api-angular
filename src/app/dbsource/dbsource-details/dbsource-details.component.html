@@ -1,0 +1,162 @@
+<app-loader></app-loader>
+
+<section class="container-fluid">
+    <!-- Show a Project Details Section START -->
+    <article>
+        <br>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="box" style="box-shadow: none" *ngIf="dbsource?.id">
+                    <div class="box-header dbsource-header radius-top">
+                        <button mat-button (click)="showDbsourceDetails()"style="cursor: pointer;text-decoration: none;color: white;">
+                            <mat-icon class="material-icons" style="cursor: pointer;color: white;">
+                                {{toggleDbsourceDetails ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                            </mat-icon> &nbsp;
+                            <span matBadge="." class="hide-text" matBadgeSize="small"
+                                [matBadgeColor]="dbsource?.active === false ? 'warn' : 'accent'"
+                                matBadgeOverlap="false">{{ dbsource?.name }}
+                            </span>&nbsp;&nbsp;
+
+                        </button>
+                        <span style="flex: 1 1 auto;"></span>
+                        <div style="float:right">
+                            <button *ngIf="dbsource?.provider === 'MONGO'" mat-button (click)="uploadCSVfile()" style="cursor: pointer;text-decoration: none;color: white;">
+                                <mat-icon style="cursor: pointer;color: white;">upload</mat-icon>&nbsp;
+                                <span translate>upload</span>
+                            </button>
+                            <button mat-button (click)="openEditDBSourceModal()" style="cursor: pointer;text-decoration: none;color: white;">
+                                <mat-icon style="cursor: pointer;color: white;">edit</mat-icon>&nbsp;
+                                <span translate>project.edit</span>
+                            </button>&nbsp;
+                            <button mat-button (click)="openConfirmDeleteDialog()" style="cursor: pointer;text-decoration: none;color: white;">
+                                <mat-icon style="cursor: pointer;color: white;">delete_forever</mat-icon>&nbsp;
+                                <span translate>project.delete</span>
+                            </button>
+                            <mat-icon class="info" matTooltipClass="test" matTooltip="{{ 'dbsource.creationTime' | translate }} : {{dbsource?.creationTime | date: 'M/d/yy, h:mm a'}}
+              {{ 'dbsource.lastUpdate' | translate }} : {{dbsource?.lastUpdate | date: 'M/d/yy, h:mm a'}}">
+                                info
+                            </mat-icon>
+                        </div>
+                    </div>
+                    <div class="box-body bg-color-white radius-bottom" [@slideUpDown]="toggleDbsourceDetails">
+                        <div class="widget-container">
+                            <em *ngIf="dbsource.provider!== 'BIGQUERY' " class="material-icons" style="vertical-align: middle"> error </em> &nbsp;
+                            <span *ngIf="dbsource.type === 'nosql' && dbsource.provider!== 'BIGQUERY' " translate>dbsource-details.warning</span> &nbsp; <span *ngIf="dbsource.type === 'sql'" translate>dbsource-details.warningSQL</span>
+                            <h5><span translate>dbsource-details.status</span> :
+                                <span *ngIf="dbsource?.active " style="font-weight: 400; color: #66BB6A">OK</span>
+                                <span *ngIf="!dbsource?.active" style="font-weight: 400; color: #EF5350">KO</span>
+                            </h5>
+                            <h5 >Data source provider : <span style="font-weight: 400;">
+                                {{ dbsource.provider}}</span></h5>
+                            <h5 *ngIf="dbsource?.host">Host : <span style="font-weight: 400;">
+                                    {{ dbsource.host }}</span></h5>
+                            <h5 *ngIf="dbsource?.port && dbsource.provider !== 'COUCHDB'">Port : <span style="font-weight: 400;">
+                                    {{ dbsource.port }}</span></h5>
+                            <h5 *ngIf="dbsource?.description">Description :
+                                <span style="font-weight: 400;">
+                                    {{ dbsource.description }}
+                                </span>
+                            </h5>
+                           
+                        </div>
+
+                        <mat-accordion>
+                            <mat-expansion-panel *ngFor="let db of dbsource.databases" (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]=true >
+                                <mat-expansion-panel-header *ngIf="dbsource.type==='nosql' && db.collections.length > 0">
+                                    <mat-panel-title>
+                                        {{ db.name }}
+                                    </mat-panel-title>
+                                    <mat-panel-description>
+                                        {{ db.collections?.length }} &nbsp;
+                                        <span *ngIf="dbsource.provider === 'MONGO'"> Collections</span>
+                                        <span *ngIf="dbsource.provider === 'COUCHDB'"> Buckets</span>
+                                        <span *ngIf="dbsource.provider === 'ELASTICSEARCH'"> Indexes</span>
+                                        <span *ngIf="dbsource.type === 'sql'"> Tables</span>
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                <mat-expansion-panel-header *ngIf="dbsource.type === 'sql'">
+                                    <mat-panel-title class="mt-2">
+                                        {{ db.name }}
+                                    </mat-panel-title>
+                                    <mat-panel-description *ngIf="db.tables !== null && db.tables.length > 0" class="mt-2">
+                                        {{ db.tables?.length }} &nbsp;
+                                        <span *ngIf="dbsource.provider === 'MONGO'"> Collections</span>
+                                        <span *ngIf="dbsource.provider === 'COUCHDB'"> Buckets</span>
+                                        <span *ngIf="dbsource.provider === 'ELASTICSEARCH'"> Indexes</span>
+                                        <span *ngIf="dbsource.type === 'sql'"> Tables</span>
+                                    </mat-panel-description>
+                                    <div style="float:right" class="mr-5" *ngIf="dbsource.provider === 'MYSQL' || dbsource.provider==='MARIADB'">
+                                        <button style="color: #002659;" mat-button (click)="openEditTableModal(dbsource,null,'create')">
+                                            <mat-icon>library_add</mat-icon> &nbsp;<span translate>container.add</span>
+                                        </button>
+                                    </div>
+
+                                </mat-expansion-panel-header>
+                                <div class="example-container mat-elevation-z1" *ngIf="dbsource.type === 'sql'" style="margin-top:10px">
+                                    <mat-table #table [dataSource]="db.tables">
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="name">
+                                            <mat-header-cell *matHeaderCellDef translate>Table</mat-header-cell>
+                                            <mat-cell style="font-weight: 600;" *matCellDef="let element"> {{element.name}} </mat-cell>
+                                        </ng-container>
+                                        <ng-container style="justify-content:center" matColumnDef="primary-keys">
+                                            <mat-header-cell *matHeaderCellDef translate >Primary Key(s)</mat-header-cell>
+                                            <mat-cell style="font-weight: 600;" *matCellDef="let element" >
+                                                <h4 style="margin-top: 3%;font-weight: 600;margin-right: 3%;font-size: 12px;" *ngFor="let i of element.primaryKeys" class="badge badge-pill badge-light">{{i}}</h4></mat-cell>
+                                        </ng-container>
+                                        <!-- Symbol Column -->
+                                      <ng-container matColumnDef="Actions">
+                                            <mat-header-cell *matHeaderCellDef style="justify-content:center"> Actions </mat-header-cell>
+                                            <mat-cell *matCellDef="let element, let i = index" style="justify-content:center ; cursor: pointer">
+                                                <mat-icon matTooltip='view table' style="color: #49CC90;" (click)="openEditTableModal(dbsource, element, 'edit')">launch</mat-icon>
+                                                <mat-icon matTooltip='delete table'   style="color: #ef5350;"(click)="openDeleteTableModal(dbsource, element)">delete_forever</mat-icon>
+                                              
+                                            </mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns;"
+                                            [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                                            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+                                    </mat-table>
+                                </div>
+                                <div class="example-container mat-elevation-z1" *ngIf="dbsource.type !== 'sql'" style="margin-top:10px">
+                                    <mat-table #table [dataSource]="db.collections">
+                                        <!-- Name Column -->
+                                        <ng-container matColumnDef="name">
+                                            <mat-header-cell *matHeaderCellDef translate>Collection</mat-header-cell>
+                                            <mat-cell *matCellDef="let element; let i = index">
+                                                <ng-container *ngIf="editingIndex === i; else displayText">
+                                                    <input [(ngModel)]="db.collections[i]" (keydown.enter)="saveEdit(i, db.collections[i],db.name, element)" />
+                                                </ng-container>
+                                                <ng-template #displayText>
+                                                    <span style="font-weight: 600;" (click)="enableEdit(i)">{{element}}</span>
+                                                </ng-template>
+                                            </mat-cell>
+                                        </ng-container>
+                                        <!-- Symbol Column -->
+                                      <ng-container matColumnDef="Actions">
+                                            <mat-header-cell *matHeaderCellDef style="justify-content:center"> Actions </mat-header-cell>
+                                            <mat-cell *matCellDef="let element; let i = index" style="justify-content:center ; cursor: pointer">
+                                                <mat-icon *ngIf="showDelete(element)" matTooltip='Delete'   style="color: #ef5350;"(click)="confirmDropCollection(db.name, element)">delete_forever</mat-icon>
+                                                <mat-icon *ngIf="showDelete(element)" matTooltip='Edit' style="color: #1976d2;" (click)="enableEdit(i)">edit</mat-icon>
+                                                <mat-icon *ngIf="showDelete(element)" matTooltip='Indexes' style="color: #49CC90;" (click)="openCreateIndexleModal(db.name, element)">add</mat-icon>
+                                            </mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumnsMongo"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumnsMongo;"
+                                            [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}"
+                                            (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+                                    </mat-table>
+                                </div>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                        {{ collectionDetails | json }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!-- Show a Project Details Section END -->
+
+</section>
