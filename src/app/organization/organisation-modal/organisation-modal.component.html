@@ -1,0 +1,115 @@
+
+<app-loader></app-loader>
+<div class="container-fluid" tyle="text-align: center;height:100vh;position: relative;">
+  <div>
+    <form name="form" #f="ngForm">
+
+      <h1 mat-dialog-title> <span style="margin-left: 38%;" translate>{{ data.action.msg }}</span>
+        {{ data.organization?.name }}</h1>
+
+      <mat-horizontal-stepper #stepper>
+        <div class="divider divider-md"></div>
+        <mat-step #organizationForm>
+          <ng-template matStepLabel style="color: #fff"><span translate>popups.organization.details</span></ng-template>
+          <div class="divider divider-md"></div>
+          <div class="container" style="height: 100%">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <mat-label> {{ 'popups.organization.placeholder.name' | translate}} </mat-label>
+                    <input (input)="resetNameUnicity()" required matInput #name="ngModel"
+                      name="name"
+                      [(ngModel)]="organization.name">
+                  </mat-form-field  >
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-error *ngIf="name?.errors?.required && name?.touched">
+                      <span translate>popups.organization.errors.nullName</span>
+                    </mat-error>
+                    <mat-error *ngIf="nameUnicityError">
+                      <span translate>popups.organization.errors.unicity</span>
+                    </mat-error>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                    <mat-form-field appearance="outline"  class="col-md-12">
+                      <mat-label>{{ 'popups.organization.placeholder.email' | translate}}</mat-label>
+                      <input required matInput #email="ngModel"
+                       name="email"
+                        [(ngModel)]="organization.email">
+                    </mat-form-field  >
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-error *ngIf="email?.errors?.required && email?.touched">
+                        <span translate>popups.organization.errors.nullEmail</span>
+                      </mat-error>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-error *ngIf="!emailFormatValid">
+                        <span translate>auth.signup.errors.emailValid</span>
+                      </mat-error>
+                    </div>
+                  </div>
+                  <br>
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <mat-label>{{ 'popups.organization.placeholder.address' | translate}}</mat-label>
+                    <input  matInput #address="ngModel"
+                       name="address"
+                      [(ngModel)]="organization.address">
+                  </mat-form-field  >
+                </div>
+                <br>
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <mat-label>{{ 'popups.organization.placeholder.phone' | translate}}</mat-label>
+                    <input  matInput #phone="ngModel"
+                       name="phone"
+                      [(ngModel)]="organization.phone">
+                  </mat-form-field  >
+                </div>
+              
+              </div>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="outline"  class="col-md-12">
+                <mat-label>{{ 'popups.organization.placeholder.description' | translate}}</mat-label>
+                <textarea matInput  rows="3"
+                  name="description" [(ngModel)]="organization.description"></textarea>
+              </mat-form-field  >
+            </div>
+            
+
+    
+          </div>
+
+        </mat-step>
+
+      </mat-horizontal-stepper>
+
+      <div class="divider divider-md"></div>
+      <div class="box-body text-right">
+
+        <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()"
+         >
+          <span translate>popups.buttons.cancel</span></button>
+        <span class="space"></span>
+        <button mat-raised-button type="button" (click)="Save()"  color="primary"
+          class="btn-w-md" id="confirm" [disabled]="f.form.invalid ">
+          <span translate>popups.buttons.confirm</span></button>
+      </div>
+
+
+
+    </form>
+  </div>
+
+</div>

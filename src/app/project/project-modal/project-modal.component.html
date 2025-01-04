@@ -1,0 +1,518 @@
+<app-loader></app-loader>
+<div class="container-fluid" style="text-align: center;position: relative;background-color: #002659;">
+    <h1 *ngIf="obj.type !== 'authentication microservice'" mat-dialog-title> <span style="color:white" translate>{{ data.action.msg
+            }}</span> {{ data.project?.name }}</h1>
+    <h1 *ngIf="obj.type === 'authentication microservice' && data.action.create" mat-dialog-title> <span style="color:white"
+            translate>popups.project.addIAM</span> {{ data.project?.name }}</h1>
+    <h1 *ngIf="obj.type === 'authentication microservice' && data.action.update" mat-dialog-title> <span style="color:white"
+            translate>popups.project.editIAM</span> {{ data.project?.name }}</h1>
+
+    <span style="position: absolute; top: 10px; right: 0;">
+        <button mat-button (click)="dialogRef.close()" style="color: white;">
+            <mat-icon>clear</mat-icon><span translate>popups.buttons.cancel</span>
+        </button>
+    </span>
+</div>
+
+    <div class="container-fluid" style="text-align: center;position: relative;">
+        <form name="form" #f="ngForm" (keydown.enter)="$event.preventDefault()">
+
+
+            <mat-horizontal-stepper #stepper>
+                <div class="divider divider-md"></div>
+                <mat-step style="height: 100%" *ngIf="data.action.create">
+                    <ng-template matStepLabel style="color: #fff"><span translate>Microservice</span></ng-template>
+                    <div class="divider divider-md"></div>
+
+                    <div class="containerType" style="height: 100%">
+                        <div class="row" style="    margin-top: -20px;">
+                            <div class="col-xl-4">
+                                <div (click)="obj.type='microservice'"
+                                    [ngClass]="{'item-card-selected': obj.type==='microservice'}" class="item-card">
+
+                                    <img style="width: 60px;" src="assets/images/menu/Microservice.png" alt="MS-Logo">
+
+                                    <h2 class="card-title" style="font-size: x-large;font-weight: bold;">Microservice /
+                                        API</h2><br>
+                                    <p class="card-text" style="font-size: 14px;font-weight: bold;"><span
+                                            translate>popups.project.typeMicroserviceMsg</span>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div (click)="obj.type='authentication microservice'"
+                                    [ngClass]="{'item-card-selected': obj.type === 'authentication microservice'}"
+                                    class="item-card">
+                                    <img style="width: 50px;" src="assets/images/iam-logo.png" alt="iam-logo">
+
+
+                                    <h2 class="card-title" style="font-size: x-large;font-weight: bold;"><span
+                                            translate>IAM</span></h2><br>
+                                    <p class="card-text" style="font-size: 14px; font-weight: bold;"><span
+                                            translate>popups.project.authenticationMsg</span></p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div (click)="obj.type='markup microservice'"
+                                    [ngClass]="{'item-card-selected': obj.type==='markup microservice'}"
+                                    class="item-card">
+                                    <img style="width: 50px;" src="assets/images/markupAPI.png" alt="markupAPI">
+
+
+                                    <h2 class="card-title" style="font-size: x-large;font-weight: bold;"><span
+                                            translate>Digital Asset / Markup API</span></h2><br>
+                                    <p class="card-text" style="font-size: 14px;font-weight: bold;"><span
+                                            translate>popups.project.markupTypeMsg</span></p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><br> <br>
+                    <p style="font-weight: bold;" translate>popups.project.madeBy</p>
+
+                    <div> <img class="imagetechno" src="assets/images/technologies/logo_java.jpg" alt="java-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/logo_spring.png"
+                            alt="logo_spring-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/open-ai-logo.png" alt="open-ai-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/facebook.png" alt="facebook-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/Keycloak_Logo.png"
+                            alt="Keycloak_Logo-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/github.png" alt="github-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/googlelogo.png" alt="googlelogo-Logo">
+                        <img class="imagetechno" src="assets/images/technologies/kafka-logo.jpeg" alt="kafka-logo">
+                    </div>
+
+                </mat-step>
+                <mat-step style="height: 100%">
+                    <ng-template matStepLabel style="color: #fff"><span translate>popups.project.details</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div class="container" style="height: 100%">
+                        <mat-form-field appearance="outline" class="col-md-12">
+                            <mat-label>
+                                {{ obj.type === 'authentication microservice'
+                                ? ('popups.project.placeholder.nameIAM' | translate)
+                                : ('popups.project.placeholder.name' | translate)
+                                }}
+                            </mat-label>
+                            <input matInput [(ngModel)]="obj.name" #projectName="ngModel" name="name"
+                                (keyup)="onInput()" value="obj?.name" required="true"
+                                pattern="^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$">
+
+                        </mat-form-field>
+
+
+                        <mat-form-field appearance="outline" class="col-md-12">
+
+                            <mat-label>
+                                {{ obj.type === 'authentication microservice'
+                                ? ('popups.project.placeholder.descriptionIAM' | translate)
+                                : ('popups.project.placeholder.description' | translate)
+                                }}
+                            </mat-label>
+                            <textarea matInput rows="3" [(ngModel)]="obj.description" name="description"></textarea>
+
+                        </mat-form-field>
+
+
+                        <mat-checkbox style="float: left" [(ngModel)]="withSynchronisationGit"
+                            name="withSynchronisationGit">
+                            <span translate>project.synchronisationGit</span></mat-checkbox><br>
+                        <mat-checkbox style="float: left"
+                            *ngIf="obj.type === 'authentication microservice' && this.data.action.create"
+                            [(ngModel)]="createDefaultGrizzlyIdP" name="createDefaultGrizzlyIdP"><span
+                                translate>project.identityprovider.idpDefault</span></mat-checkbox><br><br>
+                        <mat-checkbox style="float: left"
+                            *ngIf="!obj?.dbsourceId && obj.type !== 'authentication microservice'"
+                            [(ngModel)]="createDefaultDb" name="createDefaultDb"><span
+                                translate>datasource.default</span></mat-checkbox><br><br>
+                        <mat-slide-toggle style="float: left"
+                            *ngIf="obj.type !== 'authentication microservice' && this.data.action.create"
+                            [(ngModel)]="securityConfig" name="securityConfig"><span
+                                translate>popups.project.securityConfig</span>
+                        </mat-slide-toggle>
+                        <br><br>
+                        <mat-slide-toggle style="float: left"
+                            *ngIf="obj.type !== 'authentication microservice' && this.data.action.create"
+                            [(ngModel)]="analyticMicroservice" name="analyticMicroservice"><span
+                                translate>popups.project.AnalyticMicroservice</span>
+                        </mat-slide-toggle>
+
+
+                        <div class="divider divider-md"></div>
+
+                        <!-- Naming Verification Rules Section START -->
+                        <div *ngIf="projectName?.errors?.required && projectName?.touched">
+                            <ul class="error">
+
+                                <li translate>popups.project.errors.null</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="projectName?.errors?.pattern">
+                            <ul class="error">
+                                <li translate>popups.project.errors.pattern</li>
+                            </ul>
+                        </div>
+                        <div *ngIf="!uniqueProjectName">
+                            <ul class="error">
+                                <li translate>popups.project.errors.unicity</li>
+                            </ul>
+                        </div>
+
+                        <div *ngIf="!uniqueDbName">
+                            <ul class="error">
+                                <li translate>popups.dbsource.errors.unicity</li>
+                            </ul>
+                        </div>
+                        <!-- Naming Verification Rules Section END -->
+                    </div>
+
+                </mat-step>
+                <mat-step
+                    *ngIf="((!createDefaultDb && obj.type !== 'authentication microservice') || (obj.type === 'authentication microservice' && createDefaultGrizzlyIdP))">
+                    <ng-template matStepLabel style="color: #fff"><span translate>popups.project.selectDb</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 100%">
+                        <div class="row">
+                            <div class="col-9">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label translate>project.datasource.name </mat-label>
+                                    <mat-select *ngIf="!analyticMicroservice" matNativeControl name="datasource"
+                                        #datasourceSelect [(ngModel)]="obj.dbsourceId"
+                                        (selectionChange)="selectDataSource($event.value)" required>
+                                        <div *ngFor="let dbsource of dbsourcesList">
+
+                                            <mat-option *ngIf="dbsource.provider !== 'BIGQUERY'"
+                                                [value]="dbsource.id">{{ dbsource.name }}</mat-option>
+                                        </div>
+                                    </mat-select>
+
+                                    <mat-select *ngIf="analyticMicroservice" matNativeControl name="datasource"
+                                        #datasourceSelect [(ngModel)]="obj.dbsourceId"
+                                        (selectionChange)="selectDataSource($event.value)" required>
+                                        <div *ngFor="let dbsource of dbsourcesList">
+
+                                            <mat-option *ngIf="dbsource.provider ==='BIGQUERY'" [value]="dbsource.id">{{
+                                                dbsource.name }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+
+
+
+                                <p *ngIf="databasesList && databasesList.length == 0 && !analyticMicroservice "
+                                    style="text-align: left;">
+                                    This data source contains no database.
+                                </p><br><br>
+                                <div *ngIf="analyticMicroservice">
+                                    <mat-slide-toggle class="toggle-option" style="float: left" [(ngModel)]="dbOutKafka"
+                                        name="dbOutKafka">
+                                        <span>Datasource output kafka</span>
+                                    </mat-slide-toggle>
+                                    <br> <br>
+                                    <mat-slide-toggle class="toggle-option" style="float: left" [(ngModel)]="dbOutMongo"
+                                        name="dbOutMongo">
+                                        <span>Datasource output mongodb</span>
+                                    </mat-slide-toggle>
+                                </div>
+                                <mat-form-field appearance="outline"
+                                    *ngIf="databasesList && databasesList.length != 0 && !analyticMicroservice"
+                                    style="width: 100%;">
+
+                                    <mat-label translate>popups.project.placeholder.database</mat-label>
+                                    <mat-select matNativeControl name="database" #databaseSelect
+                                        [(ngModel)]="obj.databaseName" required>
+                                        <div *ngFor="let db of databasesList">
+                                            <mat-option [value]="db.name">{{ db.name }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <button mat-button type="button" style="background-color:  #002659; color: white"
+                                    class="btn-w-sm" (click)="$event.stopPropagation(); openDataSourceModal();">
+                                    <span translate>dbsource.simpleAdd </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- If not Data Source is Found in The State-->
+                        <div style="text-align: left" *ngIf="dbsourcesList.length === 0">
+                            <p translate>datasource.error</p>
+                        </div>
+                        <p style="text-align: left" *ngIf="!analyticMicroservice">
+                            <em class="material-icons" style="vertical-align: middle"> error </em>
+                            <span translate> &nbsp;
+                                dbsource-details.warning
+                            </span>
+                        </p>
+                    </div>
+
+                </mat-step>
+                <mat-step *ngIf="securityConfig && obj.type !== 'authentication microservice'">
+                    <ng-template matStepLabel style="color: #fff"><span translate>popups.project.securityConfig</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 100%">
+                        <div class="row" *ngIf="!createDefaultIP">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label translate>Authentication service </mat-label>
+                                    <mat-select matNativeControl name="authenticationService"
+                                        #authenticationServiceSelect [(ngModel)]="iamDelegatedSecurityProjectId"
+                                        (selectionChange)="selectAuthenticationService($event.value)" required>
+                                        <div *ngFor="let authenticationService of projectWithTypeList">
+                                            <mat-option [value]="authenticationService.id">{{ authenticationService.name
+                                                }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- If not Identity Provider is Found in The State-->
+                        <div style="text-align: left" *ngIf="identityproviderList.length === 0">
+                            <p translate>identityprovider.error</p>
+                        </div>
+                        <mat-form-field appearance="outline" class="col-md-6" *ngIf="!createDefaultIP">
+                            <input matInput placeholder="{{'project.security.clientId' |translate}}"
+                                [(ngModel)]="obj.securityConfig.clientId" #clientId="ngModel" name="clientId" required>
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline" class="col-md-6" *ngIf="!createDefaultIP">
+                            <input matInput placeholder="{{'project.security.appSecretKey' | translate}}"
+                                [(ngModel)]="obj.securityConfig.secretKey" #secretKey="ngModel" name="secretKey"
+                                required>
+                        </mat-form-field>
+
+                        <mat-checkbox style="float: left" *ngIf="!obj?.identityProviderId || this.data.action.update"
+                            [(ngModel)]="createDefaultIP" name="createDefaultIP"><span
+                                translate>identityprovider.default</span></mat-checkbox>
+                    </div>
+
+                </mat-step>
+
+                <mat-step *ngIf="analyticMicroservice && obj.type !== 'authentication microservice'">
+                    <ng-template matStepLabel style="color: #fff"><span translate>popups.project.outputDatasource</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 100%">
+                        <div class="row" *ngIf="dbOutKafka">
+                            <div class="col-9">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label translate>Datasource output kafka </mat-label>
+                                    <div></div>
+                                    <mat-select matNativeControl name="dbOutKafkaId" #datasourceSelect
+                                        [(ngModel)]="obj.dbOutKafkaId"
+                                        (selectionChange)="selectDataSource($event.value)" required>
+                                        <div *ngFor="let dbsource of dbsourcesList">
+
+                                            <mat-option *ngIf="dbsource.provider === 'KAFKA'" [value]="dbsource.id">{{
+                                                dbsource.name }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <button mat-button type="button" style="background-color:  #002659; color: white"
+                                    class="btn-w-sm" (click)="$event.stopPropagation(); openDataSourceModal();">
+                                    <span translate>dbsource.simpleAdd </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 100%">
+                        <div class="row" *ngIf="dbOutMongo">
+
+                            <div class="col-9">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label translate>Datasource output mongodb </mat-label>
+                                    <mat-select matNativeControl name="dbOutMongoId" #datasourceSelect
+                                        [(ngModel)]="obj.dbOutMongoId"
+                                        (selectionChange)="selectDataSource($event.value)" required>
+                                        <div *ngFor="let dbsource of dbsourcesList">
+
+                                            <mat-option *ngIf="dbsource.provider ==='MONGO'" [value]="dbsource.id">{{
+                                                dbsource.name }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <button mat-button type="button" style="background-color:  #002659; color: white"
+                                    class="btn-w-sm" (click)="$event.stopPropagation(); openDataSourceModal();">
+                                    <span translate>dbsource.simpleAdd </span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </mat-step>
+
+                <mat-step *ngIf="obj.type === 'authentication microservice' && !createDefaultGrizzlyIdP">
+                    <ng-template matStepLabel style="color: #fff"><span translate>popups.project.selectIP</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 100%">
+                        <div class="row">
+                            <div class="col-9">
+                                <mat-form-field appearance="outline" style="width: 100%;">
+                                    <mat-label translate>project.identityprovider.idpmsg </mat-label>
+                                    <mat-select matNativeControl name="identityProviderID"
+                                        (selectionChange)="selectIP($event.value)">
+                                        <div *ngFor="let identityprovider of identityproviderList">
+                                            <mat-option [value]="identityprovider.id">{{ identityprovider.displayedName
+                                                }}</mat-option>
+                                        </div>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-3">
+                                <button mat-button type="button" style="background-color:  #002659; color: white"
+                                    class="btn-w-sm" (click)="$event.stopPropagation(); openIdentityProviderModal();">
+                                    <span translate>identityprovider.simpleAdd </span>
+                                </button>
+                            </div>
+                            <div class="col-9">
+                                <mat-chip-grid #chipList>
+                                    <mat-chip-row style="background-color: #357EC7;color: white;"
+                                        *ngFor="let value of selectedIdentityProvidersONAuthMS"
+                                        [selectable]="selectable" [removable]="removable" (removed)="remove(value.id)">
+                                        {{value.displayedName}}
+                                        <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel
+                                        </mat-icon>
+                                    </mat-chip-row>
+                                </mat-chip-grid>
+                            </div>
+
+                        </div>
+                        <!-- If not Identity Provider is Found in The State-->
+                        <div style="text-align: left" *ngIf="identityproviderList.length === 0">
+                            <p translate>identityprovider.error</p>
+                        </div>
+                    </div>
+
+                </mat-step>
+
+                <mat-step *ngIf="withSynchronisationGit">
+                    <ng-template matStepLabel style="color: #fff"><span translate>Git Syncronisation</span>
+                    </ng-template>
+                    <div class="container" style="height: 100%">
+                        <mat-form-field appearance="outline" class="col-md-12 mt-3">
+                            <mat-label>GIT URL</mat-label>
+                            <input matInput type="text" [(ngModel)]="obj.gitUrl" name="gitUrl" [disabled]="hide">
+                        </mat-form-field>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class="col-md-12">
+                                    <mat-label translate>import-modal.username</mat-label>
+                                    <input matInput type="text" [(ngModel)]="obj.gitUsername" name="gitUsername">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" class="col-md-11 ml-2">
+                                    <mat-label translate>import-modal.password</mat-label>
+                                    <input matInput type="password" [(ngModel)]="obj.gitPassword" name="gitPassword">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <mat-form-field appearance="outline" class="col-md-12">
+                            <mat-label translate>import-modal.token</mat-label>
+                            <input matInput type="text" [(ngModel)]="obj.gitToken" name="gitToken">
+                        </mat-form-field>
+                        <div class="row mt-2">
+
+                            <div class="col-7">
+                                <mat-form-field appearance="outline" *ngIf="!addBranchBool" class="col-12">
+                                    <mat-label translate>import-modal.branch</mat-label>
+                                    <mat-select matNativeControl [(ngModel)]="obj.gitBranch" name="gitBranch"
+                                        [disabled]="hide || loadingBranches">
+                                        <mat-option *ngFor="let branch of branchsList" [value]="branch">{{ branch }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" *ngIf="addBranchBool" class="col-12">
+                                    <mat-label>Git URL</mat-label>
+                                    <input matInput c type="text" [(ngModel)]="gitBranch" #gitbranch name="gitbranch">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-5">
+                                <button matSuffix mat-raised-button *ngIf="addBranchBool" (click)="confirmNewBranch()">
+                                    <em class="material-icons" style="color: #66BB6A">
+                                        done
+                                    </em>
+                                </button>
+                                <button matSuffix mat-raised-button style="float: right;" *ngIf="addBranchBool"
+                                    (click)="cancelNewBranch()">
+                                    <em class="material-icons" style="color: #F93E3E">
+                                        undo
+                                    </em>
+                                </button>
+                                <span class="ml-2">
+                                    <button *ngIf="!addBranchBool" mat-raised-button color="accent" class="btn-md"
+                                        [disabled]="!obj.gitUrl" (click)="addNewBranch()"
+                                        [disabled]="hide || loadingBranches">
+                                        <span *ngIf="!loading" translate>
+                                            git.btn.addBranch
+                                        </span>
+                                    </button>
+                                </span>
+                                <span>
+                                    <button mat-raised-button *ngIf="!addBranchBool" color="accent" class="btn-md"
+                                        [disabled]="!obj.gitUrl" (click)="getBranchsList(obj.gitUrl)"
+                                        [disabled]="hide || loadingBranches" style="float:left;">
+                                        <span *ngIf="!loading" translate>
+                                            git.btn.check
+                                        </span>
+                                    </button>
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="alert alert-danger" style="text-align: center" role="alert"
+                            *ngIf="gitError && !unexpectedErrorMsg">
+                            <span translate>git.import.error</span>
+                        </div>
+                        <div class="alert alert-danger" style="text-align: center" role="alert"
+                            *ngIf="gitError && unexpectedErrorMsg">
+                            <span>{{ unexpectedErrorMsg }}</span>
+                        </div>
+
+                    </div>
+                </mat-step>
+                <!-- end of part that shoud be changer-->
+            </mat-horizontal-stepper>
+
+
+
+            <div class="box-body text-right fixed-buttons" style="padding: 0px">
+                <button mat-raised-button type="button" class="btn-w-md" (click)="goBack(stepper)" style="margin: 4px;"
+                    *ngIf="stepper.selectedIndex !== 0">
+                    <span translate>popups.buttons.back</span></button>
+                <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()"
+                    *ngIf="stepper.selectedIndex === 0">
+                    <span translate>popups.buttons.cancel</span></button>
+
+
+                <button style="margin: 4px;"
+                    [disabled]="type?.errors?.required || (stepper.selectedIndex !==0 && (projectName.errors || !uniqueProjectName))"
+                    *ngIf="checkEndModal()" mat-raised-button type="button" (click)="goForward(stepper)" color="primary"
+                    class="btn-w-md">
+                    <span translate>popups.buttons.next</span></button>
+
+                <button mat-raised-button type="button" (click)="validateProject()" style="margin: 4px;"
+                    *ngIf="stepper.selectedIndex === 3 || stepper.selectedIndex === 4 ||(stepper.selectedIndex === 2 && createDefaultDb && !securityConfig) ||  (stepper.selectedIndex === 1 && createDefaultDb && !securityConfig)||(stepper.selectedIndex === 2 && (obj.identityProviderIds.length !== 0|| createDefaultIP || this.obj.authMSRuntimeURL !== null))"
+                    color="primary" class="btn-w-md" id="confirm"
+                    [disabled]="f.form.invalid || !uniqueProjectName ||  (((obj.identityProviderIds.length == 0 && obj.type === 'authentication microservice') || (obj.type === 'microservice' && !createDefaultIP && !obj.authMSRuntimeURL)) && securityConfig)">
+                    <span translate>popups.buttons.confirm</span></button>
+            </div>
+
+
+        </form>
+    </div>
+

@@ -1,0 +1,63 @@
+
+
+<nav class="app-sidebar" myAutoCloseMobileNav [ngClass]="{'bg-color-light': ['31','32','33','34','35','36'].indexOf(AppConfig.colorOption) >= 0,
+  'bg-color-dark': ['31','32','33','34','35','36'].indexOf(AppConfig.colorOption) < 0 ,'closed': !isMenuOpen}">
+
+  
+<button mat-icon-button (click)="toggleSidebar()" class="toggle-menu-btn"  [ngClass]="{ 'closed-menu-btn': !isMenuOpen }"  [matTooltip]="isMenuOpen ? 'Fermer Menu' : 'Ouvrir Menu'">
+  <mat-icon>{{ isMenuOpen ? 'arrow_back' : 'arrow_forward' }}</mat-icon>
+</button>
+  <section class="sidebar-content" [ngClass]="{'closed': !isMenuOpen}">
+
+    <ul class="nav" myAccordionNav myAppendSubmenuIcon mySlimScroll myHighlightActiveItems>
+      <li style="margin-bottom: 5px;">
+        <a mat-button [routerLink]="['/app/dashboard']">
+          
+          <img  src="assets/images/menu/dashboard.png"  alt="dashboard-logo" style="width: 13%;;margin-right: 3px;">
+          
+          <span style="position: absolute;"><strong translate>sidenav.dashboard</strong></span>
+        </a>
+      </li>
+
+      <li style="margin-bottom: 5px;">
+        <a mat-button [routerLink]="['/app/grizzly-ai']">
+         
+          <span  
+                            style="font-size: larger;margin-right: 8px;">
+                            🤖
+                        </span>
+          
+          
+          <span style="position: absolute;"><strong>Grizzly AI</strong></span>
+        </a>
+      </li>
+
+    </ul>
+
+
+    <div>
+      <app-project-list></app-project-list>
+    </div>
+
+
+    <div>
+      <app-dbsource-list></app-dbsource-list>
+    </div>
+
+    <div>
+      <app-identityprovider-list></app-identityprovider-list>
+    </div>
+
+    <div>
+      <app-organization-menu></app-organization-menu>
+    </div>
+
+
+  </section>
+
+
+
+  <div class="badge pulsate" [routerLink]="['/app/grizzly-ai']" *ngIf="isBullVisible">L'assistant <br>intelligent</div>
+
+
+</nav>

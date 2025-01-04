@@ -1,0 +1,35 @@
+<div class="container dbContainer">
+    <form>
+        <div class="article">
+            <div class="row">
+                <div class="col-xl-4">
+                    <div (click)="dbSource.type='sql';dbSource.connectionMode = 'ON-PREMISE'" [ngClass]="{'item-card-selected': dbSource.type==='sql'}" class="item-card">
+                        <div class="img">
+                            <img src="assets/images/db/sql-database.png" alt="Sql-logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div (click)="dbSource.type = 'nosql'; dbSource.connectionMode = 'ON-PREMISE'" [ngClass]="{'item-card-selected': dbSource.type==='nosql'}" class="item-card">
+                        <div class="img">
+                            <img src="assets/images/db/nosql.jpg" alt="nosql">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div (click)="dbSource.type = 'KAFKA'; dbSource.connectionMode = 'ON-PREMISE' ;dbSource.provider = 'KAFKA'" [ngClass]="{'item-card-selected': dbSource.type==='KAFKA' }" class="item-card">
+                        <div class="img">
+                            <img src="assets/images/db/kafka-logo.jpeg" alt="kafka">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="box-body step-buttons text-right">
+        <span class="space"></span>
+        <button matStepperNext mat-raised-button color="primary" class="btn-w-md" [disabled]="!dbSource.type || !dbSource.connectionMode"><span
+                translate>
+                dbsource-modal-provider.next</span></button>
+    </div>
+</div>

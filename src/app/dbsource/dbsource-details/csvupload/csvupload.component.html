@@ -1,0 +1,85 @@
+<div class="column" style="width: 95%;">
+    <div class="row">
+        <div style="width: 100%; margin-top: 20px; margin-left: 20px;" class="col-md-8">
+
+            <mat-form-field appearance="outline"  style="width: 104%;">
+                <mat-label>
+                    <span translate>api.placeholder.selectCollection</span>
+                </mat-label>
+
+                <!-- Tooltip -->
+                <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;" matTooltipClass="test"
+                    matTooltip="{{ 'help.collection' | translate }}">
+                    info
+                </mat-icon>
+
+                <mat-select class=" col-md " *ngIf="!addCollectionBool"
+                    (selectionChange)="checkCollection($event.value)" matNativeControl name="collection" required
+                    [(ngModel)]="collection">
+                    <mat-option disabled hidden [value]="" *ngIf="!collection">-- select --
+                    </mat-option>
+                    <mat-option *ngFor="let collection of collectionsList" [value]="collection">{{ collection.collection
+                        }} -- {{collection.database}}
+                    </mat-option>
+                </mat-select>
+
+
+                <input matInput type="text" [(ngModel)]="newCollectionName" #newCollection
+                    placeholder="{{'api.placeholder.collection' |translate}}" name="newCollection"
+                    *ngIf="addCollectionBool ">
+            </mat-form-field  >
+
+            <mat-error class="postAndPut" *ngIf="emptyCollection">
+                <span translate>api.emptyCollection</span>
+                <br>
+            </mat-error>
+        </div>
+        <div class="col-md-3" style="margin-top: 30px;">
+            <button matSuffix mat-raised-button  style="width: 235px;background-color: #002659;color: white;" *ngIf="!addCollectionBool" (click)="addCollection()">
+                <mat-icon class="material-icons">add</mat-icon>&nbsp; <span translate>api.ad</span>
+            </button>
+            <button matSuffix mat-raised-button *ngIf="addCollectionBool" (click)="confirmNewCollection()">
+                <em class="material-icons" style="color: #66BB6A">
+                    done
+                </em>
+            </button>
+            <button matSuffix mat-raised-button style="float: right; margin-left: 10px;" *ngIf="addCollectionBool"
+                (click)="cancelNewCollection()">
+                <em class="material-icons" style="color: #F93E3E">
+                    undo
+                </em>
+            </button>
+        </div>
+    </div>
+
+    <mat-checkbox [(ngModel)]="replaceData" name="replaceData" style="margin-left: 15px;"><span
+            translate>dbsource-details.replaceData</span></mat-checkbox>
+
+    <div class="row">
+        <br>
+        <h4 style="margin-left: 20px;">Select the format of your CSV file :</h4>
+        <mat-radio-group style="margin-left: 10px;" aria-label="Select your CSV file format" [(ngModel)]="csvFormat">
+            <mat-radio-button value="comma">Comma seperated </mat-radio-button>
+            <mat-radio-button style="margin-left: 10px;" value="semiColon">Semi Colon</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <div>
+        <button type="button" mat-raised-button id="uploadBtnMenu" (click)="inputFileCSV.click()"
+            style="margin-left: 20px;">
+            <mat-icon>upload</mat-icon>
+            &nbsp;
+            <span translate>Upload a CSV file</span>
+        </button> &nbsp;
+
+        <input #inputFileCSV type="file" name="file" [style.display]="'none'" ng2FileSelect
+            (change)="onFileSelected($event)" [uploader]="uploader">
+        <span style="margin-left: 1rem;">{{selectedFile?.name}}</span>
+    </div>
+    <div style="text-align: -webkit-right;">
+        <button mat-raised-button type="button" (click)="validateUpload()" color="primary" class="btn-w-md"
+            style="margin-right: 20px; margin-bottom: 20px;"
+            [disabled]="!selectedFile?.name || !this.collection || !csvFormat">
+            <span translate>popups.buttons.confirm</span></button>
+    </div>
+</div>

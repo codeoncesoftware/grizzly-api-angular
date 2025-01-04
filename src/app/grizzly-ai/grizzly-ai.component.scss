@@ -1,0 +1,93 @@
+@media only screen and (max-width: 767px) {
+  .badgeMS {
+    width: 90% !important; /* Réduire la largeur pour petits écrans */
+    right: 5%; /* Ajuster la position */
+    top: 50px; /* Ajuster la marge supérieure */
+    height: auto; /* Permettre un ajustement dynamique */
+    flex-wrap: wrap; /* Permet d’aller sur plusieurs lignes si nécessaire */
+  }
+
+  .card-body {
+    width: 100%; /* S'adapte à l'écran */
+    padding: 1em; /* Ajoute un peu d'espace autour */
+  }
+
+  .alert {
+    width: auto; /* S'adapte au contenu */
+    max-width: 90%; /* Limite la largeur maximale */
+    font-size: 0.9rem; /* Réduit la taille de la police */
+  }
+
+  textarea {
+    width: 100%; /* Remplit toute la largeur */
+  }
+
+  button {
+    width: 100%; /* Prend toute la largeur sur petit écran */
+    margin-top: 10px; /* Ajoute un espacement entre le bouton et le textarea */
+  }
+}
+
+.card-body {
+  position: relative;
+}
+
+.badgeMS {
+  position: fixed; /* Évite les débordements sur petits écrans */
+  width: 72%; /* Ajuster la largeur */
+  height: auto; /* Permet un contenu dynamique */
+  flex-wrap: wrap; /* Permet de passer sur plusieurs lignes */
+  right: 1%; /* Ajuste la position */
+  top: 62px; /* Mieux positionné pour les mobiles */
+  padding: 4px; /* Réduit l'espacement interne */
+  background-color: #002659;
+  color: #fff;
+  display: flex;
+  z-index: 100;
+  left: 55%; 
+  transform: translateX(-45%);
+}
+
+
+.pulsate::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: pulse 1s ease infinite;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.card {
+  border-radius: 20px; 
+  width: 85%;
+  
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 14px; /* Réduit la taille de police globale */
+  }
+
+  .alert {
+    font-size: 0.8rem;
+    width: 80%;
+  }
+}
+.row {
+  display: flex;
+  flex-wrap: wrap; /* Permet de passer sur plusieurs lignes si nécessaire */
+  justify-content: space-between; /* Espace entre les éléments */
+}
+
+.col {
+  flex: 1; /* Prend tout l’espace disponible */
+  margin: 0.5em; /* Espacement entre les colonnes */
+}
+
+.col-auto {
+  flex: 0 0 auto; /* Largeur automatique basée sur le contenu */
+}

@@ -1,0 +1,102 @@
+<div class="container-fluid" style="margin-bottom: 20px; height:65vh;position: relative;overflow: hidden;overflow-y: scroll;margin-top: 10px;">
+    <span class="closeBtn">
+        <button mat-button mat-dialog-close>
+            <mat-icon>clear</mat-icon> <span translate>api.close</span>
+    </button>
+    </span><br>
+    <h1 mat-dialog-title style="text-align: center" translate>docker.title</h1>
+
+    <div class="divider divider-md"></div>
+    <div class="row">
+        <form name="form" #f="ngForm" class="col-md-12">
+            <div>
+                <div class="row">
+                    <mat-form-field appearance="outline"  class="col-md-6">
+                        <mat-label>Version</mat-label>
+                        <mat-select matNativeControl [(ngModel)]="container" name="container" required>
+                            <mat-option *ngFor="let container of containers" [value]="container">{{ container.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field  >
+                    <mat-form-field appearance="outline"  class="col-md-5">
+                        <mat-label><span translate>Tag</span></mat-label>
+
+                        <input matInput list="tags" name="tag" [(ngModel)]="dockerExport.tag" autocomplete="off">
+                        <datalist matNativeControl id="tags">
+                            <option value="Developement">Developement</option>
+                            <option value="Staging">Staging</option>
+                            <option value="Test">Test</option>
+                            <option value="Preprod">Pre-production</option>
+                            <option value="Production">Production</option>
+                            <option value="Default">Default</option>
+
+                        </datalist>
+                    </mat-form-field  >
+                </div>
+                <div class="row">
+                    <mat-form-field appearance="outline"  class="col-md-8">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput type="string" rows="4" [(ngModel)]="description" name="description"></textarea>
+                    </mat-form-field  >
+                    <button mat-raised-button  class="btn-md mt-5 ml-2" (click)="exportSwagger()" style="margin-top: 55px !important;float:right; background-color:#002659; color:white; height:35px; width: 23.5%;">
+                        <span translate>
+                            docker.export
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="row mt-4" *ngIf="dockerExports.length>0">
+        <h2 translate class="ml-3">docker.latest</h2>
+        <button style="float:right ; margin-top:-10px; margin-left:79%" (click)="reload(projectId)" mat-button>
+            <mat-icon>refresh</mat-icon>
+        </button>
+        <table class="table table-striped mt-1 ml-2">
+            <thead>
+                <tr>
+
+                    <th scope="col">Version</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" style="text-align: center;">URI</th>
+                    <th scope="col" style="text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let docker of dockerExports; let i = index; ">
+                    <tr>
+
+                        <td style="font-weight: bold; margin-left:25px; font-size: 15px;">{{docker.containerName}}</td>
+                        <td [style.color]="getColor(docker)" style="font-weight: bold ; font-size: 15px;">
+                            {{docker.status}}</td>
+                        <td style="font-weight: bold;text-align: center;  font-size: 15px;">{{docker.repoUrl}}</td>
+                        <!-- <td><button style="position: relative;top: -10px;" (click)="generateYaml(docker)" mat-button>
+                            <mat-icon>copy</mat-icon>
+                        </button></td> -->
+                        <td style="text-align: center;width: 40%;">
+                            <span style="position: relative;">
+                                <button matTooltip="Kubernetes Files" class="actions kube" [disabled]="docker.repoUrl==='-'" (click)="downloadKubernetesFiles(docker)">
+                                        <img [ngStyle]="{'opacity': docker.repoUrl==='-' ? '0.5' : '1' }" style="width: 30.5%;" src="../../../assets/images/output-onlinepngtools (1).png">
+                                </button>
+                                <button class="actions" [disabled]="docker.repoUrl==='-'" (click)="downloadDockerCompose(docker)">
+                                    <mat-icon matTooltip="Download docker compose" 
+                                        style="cursor: pointer" class="ml-2">
+                                        backup</mat-icon>
+                                </button>
+                                <button class="actions" [disabled]="docker.repoUrl==='-'" (click)="infoApi(docker)">
+                                    <mat-icon  matTooltip="How to use it" class="ml-2"
+                                        style="cursor: pointer">help</mat-icon>
+                                </button> <button class="actions" (click)="openConfirmDeleteDialog(docker)">
+                                    <mat-icon matTooltip="Delete docker" 
+                                        class="ml-2" style="cursor: pointer">delete_forever</mat-icon>
+                                </button>
+                            </span>
+                           
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,150 @@
+<app-loader></app-loader>
+<div class="page-auth">
+  <div class="main-body">
+
+    <div class="row justify-content-center">
+      <div class="" style="background-color: transparent; padding:10px; margin-bottom: 0px">
+        <a href="https://www.grizzly-api.com/">
+          <div style="cursor: pointer; display: flex; align-items: center; justify-content: center;">
+            <img style="vertical-align:middle; height: 50px;" src="../../../assets/images/logo/white-logo.png"
+              alt="Code Once Logo">
+            <span
+              style="color: white; font-size: 50px; vertical-align:middle; font-family: 'Nunito', sans-serif;">&nbsp;
+              Grizzly API</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br>
+    <div class="card card-white">
+      <h4 style="margin-top: revert; text-align: center;">
+        <span style="font-size: x-large;" translate>auth.signin.title</span>
+        <div style="float: right; position: absolute; right: 0; top: 0">
+          <button mat-button [matMenuTriggerFor]="menu" class="md-button header-btn">
+            <span *ngIf="!isFr" class="flag-icon flag-icon-fr"> </span><span *ngIf="isFr"
+              class="flag-icon flag-icon-gb"></span>
+            {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isFr" (click)="setLang('fr')"><span class="flag-icon flag-icon-fr"></span>
+              FR</button>
+            <button mat-menu-item *ngIf="!isFr" (click)="setLang('en')"><span class="flag-icon flag-icon-gb"></span>
+              EN</button>
+          </mat-menu>
+        </div>
+      </h4>
+
+      <div class="card-content">
+
+
+        <form name="form" (ngSubmit)="ffLogin.form.valid" #ffLogin="ngForm">
+          <div *ngIf="!resetPasswordBool">
+            <div class="form-group">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input required matInput type="email" name="email" placeholder="Email" [(ngModel)]="email" autofocus>
+                <mat-icon matSuffix class="material-icons">mail_outline</mat-icon>
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label> {{ 'auth.signin.placeholder.password' | translate}}</mat-label>
+                <input required matInput type="password" name="pass"
+                  placeholder="{{ 'auth.signin.placeholder.password' | translate}}" [(ngModel)]="pass">
+                <mat-icon matSuffix class="material-icons">lock_outline</mat-icon>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="resetPasswordBool && !successfulReset">
+            <div class="form-group" *ngIf="resetPasswordBool">
+              <p><span translate>auth.signin.errors.email</span></p>
+              <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input required matInput type="email" name="email" placeholder="Email"
+                  [(ngModel)]="emailToSendResetPass" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}" autofocus>
+                <mat-icon matSuffix class="material-icons">mail_outline</mat-icon>
+              </mat-form-field>
+
+            </div>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="!logged && !successfulReset && !resetPasswordBool">
+            <span translate>{{errorMessage}}</span>
+          </div>
+
+          <div class="alert alert-danger" role="alert" *ngIf="resetErrorMessage">
+            <span translate>auth.reset.errors.notFound</span>
+          </div>
+
+          <div class="divider divider-md"></div>
+
+          <a class="primaryColor" [routerLink]="undefined" *ngIf="!resetPasswordBool" style="cursor: pointer;"
+            (click)="showResetPassword()"><span translate>auth.signin.forgotPass</span></a>
+
+          <button mat-raised-button type="submit" style="background-color: #002659;" (click)="login()"
+            class="float-right" [disabled]="ffLogin.form.invalid" *ngIf="!resetPasswordBool"><span translate
+              style="color: white;">auth.signin.btn</span></button>
+
+          <button mat-raised-button type="submit" style="background-color: #002659;" (click)="resetPassword()"
+            class="float-right" [disabled]="ffLogin.form.invalid" *ngIf="resetPasswordBool && !successfulReset"><span
+              style="color: white;" translate>auth.signin.reset</span></button>
+
+        </form>
+        <div class="alert alert-success" role="alert" *ngIf="successfulReset">
+          <span translate>auth.signin.errors.checkEmail</span>
+        </div>
+
+
+        <br><br>
+
+        <div class="alert alert-danger" role="alert" *ngIf="githubLoginError">
+          <span translate>github.emailExists</span>
+        </div>
+        <div style="text-align: center;">
+
+          <br>
+          <button mat-raised-button type="submit" style="margin: auto; width:250px; background-color: #002659;"
+            (click)="githubLogin()">
+            <span style="font-size: 20px; color: white;"><i class="fa fa-github" aria-hidden="true"></i></span>
+            &nbsp;&nbsp;<span style="font-size: small;color: white;" translate>github.login</span>
+          </button>
+        </div>
+
+	      <div class="alert alert-danger" role="alert" *ngIf="googleLoginError">
+		      <span translate>google.emailExists</span>
+	      </div>
+	      <div style="text-align: center;">
+
+		      <br>
+		      <button mat-raised-button type="submit" style="margin: auto; width:250px; background-color: #002659;"
+						      (click)="googleLogin()">
+			      <span style="font-size: 20px; color: white;"><i class="fa fa-google" aria-hidden="true"></i></span>
+			      &nbsp;&nbsp;<span style="font-size: small;color: white;" translate>google.login</span>
+		      </button>
+	      </div>
+        <div style="text-align: center;">
+
+          <br>
+          <button mat-raised-button type="submit" style="margin: auto; width:250px; background-color: #002659;"
+            [routerLink]="['/editor']">
+            <span style="font-size: 20px;color: white;"><i class="fa fa-edit" aria-hidden="true"></i></span>
+            &nbsp;&nbsp;<span translate style="color: white;">editor.goto</span>
+          </button>
+        </div>
+
+
+        <div class="divider divider-md"></div>
+
+        <div class="additional-info">
+          <span style="color: black; font-size: 12.5px;" translate>auth.signin.account</span> <a
+            [routerLink]="['/sign-up']"><span
+              style="color: black; text-decoration: underline; font-weight: bold;font-size: 13.5px;"
+              translate>auth.signin.signup</span></a>
+          <span *ngIf="resetPasswordBool">&nbsp; | &nbsp;</span>
+          <a *ngIf="resetPasswordBool" [routerLink]="['/login']" (click)="showResetPassword()"><span
+              translate>auth.signin.btn</span></a>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

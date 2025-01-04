@@ -1,0 +1,33 @@
+.collection:disabled {
+    background-color: #002659;
+    font-weight: 300;
+    color: white;
+}
+
+.mat-badge.hide-text .mat-badge-content {
+    color: transparent;
+}
+
+.identityprovider-header {
+    background-color: #002659;
+    color: white
+}
+
+button {
+    cursor: pointer;
+}
+
+button.mat-primary {
+    background-color: #002659;
+}
+
+.mat-column-name {
+    flex: 0 0 45%;
+}
+.mat-column-primary-keys {
+    flex: 0 0 30%;
+}
+
+.mat-column-actions {
+    flex: 0 0 70%;
+}

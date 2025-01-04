@@ -1,0 +1,59 @@
+<mat-accordion *ngIf="organizationShow">
+    <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header style="background-color: #002659;color: white;height: 37px;margin-top: 4px;">
+            <mat-panel-title>
+                <button mat-button style="background: #002659; ">
+                    <button class="mat-fab-menu " mat-mini-fab>
+                        <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span>
+                    </button>
+                    <span sclass="toolbar-text" style="font-size: 15px;color: white;">{{organizationName}}</span>
+
+                </button>
+                
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        <div>
+            <ul style="background-color: white;" class="nav list" myAccordionNav mySlimScroll myHighlightActiveItems
+                myAppendSubmenuIcon>
+                <li>
+                    <a [routerLink]="['/app/organization' ,organizationId ,'details']" mat-button><em
+                            class="nav-icon material-icons">edit</em><span style="color: black"
+                            class="nav-text">Details</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/app/organization',organizationId,'members']" mat-button><em
+                            class="nav-icon material-icons">perm_identity</em><span style="color: black"
+                            class="nav-text" translate>organization.membersTitle</span>
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/app/organization',organizationId,'teams']" mat-button><em
+                            class="nav-icon material-icons">supervisor_account</em><span style="color: black"
+                            class="nav-text" translate>organization.teams</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </mat-expansion-panel>
+</mat-accordion>
+
+
+<mat-accordion *ngIf="!organizationShow">
+
+    <mat-expansion-panel [expanded]="false">
+        <mat-expansion-panel-header style="background-color: #002659;color: white;height: 37px;margin-top: 4px;">
+            <mat-panel-title>
+
+                <button mat-button style="background: #002659;" (click)="openDialog()">
+                    <strong class="nav-icon material-icons" style="color:white">add_circle </strong>
+                </button>
+                <span sclass="toolbar-text" style="font-size: 15px;color: white;" translate>sidenav.organization</span>
+            </mat-panel-title>
+
+
+        </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion>

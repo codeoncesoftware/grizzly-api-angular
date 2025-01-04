@@ -1,0 +1,111 @@
+<app-loader></app-loader>
+
+
+<br>
+<div class="row col-12">
+    <div>
+        <div class="text-center">
+        <h3 >
+            <span ><strong>Collection : </strong>{{data.collName}}</span>
+           
+        </h3>
+    </div>
+        <div class="box" style="box-shadow: none">
+            <div class="box-header project-header radius-top">
+                <span translate>Ajout Index</span>
+                <span style="flex: 1 1 auto;"></span>
+            </div>
+            <div class="box-body radius-bottom" style="background-color: #FFF;">
+                <!-- Formulaire d'ajout -->
+                <form (ngSubmit)="onSubmit()" #addIndexForm="ngForm" class="col-11">
+                    <!-- Champ pour le nom de l'index -->
+                    <div class="row col-12">  
+                        <mat-form-field appearance="fill">
+                            <mat-label>Index Name</mat-label>
+                            <input matInput required name="indexName" [(ngModel)]="indexName">
+                        </mat-form-field>
+                        <div *ngIf="alertMessage" class="alert alert-danger">
+                            {{ alertMessage }}
+                        </div>
+                        
+                    </div>
+                    <div class="container d-flex justify-content-between">
+                        <!-- Liste des colonnes -->
+                        <div class="col-md-5">
+                            <span><b>Colonnes :</b></span>
+                            <div *ngFor="let column of columns">
+                                <mat-checkbox [(ngModel)]="column.selected"
+                                    [name]="column.name">{{column.name}}</mat-checkbox>
+                            </div>
+                        </div>
+
+                        <!-- Liste des options -->
+                        <div class="col-md-5">
+                            <span><b>Options :</b></span>
+                            <div *ngFor="let option of options">
+                                <mat-checkbox [(ngModel)]="option.selected"
+                                    [name]="option.name">{{option.name}}</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid()">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row col-12">
+    <div>
+        <div class="box" style="box-shadow: none">
+            <div class="box-header project-header radius-top">
+                <span translate>Liste des Indexes</span>
+                <span style="flex: 1 1 auto;"></span>
+            </div>
+            <div class="box-body radius-bottom" style="background-color: #FFF;">
+            
+        <div class="row mt-4">
+            <table class="table mt-1 ml-2">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 20%;">Name</th>
+                        <th scope="col" style="width: 30%;">Columns</th>
+                        <th scope="col" style="width: 35%;">Options</th>
+                        <th scope="col" style="width: 15%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let column of collectionIndex; let i = index; ">
+                        <tr>
+                            <td style="font-weight: bold ;font-size: 15px; width: 20%;">
+                                <span>{{column.indexOptions.name}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 30%;">
+                                <span>{{getIndexKeysAsString(column.indexKeys)}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 35%;">
+                                <span> {{ getTrueOptions(column.indexOptions) }}</span>
+                            </td>
+
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;">
+                               
+                                    <mat-icon matTooltip='Delete' class="ml-2 mt-2"  style="color: #ef5350;" *ngIf="column.indexOptions.name !== '_id_'"
+                                        (click)="confirmDropCollectionIndex(column.indexOptions.name)">delete_forever</mat-icon>
+                               
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box-body step-buttons text-right mt-4 ">
+            <button mat-raised-button color="primary" class="btn-w-md my-button" (click)="dialogRef.close()"><span
+                    translate>popups.buttons.close</span></button>
+
+        </div>
+   </div></div></div></div>

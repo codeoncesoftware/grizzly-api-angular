@@ -1,0 +1,26 @@
+<div class="container-fluid" style="text-align: center;height:65vh;position: relative;">
+    <!-- Modal Section START -->
+    <form name="form" (ngSubmit)="ff.form.valid" #ff="ngForm">
+        <h1 mat-dialog-title style="text-align: center" translate>function.clone</h1>
+        <div mat-dialog-content class="row">
+            <mat-form-field appearance="outline"  class="col-md-12">
+
+                <input matInput placeholder="{{ 'popups.container.placeholder' | translate }}" [(ngModel)]="version"
+                    #containerName="ngModel" name="version" (keyup.enter)="save()" value="data?.container?.name"
+                    required="true" autofocus>
+
+            </mat-form-field  >
+
+            <div class="box-body text-right">
+                <button mat-raised-button mat-dialog-close class="btn-w-md"><span
+                        translate>popups.buttons.cancel</span></button>
+                <span class="space"></span>
+                <button (click)="save()" mat-raised-button id="confirm" type="submit" color="primary" class="btn-w-md"
+                    [disabled]="ff.form.invalid">
+                    <span translate>popups.buttons.confirm</span></button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

@@ -1,0 +1,54 @@
+
+<mat-accordion>
+
+  <mat-expansion-panel [expanded]="false">
+    <mat-expansion-panel-header [ngStyle]="{
+      'background-color': dbSourceList.length === 0 ? '#002659' : '#002659',
+      'color': 'white',
+      'height': '37px',
+      'margin-top': '4px',
+      'margin-bottom': '4px'
+    }"style="background-color: #002659;color: white;height: 37px;margin-top: 4px;">
+          <mat-panel-title>
+
+  
+    <button mat-button (click)="openDBSourceModal()">
+      <strong class="nav-icon material-icons" style="color:white">add_circle</strong>
+    </button>
+    <!-- <strong style="cursor: pointer;" *ngIf="limitReachedDb" matTooltip="{{'project.limit' | translate}}" class="material-icons" style="color:#FFC107;">report_problem</strong>&nbsp; -->
+    <span class="toolbar-text" style="font-size: 15px;color: white;" translate>sidenav.datasources</span>
+  
+</mat-panel-title>
+</mat-expansion-panel-header>
+
+
+<div>
+  <ul class="nav dbsources list_style">
+
+    <li class="li-small" *ngFor="let dbsource of dbSourceList">
+      <div *ngIf="fetching" style="text-align: center">
+        <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+        <p><span translate>dbsource.fetch</span> {{ dots }}</p>
+      </div>
+    <li class="li-small" *ngFor="let dbsource of dbSourceList; let i = index">
+      <a mat-button [routerLink]="['/app/dbsource', dbsource.id ]">
+      
+        <img *ngIf="dbsource.provider ==='MONGO'" src="assets/images/menu/MBD.png" alt="mongodb-logo" style="width: 10%;" >
+        <img *ngIf="dbsource.provider ==='MYSQL'" src="assets/images/menu/mysql.png" alt="mysql.pnglogo" style="width:15%;">
+        <fa-icon *ngIf="dbsource.active" [icon]="faCircle"
+          style="font-size: 8px; color: green; display: table-caption;margin-left: -3px;"></fa-icon>
+        <fa-icon *ngIf="!dbsource.active" [icon]="faCircle"
+          style="font-size: 8px; color: red; display: table-caption;margin-left: -3px;"></fa-icon>
+        <span> {{ dbsource.name }}</span>
+
+      </a>
+    </li>
+    <div *ngIf="fetching" style="text-align: center">
+      <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+      <p><span translate>dbsource.fetch</span> {{ dots }}</p>
+    </div>
+  </ul>
+
+</div>
+</mat-expansion-panel>
+</mat-accordion>

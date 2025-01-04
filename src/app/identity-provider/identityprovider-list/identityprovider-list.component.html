@@ -1,0 +1,55 @@
+
+<mat-accordion>
+
+  <mat-expansion-panel [expanded]="false">
+    <mat-expansion-panel-header [ngStyle]="{
+      'background-color': identityproviderList.length === 0 ? '#002659' : '#002659',
+      'color': 'white',
+      'height': '37px',
+      'margin-top': '4px',
+      'margin-bottom': '4px'
+    }" style="background-color: #002659;color: white;height: 37px;margin-top: 4px;margin-bottom: 4px;">
+          <mat-panel-title>
+  
+    <button mat-button  (click)="openIdentityProviderModal()">
+      <strong class="nav-icon material-icons" style="color:white">add_circle</strong>
+    </button>
+    <span class="toolbar-text" style="font-size: 15px;color: white;" translate>sidenav.identityprovider</span>
+  
+</mat-panel-title>
+</mat-expansion-panel-header>
+<div>
+  <ul class="nav list list_style">
+
+    <li class="li-small" *ngFor="let identityprovider of identityproviderList">
+      <div *ngIf="fetching" style="text-align: center">
+        <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+        <p><span translate>identityprovider.fetch</span> {{ dots }}</p>
+      </div>
+    <li class="li-small" *ngFor="let identityprovider of identityproviderList; let i = index">
+      <a mat-button [routerLink]="['/app/identityprovider', identityprovider.id ]">
+            
+
+        <img *ngIf="identityprovider.name==='GOOGLE'" src="assets/images/menu/google.png"  alt="google-logo">
+        <img *ngIf="identityprovider.name==='FACEBOOK'" src="assets/images/menu/facebook.png"  alt="fb-logo">
+        <img *ngIf="identityprovider.name==='LINKEDIN'" src="assets/images/menu/linkedin.png"  alt="linkedin-logo">
+        <img *ngIf="identityprovider.name==='GITHUB'" src="assets/images/menu/github.png"  alt="github-logo" style="width: 10%;margin: 5px;">
+        <img *ngIf="identityprovider.name==='GITLAB'" src="assets/images/menu/gitlab.png"  alt="gitlab-logo" style="width: 11%;margin: 5px;">
+
+        <fa-icon *ngIf="identityprovider.active" [icon]="faCircle"
+          style="font-size: 8px; color: green; display: table-caption;margin-left: -3px;"></fa-icon>
+        <fa-icon *ngIf="!identityprovider.active" [icon]="faCircle"
+          style="font-size: 8px; color: red; display: table-caption;margin-left: -3px;"></fa-icon>
+        <span> {{ identityprovider.displayedName }}</span>
+
+      </a>
+    </li>
+    <div *ngIf="fetching" style="text-align: center">
+      <img src="../../../assets/images/loader.gif" width="80" alt="Loader">
+      <p><span translate>identityprovider.fetch</span> {{ dots }}</p>
+    </div>
+  </ul>
+
+</div>
+</mat-expansion-panel>
+</mat-accordion>

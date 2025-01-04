@@ -1,0 +1,142 @@
+<!-- <app-loader></app-loader>
+<div class="page-auth">
+  <div class="main-body">
+    <div class="row justify-content-center">
+      <div class="" style="background-color: transparent; padding:10px; margin-bottom: 0px">
+        <a href="https://www.grizzly-api.com/">
+          <div style="cursor: pointer;">
+            <img style="vertical-align:middle; height: 50px;" src="../../../assets/images/logo/white-logo.png"
+              alt="Code Once Logo">
+            <span style="color: white; font-size: 50px; vertical-align:middle; font-family: 'Nunito', sans-serif;">&nbsp;
+              Grizzly API</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br>
+    <div style="width: 120%;margin-left: -8%;" class="card card-white">
+      <h4 style="text-align: center" >
+        <div style="float: right; position: absolute; right: 0; top: 0">
+          <button mat-button [matMenuTriggerFor]="menu" class="md-button header-btn">
+            <span *ngIf="!isFr" class="flag-icon flag-icon-fr"> </span><span *ngIf="isFr"
+              class="flag-icon flag-icon-gb"></span>
+            {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isFr" (click)="setLang('fr')"><span class="flag-icon flag-icon-fr"></span>
+              FR</button>
+            <button mat-menu-item *ngIf="!isFr" (click)="setLang('en')"><span class="flag-icon flag-icon-gb"></span>
+              EN</button>
+          </mat-menu>
+        </div>
+      </h4>
+
+
+
+       <div class="card-content">
+<h3 class="title"><span translate>Checkout</span></h3>
+<div class="row">
+    <div class="col-md-6">
+        <h3 style="font-size: 20px;font-weight: 500;">BILLING DETAILS</h3>
+    </div>
+    <div class="col-md-6">
+        <h3 style="font-size: 20px;font-weight: 500;">ADDITIONAL INFORMATIONS</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="firstName"
+              placeholder="First name" >
+          </mat-form-field  >
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="lastName"
+              placeholder="Last name" >
+          </mat-form-field  >
+    </div>
+    <div class="col-md-6">
+        <h4 style="margin-top: 3%;font-size: 18px;font-weight: 500;">You order</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="address_country" [(ngModel)]="cardDetails.address_country"
+              placeholder="Country / Region" >
+          </mat-form-field  >
+    </div>
+  
+    <div class="col-md-6">
+        <p style="margin-top: 3%;font-size: 18px;"><span style="font-weight: bold;">Plan :</span> Limitless ...........................................................  <span style="font-weight: bold;">Price</span> : 5000€/Month</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="address_line1"   [(ngModel)]="cardDetails.address_line1"
+              placeholder="Street address" >
+          </mat-form-field  >
+    </div>
+  
+    <div class="col-md-6">
+        <h4 style="margin-top: 3%;font-size: 18px;font-weight: 500;">Credit Card (Stripe)</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="address_zip" [(ngModel)]="cardDetails.address_zip"
+              placeholder="Postcode / ZIP" >
+          </mat-form-field  >
+    </div>
+    <div class="col-md-3">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="address_city"  [(ngModel)]="cardDetails.address_city"
+              placeholder="City" >
+          </mat-form-field  >
+    </div>
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input  [(ngModel)]="cardDetails.name"   matInput type="text" name="name"
+              placeholder="Cardholder" >
+          </mat-form-field  >
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"  class="full-width">
+            <input required matInput type="text" name="email"
+              placeholder="Email" >
+          </mat-form-field  >
+    </div>
+  
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"  style="width: 70%;">
+            <span matPrefix><mat-icon style="position: relative;top: 5px;">credit_card</mat-icon>&nbsp;&nbsp;</span>
+            <input  [(ngModel)]="cardDetails.number" size="5" minlength="16" maxlength="16" type="number"  pattern="^[0-9].{15,}" matInput placeholder="Card Number">
+
+          </mat-form-field  >
+          <mat-form-field appearance="outline"  style="width:10%;">
+            <input [(ngModel)]="cardDetails.exp_month" name="exp_month"  size="5" min="0" minlength="2" maxlength="2"  type="number" pattern="^[0-9].{15,}" matInput placeholder="MM">
+
+          </mat-form-field  >
+          <mat-form-field appearance="outline"  style="width: 10%;">
+            <input [(ngModel)]="cardDetails.exp_year" name="exp_year"   size="5" min="0" minlength="2" maxlength="2" type="number"  pattern="^[0-9].{15,}" matInput placeholder="YY">
+          </mat-form-field  >
+         
+          <mat-form-field appearance="outline"  style="width:10%;">
+            <input [(ngModel)]="cardDetails.cvc" name="cvc" size="5" minlength="3" maxlength="3"  type="number" pattern="^[0-9].{15,}" matInput placeholder="CVC">
+
+          </mat-form-field  >
+    </div>
+</div>
+<br>
+<div class="row">
+    <button (click)=" chargeCreditCard()" mat-raised-button style="color: white;background-color: #002659;width: 30%;position: relative;left: 35%;">Place Your Order</button>
+
+</div>
+      </div>
+    </div>
+  </div>
+</div> -->

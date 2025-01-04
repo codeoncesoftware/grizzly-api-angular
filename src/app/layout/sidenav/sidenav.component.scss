@@ -1,0 +1,165 @@
+.headerbar {
+  background-color: rgb(29 113 191 / 31%);
+  color: white;
+}
+
+.project-toolbar {
+  background-color: #fff;
+  color: black;
+  height: auto;
+}
+.p{
+  font-size: 25px;
+  color: #002659
+}
+.toolbar-text {
+  padding: 5%;
+  font-weight: 300;
+}
+
+.support-email {
+  font-size: 14px;
+  color: #002659;
+  font-weight: 500;
+  margin-left: 18%;
+}
+
+::-webkit-scrollbar {
+  height: 30px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(196, 192, 192);
+}
+
+
+.badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #002659;
+  border-radius: 50%;
+  color: #fff;
+  padding: 0.5em 0.75em;
+  position: fixed;
+  bottom: 25px;
+  right: 28px;
+  z-index: 999;
+  width: 83px;
+  height: 83px;
+  font: unset;
+  cursor: pointer;
+}
+
+.pulsate::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: pulse 1s ease infinite;
+  border-radius: 50%;
+  border: 4px double #002659;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  60% {
+    transform: scale(1.3);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+.sidebar-content {
+  flex-grow: 1; /* Permet à la section de se développer pour occuper l'espace restant */
+}
+.app-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Utilisez toute la hauteur de la fenêtre */
+  overflow-y: auto; /* Ajoute une barre de défilement verticale si nécessaire */
+  top: 60px;
+  z-index: 1000;
+}
+/* Style pour le bouton flottant qui reste visible */
+.toggle-menu-btn {
+  position: fixed;
+  top: 60px;
+  left: 215px; /* Ajustez pour qu'il soit en dehors de la barre latérale */
+  z-index: 1000;
+  background-color: #0026599e;
+  color: white;
+  border-top-left-radius: 50%; /* Arrondi seulement sur le coin supérieur gauche */
+  border-bottom-left-radius: 50%; /* Arrondi seulement sur le coin inférieur gauche */
+  border-top-right-radius: 0; /* Coin supérieur droit non arrondi */
+  border-bottom-right-radius: 0; /* Coin inférieur droit non arrondi */
+  transition: left 0.3s ease;
+  width: 35px;
+  height: 40px;
+  padding: 9px;
+}
+
+/* Style pour masquer le menu */
+.app-sidebar.closed {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+}
+/* Classe appliquée lorsque le menu est fermé */
+.closed-menu-btn {
+  left: 1px; /* Nouvelle position du bouton lorsque le menu est fermé */
+  background-color: #002659; /* Optionnel : changer la couleur pour indiquer l'état */
+  border-top-left-radius: 0%; /* Arrondi seulement sur le coin supérieur gauche */
+  border-bottom-left-radius: 0%; /* Arrondi seulement sur le coin inférieur gauche */
+  border-top-right-radius: 50%; /* Coin supérieur droit non arrondi */
+  border-bottom-right-radius: 50%; /* Coin inférieur droit non arrondi */
+  width: 35px;
+  height: 40px;
+  padding: 9px;
+ 
+
+}
+
+/* Transition pour le bouton lorsqu'il s'ouvre */
+.app-sidebar:not(.closed) + .toggle-menu-btn {
+  left: 200px; /* Ajustez selon la largeur du menu */
+}
+/* Styles pour la section header et content lorsque le menu est ouvert */
+.sidebar-header, .sidebar-content {
+  transition: width 0.3s ease;
+  width: 250px; /* Largeur du menu lorsqu'il est ouvert */
+}
+
+/* Styles lorsque le menu est fermé */
+.sidebar-header.closed, .sidebar-content.closed {
+  width: 0px; /* Largeur du menu réduit pour garder les icônes visibles */
+  overflow: hidden; /* Cache le contenu texte quand réduit */
+}
+
+/* Optionnel : ajuster les icônes et leur alignement */
+
+
+.nav span {
+  display: inline-block;
+  white-space: nowrap;
+}

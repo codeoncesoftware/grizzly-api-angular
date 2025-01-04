@@ -1,0 +1,51 @@
+
+<mat-accordion>
+
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header [ngStyle]="{
+            'background-color': projectsList.length === 0 ? '#002659' : '#002659',
+            'color': 'white',
+            'height': '37px',
+            'margin-top': '4px',
+            'margin-bottom': '4px'
+          }" style="background-color: #002659;color: white;height: 37px;margin-top: 4px;">
+            <mat-panel-title>
+
+                    <button mat-button (click)="openDialog()">
+                        <strong class="material-icons" style="color:white;">add_circle</strong>
+                    </button>
+                    <!-- <strong style="cursor: pointer;" *ngIf="limitReached" matTooltip="{{'project.limit' | translate}}" class="material-icons" style="color:#FFC107;">report_problem</strong>&nbsp; -->
+                    <span class="toolbar-text" style="font-size: 15px;color: white;" translate>sidenav.projects</span>
+
+
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div>
+            <ul style="background-color: white;"  class="nav list list_style" myAccordionNav mySlimScroll myHighlightActiveItems myAppendSubmenuIcon>
+                <li *ngFor="let project of projectsList; let i = index">
+                    <a mat-button [routerLink]="['/app/project', project.id]">
+
+                        <img *ngIf="project.type==='microservice'"
+                            style="height: 20px; width: 20px;margin-right: 5px;" src="assets/images/menu/Microservice.png"
+                            alt="MS-Logo">
+                        <img *ngIf="project.type==='authentication microservice'"
+                            style="height: 20px; width: 20px;margin-right: 5px;" src="assets/images/menu/IAM.png"
+                            alt="iam-Logo">
+                        <img *ngIf="project.type==='markup microservice'"
+                            style="height: 20px; width: 20px;margin-right: 5px;" src="assets/images/markupAPI.png"
+                            alt="markupAPI-Logo">
+
+                        <span style="color: black" class="nav-text">{{ project.name }}</span>
+                    </a>
+
+
+                    <ul>
+                        <li><a mat-button class="md-button prepend-icon"><span><span translate>sidenav.database
+                                    </span> {{project.databaseName}}</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

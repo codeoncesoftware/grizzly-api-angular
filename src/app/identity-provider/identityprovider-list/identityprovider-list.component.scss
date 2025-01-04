@@ -1,0 +1,53 @@
+.identityprovider-toolbar {
+  background-color: #002659;
+  color: white;
+  height: auto;
+}
+a:hover {
+  color: #002659; /*the default color*/
+}
+
+button {
+  cursor: pointer;
+}
+
+button.mat-primary {
+  background-color: #002659;
+}
+::-webkit-scrollbar {
+  height: 4px;
+}
+.list_style {
+  overflow-y: scroll;
+  height: auto;
+  max-height: 195px;
+  
+}
+
+
+.custom-header .mat-expansion-indicator {
+  color: white; /* Change la couleur de l'icône en blanc */
+}
+.custom-header {
+background-color: #002659; /* Bleu */
+color: white; /* Pour changer la couleur du texte si nécessaire */
+}
+.article mat-expansion-panel > div {
+overflow-y: hidden; /* Désactive le défilement vertical */
+height: auto;
+max-height: none;
+}
+::ng-deep .mat-expansion-panel-body {
+padding: 0 !important;
+}
+
+.mat-expansion-panel-header {
+display: flex;
+flex-direction: row;
+align-items: center;
+padding: 5px;
+}
+::ng-deep .mat-expansion-panel-header .mat-expansion-indicator {
+color: white !important;  /* Définir la couleur de la flèche en blanc */
+padding: 15px;
+}

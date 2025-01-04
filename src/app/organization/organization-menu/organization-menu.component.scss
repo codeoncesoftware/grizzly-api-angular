@@ -1,0 +1,64 @@
+.Organization-toolbar {
+    background-color: #002659;
+    color: white;
+    height: auto;
+}
+
+.mat-fab-menu {
+    background-color: white;
+    width: 22px;
+    height: 22px;
+    margin-right: 10px;
+}
+
+.abrevName {
+    color: #002659;
+    font-weight: bold;
+    font-size: 11px;
+    position: relative;
+    top: -10px;
+}
+
+.dbsource-toolbar,
+.organization-menu {
+    background-color: #002659;
+    color: white;
+    height: auto;
+}
+
+.nav {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.first_acc {
+      width: 100%;
+    top: 89%;
+}
+
+.second_acc {
+   
+    width: 100%;
+    top: 71%;
+}
+.mat-expansion-panel-header .mat-expansion-indicator {
+  color: white !important;  /* Définir la couleur de la flèche en blanc */
+  padding: 0px;
+}
+
+
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+}
+::ng-deep .mat-expansion-panel-header .mat-expansion-indicator {
+  color: white !important;  /* Définir la couleur de la flèche en blanc */
+  padding: 15px;
+}

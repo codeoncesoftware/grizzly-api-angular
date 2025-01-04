@@ -1,0 +1,46 @@
+<div class="container" style="height:65vh;position: relative;overflow: hidden;overflow-y: scroll;">
+    <!-- Modal Section START -->
+    <!-- Resource Name -->
+    <span style="position:absolute; top:0; right:0; cursor: pointer;">
+        <mat-icon (click)="dialogRef.close()">clear</mat-icon>
+    </span><br>
+    <h1 mat-dialog-title style="text-align: center" translate>docker.info.import</h1>
+    <hr>
+    <br>
+    <!-- Activate API -->
+    <div mat-dialog-content class="row">
+        <h2 translate>docker.info.commands</h2>
+        <strong class="ml-3" translate="">docker.info.pull <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                class="mt-2" (click)="copyText(dockerPull)">file_copy</mat-icon>
+        </strong>&nbsp;
+        <pre style="background-color: #EFF0F1; margin-top:15px;" #dockerPull>
+docker pull {{docker.repoUrl}}
+    </pre>
+        <strong class="ml-3" translate>docker.info.run</strong>&nbsp;
+        <mat-icon matTooltip="Copy Code" style="cursor: pointer" class="mt-2" (click)="copyText(dockerRun)">file_copy
+        </mat-icon>
+
+        <pre *ngIf="docker.databaseType==='nosql'" style="background-color: #EFF0F1;  margin-top:15px;" #dockerRun>
+docker run -p 8050:8050 --env "databaseUri=&lt;MongoDb_Uri&gt;"<br>--env "databaseName={{docker.projectName}}_{{docker.containerName | replace}}" --name={{docker.projectName}}_{{docker.containerName}} <br> {{docker.repoUrl}} 
+</pre>
+        <pre *ngIf="docker.databaseType==='sql'" style="background-color: #EFF0F1;  margin-top:15px;" #dockerRun>
+    
+    docker run -p 8050:8050 "databaseName={{docker.databaseName}}"
+       "databaseProvider={{docker.databaseProvider}}"
+       "databasehost={{docker.databaseHost}}"
+       "databasePort={{docker.databasePort}}"
+       "databaseUsername={{docker.databaseUsername}}"
+       "databasePassword={{docker.databasePassword}}"
+       --name={{docker.projectName}}_{{docker.containerName}}  
+    {{docker.repoUrl}} 
+    </pre>
+        <h2 translate>docker.info.compose</h2>&nbsp;
+        <mat-icon matTooltip="Copy Code" style="cursor: pointer" class="mt-2" (click)="copyText(dockerCompose)">
+            file_copy</mat-icon>
+        <pre style="background-color: #EFF0F1;  margin-top:15px;" #dockerCompose>
+{{dockerComposeString}}
+    </pre>
+    </div>
+
+
+</div>

@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline"  class="fields-chip-list">
+    <mat-chip-grid #chipList aria-label="Fields selection">
+        <mat-chip-row *ngFor="let field of fields" [selectable]="selectable" [removable]="removable"
+            (removed)="remove(field)">
+            {{field}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip-row>
+        <input placeholder="Project fields to return from query..." [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+        <!-- Tooltip -->
+        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+            matTooltip="{{ 'help.projection' | translate }}">
+            info
+        </mat-icon>
+    </mat-chip-grid>
+</mat-form-field  >

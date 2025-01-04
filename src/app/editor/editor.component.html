@@ -1,0 +1,255 @@
+<app-header-editor>
+</app-header-editor>
+
+<br><br><br><br>
+
+<!-- BUTTONS -->
+
+<section class="">
+    <div class="row" style="text-align: center">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 col-md-5">
+            <div class="float-md-right float-sm-right mt-2">
+                <button matTooltip="{{ 'editor.btn.featureGrizzlyAPI' | translate }}" (click)="integrateApi()"
+                    mat-button style="background-color:  #002659; color: white;" class="btn-w-md cobtn">
+                    <mat-icon>work</mat-icon>&nbsp;
+                    <span translate>editor.btn.integrateApi</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-right float-sm-right mt-2">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    (click)="openHistoryModal()">
+                    <mat-icon>history</mat-icon>&nbsp;
+                    <span translate>editor.btn.history</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-right float-sm-right mt-2">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    (click)="openShareModal()">
+                    <mat-icon>forward</mat-icon>&nbsp;
+                    <span translate>editor.btn.share</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-right float-sm-right mt-2">
+                <button matTooltip="{{ 'editor.btn.cloneTooltip' | translate }}" mat-button
+                    style="background-color:  #002659; color: white" class="btn-w-md cobtn2"
+                    (click)="openCloneModal(true)">
+                    <mat-icon>filter_none</mat-icon>&nbsp;
+                    <span translate>container.clone</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-right float-sm-right mt-2">
+                <button matTooltip="{{ 'editor.btn.clearTooltip' | translate }}" mat-button
+                    style="background-color:  #002659; color: white" class="btn-w-md cobtn2" (click)="clearPage()">
+                    <mat-icon>clear</mat-icon>&nbsp;
+                    <span translate>editor.btn.clear</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-right float-sm-right mt-2">
+                <button matTooltip="{{ 'editor.btn.generateTooltip' | translate }}" mat-button
+                    style="background-color:  #002659; color: white" class="btn-w-md cobtn2"
+                    (click)="generateNewContainer(true)">
+                    <mat-icon>autorenew</mat-icon>&nbsp;
+                    <span translate>editor.btn.new</span>
+                </button> &nbsp;
+            </div>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</section>
+
+<br>
+
+<!-- TIPS -->
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="float-md-left float-sm-left" style="width: 100%;">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert" style=" padding: 5px;">
+                <button mat-icon-button disabled style="color: black;">
+                    <mat-icon>info</mat-icon>
+                </button>
+                <button mat-button class="btn-w-md cobtn" disabled style="color: black; margin-top: -15px;">
+                    &nbsp;
+                    <span translate>{{editorTip}}</span>
+                </button>
+                <br>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+</div>
+
+
+<!-- TITLE -->
+
+<section class="">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <mat-card style="height: 100%">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h1 *ngIf="!editMode" style="margin-left: 10px;">{{projectName}} <span class="badge"
+                                style="margin-top: 2%;">{{containerName}}</span> &nbsp;
+                            <mat-icon (click)="editTitle()" style="margin-top: 2%;">edit</mat-icon>
+                            <mat-icon class="info ml-2" matTooltipClass="test" matTooltip="{{ 'container.creationTime' | translate}} : {{container?.creationTime |  localizedDate}} 
+                            {{ 'container.lastUpdate' | translate }} : {{container?.lastUpdate | localizedDate}}">
+                                info
+                            </mat-icon>
+                        </h1>
+                    </div>
+                    <div class="col-md-3"><mat-icon (click)="openConfirmDeleteContainer()"
+                            matTooltip="{{ 'editor.btn.deleteContainer' | translate }}"
+                            style="font-size: 26px;float: right;margin-right: 8%;color: #f44336; margin-top: 5%;">delete_forever</mat-icon>
+                    </div>
+                </div>
+
+
+                <div style="margin-left: 20px;">
+                    <span [innerHtml]="containerDescription"></span>
+                </div>
+
+                <div
+                    *ngIf="container.contact && ((container.contact?.url !== '' && container.contact?.url !== null)  || (container.contact?.name !== '' && container.contact?.name !== null) )">
+                    <p *ngIf="container.contact.url"><span
+                            style="font-weight: 500;color: #002659; margin-left: 15px;">Contact : </span> <a
+                            target="_blank" [href]="container.contact.url"> {{container.contact.url}}</a></p>
+                    <p *ngIf="!container.contact.url"><span
+                            style="font-weight: 500;color: #002659; margin-left: 15px;">Contact : </span>
+                        {{container.contact.name}} </p>
+                </div>
+                <div
+                    *ngIf="container.license && ((container.license?.url !== '' && container.license?.url !== null)  || (container.license?.name !== '' && container.license?.name !== null) )">
+                    <p *ngIf="container.license.url"><span
+                            style="font-weight: 500;color: #002659; margin-left: 15px;">License : </span> <a
+                            target="_blank" [href]="container.license.url"> {{container.license.url}}</a></p>
+                    <p *ngIf="!container.license.url"><span
+                            style="font-weight: 500;color: #002659; margin-left: 15px;">License : </span>
+                        {{container.license.name}} </p>
+                </div>
+                <div>
+                    <span style="font-weight: 500;color: #002659; margin-left: 15px;">Status : </span> <img
+                        style="margin-bottom: 10px;" [src]="thumbnail" alt="swagger status">
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <br>
+    <div class="row" style="text-align: center">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="float-md-left float-sm-left mt-1">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    (click)="RGopenGroupModal()">
+                    <mat-icon>add</mat-icon>
+                    <span translate>editor.btn.addTag</span>
+                </button> &nbsp;
+            </div>
+
+            <div class="float-md-left float-sm-left mt-1">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    id="swaggerImport" [matMenuTriggerFor]="menuImportSwagger">
+                    <mat-icon>cloud_upload</mat-icon> &nbsp;
+                    <span translate>editor.btn.load</span>
+                </button> &nbsp;
+            </div>
+
+            <div>
+                <mat-menu #menuImportSwagger="matMenu">
+                    <button mat-menu-item class="btn-w-md cobtn" (click)="inputFileSwagger.click()">
+                        <mat-icon>attachment</mat-icon>&nbsp;
+                        <span translate>editor.btn.jsonFile</span>
+                    </button>
+                    <button mat-menu-item class="btn-w-md cobtn" (click)="openSwaggerUrlModal()">
+                        <mat-icon>public</mat-icon>&nbsp;
+                        <span>URL</span>
+                    </button>
+                </mat-menu>
+            </div>
+
+            <input #inputFileSwagger type="file" name="file" [style.display]="'none'" ng2FileSelect
+                [uploader]="uploader" (change)="importSwaggerOnExistingContainer()">
+            <div class="float-md-left float-sm-left mt-1">
+                <button mat-button (click)="Open()" id="swaggerBtnMenu"
+                    style="background-color:  #002659; color: white">
+                    <mat-icon>cloud_download</mat-icon>
+                    &nbsp;
+                    <span translate>editor.btn.export</span>
+                </button> &nbsp;
+            </div>
+
+            <mat-menu #swaggerMenu="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="swagger">
+                    <mat-icon style="transform: rotate(180deg); transform: rotateY(180deg);">reply</mat-icon>
+                    <span translate>editor.btn.exportSwagger</span>
+                </button>
+                <button mat-menu-item [matMenuTriggerFor]="openapi">
+                    <mat-icon style="transform: rotate(180deg); transform: rotateY(180deg);">reply</mat-icon>
+                    <span translate>editor.btn.exportOpenApi</span>
+                </button>
+            </mat-menu>
+
+            <mat-menu #swagger="matMenu">
+                <button mat-menu-item (click)="downloadYamlSwagger()">editor.btn.yamlFile</button>
+                <button mat-menu-item (click)="downloadJsonSwagger()">editor.btn.jsonFile</button>
+            </mat-menu>
+
+            <mat-menu #openapi="matMenu">
+                <button mat-menu-item (click)="downloadYamlOpenApi()">editor.btn.yamlFile</button>
+                <button mat-menu-item (click)="downloadJsonOpenApi()">editor.btn.jsonFile</button>
+            </mat-menu>
+
+            <div class="float-md-left float-sm-left mt-1">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    (click)="openJsonViewer()">
+                    <mat-icon>text_snippet</mat-icon>
+                    &nbsp;
+                    <span translate>editor.btn.preview</span>
+                </button> &nbsp;
+            </div>
+            <div class="float-md-left float-sm-left mt-1">
+                <button matTooltip="{{ 'editor.btn.manageModelTootlip' | translate }}" mat-button
+                    style="background-color:  #002659; color: white" class="btn-w-md cobtn" (click)="addModel()">
+                    <mat-icon>menu</mat-icon>
+                    &nbsp;
+                    <span translate>editor.btn.model</span>
+                </button> &nbsp;
+            </div>
+            <div class="float-md-left float-sm-left mt-1">
+                <button mat-button style="background-color:  #002659; color: white" class="btn-w-md cobtn"
+                    (click)="generateServerClient()">
+                    <mat-icon>source</mat-icon>
+                    &nbsp;
+                    <span translate>editor.btn.generateServerClient</span>
+                </button> &nbsp;
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+</section>
+
+<!-- GROUPS -->
+
+<app-group-editor [refreshSwagger]="refreshSwagger" [ui]="ui" [swaggerBaseUrl]="swaggerBaseUrl" [el]="el">
+</app-group-editor>
+
+
+<!-- Models -->
+<div class="row" [hidden]="hideModels">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <div class="swagger-container"></div>
+    </div>
+    <div class="col-md-1"></div>
+</div>

@@ -1,0 +1,108 @@
+button {
+    cursor: pointer;
+}
+
+button.mat-primary {
+    background-color: #002659;
+}
+
+.full-screen-modal .mat-dialog-container {
+    max-width: none;
+}
+
+.get:disabled {
+    background-color: #61AFFE;
+    color: white;
+}
+
+.post:disabled {
+    background-color: #49CC90;
+    color: white;
+}
+
+.put:disabled {
+    background-color: #FCA130;
+    color: white;
+}
+
+.delete:disabled {
+    background-color: #F93E3E;
+    color: white;
+}
+
+.patch:disabled {
+    background-color: #50E3C2;
+    color: white;
+}
+
+.head:disabled {
+    background-color: #9012FE;
+    color: white;
+}
+
+.options:disabled {
+    background-color: #0D5AA7;
+    color: white;
+}
+
+.mat-column-Check {
+    flex: 0 0 6%;
+}
+
+.mat-column-Path {
+    flex: 0 0 24%;
+}
+
+.mat-column-Summary {
+    flex: 0 0 27%;
+}
+
+.mat-column-Method {
+    flex: 0 0 15%;
+}
+
+.mat-column-space {
+    flex: 0 0 2%;
+}
+
+.mat-column-Params {
+    flex: 0 0 14%;
+}
+
+.mat-column-Codes {
+    flex: 0 0 19%;
+    //   max-width: 50px;
+}
+
+.mat-column-Actions {
+    flex: 0 0 10%;
+}
+
+tr.mat-row:hover {
+    background-color: yellow;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    height: 4px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: rgb(196, 192, 192);
+}
+
+::ng-deep .test {
+    white-space: pre-line;
+}

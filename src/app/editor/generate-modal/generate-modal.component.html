@@ -1,0 +1,184 @@
+<div class="container-fluid" style="text-align: justify;height:40vh;position: relative; width: 95%;">
+  <h1 mat-dialog-title translate style="text-align: center;">editor.btn.generateServerClient</h1>
+  <br>
+  <form name="form" #f="ngForm" (keydown.enter)="$event.preventDefault()">
+
+    <div class="container" style="height: 100%">
+      <mat-radio-group #type="ngModel" required="true" [(ngModel)]="choice" name="type">
+        <div class="row">
+          <mat-radio-button value="servers" name="type"><span translate>editor.server</span></mat-radio-button>
+          <mat-radio-group style="margin-left: 5%;" required="true" [(ngModel)]="format" name="format"
+            *ngIf="choice==='servers'">
+            <br>
+            <table>
+              <tr>
+                <td><mat-radio-button value="ada-server" name="format">ada-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="aspnetcore" name="format">aspnetcore</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="erlang-server" name="format">erlang-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="finch" name="format">finch</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="go-server" name="format">go-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="haskell" name="format">haskell</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="inflector" name="format">inflector</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="java-pkmst" name="format">java-pkmst</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="java-play-framework"
+                    name="format">java-play-framework</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="java-vertx" name="format">java-vertx</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="jaxrs" name="format">jaxrs</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="jaxrs-cxf" name="format">jaxrs-cxf</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="jaxrs-cxf-cdi" name="format">jaxrs-cxf-cdi</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="jaxrs-resteasy" name="format">jaxrs-resteasy</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="jaxrs-resteasy-eap"
+                    name="format">jaxrs-resteasy-eap</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="jaxrs-spec" name="format">jaxrs-spec</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="kotlin-server" name="format">kotlin-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="lumen" name="format">lumen</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="nancyfx" name="format">nancyfx</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="nodejs-server" name="format">nodejs-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="php-silex" name="format">php-silex</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="php-symfony" name="format">php-symfony</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="pistache-symfony" name="format">pistache-symfony</mat-radio-button>&nbsp;
+                </td>
+                <td><mat-radio-button value="python-flask" name="format">python-flask</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="rails5" name="format">rails5</mat-radio-button>&nbsp;</td>
+                <td> <mat-radio-button value="restbed" name="format">restbed</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="rust-server" name="format">rust-server</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="scala-lagom-server"
+                    name="format">scala-lagom-server</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="scalatra" name="format">scalatra</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="sinatra" name="format">sinatra</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="slim" name="format">slim</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="spring" name="format">spring</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="undertow" name="format">undertow</mat-radio-button>&nbsp;</td>
+              </tr>
+            </table>
+
+          </mat-radio-group>
+        </div>
+        <br>
+        <div class="row">
+          <mat-radio-button value="clients" name="type">Client</mat-radio-button>
+          <mat-radio-group style="margin-left: 5%;" required="true" [(ngModel)]="format" name="format"
+            *ngIf="choice==='clients'">
+            <br>
+            <table>
+              <tr>
+                <td><mat-radio-button value="ada" name="format">ada</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="akka-scala" name="format">akka-scala</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="android" name="format">android</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="apex" name="format">apex</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="bash" name="format">bash</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="clojure" name="format">clojure</mat-radio-button>&nbsp;</td>
+
+              </tr>
+              <br>
+              <tr>
+                <td><mat-radio-button value="cpprest" name="format">cpprest</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="csharp" name="format">csharp</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="csharp-dotnet2" name="format">csharp-dotnet2</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="cwiki" name="format">cwiki</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="dart" name="format">dart</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="dart-jaguar" name="format">dart-jaguar</mat-radio-button>&nbsp;</td>
+              </tr>
+              <br>
+              <tr>
+                <td><mat-radio-button value="dynamic-html" name="format">dynamic-html</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="eiffel" name="format">eiffel</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="elixir" name="format">elixir</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="elm" name="format">elm</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="erlang-client" name="format">erlang-client</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="flash" name="format">flash</mat-radio-button>&nbsp;</td>
+
+              </tr>
+              <br>
+              <tr>
+                <td><mat-radio-button value="go" name="format">go</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="groovy" name="format">groovy</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="haskell-http-client"
+                    name="format">haskell-http-client</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="html" name="format">html</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="html2" name="format">html2</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="java" name="format">java</mat-radio-button>&nbsp;</td>
+              </tr>
+              <br>
+              <tr>
+                <td><mat-radio-button value="javascript" name="format">javascript</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="javascript-closure-angular"
+                    name="format">javascript-closure-angular</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="java-cxf-client" name="format">java-cxf-client</mat-radio-button>&nbsp;
+                </td>
+                <td><mat-radio-button value="jmeter" name="format">jmeter</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="kotlin" name="format">kotlin</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="lua" name="format">lua</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="objc" name="format">objc</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="perl" name="format">perl</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="php" name="format">php</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="powershell" name="format">powershell</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="python" name="format">python</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="qt5cpp" name="format">qt5cpp</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="r" name="format">r</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="ruby" name="format">ruby</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="rust" name="format">rust</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="scala" name="format">scala</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="scala-gatling" name="format">scala-gatling</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="scalaz" name="format">scalaz</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="swagger" name="format">swagger</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="swagger-yaml" name="format">swagger-yaml</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="swift" name="format">swift</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="swift3" name="format">swift3</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="swift4" name="format">swift4</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="swift5" name="format">swift5</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="tizen" name="format">tizen</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="typescript-angular"
+                    name="format">typescript-angular</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="typescript-angularjs"
+                    name="format">typescript-angularjs</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="typescript-aurelia"
+                    name="format">typescript-aurelia</mat-radio-button>&nbsp;</td>
+                <td><mat-radio-button value="typescript-fetch" name="format">typescript-fetch</mat-radio-button>&nbsp;
+                </td>
+                <td><mat-radio-button value="typescript-inversify"
+                    name="format">typescript-inversify</mat-radio-button>&nbsp;</td>
+              </tr><br>
+              <tr>
+                <td><mat-radio-button value="typescript-jquery" name="format">typescript-jquery</mat-radio-button>&nbsp;
+                </td>
+                <td><mat-radio-button value="typescript-node" name="format">typescript-node</mat-radio-button>&nbsp;
+                </td>
+                <td><mat-radio-button value="ue4cpp" name="format">ue4cpp</mat-radio-button>&nbsp;</td>
+              </tr>
+            </table>
+
+          </mat-radio-group>
+        </div>
+      </mat-radio-group>
+    </div>
+  </form>
+  <br>
+  <div class="box-body text-right">
+    <button mat-raised-button (click)="dialogRef.close()" class="btn-w-md">
+      <span translate>popups.buttons.cancel</span>
+    </button>&nbsp;&nbsp;
+    <button mat-raised-button type="button" (click)="download()" style="background-color: #002659;color: white;"
+      class="btn-w-md" [disabled]="choice==undefined || format==undefined || disableBtn" id="confirm">
+      <span translate>editor.btn.generate</span></button>
+    <br>
+    <p *ngIf="disableBtn">cannot generate without at least one endpoint</p>
+  </div>
+
+</div>

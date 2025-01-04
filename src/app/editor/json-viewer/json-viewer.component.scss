@@ -1,0 +1,39 @@
+ngx-json-viewer {
+    height: 100%;
+    overflow-y: auto;
+    background-color: black;
+} 
+
+$type-colors: (
+  string: #8bae57,
+  number: #009688,
+  boolean: #8bae57,
+  date: #05668D,
+
+  array: #000,
+  object: #000,
+  function: #000,
+
+  'null': #fff,
+  undefined: #fff,
+  any: #f2777a,
+  segment-key : #000
+);
+
+@each $type, $color in $type-colors {
+  ::ng-deep .segment-type-#{$type} > .segment-main > .segment-value {
+    color: $color !important;
+
+  }
+ 
+}
+
+@each $color in $type-colors {
+  ::ng-deep .segment-key {
+      color: #f2777a !important;
+    }
+}
+
+
+
+

@@ -1,0 +1,54 @@
+.headerbar {
+  background-color:#002659;
+  color: white;
+}
+
+.flag-icon {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: relative;
+  display: inline-block;
+  width: 1.33333333em;
+  line-height: 1em;
+}
+
+.flag-icon:before {
+    content: "\00a0";
+  }
+
+.flag-icon-gb {
+  background-image: url(../../../assets/images/flags/gb.svg);
+}
+
+.flag-icon-fr {
+  background-image: url(../../../assets/images/flags/fr.svg);
+}
+
+
+a:hover {
+  color: #FFF; /*the default color*/
+}
+
+.upgrade{
+  position: relative;
+  top: 17px;
+  left: -11px;
+  font-size: 18px;
+  color: #002659;
+}
+.ba{
+   background-color: #6c6123;
+    color: white;
+    position: relative;
+    top: -1px;
+    left: 2px;
+}
+.fa-lg {
+  font-size: 1.33333333em;
+  line-height: 0.75em;
+  vertical-align: -15%;
+  color:white;
+  font-weight: bold;
+}
+

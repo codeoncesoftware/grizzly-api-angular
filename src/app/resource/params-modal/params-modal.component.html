@@ -1,0 +1,131 @@
+<app-loader></app-loader>
+<div class="container-fluid" style="text-align: center;">
+
+  <div>
+    <form name="form" #f="ngForm">
+
+      <h2 mat-dialog-title><span translate>api.addParams</span></h2>
+
+      <mat-horizontal-stepper #stepper>
+        <div class="divider divider-md"></div>
+        <mat-step>
+          <ng-template matStepLabel style="color: #fff"><span translate>Parameter Details</span></ng-template>
+
+          <div class="divider divider-md"></div>
+
+          <div class="container" style="max-height: 400px;overflow-y: scroll;">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <mat-label>In</mat-label>
+                    <mat-select matNativeControl [(ngModel)]="param.in" name="paramIn" required>
+                      <mat-option value="header">Header</mat-option>
+                      <mat-option value="formData">formData</mat-option>
+                      <mat-option value="query">Query</mat-option>
+                      <mat-option value="path">Path</mat-option>
+                      <mat-option value="Body">Body</mat-option>
+
+                    </mat-select>
+                  </mat-form-field  >
+                </div>
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <mat-label>Type</mat-label>
+                    <mat-select matNativeControl [(ngModel)]="param.type" name="paramType"
+                      (selectionChange)="checkIfFileIsSelected()" required>
+                      <mat-option value="object"><span translate>object</span></mat-option>
+                      <mat-option value="string"><span translate>string</span></mat-option>
+                      <mat-option value="integer"><span translate>integer</span></mat-option>
+                      <mat-option value="number"><span translate>number</span></mat-option>
+                      <mat-option value="boolean"><span translate>boolean</span></mat-option>
+                      <mat-option value="enum"><span translate>enum</span></mat-option>
+                      <mat-option value="char"><span translate>char</span></mat-option>
+                      <mat-option value="file"><span translate>file</span></mat-option>
+                    </mat-select>
+                  </mat-form-field  >
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <input required matInput placeholder="{{'api.placeholder.name' |translate}}"
+                      [(ngModel)]="param.name" name="paramName">
+                  </mat-form-field  >
+                </div>
+
+                <div class="row">
+                  <mat-form-field appearance="outline"  class="col-md-12">
+                    <input matInput placeholder="{{'api.placeholder.default' |translate}}" [(ngModel)]="param.value"
+                      name="paramValue" [disabled]="disableDefaultValue">
+                  </mat-form-field  >
+                </div>
+              </div>
+            </div>
+            <br *ngIf="showEnumList">
+            <div *ngIf="showEnumList" class="row">
+              <p style="margin-left:1.5%"> <span translate>api.enumMsg</span> </p>
+              <mat-form-field appearance="outline"  style="width: 96%;margin-left:1.5%" appearance="outline">
+                <mat-label>Enum Values</mat-label>
+                <mat-chip-grid #chipList>
+                  <mat-chip-row style="background-color: #357EC7;color: white;" *ngFor="let value of values"
+                    [selectable]="selectable" [removable]="removable" (removed)="remove(value)">
+                    {{value}}
+                    <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip-row>
+                  <input #enumInput [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    (matChipInputTokenEnd)="add($event)" [formControl]="myControl" [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" (click)="addOption(option)"
+                      [value]="option">
+                      {{option}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-chip-grid>
+              </mat-form-field  >
+            </div>
+            <div class="row">
+              <div class="col-md-6 mt-2">
+                <mat-checkbox style="margin-left: -335px;" name="paramRequired" [(ngModel)]="param.required"><span
+                    translate>api.required</span></mat-checkbox>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <mat-form-field appearance="outline"  class="col-md-12">
+                <textarea [(ngModel)]="param.description" name="description" matInput
+                  placeholder="{{ 'Description' | translate}}"></textarea>
+              </mat-form-field  >
+            </div>
+            <div class="divider divider-md"></div>
+          </div>
+
+        </mat-step>
+
+      </mat-horizontal-stepper>
+
+      <div class="divider divider-md"></div>
+
+
+      <div class="box-body text-right">
+
+        <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()">
+          <span translate>popups.buttons.cancel</span></button>
+        <span class="space"></span>
+
+        <button mat-raised-button
+          [style.background-color]="(!param.type || !param.in || !param.name)? null : '#002659' "
+          [style.color]="(!param.type || !param.in || !param.name)? null : 'white' " type="button" class="btn-w-md"
+          (click)="addNewParam()" [disabled]="!param.type || !param.in || !param.name ">
+          <span translate>popups.buttons.confirm</span></button>
+
+      </div>
+
+
+
+
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,69 @@
+<app-loader></app-loader>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-9">
+      <button class="mat-fab-menu  mt-2 " mat-mini-fab>
+        <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span>
+      </button>
+      <span style="font-size: 25px;font-weight: bold;">{{organization?.name}}</span>
+    </div>
+    <div class="col-3">
+      <button style="margin-left: 100px;" (click)="openDialog()" class="deleteButton" mat-button><span
+          translate>team.create</span></button>
+    </div>
+  </div>
+
+  <div>
+    <h3>{{organization?.totalMembers}} <span translate>organization.membersTitle</span> / {{totalTeams}} <span
+        translate>organization.teams</span> | <span translate>team.created</span> {{organization?.creationDate | date}}
+    </h3>
+  </div>
+  <div class="border-div"></div>
+
+  <br>
+
+  <div>
+    <h2 translate>organization.teams</h2>
+    <div *ngIf="teams.length > 0; else noTeams">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+
+            <th scope="col"><span translate>team.team</span></th>
+            <th scope="col">Description</th>
+            <th scope="col"><span translate>organization.membersTitle</span></th>
+            <th style="text-align: center;" scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let team of teams">
+            <tr>
+              <td>{{team.name}}</td>
+              <td>{{team.description}}</td>
+              <td>{{team.totalMembers}}</td>
+              <td style="text-align: center;">
+                <button mat-icon-button style="position: relative;top: -10px;" (click)="deleteTeam(team.id)">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+                <button mat-icon-button [routerLink]="['/app/organization',organization.id, 'teams',team.id]"
+                  style="position: relative;top: -10px;">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+
+
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noTeams>
+      <h3> {{organization?.name}} <span translate>organization.noTeams</span></h3>
+    </ng-template>
+
+  </div>
+  <div>
+
+  </div>
+
+</section>

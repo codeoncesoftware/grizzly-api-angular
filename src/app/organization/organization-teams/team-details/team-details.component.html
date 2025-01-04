@@ -1,0 +1,103 @@
+<app-loader></app-loader>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <button class="mat-fab-menu  mt-2 " mat-mini-fab>
+        <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span>
+      </button>
+      <span style="font-size: 25px;font-weight: bold;">{{organization?.name}}</span> &nbsp; <span
+        style="font-size: 28px;">/ </span>&nbsp;
+      <mat-icon
+        style="font-size: 33px;margin-right: 25px;position: relative;top: 6px;color: #002659;">supervisor_account</mat-icon>
+      <span style="font-size: 25px;font-weight: bold;">{{team?.name}}</span>
+    </div>
+    <div class="col-4">
+      <div class="row">
+        <button (click)="editTeam()" style="margin-left: 45%;" class="deleteButton" mat-button><span
+            translate>team.edit</span><mat-icon style="margin-left: 10px;">edit</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3>{{organization?.totalMembers}} <span translate>organization.membersTitle</span> / {{organization?.totalTeams}}
+      <span translate>organization.teams</span> | <span translate>team.created</span> {{organization?.creationDate |
+      date}}
+    </h3>
+  </div>
+  <div class="border-div"></div>
+  <div>
+    <h2 translate>team.member.invite</h2>
+    <form>
+      <h3 translate>team.member.msg</h3>
+      <div class="row">
+        <div class="col-10">
+          <mat-form-field appearance="outline" style="width: 820px;" appearance="outline">
+            <mat-label>User Email</mat-label>
+            <mat-chip-grid #chipList>
+              <mat-chip-row style="background-color: #357EC7;color: white;" *ngFor="let member of members"
+                [selectable]="selectable" [removable]="removable" (removed)="remove(member)">
+                {{member.name}}
+                <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip-row>
+              <input type="email" placeholder="E.g. user@email.com" #memberInput [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)"
+                [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="addOption(option)">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-chip-grid>
+          </mat-form-field>
+          <mat-error *ngIf="!emailFormatValid">
+            <span translate>auth.signup.errors.emailValid</span>
+          </mat-error>
+          <p translate>team.warning</p>
+        </div>
+        <div class="col-2 mt-2">
+          <div matTooltip="{{ 'organization.inviteFormat' | translate}}" [matTooltipDisabled]="members.length !== 0">
+            <button [disabled]="members.length === 0" (click)="invite()" id="inviteButton" class="inviteButton"
+              mat-button><span translate>team.add</span><mat-icon
+                style="margin-left: 10px;">person_add</mat-icon></button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+  <div>
+    <h2 translate>team.members</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let member of teamMembers ">
+          <tr>
+
+            <td>{{member.email}}</td>
+
+            <td>{{member.role}}</td>
+            <td><button (click)="deleteMemberFromTeam(member.email)" style="position: relative;top: -10px;"
+                mat-icon-button><mat-icon>delete_forever</mat-icon></button></td>
+          </tr>
+        </ng-container>
+
+
+
+      </tbody>
+    </table>
+  </div>
+  <div>
+
+  </div>
+
+</section>

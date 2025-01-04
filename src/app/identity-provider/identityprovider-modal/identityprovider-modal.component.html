@@ -1,0 +1,274 @@
+<app-loader></app-loader>
+<div class="container-fluid" style="text-align: center;height:65vh;position: relative;">
+  <span style="position: absolute; top: 0; right: 0;">
+    <button mat-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon><span translate>identityprovider-modal.cancel</span>
+    </button>
+  </span>
+  <!-- Modal Section START -->
+  <h1 mat-dialog-title><span translate>{{
+      data.mode === 0 ? 'identityprovider-modal.add' :
+        'identityprovider-modal.update'
+    }}</span>
+  </h1>
+  <div>
+
+    <mat-horizontal-stepper linear #stepper>
+      <mat-step *ngIf="data.mode === 0" [completed]="isStepCompleted(0)">
+        <ng-template matStepLabel>
+          <span translate>identityprovider-modal.type</span>
+        </ng-template>
+        <div class="divider divider-md"></div>
+        <div class="container dbContainer">
+          <form>
+            <div class="article">
+              <div class="row">
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='KEYCLOAK';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='KEYCLOAK'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/Keycloak_Logo.png" alt="Keycloak"> <br>
+                      <span class="idpName">Keycloak IdP</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='GOOGLE';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='GOOGLE'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/googlelogo.png" alt="Google"><br>
+                      <span class="idpName">Google IdP</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='GITHUB';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='GITHUB'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/github.png" alt="Github"><br>
+                      <span class="idpName">Github IdP</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='GITLAB';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='GITLAB'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/gitlab.png" alt="Gitlab"><br>
+                      <span class="idpName">Gitlab IdP</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='FACEBOOK';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='FACEBOOK'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/facebook.png" alt="Facebook"><br>
+                      <span class="idpName">Facebook IdP</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-4">
+                  <div (click)="identityprovider.name='LINKEDIN';onClick()"
+                       [ngClass]="{'item-card-selected': identityprovider.name==='LINKEDIN'}" class="item-card">
+                    <div class="img">
+                      <img src="assets/images/db/linkedin.png" alt="Linkedin"><br>
+                      <span class="idpName">Linkedin IdP</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </form>
+          <div class="box-body step-buttons text-right">
+            <span class="space"></span>
+            <button matStepperNext mat-raised-button color="primary" class="btn-w-md"
+                    [disabled]="!identityprovider.name"><span translate>
+                identityprovider-modal.next</span></button>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step [completed]="isStepCompleted(1)">
+        <ng-template matStepLabel>
+          <span translate>identityprovider-modal.fill</span>
+        </ng-template>
+        <div class="divider divider-md"  style="margin-top: -15px;"></div>
+        <div class="container dbContainer">
+
+          <form #dsFreeForm="ngForm">
+
+            <div class="box box-default">
+
+              <div class="box-body">
+                <div class="form-group">
+
+                  <mat-form-field appearance="outline" [ngClass]="opencredswizard ? 'col-md-6' : 'col-md-12'"
+                                  class="col-md-6">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.displayedName' |translate}}"
+                           [(ngModel)]="identityprovider.displayedName" #displayedName="ngModel" name="displayedName"
+                           required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing"
+                                  [ngClass]="identityprovider.name === 'KEYCLOAK' ? 'col-md-6' : 'col-md-12'">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.description' |translate}}"
+                           [(ngModel)]="identityprovider.description" #description="ngModel" name="description">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.userName' |translate}}"
+                           [(ngModel)]="identityprovider.credentials.userName" #issuer="ngModel" name="userName"
+                           required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <input matInput type="password"
+                           placeholder="{{'identityprovider-modal.placeholder.password' |translate}}"
+                           [(ngModel)]="identityprovider.credentials.password" #issuer="ngModel" name="password"
+                           required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.issuer' |translate}}"
+                           [(ngModel)]="identityprovider.credentials.issuer" #issuer="ngModel" name="issuer" required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing"
+                                  [ngClass]="identityprovider.name === 'KEYCLOAK' ? 'col-md-6' : 'col-md-12'">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.protocol' |translate}}" disabled>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.clientId' |translate}}"
+                           [(ngModel)]="identityprovider.credentials.clientId" #clientId="ngModel" name="clientId"
+                           required>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <mat-label><span translate>identityprovider-modal.placeholder.grantType</span></mat-label>
+                    <mat-select [(ngModel)]="identityprovider.credentials.grantType" name="grantType" required>
+                      <mat-option value="password"><span translate>password</span></mat-option>
+                      <mat-option value="client_credentials" *ngIf="showSecretKey"><span
+                        translate>client_credentials</span></mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="opencredswizard">
+                    <mat-label><span translate>identityprovider-modal.placeholder.acesstype</span></mat-label>
+                    <mat-select [(ngModel)]="identityprovider.credentials.accessType" name="accessType"
+                                #accessType="ngModel" (selectionChange)="checkIfCredentialsIsSelected()" required>
+                      <mat-option value="confidential"><span translate>confidential</span></mat-option>
+                      <mat-option value="public"><span translate>public</span></mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="col-md-6 reduce-spacing" *ngIf="showSecretKey">
+                    <input matInput placeholder="{{'identityprovider-modal.placeholder.secretKey' |translate}}"
+                           [(ngModel)]="identityprovider.credentials.secretKey" #secretKey="ngModel" name="secretKey"
+                           required>
+                  </mat-form-field>
+
+                  <div *ngIf="identityprovider.connectionSucceeded === false">
+                    <p>
+                      <em class="material-icons" style="vertical-align: middle"> error </em><span
+                      translate>identityprovider-modal-connection.fail</span>
+                    </p>
+                  </div>
+                  <div *ngIf="identityprovider.connectionSucceeded === true">
+                    <p>
+                      <em class="material-icons" style="vertical-align: middle"> check_circle </em><span
+                      translate>identityprovider-modal-connection.success</span>
+                    </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </form>
+        </div>
+          <div  style="    margin-top: 45px;float: right;">
+            <button *ngIf="opencredswizard" mat-raised-button color="accent" class="btn-w-md"
+                    (click)="onCheckConnection()"><span translate>popups.identityprovider.test</span></button>
+            <span class="space"></span>
+            <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+              translate>popups.buttons.back</span></button>
+            <span class="space"></span>
+            <button [disabled]="dsFreeForm.invalid" matStepperNext mat-raised-button color="primary"
+                    class="btn-w-md"><span translate>popups.buttons.next</span></button>
+          </div>
+
+       
+      </mat-step>
+      <mat-step [completed]="false">
+        <!-- <button matStepperPrevious mat-raised-button class="btn-w-md"><span translate>popups.buttons.back</span></button> -->
+        <ng-template matStepLabel><span translate>identityprovider-modal-review.review</span></ng-template>
+        <div class="container dbContainer">
+
+          <form>
+            <div class="box box-default">
+              <div class="box-header" style="text-align: left; margin-top: 20px;"><span translate>
+                  identityprovider-modal-review.review</span></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="text-align: left; margin-left: 10px;"><span translate>
+                      identityprovider-modal-review.ip</span> :
+                    {{ identityprovider.name }}
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <div style="text-align: left; margin-left: 10px;"><span translate>
+                      identityprovider-modal-review.displayedName</span> :
+                    {{ identityprovider.displayedName }}
+                  </div>
+                </div>
+                <div *ngIf="opencredswizard">
+                  <div class="col-sm-12">
+                    <div style="text-align: left;"><span translate>
+                        identityprovider-modal-review.acessType</span> :
+                      {{ identityprovider.credentials.accessType }}
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div style="text-align: left;"><span translate>
+                        identityprovider-modal-review.clientID</span> :
+                      {{ identityprovider.credentials.clientId }}
+                    </div>
+                  </div>
+                  <div class="col-sm-12">
+                    <div style="text-align: left;"><span translate>
+                        identityprovider-modal-review.grantType</span> :
+                      {{ identityprovider.credentials.grantType }}
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+
+          <div class="box-body step-buttons text-right">
+            <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+              translate>popups.buttons.back</span></button>
+            <span class="space"></span>
+            <button (click)="createNewIdentityProvider()" matStepperNext mat-raised-button color="primary"
+                    class="btn-w-md">
+              {{
+                (data.mode === 0 ? 'identityprovider-modal-review.create' : 'identityprovider-modal-review.save') |
+                  translate
+              }}
+            </button>
+          </div>
+
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+  </div>
+
+</div>

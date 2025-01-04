@@ -1,0 +1,478 @@
+<app-loader></app-loader>
+
+<span class="closeBtn">
+    <button mat-button mat-dialog-close>
+        <mat-icon>clear</mat-icon> <span translate>api.close</span>
+    </button>
+</span>
+<br>
+<h3 mat-dialog-title>
+    <div style="text-align: center;">
+        <span class="mr-5"><img src="./../../../../assets/images/databases1.png" width="55" height="40"
+                class="mr-1" /><strong>Database :</strong> {{dbsource.database}}</span>
+        <span *ngIf="table !== null && table?.name && table?.name !== ''" translate><img
+                src="./../../../../assets/images/tables.png" width="40" height="25" class="mr-1" /><strong>
+                Table :</strong> {{table.name}}</span>
+    </div>
+</h3>
+<br>
+
+
+<mat-horizontal-stepper linear #stepper class="mx-5">
+    <mat-step>
+        <ng-template matStepLabel>
+            <span translate>Column Properties</span>
+        </ng-template>
+        <div class="row mt-4">
+            <form name="form" #f="ngForm" class="col-12">
+                <div>
+                    <div class="row" *ngIf="mode !== 'edit'" >
+                        <mat-form-field appearance="outline"  class="col-md-12">
+                            <mat-label>Table Name</mat-label>
+                            <input matInput type="string" [(ngModel)]="table.name" name="name" />
+                        </mat-form-field  >
+                    </div>
+
+                    <div *ngIf="mode !== 'edit'"  class="row mt-4">
+                        <mat-form-field appearance="outline"  class="col-md-2">
+                            <mat-label>Column Name</mat-label>
+                            <input matInput type="string" [(ngModel)]="column.name" name="columnName" />
+                        </mat-form-field  >
+                        <mat-form-field appearance="outline"  class="col-md-2">
+                            <mat-label>Type</mat-label>
+                            <input matInput type="string" [(ngModel)]="column.type" name="columnType" />
+
+                        </mat-form-field  >
+
+                        <span class="col-md-2 mt-3">
+                            <mat-checkbox class="example-margin" [(ngModel)]="column.unique" name="unique">
+                                Unique
+                            </mat-checkbox>
+                        </span>
+                        <span class="col-md-2 mt-3">
+                            <mat-checkbox class="example-margin" [(ngModel)]="column.autoIncrement"
+                                name="autoIncrementChecked">
+                                Auto Increment
+                            </mat-checkbox>
+                        </span>
+                        <span class="col-md-2 mt-3">
+                            <mat-checkbox class="example-margin" [(ngModel)]="column.nullable" name="nullableChecked">
+                                Nullable
+                            </mat-checkbox>
+                        </span>
+                        <button mat-raised-button class="btn-md mt-2 my-button" (click)="addColumn()"
+                            [disabled]="checkAddColumn(column)">
+                            <span class="pb-2" translate>
+                                Add Column
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <br>
+
+        <div class="row mt-2" *ngIf="columns.length !== 0">
+            <mat-error class="mx-1 my-2 ml-2 error" *ngIf="sqlError !== ''">
+                {{sqlError}}</mat-error>
+            <table class="table mt-1 ml-2">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 19%;">Name</th>
+                        <th scope="col" style="width: 19%;">Type</th>
+                        <th scope="col" style="width: 17%;">Unique</th>
+                        <th scope="col" style="width: 17%;">Auto Increment</th>
+                        <th scope="col" style="width: 17%;">Nullable</th>
+                        <th *ngIf="mode !== 'edit'"  scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let column of columns; let i = index; ">
+                        <tr>
+                            <td style="font-weight: bold ;font-size: 15px; width: 19%;"><span
+                                    *ngIf="!column.editModeEnabled">{{column.name}} <span>
+                                        <mat-icon class="mr-4" style="position: relative; margin-left: 7px;top: 6px;margin-top: -5%;"
+                                            *ngIf="checkCategory(column.name)">vpn_key</mat-icon>
+                                    </span></span>
+                                <input type="string" *ngIf="column.editModeEnabled" [(ngModel)]="column.name"
+                                    name="columnName" />
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 19%;">
+                                <span *ngIf="!column.editModeEnabled">{{column.type}} </span>
+                                <input type="string" *ngIf="column.editModeEnabled" [(ngModel)]="column.type"
+                                    name="columnType" />
+                            </td>
+
+                            <td style="font-weight: bold ; font-size: 15px; width: 17%;"
+                                [ngStyle]="{'margin-left': column.editModeEnabled ? '80px' : '0px' }">
+                                <mat-checkbox *ngIf="column.editModeEnabled" class="example-margin"
+                                    style="text-align: center;" [(ngModel)]="column.unique" name="unique">
+                                </mat-checkbox>
+                                <span *ngIf="!column.editModeEnabled">
+                                    {{column.unique}}
+                                </span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 17%;"
+                                [ngStyle]="{'margin-left': column.editModeEnabled ? '80px' : '0px' }">
+                                <mat-checkbox *ngIf="column.editModeEnabled" class="example-margin"
+                                    style="text-align: center;" [(ngModel)]="column.autoIncrement"
+                                    name="autoIncrementChecked">
+                                </mat-checkbox>
+                                <span *ngIf="!column.editModeEnabled">
+                                    {{column.autoIncrement}}
+                                </span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 17%;"
+                                [ngStyle]="{'margin-left': column.editModeEnabled ? '80px' : '0px' }">
+                                <mat-checkbox *ngIf="column.editModeEnabled" class="example-margin"
+                                    style="text-align: center;" [(ngModel)]="column.nullable"
+                                    name="autoIncrementChecked">
+                                </mat-checkbox>
+                                <span *ngIf="!column.editModeEnabled">
+                                    {{column.nullable}}
+                                </span>
+                            </td>
+                            <button *ngIf="mode !== 'edit'"  class="actions" (click)="enableEdit(column)">
+                                <mat-icon matTooltip="Download docker compose" style="cursor: pointer"
+                                    *ngIf="!column.editModeEnabled" class="ml-2 mt-2">edit</mat-icon>
+                                <mat-icon *ngIf="column.editModeEnabled" class="ml-2 mt-2">check</mat-icon>
+                            </button>
+                            <button *ngIf="mode !== 'edit'"  class="actions" (click)="openConfirmDeleteDialogColumn(column)">
+                                <mat-icon matTooltip="Delete docker" class="ml-2 mt-2" style="cursor: pointer">
+                                    delete_forever</mat-icon>
+                            </button>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="box-body step-buttons text-right mt-5">
+            <button *ngIf="mode !== 'edit'"  (click)="save()" mat-raised-button color="primary" class="btn-w-md  my-button"
+                [disabled]="table.name === undefined || columns.length==0"><span
+                    translate>popups.buttons.saveAndExit</span></button> &nbsp;
+            <button *ngIf="mode !== 'edit'"  matStepperNext mat-raised-button color="primary" class="btn-w-md mr-2  my-button"
+                (click)="nextStep(stepper)" [disabled]="table.name==undefined || columns.length==0"><span
+                    translate>dbsource-modal-cloud-connection.next</span></button>
+            <span class="space"></span>
+        </div>
+    </mat-step>
+    <mat-step *ngIf="mode === 'edit' && constraints.length !== 0">
+        <ng-template matStepLabel>
+            <span translate>Constraints</span>
+        </ng-template>
+
+        <div class="row mt-5" *ngIf="constraints.length !== 0">
+            <table class="table mt-1 ml-2">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 19%;">Name</th>
+                        <th scope="col" style="width: 19%;">Column Name</th>
+                        <th scope="col" style="width: 17%;">Reference Table</th>
+                        <th scope="col" style="width: 17%;">Reference Column</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let constraint of constraints; let i = index; ">
+                        <tr>
+                            <td style="font-weight: bold ;font-size: 15px; width: 19%;">
+                                <span>{{constraint.name}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 19%;">
+                                <span>{{constraint.columnName}}</span>
+                            </td>
+
+                            <td style="font-weight: bold ; font-size: 15px; width: 17%;">
+                                <span>
+                                    {{constraint.refTable}}
+                                </span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 17%;">
+                                <span>
+                                    {{constraint.refColumn}}
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="box-body step-buttons text-right mt-5">
+            <button *ngIf="mode !== 'edit'"  (click)="save()" mat-raised-button color="primary" class="btn-w-md  my-button"
+                [disabled]="table.name === undefined || columns.length==0"><span
+                    translate>popups.buttons.saveAndExit</span></button> &nbsp;
+            <button *ngIf="mode !== 'edit'"  matStepperNext mat-raised-button color="primary" class="btn-w-md mr-2  my-button"
+                (click)="nextStep(stepper)" [disabled]="table.name==undefined || columns.length==0"><span
+                    translate>dbsource-modal-cloud-connection.next</span></button>
+            <span class="space"></span>
+        </div>
+    </mat-step>
+    <mat-step *ngIf="mode !== 'edit'" >
+        <ng-template matStepLabel>
+            <span translate>Primary Key And Indexes</span>
+        </ng-template>
+        <div class="row ml-2">
+            <h2 style="text-align: center; margin-top: 20px;">Primary Key</h2>
+        </div>
+        <div class="row ml-2">
+            <mat-checkbox *ngFor="let column of columns;  let i = index" class="mx-4" style="text-align: center;"
+                [(ngModel)]="column.primary" name="primaryKey">
+                <div class="ml-2" style="font-weight: bold;">
+                    {{column.name}}
+                </div>
+            </mat-checkbox>
+        </div>
+        <div class="row ml-2">
+            <h2 style="text-align: center; margin-top: 20px;">Indexes
+                <mat-icon matTooltip="Primary keys have a default index">info</mat-icon>
+            </h2>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline"  class="col-md-10 ml-3">
+                <mat-label>Index Name</mat-label>
+                <input matInput type="string" [(ngModel)]="index.name" name="indexName" />
+            </mat-form-field  >
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <mat-checkbox *ngFor="let column of columns;  let i = index" class="mx-4" style="text-align: center;"
+                    [(ngModel)]="column.indexed" name="index">
+                    <div class="ml-2" style="font-weight: bold;">
+                        {{column.name}}
+                    </div>
+                </mat-checkbox>
+            </div>
+            <div class="col-md-3">
+                <button mat-raised-button class="btn-md mb-2 my-button" (click)="addIndex()"
+                    [disabled]="checkIndex(index)">
+                    <span translate>
+                        Add Index
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <table class="table mt-1 ml-2" *ngIf="indexes !== undefined && indexes?.length !== 0">
+                <thead>
+                    <tr>
+                        <th scope="col" style="width: 20%;">Name</th>
+                        <th scope="col" style="width: 65%;">Columns</th>
+                        <th  scope="col" style="width: 17%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let selectedIndex of selectedIndexes | keyvalue; let i = index; ">
+                        <tr>
+                            <td style="font-weight: bold ;font-size: 15px; width: 20%;">
+                                <span>{{selectedIndex.key}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 65%;">
+                                {{selectedIndex.value}}
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;">
+                                <button class="actions" (click)="openConfirmDeleteDialogIndex(selectedIndex)">
+                                    <mat-icon matTooltip="Delete docker" class="ml-2 mt-2" style="cursor: pointer">
+                                        delete_forever</mat-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="box-body step-buttons text-right mt-4 ">
+            <button (click)="save()" mat-raised-button color="primary" class="btn-w-md my-button"><span
+                    translate>popups.buttons.saveAndExit</span></button>
+            <span class="space"></span>
+            <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+                    translate>dbsource-modal-cloud-connection.previous</span></button>
+            <span class="space"></span> &nbsp;
+            <button matStepperNext mat-raised-button color="primary" class="btn-w-md my-button"
+                (click)="nextStep(stepper)"><span translate>dbsource-modal-cloud-connection.next</span></button>
+
+        </div>
+    </mat-step>
+    <mat-step *ngIf="mode !== 'edit'" >
+        <ng-template matStepLabel>
+            <span translate>Foreign keys constraints</span>
+        </ng-template>
+        <div class="row mt-4">
+            <mat-form-field appearance="outline"  [ngClass]="mode == 'create' ? 'col-md-5' : 'col-md-3'">
+                <mat-label>Constraint Name</mat-label>
+                <input matInput type="string" [(ngModel)]="constraint.name" name="constraintName" />
+            </mat-form-field  >
+            <mat-form-field appearance="outline"  [ngClass]="mode == 'create' ? 'col-md-7' : 'col-md-3'">
+                <mat-label>Column Name</mat-label>
+                <mat-select [(ngModel)]="constraint.columnName" name="columnName">
+                    <mat-option *ngFor="let column of columns" [value]="column.name">{{ column.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <mat-form-field appearance="outline"  [ngClass]="mode == 'create' ? 'col-md-5' : 'col-md-3'">
+                <mat-label>Foreign key table </mat-label>
+                <mat-select [(ngModel)]="constraint.refTable" name="refTable"
+                    (selectionChange)="changeRefTable($event)">
+                    <mat-option *ngFor="let table of tables" [value]="table.name">{{ table.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <mat-form-field appearance="outline"  [ngClass]="mode == 'create' ? 'col-md-5' : 'col-md-3'">
+                <mat-label>Foreign key column</mat-label>
+                <mat-select [(ngModel)]="constraint.refColumn" name="foreignColumnName">
+                    <mat-option *ngFor="let column of foreignColumns" [value]="column.name">{{ column.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <div class="col-md-2 " *ngIf="mode === 'create'">
+                <span class="mt-1 ml-1">
+                    <button mat-raised-button color="primary" [disabled]="!isConstraintValid()"
+                        class="btn-w-md mt-1 my-button"><span translate (click)="addConstraint()">Add
+                            Constraint</span></button>
+                </span>
+            </div>
+        </div>
+        <div class="row" *ngIf="mode=='edit'">
+            <mat-form-field appearance="outline"  class="col-md-5">
+                <mat-label>ON DELETE</mat-label>
+                <mat-select [(ngModel)]="constraint.onDelete" name="onDelete">
+                    <mat-option *ngFor="let prop of editConstraintProps" [value]="prop">{{ prop }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <mat-form-field appearance="outline"  class="col-md-5">
+                <mat-label>ON UPDATE</mat-label>
+                <mat-select [(ngModel)]="constraint.onUpdate" name="onUpdate">
+                    <mat-option *ngFor="let prop of editConstraintProps" [value]="prop">{{ prop }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field  >
+            <span class="col-md-2 mt-1">
+                <button mat-raised-button color="primary" class="btn-w-md ml-5 my-button"
+                    (click)="addConstraint()"><span translate>Add Constraint</span></button>
+            </span>
+        </div>
+        <div class="row mt-5" *ngIf="constraints.length!==0">
+            <mat-error class="mx-1 my-2 error" *ngIf="sqlError !== ''">
+                {{sqlError}}</mat-error>
+            <table class="table mt-1 ml-2">
+                <thead>
+                    <tr>
+
+                        <th scope="col" style="width: 20%;">Constraint Name</th>
+                        <th scope="col" style="width: 18%;">Column Name</th>
+                        <th scope="col" style="width: 18%;">Reference Table</th>
+                        <th scope="col" style="width: 18%;">Reference Column</th>
+                        <th scope="col" style="width: 18%;" *ngIf="mode==='edit'">ON UPDATE</th>
+                        <th scope="col" style="width: 18%;" *ngIf="mode==='edit'">ON DELETE</th>
+                        <th scope="col" style="width: 20%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let constraint of constraints; let i = index; ">
+                        <tr>
+                            <td style="font-weight: bold ;font-size: 15px; width: 15%;"><span
+                                    *ngIf="!constraint.editModeEnabled">{{constraint.name}}</span>
+                                <input type="string" *ngIf="constraint.editModeEnabled" [(ngModel)]="constraint.name"
+                                    name="constraintName" />
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;">
+                                <mat-select *ngIf="constraint.editModeEnabled" matNativeControl
+                                    [(ngModel)]="constraint.columnName" name="constraintColumnName">
+                                    <mat-option *ngFor="let column of columns" [value]="column.name">{{ column.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <span *ngIf="!constraint.editModeEnabled"> {{constraint.columnName}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;">
+                                <mat-select *ngIf="constraint.editModeEnabled" matNativeControl
+                                    [(ngModel)]="constraint.refTable" name="catgory">
+                                    <mat-option *ngFor="let table of tables" [value]="table.name">{{ table.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <span *ngIf="!constraint.editModeEnabled">{{constraint.refTable}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;">
+                                <mat-select *ngIf="constraint.editModeEnabled" matNativeControl
+                                    [(ngModel)]="constraint.refColumn" name="constraintColumnName">
+                                    <mat-option *ngFor="let column of foreignColumns" [value]="column.name">{{
+                                        column.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <span *ngIf="!constraint.editModeEnabled"> {{constraint.refColumn}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;" *ngIf="mode==='edit'">
+                                <mat-select *ngIf="constraint.editModeEnabled" matNativeControl
+                                    [(ngModel)]="constraint.onUpdate" name="constraintColumnName">
+                                    <mat-option *ngFor="let prop of editConstraintProps" [value]="prop">{{ prop }}
+                                    </mat-option>
+                                </mat-select>
+                                <span *ngIf="!constraint.editModeEnabled"> {{constraint.onUpdate}}</span>
+                            </td>
+                            <td style="font-weight: bold ; font-size: 15px; width: 15%;" *ngIf="mode==='edit'">
+                                <mat-select *ngIf="constraint.editModeEnabled" matNativeControl
+                                    [(ngModel)]="constraint.onDelete" name="constraintColumnName">
+                                    <mat-option *ngFor="let prop of editConstraintProps" [value]="prop">{{ prop }}
+                                    </mat-option>
+                                </mat-select>
+                                <span *ngIf="!constraint.editModeEnabled"> {{constraint.onDelete}}</span>
+                            </td>
+                            <button class="actions" (click)="enableEdit(constraint)">
+                                <mat-icon matTooltip="Edit constraint" style="cursor: pointer"
+                                    *ngIf="!constraint.editModeEnabled" class="ml-2 mt-2">
+                                    edit</mat-icon>
+                                <mat-icon *ngIf="constraint.editModeEnabled" class="ml-2 mt-2">check</mat-icon>
+                            </button>
+                            <button class="actions" (click)="openConfirmDeleteDialogConstraint(constraint)">
+                                <mat-icon matTooltip="Delete constraint" class="ml-2 mt-2" style="cursor: pointer">
+                                    delete_forever</mat-icon>
+                            </button>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box-body step-buttons text-right mt-5 pt-5">
+            <button mat-raised-button color="primary" class="btn-w-md my-button" (click)="save()"><span
+                    translate>popups.buttons.saveAndExit</span></button>
+            <span class="space"></span>
+            <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+                    translate>dbsource-modal-cloud-connection.previous</span></button>
+            <span class="space"></span> &nbsp;
+            <button matStepperNext mat-raised-button color="primary" class="btn-w-md my-button"
+                (click)="nextStep(stepper)"><span translate>dbsource-modal-cloud-connection.next</span></button>
+
+        </div>
+    </mat-step>
+    <mat-step *ngIf="mode !== 'edit'" >
+        <ng-template matStepLabel>
+            <span translate>SQL Preview</span>
+        </ng-template>
+        <textarea class="queryReview" rows="4" rows="50" [(ngModel)]="finalQuery"></textarea>
+        <mat-error class="mx-1 my-2 error" *ngIf="sqlError !== ''">
+            {{sqlError}}</mat-error>
+        <div class="box-body step-buttons text-right ">
+
+            <span class="space"></span>
+            <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+                    translate>dbsource-modal-cloud-connection.previous</span></button>
+            <span class="space"></span> &nbsp;
+            <button mat-raised-button color="primary" class="btn-w-md my-button" (click)="save()"><span
+                    translate>popups.buttons.saveAndExit</span></button>
+        </div>
+    </mat-step>
+    
+</mat-horizontal-stepper>
+<div class="box-body  text-right">
+
+<button *ngIf="mode === 'edit' && constraints.length !== 0 && stepper.selectedIndex !== 0 " mat-raised-button class="btn-w-md" (click)="goBack(stepper)" [disabled]="stepper.selectedIndex === 0">
+    <span translate>popups.buttons.back</span></button>
+<span class="space"></span>
+<button mat-raised-button (click)="goForward(stepper)" color="primary" class="btn-w-md" *ngIf="mode === 'edit' && constraints.length !== 0 && stepper.selectedIndex !== stepper.steps?.length - 1" [disabled]="stepper.selectedIndex === 1">
+    <span translate>{{'popups.buttons.next'}}</span>
+</button>
+</div>

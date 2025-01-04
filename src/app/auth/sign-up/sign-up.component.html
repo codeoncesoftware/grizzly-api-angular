@@ -1,0 +1,146 @@
+<app-loader></app-loader>
+<div class="page-auth">
+  <div class="main-body">
+    <div class="row justify-content-center">
+      <div class="" style="background-color: transparent; padding:10px; margin-bottom: 0px">
+        <a href="https://www.grizzly-api.com/">
+          <div style="cursor: pointer;display: flex; align-items: center; justify-content: center;">
+            <img style="vertical-align:middle; height: 50px;" src="../../../assets/images/logo/white-logo.png"
+              alt="Code Once Logo">
+            <span
+              style="color: white; font-size: 50px; vertical-align:middle; font-family: 'Nunito', sans-serif;">&nbsp;
+              Grizzly API</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br>
+    <div class="card card-white">
+      <h4 style="text-align: center; margin-top: revert;" *ngIf="!signedup">
+        <span translate style="font-size: x-large;">auth.signup.title</span>
+        <div style="float: right; position: absolute; right: 0; top: 0">
+          <button mat-button [matMenuTriggerFor]="menu" class="md-button header-btn">
+            <span *ngIf="!isFr" class="flag-icon flag-icon-fr"> </span><span *ngIf="isFr"
+              class="flag-icon flag-icon-gb"></span>
+            {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isFr" (click)="setLang('fr')"><span class="flag-icon flag-icon-fr"></span>
+              FR</button>
+            <button mat-menu-item *ngIf="!isFr" (click)="setLang('en')"><span class="flag-icon flag-icon-gb"></span>
+              EN</button>
+          </mat-menu>
+        </div>
+      </h4>
+
+
+
+      <div class="card-content">
+
+
+        <form [formGroup]="userForm" name="form" *ngIf="!signedup">
+
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <input required matInput type="text" name="firstName" formControlName="firstName"
+                      placeholder="{{ 'auth.signup.placeholder.firstName' | translate }}" [(ngModel)]="user.firstName">
+                    <mat-icon matSuffix class="material-icons">perm_identity</mat-icon>
+                    <mat-error *ngIf="userForm.hasError('required', 'firstName')">
+                      <span translate>auth.signup.errors.firstName</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <input required matInput type="text" name="lastName" formControlName="lastName"
+                      placeholder="{{ 'auth.signup.placeholder.lastName' | translate }}" [(ngModel)]="user.lastName">
+                    <mat-icon matSuffix class="material-icons">perm_identity</mat-icon>
+                    <mat-error *ngIf="userForm.hasError('required', 'lastName')">
+                      <span translate>auth.signup.errors.lastName</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <input pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
+                      placeholder="{{ 'auth.signup.placeholder.phone' | translate }}"  matInput name="phone"
+                      formControlName="phone" [(ngModel)]="user.phone">
+                    <mat-icon matSuffix class="material-icons">phone</mat-icon>
+                    <mat-error *ngIf="userForm.hasError('required', 'phone')">
+                      <span translate>auth.signup.errors.phone</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="col-sm-12 col-md-6">
+                <div class="form-group">
+                  <mat-form-field class="full-width" appearance="outline">
+                    <input required matInput type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"
+                      #email formControlName="email" placeholder="{{ 'auth.signup.placeholder.email' | translate }}"
+                      [(ngModel)]="user.email">
+                    <mat-icon matSuffix class="material-icons">mail_outline</mat-icon>
+                    <mat-error *ngIf="!userFormControls.email.errors?.pattern">
+                      <span translate>auth.signup.errors.emailValid</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="form-group">
+                  <mat-form-field class="full-width no-margin-bottom" appearance="outline">
+                    <input matInput type="password" name="password" formControlName="password"
+                      placeholder="{{ 'auth.signup.placeholder.password' | translate }}" [(ngModel)]="user.password"
+                      required>
+                    <mat-icon matSuffix class="material-icons">lock_outline</mat-icon>
+                    <mat-error *ngIf="userForm.hasError('required', 'password')">
+                      <span translate>auth.signup.errors.password</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                  <mat-form-field class="full-width no-margin-bottom" appearance="outline">
+                    <input matInput type="password" name="confirmPassword" formControlName="confirmPassword"
+                      placeholder="{{ 'auth.signup.placeholder.confirmPassword' | translate }}"
+                      [(ngModel)]="confirmPassword" [errorStateMatcher]="matcher" required>
+                    <mat-icon matSuffix class="material-icons">lock_outline</mat-icon>
+                    <mat-error *ngIf="userForm.hasError('notSame')">
+                      <span translate>auth.signup.errors.passwordMatch</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+
+          <div class="alert alert-danger" *ngIf="exists">
+            <span translate>auth.signup.errors.emailUnicity</span>
+          </div>
+          <div class="alert alert-danger" *ngIf="!validPhoneNumber">
+            <span translate>auth.signup.errors.phoneValid</span>
+          </div>
+
+          <button mat-raised-button type="submit" color="primary" class="float-right" style="background-color: #002659;"
+            (click)="signup()" [disabled]="userForm.invalid"><span translate
+              style="color: white;">auth.signup.btn</span></button>
+
+        </form>
+        <br>
+        <div style="text-align: center" class="alert alert-success" *ngIf="signedup">
+          <p translate>auth.signup.welcome2</p>
+        </div>
+        <br><br><br>
+        <div class="additional-info">
+          <span style="color: black; font-size: 12.5px;" translate>auth.signup.account</span>
+          <a [routerLink]="['/login']"><span
+              style="color: black; text-decoration: underline; font-weight: bold;font-size: 13.5px;"
+              translate>auth.signup.login</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="container" style="height:40vh;position: relative;overflow: hidden;overflow-y: scroll;">
+    <span style="position:absolute; top:0; right:0; cursor: pointer;">
+        <mat-icon (click)="dialogRef.close()">clear</mat-icon>
+    </span><br>
+    <h1 mat-dialog-title style="text-align: center"> <span translate>api.functions</span> </h1>
+    <hr>
+    <br>
+    <div     *ngIf="function">
+        <h4 style=" color:#002659 ; font-weight: bold;">Function:</h4>
+        <h3 style="margin-left:25px;"> - {{function.name}}-{{function.version}}</h3>
+    </div>
+
+    <div    *ngIf="!function && inFunction">
+        <h4 style="font-weight: bold;color:#002659 ">InFunction:</h4>
+        <h3 style="margin-left:25px;"> - {{inFunction.name}}-{{inFunction.version}}</h3>
+    </div>
+
+    <div *ngIf="!function && outFunction">
+        <h4 style="font-weight: bold; color:#002659">OutFunction:</h4>
+        <h3 style="margin-left:25px;"> - {{outFunction.name}}-{{outFunction.version}}</h3>
+    </div>
+
+    <div *ngIf="!function && !outFunction && !inFunction">
+        <h4 style="font-weight: bold;" translate>function.noFunction</h4>
+
+    </div>
+
+</div>

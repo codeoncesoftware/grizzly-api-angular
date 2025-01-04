@@ -1,0 +1,77 @@
+<app-loader></app-loader>
+<div class="divider divider-md">
+</div>
+<div class="page-wrap">
+    <div class="share-details-wrap">
+        <span class="share-details"><span translate>project.share</span>
+            {{data.project?.name}}</span>
+    </div>
+
+    <div class="container" style="height: auto;">
+
+
+        <div class="row">
+            <mat-form-field class="col-md-6">
+                <mat-label>Team</mat-label>
+                <input [(ngModel)]="teamName" matInput list="teams" name="team" #t autocomplete="off">
+                <datalist matNativeControl id="teams">
+                    <option *ngFor="let team of teams ; let i = index" [value]="team.name">{{team.name}}</option>
+                </datalist>
+            </mat-form-field>
+            <div class="col-md-6">
+                <div style="margin-left: -55px;padding-left: 12.7%;" class="row" style="display: table-cell;">
+                    <button matSuffix mat-raised-button class="btn-w-md mt-2" style="width: 40%;"
+                        (click)="addTeam(t.value)"><mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                            translate>popups.buttons.team</span>
+                    </button>
+                    <button style="margin-left: 8px;width: 54%;position: absolute;" matSuffix mat-raised-button  class="btn-w-md mt-2" 
+                        (click)="selectAllTeams()"><mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                            translate>popups.buttons.selectAll</span>
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+        <div *ngIf="teamsToAdd?.length === 0 && showNoUsers === true;">
+            <p translate>popups.microservice.errors.noUsers</p>
+        </div>
+        <div *ngIf="teamsToAdd?.length > 0">
+            <div style="height: 50%;">
+                <table class="mdl-data-table" style="width: 100%;">
+                    <thead>
+                        <tr *ngIf="teamsToAdd.length > 0">
+                            <th id="tableHead"><span translate>popups.buttons.team</span></th>
+                            <th id="tableHead">Membres</th>
+                            <th id="tableHead"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let team of teamsToAdd; let i = index">
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">{{team.name}} </td>
+                                <td class="mdl-data-table__cell--non-numeric">{{team.totalMembers}} </td>
+                                <td>
+                                    <button mat-button (click)="deleteTeam(i)">
+                                        <mat-icon>clear</mat-icon>
+                                    </button>
+                                </td>
+
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="divider divider-md"></div>
+    <div class="box-body text-right buttons">
+        <button mat-raised-button type="button" class="btn-w-md" (click)="dialogRef.close()">
+            <span translate>popups.buttons.cancel</span></button>
+        <span class="space"></span>
+        <button mat-raised-button type="button" color="#002659" class="btn-w-md" id="confirm" (click)="confirm()">
+            <span translate>popups.buttons.confirm</span></button>
+    </div>
+</div>

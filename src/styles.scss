@@ -1,0 +1,41 @@
+@import  "bootstrap/dist/css/bootstrap.min.css" ; 
+@import "~jsoneditor/dist/jsoneditor.min.css";
+@import '~codemirror/lib/codemirror.css';
+@import '~codemirror/theme/material.css';
+@import '~codemirror/addon/fold/foldgutter.css';
+@import '~codemirror/addon/lint/lint.css';
+@import "~codemirror/addon/hint/show-hint.css";
+
+.error {
+  text-align: left;
+  color: red;
+}
+
+.mat-horizontal-stepper-header-container {
+  background-color: #002659;
+  height: 40px !important;
+}
+
+.mat-step-header {
+  -webkit-text-fill-color: #fff;
+}
+
+.mat-stepper-horizontal-line {
+  border: 3px solid #fff;
+  border-radius: 50px;
+}
+
+.primaryColor {
+  color: #002659;
+}
+
+button.mat-primary {
+  background-color: #002659;
+}
+
+.hidden-modal {
+  opacity: 0;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

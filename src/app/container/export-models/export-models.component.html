@@ -1,0 +1,28 @@
+<div class="container-fluid" style="position: relative;">
+    <span class="closeBtn">
+        <button mat-button mat-dialog-close>
+            <mat-icon>clear</mat-icon> <span translate>api.close</span>
+        </button>
+    </span><br>
+    <h1 mat-dialog-title style="text-align: center" translate>swaggerModal.downloadTypescript</h1>
+
+    <div class="divider divider-md"></div>
+    <div>
+        <p style="margin-left: 10px;" translate>swaggerModal.exportOption</p>
+        <mat-selection-list #swaggerModels style="overflow-y: scroll;height:300px;">
+            <mat-list-option *ngFor="let model of container.endpointModels" (click)="addToDownload(model)" >
+            {{model.title}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        <div class="box-body text-right">
+            <button mat-raised-button [mat-dialog-close]="false">
+          <span translate>popups.buttons.cancel</span>
+        </button>
+            <span class="space"></span>
+            <button  mat-raised-button color="primary" [disabled]='swaggerModelsToDownload.length===0' (click)="downloadSTsFiles()">
+          <span translate>popups.buttons.download</span>
+        </button>
+        </div>
+    </div>
+</div>

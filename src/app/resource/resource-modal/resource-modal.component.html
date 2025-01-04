@@ -1,0 +1,1680 @@
+<div class="container-fluid" style="text-align: center;height:65vh;position: relative;">
+    <span style="position:absolute; top:0; right:10px;">
+        <button mat-button (click)="resourceDialogRef.close()">
+            <mat-icon>clear</mat-icon> <span translate>api.cancel</span>
+        </button>
+    </span>
+    <h2 style="margin-top: 10px;">
+        <span *ngIf="!editMode" translate>api.add</span>
+        <span *ngIf="editMode" translate>api.edit</span>
+    </h2>
+
+    <div class="row" style="position:relative;">
+        <div class="col-md-12" style="overflow-y: auto">
+            <!-- Wizard Section START -->
+            <mat-horizontal-stepper #stepper linear="false" style="height: 70vh;">
+                <div class="divider divider-md"></div>
+                <mat-step [stepControl]="secondFormGroup">
+
+                    <ng-template matStepLabel><span translate>api.definition</span></ng-template>
+                    <div class="divider divider-md"></div>
+                    <div class="" style="height: 50vh; overflow-y: auto;">
+                        <form [formGroup]="secondFormGroup" style="text-align: left ; margin-top: 10px;">
+                            <div class="">
+                                <div *ngIf="project.type !== 'microservice' && !this.data.editorMode"
+                                    style="padding-bottom:20px;">
+                                    <span>
+                                        <strong><span translate>api.type</span> <span class="space"></span> : <span
+                                                class="space"></span>
+                                        </strong>
+                                    </span>
+                                    <span class="space"></span>
+                                    <span class="space"></span>
+                                    <span class="space"></span>
+
+                                    <mat-radio-group layout="row" aria-label="Select an option"
+                                        formControlName="executionType" [(ngModel)]="resource.executionType"
+                                        name="executionType">
+                                        <mat-radio-button style="padding-right: 10px" value="Query"><span
+                                                translate>api.query</span>
+                                        </mat-radio-button>
+                                        <mat-radio-button style="padding-right: 10px" value="XSL">XSL</mat-radio-button>
+                                        <mat-radio-button style="padding-right: 10px" value="Thymeleaf">Thymeleaf
+                                        </mat-radio-button>
+                                        <mat-radio-button style="padding-right: 10px" value="FreeMarker">FreeMarker
+                                        </mat-radio-button>
+                                        <mat-radio-button style="padding-right: 10px" value="File"><span
+                                                translate>api.fichier</span>
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+
+                                <mat-form-field appearance="outline"  style="width: 20%">
+                                    <mat-label>{{ 'api.placeholder.http' | translate }}</mat-label>
+                                    <mat-select (selectionChange)="checkPath()" matNativeControl
+                                        formControlName="httpMethod" [(ngModel)]="resource.httpMethod" name="httpMethod"
+                                        required>
+                                        <mat-option value="POST">POST</mat-option>
+                                        <mat-option value="GET">GET</mat-option>
+                                        <mat-option value="PUT">PUT</mat-option>
+                                        <mat-option value="DELETE">DELETE</mat-option>
+                                        <mat-option value="PATCH">PATCH</mat-option>
+                                    </mat-select>
+                                </mat-form-field  >
+                                <mat-form-field appearance="outline"  style="width: 70%; margin-left: 10px;">
+                                    <mat-label> {{ 'api.placeholder.endpoint' | translate }} </mat-label>
+                                    <input matInput formControlName="pathName" (keyup)="onInput()"
+                                        [(ngModel)]="resource.path" (blur)="getPathParams($event.target.value)"
+                                        name="resourcePath" required>
+                                    <!-- Tooltip -->
+                                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                        matTooltipClass="test" matTooltip="{{ 'help.apiPath' | translate }}">
+                                        info
+                                    </mat-icon>
+
+                                </mat-form-field  >
+
+
+
+
+
+
+                                <!-- File Name To Upload, this Field will be used in HTTP Calls -->
+                                <mat-form-field appearance="outline"  style="width: 100%"
+                                    *ngIf="resource.httpMethod !== 'GET' && resource.httpMethod !== 'DELETE' && resource.executionType === 'File'">
+                                    <input matInput formControlName="fileNameForUpload" [(ngModel)]="fileNameForUpload"
+                                        placeholder="{{'api.placeholder.fname' |translate}}" name="resourcePath">
+                                    <!-- Tooltip -->
+                                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                        matTooltipClass="test" matTooltip="{{ 'help.fileName' | translate }}">
+                                        info
+                                    </mat-icon>
+                                </mat-form-field  >
+
+                                <div *ngIf="!apiUnicity" style="color: red">
+                                    <span translate>api.under</span>
+                                </div>
+                                <div *ngIf="emptyPath" style="color: red">
+                                    <span translate>api.emptyPath</span>
+                                </div>
+
+                                <div
+                                    *ngIf="(resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE') && resource.executionType === 'File'">
+                                    <div class="divider divider-md"></div>
+                                    <div *ngIf="resource.httpMethod === 'GET'">
+                                        <mat-radio-group aria-label="Select an option" formControlName="many"
+                                            [(ngModel)]="resource.customQuery.many" name="many">
+                                            <mat-radio-button [value]="false"><span translate>api.one</span>
+                                            </mat-radio-button>&nbsp;
+                                            <mat-radio-button [value]="true"><span translate>api.many</span>
+                                            </mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                    <div class="divider divider-md"></div>
+                                    <mat-card>
+                                        <p style="width: 100%; text-align: left">
+                                            <span translate>api.in</span> <span
+                                                style="color: #b00; font-weight: 700">id</span> <span
+                                                translate>api.htt</span>
+                                        </p>
+                                    </mat-card>
+                                    <div class="divider divider-md"></div>
+                                </div>
+
+                                <div
+                                    *ngIf="resource.executionType === 'Query' && resource.httpMethod === 'GET' && ( provider === 'MONGO' || type === 'sql')">
+                                    <div style="overflow: hidden">
+                                        <div class="row">
+                                            <div class="container-fluid" style="text-align: left">
+                                                <mat-slide-toggle style="margin-top:5px;font-size: 12px;float: left"
+                                                    [checked]="resource.pageable" (change)="checkPageable()">
+                                                    <span translate>api.page</span>
+                                                </mat-slide-toggle>
+                                                <div class="divider divider-md"></div>
+                                                <div *ngIf="resource.pageable">
+                                                    <p><span translate>api.please</span></p>
+                                                    <ul>
+                                                        <li><strong>pageNumber</strong><span translate>api.hold</span>
+                                                        </li>
+                                                        <li><strong>pageSize</strong><span translate>api.per </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="divider divider-md"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <div style="margin-top: 2%;">
+                            <div style="text-align: left">
+
+                                <strong><span translate>api.parameters</span></strong>
+                                <span class="space"></span>
+                                <!-- Tooltip -->
+                                <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                    [matTooltip]="paramsInfos">
+                                    info
+                                </mat-icon>
+                                <button style="margin-left: 2%;" matSuffix mat-raised-button color="primary"
+                                    (click)="openPramsModal()">
+                                    <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                        translate>api.addParams</span>
+                                </button>
+                                <p *ngIf="resource.executionType !== 'Query'">
+                                    <span translate>container.transformationDesc</span>
+                                </p>
+                                <p></p>
+                                <div *ngIf="parameters?.length > 0  ">
+                                    <br />
+                                    <div style="height: 50%;width:100%;">
+                                        <table class="mdl-data-table"
+                                            style="width: 100%;overflow-y: auto; float: left;">
+                                            <thead>
+                                                <tr *ngIf="parameters.length > 0">
+                                                    <th id="tableHead">In</th>
+                                                    <th id="tableHead"><span translate>api.placeholder.name</span></th>
+                                                    <th id="tableHead">Type</th>
+                                                    <th id="tableHead"><span translate>api.required</span></th>
+                                                    <th id="tableHead"><span translate>api.placeholder.default</span>
+                                                    </th>
+                                                    <th id="tableHead"><span translate>Enum Values</span></th>
+                                                    <th id="tableHead">Description</th>
+                                                    <th style="text-align: center;" id="tableHead">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <ng-container *ngFor="let param of parameters; let i = index"
+                                                    class="col-md-12">
+                                                    <tr>
+                                                        <td class="mdl-data-table__cell--non-numeric"
+                                                            style="width: 6%;">{{ param?.in }} </td>
+                                                        <td class="mdl-data-table__cell--non-numeric"
+                                                            style="width: 8%;">{{ param?.name }}
+                                                        </td>
+                                                        <td class="mdl-data-table__cell--non-numeric"
+                                                            style="width: 8%;">{{ param?.type }}
+                                                        </td>
+                                                        <td class="mdl-data-table__cell--non-numeric"
+                                                            style="width: 5%;">{{ param?.required }}
+                                                        </td>
+                                                        <td class="mdl-data-table__cell--non-numeric box-size"
+                                                            style="width: 10%;">
+                                                            <span>{{param.value}}</span>
+                                                        </td>
+                                                        <td class="mdl-data-table__cell--non-numeric box-size"
+                                                            style="width: 20%;">
+                                                            <span>{{getEnumValues(param?.enums)}}</span>
+                                                        </td>
+                                                        <td class="mdl-data-table__cell--non-numeric box-size"
+                                                            style="width: 25%;">
+                                                            <span>{{param.description}}</span>
+                                                        </td>
+
+                                                        <td style="text-align: center;"
+                                                            class="mdl-data-table__cell--non-numeric box-size">
+                                                            <div style=" display: table-cell;width: 40%;">
+                                                                <button
+                                                                    *ngIf="param?.in !== 'Body' && (!(param?.name==='pageSize' && param?.required===true) && !(param?.name==='pageNumber'&& param?.required===true)) "
+                                                                    mat-button (click)="deleteParam(i)">
+                                                                    <em class="material-icons">
+                                                                        delete_outline
+                                                                    </em></button>
+                                                                <button
+                                                                    *ngIf="(!(param?.name==='pageSize' && param?.required===true) && !(param?.name==='pageNumber'&& param?.required===true))"
+                                                                    [ngStyle]="{'margin-left' : param?.in !== 'Body' ? ' -15px' : '0px'}"
+                                                                    mat-button (click)="editParam(param)">
+                                                                    <em class="material-icons">
+                                                                        edit
+                                                                    </em></button>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-step>
+
+                <!-- File Selection Section START -->
+                <mat-step *ngIf="resource.executionType !== 'Query' && resource.executionType != 'File'"
+                    style="height: 80vh; overflow-y: auto">
+                    <ng-template matStepLabel>
+                        <span translate>api.templateStep</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+
+                    <div style="height: 50vh; overflow-y: auto">
+
+
+                        <div class="container-fluid">
+
+                            <p style="text-align: left">
+                                <span translate>api.resources</span>
+                            </p>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+                                    <h5>
+                                        <span translate>api.template</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.primaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('primary')">Select</button>
+                                    </h5>
+                                    <p *ngIf="!resource.resourceFile?.fileUri">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <p *ngIf="resource.resourceFile?.fileUri">
+                                        {{ resource.resourceFile.fileUri }}
+                                        <button mat-button (click)="unSelectFile(file, 'primary')">
+                                            <em class="material-icons">
+                                                delete_outline
+                                            </em>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+
+                                    <h5>
+                                        <span translate>api.staticRes</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.secondaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('secondary')">Select</button>
+
+                                    </h5>
+
+                                    <p *ngIf="resource.secondaryFilePaths.length === 0">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <div *ngIf="resource.secondaryFilePaths">
+                                        <p *ngFor="let file of resource.secondaryFilePaths">
+                                            {{ file.fileUri }}
+                                            <button mat-button (click)="unSelectFile(file, 'secondary')">
+                                                <em class="material-icons">
+                                                    delete_outline
+                                                </em>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </mat-step>
+
+                <!-- File Selection Section START -->
+                <mat-step *ngIf="resource.executionType !== 'Query' && resource.executionType != 'File'"
+                    style="height: 80vh; overflow-y: auto">
+                    <ng-template matStepLabel>
+                        <span translate>api.templateStep</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+
+                    <div style="height: 50vh; overflow-y: auto">
+
+
+                        <div class="container-fluid">
+
+                            <p style="text-align: left">
+                                <span translate>api.resources</span>
+                            </p>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+                                    <h5>
+                                        <span translate>api.template</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.primaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('primary')">Select</button>
+                                    </h5>
+                                    <p *ngIf="!resource.resourceFile?.fileUri">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <p *ngIf="resource.resourceFile?.fileUri">
+                                        {{ resource.resourceFile.fileUri }}
+                                        <button mat-button (click)="unSelectFile(file, 'primary')">
+                                            <em class="material-icons">
+                                                delete_outline
+                                            </em>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+
+                                    <h5>
+                                        <span translate>api.staticRes</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.secondaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('secondary')">Select</button>
+
+                                    </h5>
+
+                                    <p *ngIf="resource.secondaryFilePaths.length === 0">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <div *ngIf="resource.secondaryFilePaths">
+                                        <p *ngFor="let file of resource.secondaryFilePaths">
+                                            {{ file.fileUri }}
+                                            <button mat-button (click)="unSelectFile(file, 'secondary')">
+                                                <em class="material-icons">
+                                                    delete_outline
+                                                </em>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-step>
+
+                <!-- Request Response Step -->
+                <mat-step style="text-align: left">
+                    <ng-template matStepLabel>
+                        <span translate>api.resDetails</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+                    <div style="height: 80vh; overflow-y: auto; overflow-x: hidden">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline"  style="width: 100%;">
+                                    <mat-label>{{ 'api.placeholder.request' | translate }}</mat-label>
+                                    <mat-select matNativeControl (selectionChange)="addToConsumes($event.value)">
+                                        <mat-option value="application/json">application/json</mat-option>
+                                        <mat-option value="application/xml">application/xml</mat-option>
+                                        <mat-option value="multipart/form-data">multipart/form-data</mat-option>
+                                        <mat-option value="text/plain">text/plain</mat-option>
+                                        <mat-option value="text/xml">text/xml</mat-option>
+                                        <mat-option value="text/html">text/html</mat-option>
+                                    </mat-select>
+                                    <!-- Tooltip -->
+                                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                        matTooltipClass="test" matTooltip="{{ 'help.contentTypeReq' | translate }}">
+                                        info
+                                    </mat-icon>
+
+                                </mat-form-field  >
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline"  style="width: 100%;">
+                                    <mat-label>{{ 'api.placeholder.response' | translate }}</mat-label>
+                                    <mat-select matNativeControl (selectionChange)="addToProduces($event.value)">
+                                        <mat-option value="application/json">application/json</mat-option>
+                                        <mat-option value="application/xml">application/xml</mat-option>
+                                        <mat-option value="multipart/form-data">multipart/form-data</mat-option>
+                                        <mat-option value="text/plain">text/plain</mat-option>
+                                        <mat-option value="text/xml">text/xml</mat-option>
+                                        <mat-option value="text/html">text/html</mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                        matTooltipClass="test" matTooltip="{{ 'help.contentTypeRes' | translate }}">
+                                        info
+                                    </mat-icon>
+                                </mat-form-field  >
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-chip-listbox #chipList>
+                                    <mat-chip-option style="background-color: #357EC7;color: white;"
+                                        *ngFor="let value of resource.consumes" [selectable]="selectable"
+                                        [removable]="removable" (removed)="remove(value)">
+                                        {{value}}
+                                        <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel
+                                        </mat-icon>
+                                    </mat-chip-option>
+                                </mat-chip-listbox>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-chip-listbox #chipList>
+                                    <mat-chip-option style="background-color: #357EC7;color: white;"
+                                        *ngFor="let value of resource.produces" [selectable]="selectable"
+                                        [removable]="removable" (removed)="removeValue(value)">
+                                        {{value}}
+                                        <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel
+                                        </mat-icon>
+                                    </mat-chip-option>
+                                </mat-chip-listbox>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-4"
+                                *ngIf="resource.executionType === 'Query' && provider === 'ELASTICSEARCH' && resource.httpMethod !== 'GET' && resource.httpMethod !== 'DELETE'">
+                                <p style="text-align: left">
+                                    <strong translate>popups.resource.index</strong>
+                                </p>
+                                <div>
+                                    <mat-form-field appearance="outline"  style="width: 100%;">
+                                        <mat-label><span translate>popups.resource.index</span></mat-label>
+                                        <!-- Tooltip -->
+                                        <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                            matTooltipClass="test" matTooltip="Index Type">
+                                            info
+                                        </mat-icon>
+                                        <mat-label> {{ 'api.placeholder.endpoint' | translate }} </mat-label>
+                                        <input matInput [(ngModel)]="resource.customQuery.indexType" name="indexType"
+                                            required>
+                                    </mat-form-field  >
+                                </div>
+                            </div>
+
+                            <div [ngClass]="provider === 'ELASTICSEARCH' ? 'col-md-4' : 'col-md-6'"
+                                *ngIf="resource.executionType === 'Query'">
+                                <p style="text-align: left">
+                                    <strong translate>api.requestNumber</strong>
+                                </p>
+                                <div>
+                                    <mat-form-field appearance="outline"  style="width: 100%;">
+                                        <mat-label><span translate>api.requestElementNumber</span></mat-label>
+                                        <!-- Tooltip -->
+                                        <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                            matTooltipClass="test" matTooltip="{{ 'help.reqNumber' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        <mat-select aria-label="Select an option"
+                                            [(ngModel)]="resource.customQuery.requestMany" name="requestMany">
+                                            <mat-option [value]="false"><span translate>api.one</span></mat-option>
+                                            <mat-option [value]="true"><span translate>api.many</span></mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field  >
+                                </div>
+                            </div>
+                            <div [ngClass]="provider === 'ELASTICSEARCH' ? 'col-md-4' : 'col-md-6'"
+                                *ngIf="resource.executionType === 'Query'">
+                                <p style="text-align: left">
+                                    <strong translate>api.returnNumber</strong>
+                                </p>
+                                <div>
+                                    <mat-form-field appearance="outline"  style="width: 100%;">
+                                        <mat-label><span translate>api.returnElementNumber</span></mat-label>
+                                        <!-- Tooltip -->
+                                        <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                            matTooltipClass="test" matTooltip="{{ 'help.resNumber' | translate }}">
+                                            info
+                                        </mat-icon>
+
+                                        <mat-select aria-label="Select an option"
+                                            [(ngModel)]="resource.customQuery.many" name="many">
+                                            <mat-option [value]="false"><span translate>api.one</span></mat-option>
+                                            <mat-option [value]="true"><span translate>api.many</span></mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field  >
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p style="text-align: left">
+                                    <strong translate>api.requestModel</strong>
+                                </p>
+                                <div class="row">
+                                    <mat-form-field appearance="outline" 
+                                        [ngClass]="(showRequestEditor === true  || reqModel ===null) ? 'col-md-8' : 'col-md-6'"
+                                        style="width: 100%;">
+                                        <mat-label>
+                                            <span *ngIf="containerToSave.endpointModels?.length > 0"
+                                                translate>api.placeholder.selectModel</span>
+                                            <span *ngIf="containerToSave.endpointModels?.length === 0"
+                                                translate>api.placeholder.noModel</span>
+                                        </mat-label>
+                                        <!-- Tooltip -->
+                                        <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                            matTooltipClass="test" matTooltip="{{ 'help.requestModel' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        <mat-select [disabled]="containerToSave.endpointModels?.length === 0"
+                                            matNativeControl name="reqModel"
+                                            (selectionChange)="addRequestModel($event.value)" [(ngModel)]="reqModel">
+                                            <mat-option value=null></mat-option>
+                                            <mat-option *ngFor="let model of containerToSave.endpointModels"
+                                                [value]="model.title">
+                                                {{ model.title }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field  >
+                                    <button *ngIf="!showRequestEditor && reqModel !== null" class="col-md-3" matSuffix
+                                        mat-raised-button color="primary"
+                                        style="float: right;height: 50%;margin-left: 25px; height: 43px;"
+                                        (click)="viewRequestModel()">
+                                        <mat-icon class="material-icons">remove_red_eye</mat-icon>&nbsp; <span
+                                            translate>api.view</span>
+                                    </button>&nbsp;
+                                    <button *ngIf="!showRequestEditor" class="col-md-2" matSuffix mat-raised-button
+                                        color="primary" style="float: right;width: 100%;height: 43px;"
+                                        (click)="toggleRequestEditor()"
+                                        matTooltip="{{ 'editor.btn.addModelTootlip' | translate }}">
+                                        <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                            translate>api.ad</span>
+                                    </button>
+                                    <button *ngIf="showRequestEditor" class="col-md-3 btn-md" matSuffix
+                                        mat-raised-button color="primary"
+                                        style="float: right;width: 100%;height: 43px;margin-left: 2%;"
+                                        (click)="toggleRequestEditor()">
+                                        <mat-icon class="material-icons">cancel</mat-icon>&nbsp; <span
+                                            translate>api.exitEditor</span>
+                                    </button>
+                                </div>
+                                <div *ngIf="requestModelError" class="row">
+                                    <div class="col-md-12">
+                                        <p style="color: red;text-align: left" translate>resource.responseError</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <p style="text-align: left">
+                                    <strong translate>api.responseModel</strong>
+                                </p>
+                                <div class="row">
+                                    <mat-form-field appearance="outline" 
+                                        [ngClass]="(showResponseEditor === true || respModel === null ) ? 'col-md-8' : 'col-md-6'"
+                                        style="width: 100%;">
+                                        <mat-label>
+                                            <span *ngIf="containerToSave.endpointModels?.length > 0"
+                                                translate>api.placeholder.selectModel</span>
+                                            <span *ngIf="containerToSave.endpointModels?.length === 0"
+                                                translate>api.placeholder.noModel</span>
+                                        </mat-label>
+                                        <!-- Tooltip -->
+                                        <mat-icon matSuffix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                            matTooltipClass="test" matTooltip="{{ 'help.responseModel' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        <mat-select [disabled]="containerToSave.endpointModels?.length === 0"
+                                            matNativeControl name="respModel"
+                                            (selectionChange)="addResponseModel($event.value)" [(ngModel)]="respModel">
+                                            <mat-option value=null></mat-option>
+                                            <mat-option *ngFor="let model of containerToSave.endpointModels"
+                                                [value]="model.title">
+                                                {{ model.title }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field  >
+                                    <button *ngIf="!showResponseEditor  && respModel !== null" class="col-md-3"
+                                        matSuffix mat-raised-button color="primary"
+                                        style="float: right;height: 50%;margin-left: 25px; height: 43px;"
+                                        (click)="viewResponseModel()">
+                                        <mat-icon class="material-icons">remove_red_eye</mat-icon>&nbsp; <span
+                                            translate>api.view</span>
+                                    </button>&nbsp;
+
+                                    <button matTooltip="{{ 'editor.btn.addModelTootlip' | translate }}"
+                                        *ngIf="!showResponseEditor" class="col-md-2" matSuffix mat-raised-button
+                                        color="primary" style="float: right;width: 100%;height: 43px;"
+                                        (click)="toggleResponseEditor()">
+                                        <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                            translate>api.ad</span>
+                                    </button>
+
+                                    <button *ngIf="showResponseEditor" class="col-md-3 btn-md" matSuffix
+                                        mat-raised-button color="primary"
+                                        style="float: right;width: 100%;height: 43px;;margin-left: 2%;"
+                                        (click)="toggleResponseEditor()">
+                                        <mat-icon class="material-icons">cancel</mat-icon>&nbsp; <span
+                                            translate>api.exitEditor</span>
+                                    </button>
+                                </div>
+                                <div *ngIf="responseModelError" class="row">
+                                    <div class="col-md-12">
+                                        <p style="color: red;text-align: left" translate>resource.responseError</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row" *ngIf="showRequestEditor">
+                                    <div class="col-md-7">
+                                        <span *ngIf="requestMode !== 'edit' && !showTables">
+                                            <p class="mt-1" style="float: left;font-weight: bold;"><span
+                                                    translate>popups.model.tsIndication</span></p>
+                                        </span>
+                                        <span *ngIf="requestMode === 'edit' && !showTables">
+                                            <p class="mt-1" style="float: left;font-weight: bold;"><span
+                                                    translate>popups.model.tsEditIndication</span></p>
+                                        </span>
+                                        <mat-form-field appearance="outline"  style="width: 115%;" *ngIf="showTables && requestMode!=='edit'">
+                                            <mat-label>
+                                                <span *ngIf="containerToSave.endpointModels?.length > 0"
+                                                    translate>Choose Table</span>
+                                                <span *ngIf="containerToSave.endpointModels?.length === 0"
+                                                    translate>api.placeholder.noModel</span>
+                                            </mat-label>
+                                            <mat-icon matSuffix
+                                                style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                matTooltipClass="test"
+                                                matTooltip="{{ 'help.responseModel' | translate }}">
+                                                info
+                                            </mat-icon>
+                                            <mat-select [disabled]="collectionsList?.length === 0" matNativeControl
+                                                name="reqTable"
+                                                (selectionChange)="generateModelFromTable($event.value , 'req')">
+                                                <mat-option *ngFor="let table of collectionsList" [value]="table">
+                                                    {{ table }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field  >
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span class="btn-group" style="float:right">
+                                            <button *ngIf="type === 'sql' && requestMode !== 'edit'"
+                                                matTooltip="{{ 'editor.btn.importTooltip' | translate }}"
+                                                (click)="getTablesToModel()" mat-button>
+                                                <mat-icon>table_chart</mat-icon>
+                                            </button>
+                                            <button matTooltip="{{ 'editor.btn.importTooltip' | translate }}"
+                                                (click)="requestModelFile.click()" mat-icon-button>
+                                                <mat-icon>cloud_upload</mat-icon>
+                                            </button>
+                                            <button matTooltip="{{ 'editor.btn.saveTooltip' | translate }}"
+                                                (click)="saveModel('request')" mat-icon-button>
+                                                <mat-icon>save</mat-icon>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="showRequestEditor">
+                                    <ngx-codemirror #editor style="width: 95%;" class="mt-1" scrollTo
+                                        [(ngModel)]="requestModel" [options]="{
+                              lineNumbers: true,
+                              theme: 'material',
+                              mode: 'javascript',
+                              lineWrapping: false,
+                              foldGutter: true,
+                              gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                              autoCloseBrackets: true,
+                              matchBrackets: true
+                            }"></ngx-codemirror>
+
+                                    <input #requestModelFile type="file" name="file" [style.display]="'none'"
+                                        (change)="importRequestModel()" ng2FileSelect [uploader]="requestUploader">
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row" *ngIf="showResponseEditor">
+                                    <div class="col-md-7">
+                                        <span *ngIf="responseMode !== 'edit' && !showRespTables">
+                                            <p class="mt-1" style="float: left;font-weight: bold;"><span
+                                                    translate>popups.model.tsIndication</span></p>
+                                        </span>
+                                        <span *ngIf="responseMode === 'edit' && !showRespTables">
+                                            <p class="mt-1" style="float: left;font-weight: bold;"><span
+                                                    translate>popups.model.tsEditIndication</span></p>
+                                        </span>
+                                        <mat-form-field appearance="outline"  style="width: 115%;"
+                                            *ngIf="showRespTables && responseMode !== 'edit'">
+                                            <mat-label>
+                                                <span *ngIf="containerToSave.endpointModels?.length > 0"
+                                                    translate>Choose Table</span>
+                                                <span *ngIf="containerToSave.endpointModels?.length === 0"
+                                                    translate>api.placeholder.noModel</span>
+                                            </mat-label>
+                                            <mat-icon matSuffix
+                                                style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                matTooltipClass="test"
+                                                matTooltip="{{ 'help.responseModel' | translate }}">
+                                                info
+                                            </mat-icon>
+                                            <mat-select [disabled]="collectionsList?.length === 0" matNativeControl
+                                                name="respTable"
+                                                (selectionChange)="generateModelFromTable($event.value , 'resp')">
+                                                <mat-option *ngFor="let table of collectionsList" [value]="table">
+                                                    {{ table }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field  >
+                                    </div>
+                                    <div class="col-md-5">
+                                        <span class="btn-group" style="float:right">
+                                            <button *ngIf="type === 'sql' && responseMode !== 'edit'"
+                                                matTooltip="{{ 'editor.btn.importTooltip' | translate }}"
+                                                (click)="getTablesToModelResp()" mat-button>
+                                                <mat-icon>table_chart</mat-icon>
+                                            </button>
+                                            <button matTooltip="{{ 'editor.btn.importTooltip' | translate }}"
+                                                (click)="reponseModelFile.click()" mat-icon-button>
+                                                <mat-icon>cloud_upload</mat-icon>
+                                            </button>
+                                            <button matTooltip="{{ 'editor.btn.saveTooltip' | translate }}"
+                                                (click)="saveModel('response')" mat-icon-button>
+                                                <mat-icon>save</mat-icon>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="showResponseEditor">
+                                    <ngx-codemirror #editor style="width: 95%;" class="mt-1" scrollTo
+                                        [(ngModel)]="responseModel" [options]="{
+                              lineNumbers: true,
+                              theme: 'material',
+                              mode: 'javascript',
+                              lineWrapping: false,
+                              foldGutter: true,
+                              gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                              autoCloseBrackets: true,
+                              matchBrackets: true
+                            }"></ngx-codemirror>
+
+                                    <input #requestModelFile type="file" name="file" [style.display]="'none'"
+                                        (change)="importResponseModel()" ng2FileSelect [uploader]="requestUploader">
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </mat-step>
+
+                <!-- Query Definition -->
+                <mat-step style="height: 50vh; overflow-y: auto; overflow-x: hidden;"
+                    *ngIf="!this.data.editorMode && resource?.executionType !== 'File' && resource?.executionType === 'Query'">
+                    <ng-template matStepLabel>
+                        <span translate>api.reqDetails</span>
+                    </ng-template>
+
+
+                    <div class="mongo-query" *ngIf="provider !== 'COUCHDB' && type !=='sql'">
+                        <div style="height: 50vh; overflow-y: auto;  overflow-x: hidden;">
+                            <div *ngIf="resource.executionType === 'Query'">
+                                <div class="row mt-2">
+                                    <div [ngClass]="provider === 'ELASTICSEARCH' ? 'col-md-4' : 'col-md-6'"
+                                        style="text-align: left;"
+                                        *ngIf="(resource.httpMethod) && resource.executionType === 'Query'">
+                                        <p>
+                                            <strong translate>query-api-modal.reqType</strong>
+                                            <!-- Tooltip -->
+                                        </p>
+                                        <mat-form-field appearance="outline"  style="width: 100%; vertical-align: text-top">
+                                            <mat-label>
+                                                <span *ngIf="resource.httpMethod !== 'GET'"
+                                                    translate>api.insertUpdate</span>
+                                                <span *ngIf="resource.httpMethod === 'GET'" translate>api.read</span>
+                                            </mat-label>
+                                            <mat-icon matSuffix
+                                                style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                matTooltipClass="test" matTooltip="{{ 'help.reqType' | translate }}">
+                                                info
+                                            </mat-icon>
+                                            <mat-select matNativeControl [(ngModel)]="queryType" name="queryType">
+                                                <mat-option
+                                                    *ngIf="resource.httpMethod !== 'GET' && resource.httpMethod !== 'DELETE'"
+                                                    value="Insert"><span translate>api.insertData</span>
+                                                </mat-option>
+                                                <mat-option
+                                                    *ngIf="resource.httpMethod !== 'GET'&& resource.httpMethod !== 'DELETE'"
+                                                    value="Update"><span translate>api.updateData</span>
+                                                </mat-option>
+                                                <mat-option
+                                                    *ngIf="resource.httpMethod === 'GET' || resource.httpMethod === 'POST'"
+                                                    value="Read"><span translate>api.readData</span>
+                                                </mat-option>
+                                                <mat-option *ngIf="resource.httpMethod === 'DELETE'" value="Delete">
+                                                    <span translate>api.deleteData</span>
+                                                </mat-option>
+                                                <mat-option value="Execute"><span translate>api.function</span>
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field  >
+                                    </div>
+                                    <div class="col-md-5">
+                                        <p style="text-align: left">
+                                            <strong translate
+                                                *ngIf="provider === 'MONGO' && queryType !== 'Execute'">api.placeholder.collection</strong>
+                                            <strong translate
+                                                *ngIf="provider === 'ELASTICSEARCH' && queryType !== 'Execute'">Index</strong>
+                                            <strong translate *ngIf="queryType === 'Execute'">Function</strong>
+
+                                        </p>
+                                        <div class="row">
+                                            <div style="width: 100%;"
+                                                [ngClass]="{  'col-md-8':(resource.httpMethod && queryType !== 'Execute' ) ,  'col-md-12': queryType === 'Execute'  }">
+
+                                                <mat-form-field appearance="outline"  *ngIf=" queryType !== 'Execute'" style="width: 100%;">
+                                                    <mat-label>
+                                                        <span translate
+                                                            *ngIf="provider === 'MONGO' ">api.placeholder.selectCollection</span>
+                                                        <span translate
+                                                            *ngIf="provider === 'ELASTICSEARCH'">api.placeholder.selectIndex</span>
+
+                                                    </mat-label>
+
+                                                    <!-- Tooltip -->
+                                                    <mat-icon matSuffix
+                                                        style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                        matTooltipClass="test"
+                                                        matTooltip="{{ 'help.collection' | translate }}">
+                                                        info
+                                                    </mat-icon>
+
+                                                    <mat-select class=" col-md " *ngIf="!addCollectionBool"
+                                                        (selectionChange)="checkCollection($event.value)"
+                                                        matNativeControl name="collection" required
+                                                        [(ngModel)]="resource.customQuery.collectionName">
+                                                        <mat-option disabled hidden [value]=""
+                                                            *ngIf="!resource.customQuery.collectionName">-- select --
+                                                        </mat-option>
+                                                        <mat-option *ngFor="let collection of collectionsList"
+                                                            [value]="collection">{{ collection }}
+                                                        </mat-option>
+                                                    </mat-select>
+
+                                                    <div class="col-md-7" *ngIf=" queryType === 'Execute' ">
+
+                                                        <mat-select (selectionChange)="selectFunction($event)"
+                                                            class="col-md-9" matNativeControl placeholder="select"
+                                                            name="function" required [(ngModel)]="function">
+
+                                                            <mat-option *ngFor="let function of allFunctions"
+                                                                [value]="function">{{function.name }}-{{function.version
+                                                                }}
+                                                            </mat-option>
+                                                        </mat-select>
+
+
+                                                        <button matSuffix mat-raised-button color="primary"
+                                                            *ngIf="function && showFunction==false"
+                                                            (click)="viewFunction()">
+                                                            <mat-icon class="material-icons">remove_red_eye
+                                                            </mat-icon>&nbsp;
+                                                            <span translate>api.viewFunction</span>
+                                                        </button>&nbsp;
+
+                                                    </div>
+
+
+
+                                                    <input matInput type="text" [(ngModel)]="newCollectionName"
+                                                        #newCollection
+                                                        placeholder="{{'api.placeholder.collection' |translate}}"
+                                                        name="newCollection" *ngIf="addCollectionBool ">
+                                                </mat-form-field  >
+                                                <mat-error class="postAndPut"
+                                                    *ngIf="emptyCollection && queryType !== 'Execute'">
+                                                    <span translate>api.emptyCollection</span>
+                                                    <br>
+                                                </mat-error>
+
+
+
+                                                <div class="col-md" *ngIf=" queryType === 'Execute' ">
+
+                                                    <div class="row">
+
+
+
+                                                        <div style="width: 100%;"
+                                                            [ngClass]="{  'col-md-8':(function && function.language!== 'AWS Lambda' ) ,  'col-md-12':(function && function.language=== 'AWS Lambda' ) ,'col-md-12': (function===null || function=== undefined )  }">
+                                                            <mat-form-field appearance="outline"  *ngIf=" queryType === 'Execute'"
+                                                                style="width: 100%;">
+                                                                <mat-label>
+                                                                    <span translate>api.placeholder.selectFunction
+                                                                    </span>
+                                                                </mat-label>
+                                                                <mat-select (selectionChange)="selectFunction($event)"
+                                                                    matNativeControl placeholder="select"
+                                                                    name="function" required [(ngModel)]="function">
+                                                                    <form autocomplete="off" class="example-form">
+                                                                        <mat-form-field appearance="outline"  style="width: 100%;"
+                                                                            class="example-full-width"
+                                                                            appearance="fill">
+                                                                            <input [ngModelOptions]="{standalone:true}"
+                                                                                [(ngModel)]="searchTxt" matInput
+                                                                                placeholder="Search">
+                                                                        </mat-form-field  >
+                                                                    </form>
+                                                                    <mat-option name="search"
+                                                                        *ngFor="let function of allFunctions | search : searchTxt "
+                                                                        [value]="function">{{function.name
+                                                                        }}-{{function.version }}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                            </mat-form-field  >
+
+                                                        </div>
+
+
+                                                        <div *ngIf="function && function.language!== 'AWS Lambda' && showFunction==false"
+                                                            class="col-md-3">
+                                                            <button matSuffix mat-raised-button color="primary" style="width: max-content;"
+                                                                (click)="viewFunction()">
+                                                                <mat-icon class="material-icons">remove_red_eye
+                                                                </mat-icon>&nbsp;
+                                                                <span translate>api.viewFunction</span>
+                                                            </button>&nbsp;
+                                                        </div>
+                                                        <div *ngIf="function && function.language!== 'AWS Lambda' && showFunction==true"
+                                                            class="col-md-3">
+                                                            <button matSuffix mat-raised-button color="primary" style="width: max-content;"
+                                                                (click)="viewFunction()">
+                                                                <mat-icon class="material-icons">cancel
+                                                                </mat-icon>&nbsp;
+                                                                <span translate>api.hideFunction</span>
+                                                            </button>&nbsp;
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row" style="width: 130%;">
+                                                        <p *ngIf="showOpenFaasPostWarning"
+                                                            style="color: #ffcc00;position: relative;left: -690px;">
+                                                            <mat-icon
+                                                                style="position: relative;top: 7px;">warning</mat-icon>
+                                                            <span translate>openFaasWarning</span>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+                                                <div class="col-md-12"
+                                                    *ngIf=" isFunctionEmpty &&!function && queryType==='Execute'"
+                                                    style="text-align: left; padding: 0 0 ;   color: red">
+                                                    <span translate>api.requiredFunction</span>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div [ngClass]="queryType==='Execute' ? 'col-md-2':'col-md-4' ">
+                                                <button matSuffix mat-raised-button color="primary"
+                                                    style="float: right;width: 100%;"
+                                                    *ngIf="!addCollectionBool  && queryType !== 'Execute'"
+                                                    (click)="addCollection()">
+                                                    <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                                        translate>api.ad</span>
+                                                </button>
+                                                <button matSuffix mat-raised-button
+                                                    *ngIf="addCollectionBool  && queryType !== 'Execute'"
+                                                    (click)="confirmNewCollection()">
+                                                    <em class="material-icons" style="color: #66BB6A">
+                                                        done
+                                                    </em>
+                                                </button>
+                                                <button matSuffix mat-raised-button style="float: right;"
+                                                    *ngIf="addCollectionBool  && queryType !== 'Execute'"
+                                                    (click)="cancelNewCollection()">
+                                                    <em class="material-icons" style="color: #F93E3E">
+                                                        undo
+                                                    </em>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" *ngIf="provider ==='MONGO' && queryType === 'Read'">
+                                        <mat-radio-group style="margin-left: 35px;" aria-label="Select your queryType"
+                                            [(ngModel)]="this.resource.customQuery.queryName">
+                                            <mat-radio-button (change)="onChangeSelect($event)" value='executeQuery'
+                                                checked>Execute Query </mat-radio-button>
+                                            <mat-radio-button (change)="onChangeSelect($event)"
+                                                style="margin-left: 10px;"
+                                                value='aggregation'>Aggregation</mat-radio-button>
+                                            <mat-radio-button (change)="onChangeSelect($event)"
+                                                style="margin-left: 10px;" value='count'>Count</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="width: 100%;">
+                                        <div class="row" style="max-height: 40vh">
+                                            <div class="col-12" style="height: 40vh; overflow: auto">
+                                                <div *ngIf="resource.executionType === 'Query'">
+                                                    <div class="row"
+                                                        *ngIf=" function && function.language!=='AWS Lambda'">
+                                                        <div class="col-md-12">
+                                                            <div style="text-align: left; ">
+                                                                <p>
+                                                                    <strong *ngIf="queryType !== 'Execute'"
+                                                                        translate>api.query</strong>
+                                                                    <strong
+                                                                        *ngIf="queryType === 'Execute' && showFunction===true"
+                                                                        translate>api.previewFunction</strong>
+                                                                    <!-- Tooltip -->
+                                                                    <mat-icon *ngIf="queryType !== 'Execute'" matSuffix
+                                                                        style="cursor: pointer;" matTooltipClass="test"
+                                                                        matTooltip="{{ 'help.query' | translate }}">
+                                                                        info
+                                                                    </mat-icon>
+
+                                                                    <span class="space"></span>
+                                                                    <span class="space"></span>
+                                                                </p>
+                                                                <p>
+                                                                    <span *ngIf="queryType !== 'Execute'"
+                                                                        translate>api.reqBody</span>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mt-2">
+                                                        <div *ngIf="queryType!=='Execute'"
+                                                            class="json-editor-wrap borderRight col-md-7">
+                                                            <json-editor matInput [options]="editorOptions"
+                                                                [data]="query" (change)="getJsonChange($event)"
+                                                                aria-placeholder="{ee}">
+                                                            </json-editor>
+                                                        </div>
+
+
+                                                        <div *ngIf=" queryType === 'Execute'  && showFunction===true "
+                                                            class="json-editor-wrap borderRight col-md-7">
+                                                            <div class="json-editor-wrap borderRight "
+                                                                style="border:none">
+                                                                <ngx-codemirror #editor
+                                                                    *ngIf="( resource.httpMethod) && function &&  showFunction==true"
+                                                                    class="justToRead" scrollTo
+                                                                    [(ngModel)]="function.function" [options]="{
+                                                                    lineNumbers: true,
+                                                                    theme: 'default',
+                                                                    mode: 'javascript',
+                                                                    lineWrapping: false,
+                                                                    readOnly:true,
+                                                                    foldGutter: true,
+                                                                    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                                                                    autoCloseBrackets: true,
+                                                                    matchBrackets: true
+                                                                      }"></ngx-codemirror>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="queryType !== 'Execute'" class="col-md-3"
+                                                            style="text-align: left;">
+                                                            <p>
+                                                                <strong>
+                                                                    <span translate>List of Snippets</span>
+                                                                </strong>
+                                                            </p>
+                                                            <div style="height: 100px; overflow-y: scroll;">
+                                                                <mat-list role="list">
+                                                                    <mat-list-item class="snippetName"
+                                                                        *ngFor="let name of querySnippetNames"
+                                                                        (click)="addSnippet(name)"
+                                                                        style="text-align: left" role="listitem">
+                                                                        <span> - <span class="space"></span> {{ name }}
+                                                                        </span>
+                                                                    </mat-list-item>
+                                                                </mat-list>
+                                                            </div>
+                                                        </div>
+
+                                                        <div *ngIf="queryType !== 'Execute'" class="col-md-2"
+                                                            style="text-align: left">
+                                                            <p>
+                                                                <strong>
+                                                                    <span translate>api.paramList</span>
+                                                                </strong>
+                                                            </p>
+                                                            <mat-list role="list">
+                                                                <mat-list-item style="text-align: left" role="listitem">
+                                                                    <span> - <span class="space"></span>
+                                                                        $session_username
+                                                                    </span>
+                                                                </mat-list-item>
+                                                                <mat-list-item style="text-align: left" role="listitem">
+                                                                    <span> - <span class="space"></span>
+                                                                        $session_firstname
+                                                                    </span>
+                                                                </mat-list-item>
+                                                                <mat-list-item style="text-align: left" role="listitem">
+                                                                    <span> - <span class="space"></span>
+                                                                        $session_lastName
+                                                                    </span>
+                                                                </mat-list-item>
+                                                                <mat-list-item style="text-align: left" role="listitem">
+                                                                    <span> - <span class="space"></span> $session_email
+                                                                    </span>
+                                                                </mat-list-item>
+                                                                <mat-list-item style="text-align: left" role="listitem">
+                                                                    <span> - <span class="space"></span> $session_phone
+                                                                    </span>
+                                                                </mat-list-item>
+                                                                <mat-list-item
+                                                                    *ngFor="let param of parameters; let i = index"
+                                                                    style="text-align: left" role="listitem">
+                                                                    <span> -
+                                                                        <span class="space"></span> %{{ param.name }}
+                                                                    </span>
+                                                                </mat-list-item>
+                                                            </mat-list>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="divider divider-md"></div>
+                                                    <div class="divider divider-md"></div>
+                                                </div>
+
+                                                <div>
+
+                                                </div>
+                                                <div style="text-align: left;"
+                                                    *ngIf="(queryType !== 'Execute' &&resource.executionType === 'Query' && (resource.httpMethod === 'GET' || resource.httpMethod === 'DELETE'))">
+                                                    <p><strong>Projection</strong></p>
+                                                    <div>
+                                                        <app-resource-projection [fields]="resource.fields"
+                                                            (fieldsUpdated)="updateProjectionFields($event)">
+                                                        </app-resource-projection>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="provider === 'COUCHDB' || type === 'sql' ">
+                        <app-couchbase-query-details (queryFilled)="updateResourceQuery($event)"
+                            (typeSelected)="updateEndpointType($event)" [databaseType]="type"
+                            [differentModel]="differentModel" [reqModel]="reqModel" [respModel]="respModel"
+                            [query]="resource.customQuery.query" [type]="queryType" [buckets]="collectionsList"
+                            [httpMethod]="resource.httpMethod" [emptyCollection]="emptyCollection"
+                            [emptySqlQuery]="emptySqlQuery" [resource]="resource" (functionID)="addFunctionId($event)">
+                        </app-couchbase-query-details>
+
+                    </div>
+                </mat-step>
+
+                <!--Function Interceptor Step -->
+                <mat-step style="height: 50vh; overflow-y: auto; overflow-x: hidden;"
+                    *ngIf="queryType!== 'Execute' && queryType !== 'Delete' && !this.data.editorMode && resource?.executionType !== 'File' && resource?.executionType === 'Query' && (provider ==='MONGO' || provider ==='ELASTICSEARCH' || type==='sql' ) ">
+                    <ng-template matStepLabel>
+                        <span translate>api.functions</span>
+                    </ng-template>
+                    <div class="mongo-query" *ngIf="provider !== 'COUCHDB'">
+                        <div style="height: 50vh;     overflow-y: auto;  overflow-x: hidden;">
+
+                            <div *ngIf="resource.executionType === 'Query'">
+                                <div class="row">
+                                    <div class="col-md-5" style="text-align: left; margin-top:25px;">
+                                        <p>
+                                            <strong
+                                                *ngIf="(resource.httpMethod === 'PUT' || resource.httpMethod === 'POST' ||  resource.httpMethod === 'GET') && resource.executionType === 'Query'"
+                                                translate>api.inFunction</strong>
+                                            <!-- Tooltip -->
+                                        </p>
+                                        <div class="row">
+
+                                            <div
+                                                [ngClass]="(inFunction && inFunction.language!== 'AWS Lambda' && inFunction.language!=='OpenFaas')?'col-md-8':'col-md-12'">
+                                                <mat-form-field appearance="outline" 
+                                                    *ngIf="(resource.httpMethod === 'PUT' || resource.httpMethod === 'POST' || resource.httpMethod === 'GET') && resource.executionType === 'Query'"
+                                                    style="padding-top:14px;"
+                                                    style="width: 100%; vertical-align: text-top">
+
+                                                    <mat-icon matSuffix
+                                                        style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                        matTooltipClass="test"
+                                                        matTooltip="{{ 'help.inFunction' | translate }}">
+                                                        info
+                                                    </mat-icon>
+                                                    <mat-label translate>api.chooseFunction</mat-label>
+
+                                                    <mat-select [compareWith]="compareById" matNativeControl
+                                                        [(ngModel)]="inFunction" name="inFunction">
+                                                        <form autocomplete="off" class="example-form">
+                                                            <mat-form-field appearance="outline"  style="width: 100%;"
+                                                                class="example-full-width" appearance="fill">
+                                                                <input [ngModelOptions]="{standalone:true}"
+                                                                    [(ngModel)]="searchTxtIn" matInput
+                                                                    placeholder="Search">
+                                                            </mat-form-field  >
+                                                        </form>
+                                                        <mat-option>None</mat-option>
+
+                                                        <mat-option
+                                                            *ngFor="let collection of allFunctions | search : searchTxtIn"
+                                                            [value]="collection">{{ collection.name }}-{{
+                                                            collection.version}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field  >
+                                            </div>
+
+                                            <div class="col-md-4"
+                                                *ngIf=" inFunction && inFunction.language!== 'AWS Lambda' && inFunction.language!=='OpenFaas'">
+                                                <div class="row">
+                                                    <button matSuffix mat-raised-button color="primary"
+                                                        *ngIf="inFunction && showInFunction==false"
+                                                        (click)="viewInFunction()">
+                                                        <mat-icon class="material-icons">remove_red_eye</mat-icon>&nbsp;
+                                                        <span translate>api.viewFunction</span>
+                                                    </button>&nbsp;
+
+                                                    <button matSuffix mat-raised-button color="primary"
+                                                        *ngIf="inFunction && showInFunction==true"
+                                                        (click)="viewInFunction()">
+                                                        <mat-icon class="material-icons">cancel</mat-icon>&nbsp;
+                                                        <span translate>api.hideFunction</span>
+                                                    </button>&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5" style="text-align: left; margin-top:25px;">
+
+
+                                        <p> <strong translate>api.outFunction</strong>
+                                        </p>
+
+                                        <div class="row">
+                                            <div
+                                                [ngClass]="(outFunction && outFunction.language!== 'AWS Lambda' && outFunction.language!== 'OpenFaas') ?'col-md-8':'col-md-12'">
+                                                <mat-form-field appearance="outline"  style="width: 100%;">
+
+                                                    <!-- Tooltip -->
+                                                    <mat-icon matSuffix
+                                                        style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                                        matTooltipClass="test"
+                                                        matTooltip="{{ 'help.outFunction' | translate }}">
+                                                        info
+                                                    </mat-icon>
+                                                    <mat-label translate>api.chooseFunction</mat-label>
+
+                                                    <mat-select matNativeControl name="outFunctions"
+                                                        [(ngModel)]="outFunction">
+                                                        <form autocomplete="off" class="example-form">
+                                                            <mat-form-field appearance="outline"  style="width: 100%;"
+                                                                class="example-full-width" appearance="fill">
+                                                                <input [ngModelOptions]="{standalone:true}"
+                                                                    [(ngModel)]="searchTxtOut" matInput
+                                                                    placeholder="Search">
+                                                            </mat-form-field  >
+                                                        </form>
+                                                        <mat-option>None</mat-option>
+                                                        <mat-option
+                                                            *ngFor="let collection of allFunctions | search : searchTxtOut"
+                                                            [value]="collection">{{ collection.name }}-{{
+                                                            collection.version}}
+                                                        </mat-option>
+                                                    </mat-select>
+
+                                                </mat-form-field  >
+                                            </div>
+                                            <div *ngIf=" outFunction && outFunction.language!== 'AWS Lambda'&& outFunction.language!=='OpenFaas'"
+                                                class="col-md-4">
+                                                <div class="row">
+                                                    <button matSuffix mat-raised-button color="primary"
+                                                        *ngIf="outFunction && showOutFunction==false"
+                                                        (click)="viewOutFunction()">
+                                                        <mat-icon class="material-icons">remove_red_eye</mat-icon>&nbsp;
+                                                        <span translate>api.viewFunction</span>
+                                                    </button>&nbsp;
+
+                                                    <button matSuffix mat-raised-button color="primary"
+                                                        *ngIf="outFunction && showOutFunction==true"
+                                                        (click)="viewOutFunction()">
+                                                        <mat-icon class="material-icons">cancel</mat-icon>&nbsp;
+                                                        <span translate>api.hideFunction</span>
+                                                    </button>&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: left; margin-top:61px;">
+                                        <button matSuffix mat-raised-button
+                                            style="background-color: #002659 ;width: 170px;" color="primary"
+                                            (click)="openCreateDialog()">
+                                            <strong translate>api.createFunction</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 100%; "
+                                *ngIf="(inFunction && inFunction.language!== 'AWS Lambda' && inFunction.language!=='OpenFaas') || outFunction && outFunction.language!== 'AWS Lambda' &&  outFunction.language!=='OpenFaas'">
+                                <div class="row" style="max-height: 40vh;">
+                                    <div class="col-6" style="height: 40vh; overflow: auto;">
+                                        <p
+                                            *ngIf="(resource.httpMethod === 'PUT' || resource.httpMethod === 'POST' || resource.httpMethod === 'GET') && resource.executionType === 'Query' && showInFunction==true">
+                                            <strong translate>api.previewInFunction</strong>
+                                        </p>
+                                        <div class="json-editor-wrap borderRight " style="border:none">
+                                            <ngx-codemirror #editor
+                                                *ngIf="( resource.httpMethod === 'PUT' || resource.httpMethod === 'POST'  || resource.httpMethod === 'GET') && inFunction &&  showInFunction==true"
+                                                class="justToRead" scrollTo [(ngModel)]="inFunction.function" [options]="{
+                                               lineNumbers: true,
+                                               theme: 'default',
+                                               mode: 'sql',
+                                               lineWrapping: false,
+                                               readOnly:true,
+                                               foldGutter: true,
+                                               gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                                               autoCloseBrackets: true,
+                                               matchBrackets: true
+                                                 }"></ngx-codemirror>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-6" style="height: 40vh; overflow: auto">
+                                        <p *ngIf="outFunction && showOutFunction==true">
+                                            <strong translate>api.previewOutFunction</strong>
+                                        </p>
+                                        <div class="json-editor-wrap borderRight" style="border:none">
+                                            <ngx-codemirror #editor *ngIf="outFunction && showOutFunction==true"
+                                                class="justToRead " scrollTo [(ngModel)]="outFunction.function"
+                                                [options]="{
+                                                         lineNumbers: true,
+                                                         theme: 'default',
+                                                         mode: 'javascript',
+                                                         lineWrapping: false,
+                                                         readOnly:true,
+                                                         foldGutter: true,
+                                                         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter', 'CodeMirror-lint-markers'],
+                                                         autoCloseBrackets: true,
+                                                         matchBrackets: true
+                                                       }"></ngx-codemirror>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-step>
+
+                <!-- File Selection Section START -->
+                <mat-step *ngIf="resource.executionType !== 'Query' && resource.executionType != 'File'"
+                    style="height: 80vh; overflow-y: auto">
+                    <ng-template matStepLabel>
+                        <span translate>api.templateStep</span>
+                    </ng-template>
+                    <div class="divider divider-md"></div>
+
+                    <div style="height: 50vh; overflow-y: auto">
+
+
+                        <div class="container-fluid">
+
+                            <p style="text-align: left">
+                                <span translate>api.resources</span>
+                            </p>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+                                    <h5>
+                                        <span translate>api.template</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.primaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('primary')">Select</button>
+                                    </h5>
+                                    <p *ngIf="!resource.resourceFile?.fileUri">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <p *ngIf="resource.resourceFile?.fileUri">
+                                        {{ resource.resourceFile.fileUri }}
+                                        <button mat-button (click)="unSelectFile(file, 'primary')">
+                                            <em class="material-icons">
+                                                delete_outline
+                                            </em>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="divider divider-md"></div>
+                            <hr>
+
+                            <div style="text-align: left">
+                                <div>
+
+                                    <h5>
+                                        <span translate>api.staticRes</span>
+                                        <mat-icon matSuffix style="cursor: pointer;" matTooltipClass="test"
+                                            matTooltip="{{ 'help.secondaryRessource' | translate }}">
+                                            info
+                                        </mat-icon>
+                                        &nbsp;&nbsp;
+                                        <button mat-stroked-button color="primary" class="selectBtn"
+                                            (click)="openSelectFilesModal('secondary')">Select</button>
+
+                                    </h5>
+
+                                    <p *ngIf="resource.secondaryFilePaths.length === 0">
+                                        <span translate>api.noSelectedFiles</span>
+                                    </p>
+                                    <div *ngIf="resource.secondaryFilePaths">
+                                        <p *ngFor="let file of resource.secondaryFilePaths">
+                                            {{ file.fileUri }}
+                                            <button mat-button (click)="unSelectFile(file, 'secondary')">
+                                                <em class="material-icons">
+                                                    delete_outline
+                                                </em>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-step>
+
+                <!-- Codes Step -->
+                <mat-step style="text-align: left">
+                    <ng-template matStepLabel>
+                        <span translate>HTTP Codes</span>
+                    </ng-template>
+
+                    <div class="divider divider-md"></div>
+                    <div style="height: 50vh; overflow-y: auto; overflow-x: hidden">
+                        <h4 style="text-align: left">
+                            <span translate>api.httpCodes</span>
+                            <mat-icon matPrefix style="cursor: pointer; margin-top:10px; margin-right:10px;"
+                                matTooltipClass="test" matTooltip="{{ 'help.httpStatus' | translate }}">
+                                info
+                            </mat-icon>
+                            <button style="float: right;margin-right: 3%;margin-top: 1%;" mat-stroked-button
+                                class="addBtn" (click)="addNewResponse()">
+                                <mat-icon class="material-icons">add</mat-icon>&nbsp; <span translate>api.ad</span>
+                            </button>
+                        </h4>
+                        <br>
+                        <div *ngIf="resource.responses?.length > 0">
+                            <div style="height: 40vh; ">
+                                <table class="mdl-data-table" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th id="code" class="mdl-data-table__cell--non-numeric">Code</th>
+                                            <th id="desc" class="mdl-data-table__cell--non-numeric">Description</th>
+                                            <th id="desc" class="mdl-data-table__cell--non-numeric">Headers</th>
+                                            <th id="desc" class="mdl-data-table__cell--non-numeric">Model</th>
+                                            <th style="padding-left: 55px;" class="mdl-data-table__cell--non-numeric"
+                                                id="action">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of resource?.responses; let i = index">
+                                            <td class="mdl-data-table__cell--non-numeric" style="width: 10%;">
+                                                <span class="badge badge-pill mb-1" [ngClass]="{errorCode: checkCode(item.code) == false ,
+                                                successCode : checkCode(item.code) == true}">{{ item?.code }}</span>
+                                            </td>
+                                            <td class="mdl-data-table__cell--non-numeric box-size" style="width: 40%;">
+                                                <span [innerHtml]="item?.description"></span>
+                                            </td>
+                                            <td class="mdl-data-table__cell--non-numeric" style="width: 20%;">
+                                                {{ getHeadersFromResponse(item?.headers?.headers)}} </td>
+                                            <td class="mdl-data-table__cell--non-numeric" style="width: 10%;">
+                                                {{ item?.schema?.ref}} </td>
+                                            <td class="mdl-data-table__cell--non-numeric box-size">
+                                                <div style=" display: table-cell;">
+                                                    <button mat-button (click)="deleteResponse(i)">
+                                                        <em class="material-icons">
+                                                            delete_outline
+                                                        </em></button>
+                                                    <button style="margin-left: -20px;" mat-button
+                                                        (click)="editResponse(item)">
+                                                        <em class="material-icons">
+                                                            edit
+                                                        </em></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </mat-step>
+
+                <!-- Documentation Section -->
+                <mat-step [stepControl]="secondFormGroup" style="height: 80vh; overflow-y: auto;">
+                    <ng-template matStepLabel><span translate>api.doc</span></ng-template>
+                    <div class="divider divider-md"></div>
+
+                    <form [formGroup]="secondFormGroup" style="height: 50%; overflow-y: auto;width: 100%">
+                        <div>
+                            <div class="advanced-section">
+                                <div>
+                                    <mat-form-field appearance="outline"  style="width: 100%">
+                                        <input style="width: 100%;" matInput formControlName="resourceName"
+                                            placeholder="{{ 'api.placeholder.name' | translate }}"
+                                            [(ngModel)]="resource.name" name="resourceName">
+                                    </mat-form-field  >
+                                    <mat-form-field appearance="outline"  style="width: 100%">
+                                        <input matInput formControlName="resourceSummary" placeholder="Summary"
+                                            [(ngModel)]="resource.summary" name="resourceSummary">
+                                    </mat-form-field  >
+                                    <div style="width: 100%;">
+                                        <div>
+                                            <h4 style="text-align: left;">Description</h4>
+                                            <ckeditor formControlName="resourceDescription"
+                                                [data]="resource.description" #e id="editor" [editor]="Editor"
+                                                [(ngModel)]="resource.description" name="description"></ckeditor>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <!-- Recap Step-->
+                <mat-step>
+                    <ng-template matStepLabel>
+                        <span translate>
+                            api.recap
+                        </span>
+                    </ng-template>
+
+                    <app-recap [resource]="resource" [secondaryFiles]="secondaryFiles"
+                        [selectedFileName]="selectedFileName" [parameters]="parameters">
+                    </app-recap>
+
+                </mat-step>
+
+            </mat-horizontal-stepper>
+
+            <div class="divider divider-md"></div>
+
+
+            <div class="box-body text-right">
+                <button id="confirm" (click)="saveResource()" mat-raised-button color="primary" class="btn-w-md"
+                    *ngIf="resource.executionType !== 'Query '&& stepper.selectedIndex !== 0 && stepper.selectedIndex !== 1 ; else queryConfirm"
+                    [disabled]="!resource.httpMethod || !resource.path || !apiUnicity " cdkFocusInitial>
+                    <span translate>popups.buttons.saveAndExit</span>
+                </button>
+
+                <ng-template #queryConfirm>
+                    <button *ngIf="stepper.selectedIndex !== 0 && stepper.selectedIndex !== 1 " id="confirm"
+                        (click)="saveResource()" mat-raised-button color="primary" class="btn-w-md"
+                        [disabled]="!resource.httpMethod || emptyPath || resource.path === '/' || !apiUnicity || emptySqlQuery"
+                        cdkFocusInitial>
+                        <span translate>popups.buttons.saveAndExit</span>
+                    </button>
+                </ng-template>
+                <span class="space"></span>
+
+                <button mat-raised-button class="btn-w-md" (click)="goBack(stepper)"
+                    [disabled]="stepper.selectedIndex === 0">
+                    <span translate>popups.buttons.back</span></button>
+                <span class="space"></span>
+                <button mat-raised-button (click)="goForward(stepper)" color="primary" class="btn-w-md"
+                    *ngIf="stepper.selectedIndex !== stepper.steps?.length - 1" [disabled]="!apiUnicity">
+                    <span translate>{{'popups.buttons.next'}}</span>
+                </button>
+                <button id="confirm" (click)="saveResource()" mat-raised-button color="primary" class="btn-w-md"
+                    *ngIf="stepper.selectedIndex === stepper.steps?.length - 1" cdkFocusInitial>
+                    <span translate>{{'popups.buttons.confirm'}}</span>
+                </button>
+            </div>
+
+        </div>
+    </div>

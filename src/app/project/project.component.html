@@ -1,0 +1,790 @@
+<section class="container-fluid ">
+
+    <!-- Show a Project Details Section START -->
+    <article class="article">
+        <br>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="box" style="box-shadow: none" *ngIf="project.id">
+                    <div class="box-header project-header radius-top"
+                        [ngClass]="{'border-radius-bottom': toggleProjectDetails === true}">
+                        <button mat-button (click)="showProjectDetails()" style="cursor:pointer ;color: white;">
+                            <mat-icon class="material-icons" style="cursor: pointer;color: white;">
+                                {{toggleProjectDetails ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                            </mat-icon> &nbsp; {{ project?.name }} &nbsp;&nbsp;
+                        </button>
+                        <span style="flex: 1 1 auto;"></span>
+                        <div style="float:right">
+                            <mat-icon class="info" *ngIf="provider==='MONGO'" matTooltipClass="test" matTooltip="{{ 'project.creationTime' | translate}} : {{project?.creationTime |  date: 'M/d/yy, h:mm a'}} 
+
+              {{ 'project.lastUpdate' | translate }} : {{project?.lastUpdate | date: 'M/d/yy, h:mm a'}}">
+                                info
+                            </mat-icon>
+                            <button (click)="gitSync()" *ngIf="project.gitUrl" mat-button
+                                style="background-color:  #002659; color: white; text-align: center!important; margin-right: 15px;"
+                                class="btn-w-md cobtn ">
+                                <img src="../../assets/images/gitt2.png" class="git" width="25" height="25" alt=""
+                                    srcset="">
+                                &nbsp; <span class="hidden-md-down" translate>Git Synchronize</span>
+                            </button>
+                            <button *ngIf="project.type !== 'authentication microservice'"
+                                (click)="openExportDockerModal()" mat-button
+                                style="background-color:  #002659; color: white; text-align: center!important; margin-right: 8px;"
+                                class="btn-w-md cobtn ">
+                                <svg style="max-width: 30px; margin-right: -4px;" aria-hidden="true" focusable="false"
+                                    data-prefix="fab" data-icon="docker" class="svg-inline--fa fa-docker fa-w-20"
+                                    role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                                    <path fill="currentColor"
+                                        d="M349.9 236.3h-66.1v-59.4h66.1v59.4zm0-204.3h-66.1v60.7h66.1V32zm78.2 144.8H362v59.4h66.1v-59.4zm-156.3-72.1h-66.1v60.1h66.1v-60.1zm78.1 0h-66.1v60.1h66.1v-60.1zm276.8 100c-14.4-9.7-47.6-13.2-73.1-8.4-3.3-24-16.7-44.9-41.1-63.7l-14-9.3-9.3 14c-18.4 27.8-23.4 73.6-3.7 103.8-8.7 4.7-25.8 11.1-48.4 10.7H2.4c-8.7 50.8 5.8 116.8 44 162.1 37.1 43.9 92.7 66.2 165.4 66.2 157.4 0 273.9-72.5 328.4-204.2 21.4.4 67.6.1 91.3-45.2 1.5-2.5 6.6-13.2 8.5-17.1l-13.3-8.9zm-511.1-27.9h-66v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm78.1 0h-66.1v59.4h66.1v-59.4zm-78.1-72.1h-66.1v60.1h66.1v-60.1z">
+                                    </path>
+                                </svg>
+                                &nbsp; <span class="hidden-md-down" translate>Export
+                                    Docker</span>
+                            </button>
+
+                            <button mat-button (click)="openShareModal()">
+                                <mat-icon style="cursor: pointer;color: white;">share</mat-icon>&nbsp;
+                                <span translate
+                                    style="cursor: pointer;text-decoration: none;color: white;">project.share</span>
+                            </button>&nbsp;
+                            <button mat-button (click)="openProjectModal()">
+                                <mat-icon style="cursor: pointer;color: white;">edit</mat-icon>&nbsp;
+                                <span translate
+                                    style="cursor: pointer;text-decoration: none;color: white;">project.edit</span>
+                            </button>&nbsp;
+                            <button mat-button (click)="openConfirmDeleteDialog()">
+                                <mat-icon style="cursor: pointer; color: white;">delete_forever</mat-icon>&nbsp;
+                                <span translate
+                                    style="cursor: pointer;text-decoration: none;color: white;">project.delete</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="box-body radius-bottom" style="background-color: #FFF;"
+                        [@slideUpDown]="toggleProjectDetails">
+                        <div class="row">
+                            <div [ngClass]="project?.type === 'authentication microservice' ? 'col-md-12' : 'col-md-6'">
+                                <mat-card style="height: 100%">
+                                    <div class="widget-container"
+                                        style="margin-top: 0px; margin-bottom: -5px ; margin-left: 10px;">
+                                        <h3>Description </h3>
+                                    </div>
+                                    <div class="box-dark" id="description" style="margin-bottom: 10px;">
+                                        <p>
+                                            {{ project?.description }}
+                                        </p>
+
+                                        <div *ngIf="!project.description">
+                                            <p translate>project.noDescription</p>
+                                        </div>
+                                        <div *ngIf="identityProviderNames.length !== 0">
+                                            <p>
+                                                {{'project.idpsSupported' |
+                                                translate}}{{identityProviderNames.join(',')}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-6" *ngIf="project?.type !== 'authentication microservice'">
+                                <mat-card style="height: 100%">
+                                    <div class="widget-container"
+                                        style="margin-top: 0px; margin-bottom: -5px; margin-left: 10px;">
+                                        <h3 translate>project.datasource.name</h3>
+                                    </div>
+                                    <div *ngIf="project.dbsourceId" style="position: relative ; margin-left: 10px;">
+                                        <p><span style="color: #002659"><strong
+                                                    translate>project.datasource.name</strong></span> : {{
+                                            dataSourceName }}</p>
+                                        <p
+                                            *ngIf="project.databaseName || provider === 'MONGO' || provider === 'COUCHDB'">
+                                            <span style="color: #002659"><strong
+                                                    translate>project.datasource.database</strong></span> : {{
+                                            project.databaseName }}
+                                        </p>
+                                    </div>
+                                    <div *ngIf="!project.dbsourceId">
+                                        <p><span translate>project.select</span>
+                                            <button mat-button style="background-color:  #002659; color: white"
+                                                class="btn-w-sm cobtn" (click)="openProjectModal(1);">
+                                                <span translate>Select</span>
+                                            </button>
+                                        </p>
+                                    </div>
+                                </mat-card>
+                            </div>
+
+                            <div class="col-md-6">
+                                <mat-card *ngIf="project.gitUrl" style="height: 100% ; margin-top: 10px">
+
+                                    <div class="widget-container"
+                                        style="margin-top: 0px; margin-bottom: -5px ; margin-left: 10px;">
+                                        <h3>Git </h3>
+                                    </div>
+                                    <div id="gitUsername"
+                                        style="border-radius: 6px; margin-bottom: -5px; margin-left:10px ">
+                                        <p><span style="color: #002659"><strong>
+                                                    GitUrl </strong></span> : {{ project?.gitUrl }}
+                                        </p>
+                                    </div>
+                                    <div id="gitBranch"
+                                        style="border-radius: 6px; margin-bottom: -5px; margin-left:10px ">
+                                        <p> <span style="color: #002659"><strong>
+                                                    Branch </strong> </span>: {{ project?.gitBranch }}
+                                        </p>
+                                    </div>
+                                    <div id="gitUsername"
+                                        style="border-radius: 6px; margin-bottom: -5px; margin-left:10px ">
+                                        <p> <span style="color: #002659"><strong>
+                                                    GitUsername </strong> </span> : {{ project?.gitUsername }}
+
+                                        </p>
+                                    </div>
+                                </mat-card>
+
+                            </div>
+                            <div class="float-md-left float-sm-left mr-2 mt-3 btnExport">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </article>
+</section>
+<section class="container-fluid" *ngIf="project.securityEnabled">
+    <article class="article">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="box" style="box-shadow: none" *ngIf="project.id">
+                    <div class="box-header project-header radius-top"
+                        [ngClass]="{'border-radius-bottom': toggleSecurityDetails === true}">
+                        <button mat-button (click)="showSecurityDetails()"
+                            style="cursor: pointer;text-decoration: none;color: white;">
+                            <mat-icon class="material-icons">
+                                {{toggleSecurityDetails ? 'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                            </mat-icon> &nbsp; <span translate>project.security.title</span> &nbsp;&nbsp;
+                        </button>
+
+
+                    </div>
+
+                    <div class="box-body radius-bottom" style="background-color: #FFF;"
+                        [@slideUpDown]="toggleSecurityDetails">
+
+                        <div class="row">
+                            <div class="col-md-12"
+                                *ngIf="project?.authMSRuntimeURL !== null && project?.type !== 'authentication microservice'">
+                                <mat-card style="height: 100%;">
+                                    <div class="widget-container"
+                                        style="margin-top: 10px; margin-bottom: -5px; margin-left: 20px;">
+                                        <h3 translate>project.security.config</h3>
+                                    </div><br>
+                                    <p><span class="auth-ms"><strong translate>project.security.authMS</strong></span> :
+                                        {{ authProject.name}}</p>
+                                    <p><span class="auth-ms"><strong translate>Runtime Url</strong></span> :
+                                        {{authProject.runtimeUrl }}</p>
+                                    <button mat-button (click)="followMSLink()" class="btn-ac">
+                                        <mat-icon>open_in_browser</mat-icon> &nbsp;<span
+                                            translate>project.security.link</span>
+                                    </button>
+
+                                </mat-card>
+                            </div>
+                            <!-- Security Config -->
+                            <div class="col-md-6" *ngIf="project?.authMSRuntimeURL === null">
+
+                                <mat-card style="height: 100%;">
+                                    <div class="widget-container"
+                                        style="margin-top: 0px; margin-bottom: -5px; margin-left: 10px;">
+                                        <h3 translate>project.security.config</h3>
+                                    </div><br>
+                                    <mat-tab-group mat-stretch-tabs>
+                                        <!-- Token -->
+
+                                        <mat-tab label="{{'project.security.tokenConfig' | translate}}">
+                                            <br><br>
+                                            <form [formGroup]="securityForm" name="form">
+
+                                                <div class="form-group"
+                                                    *ngIf="project.type !== 'authentication microservice'">
+                                                    <mat-form-field appearance="outline" class="full-width"
+                                                        style="margin-left: 10px;width: 97%;">
+                                                        <mat-label>{{'project.security.clientId' |
+                                                            translate}}</mat-label>
+                                                        <input required matInput type="text" name="clientId"
+                                                            formControlName="clientId"
+                                                            [(ngModel)]="project.securityConfig.clientId">
+                                                        <mat-icon matSuffix class="material-icons">person</mat-icon>
+                                                        <mat-error
+                                                            *ngIf="securityForm.hasError('required', 'clientId')">
+                                                            <span translate>project.required</span>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group"
+                                                    *ngIf="project.type !== 'authentication microservice'">
+                                                    <mat-form-field appearance="outline" class="full-width"
+                                                        style="margin-left: 10px;width: 97%;">
+                                                        <mat-label>{{'project.security.secretKey' |
+                                                            translate}}</mat-label>
+                                                        <input required matInput [type]="hide ? 'text' : 'password'"
+                                                            name="clientSecret" formControlName="clientSecret"
+                                                            [(ngModel)]="project.securityConfig.secretKey">
+                                                        <mat-icon matSuffix (click)="hide = !hide"
+                                                            style="cursor: pointer">
+                                                            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                                        <mat-icon matSuffix class="material-icons">lock</mat-icon>
+                                                        <mat-error
+                                                            *ngIf="securityForm.hasError('required', 'clientSecret')">
+                                                            <span translate>project.req</span>
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="securityForm.hasError('pattern', 'clientSecret')">
+                                                            <span translate>project.letters</span>
+                                                        </mat-error>
+                                                        <mat-error
+                                                            *ngIf="securityForm.hasError('minlength', 'clientSecret')">
+                                                            <span translate>project.64</span>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <div class="form-group">
+                                                    <mat-form-field appearance="outline" class="full-width"
+                                                        style="margin-left: 10px; width: 97%;">
+                                                        <mat-label> {{'project.security.token' | translate}}
+                                                        </mat-label>
+                                                        <input required matInput type="text" name="tokenExpiration"
+                                                            formControlName="tokenExpiration"
+                                                            [(ngModel)]="project.securityConfig.tokenExpiration">
+                                                        <mat-icon matSuffix class="material-icons">access_time
+                                                        </mat-icon>
+                                                        <mat-error
+                                                            *ngIf="securityForm.hasError('required', 'tokenExpiration')">
+                                                            <span translate>project.req</span>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                                <button mat-raised-button type="submit" color="primary"
+                                                    style="cursor: pointer;text-decoration: none;color: white; margin-right: 10px;"
+                                                    class="float-right btn-w-md" (click)="saveSecurityConfig()"
+                                                    [hidden]="project.type === 'authentication microservice'"><span
+                                                        translate>project.security.save</span></button>
+                                                <br>
+                                            </form>
+                                            <div *ngIf="project.type !== 'authentication microservice'">
+                                                <strong translate
+                                                    style="margin-left: 10px;">project.security.default</strong>
+                                                <p translate style="margin-left: 10px;">
+                                                    project.security.defaultDescription</p>
+                                                <pre
+                                                    style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;">
+
+        {{'{'}}
+            "firstname": "Administrator",
+            "lastname" "Grizzly",
+            "username": "admin",
+            "password": "admin",
+            "roles": ["admin"]
+        {{'}'}}
+                          </pre>
+
+                                            </div>
+                                            <br>
+                                        </mat-tab>
+                                        <!-- Roles -->
+
+                                        <mat-tab label="{{'project.security.manageRoles' | translate}}">
+                                            <br>
+                                            <div class="col-md-12">
+                                                <mat-form-field appearance="outline" class="col-md-6"
+                                                    style="float: left">
+                                                    <mat-label> {{'project.security.addRole' | translate}} </mat-label>
+                                                    <input matInput (keyup)="onInput()" [(ngModel)]="role"
+                                                        name="roleAdded">
+                                                </mat-form-field>
+
+                                                <div class="col-md-6" style="float: left">
+                                                    <button mat-stroked-button class="addBtn" (click)="addNewRole()">
+                                                        <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                                            translate>project.security.addRole</span>
+                                                    </button>
+                                                </div>
+
+                                            </div><br>
+
+                                            <div *ngIf="project?.roles?.length > 0">
+                                                <table class="mdl-data-table" style="width: 90%; margin-left: 10px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="mdl-data-table__cell--non-numeric">Role</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let role of project?.roles; let i = index">
+                                                            <td class="mdl-data-table__cell--non-numeric">{{ role }}
+                                                            </td>
+                                                            <td>
+                                                                <button mat-button *ngIf="i === 0 && role === 'admin'">
+                                                                    <em class="material-icons">
+                                                                        lock
+                                                                    </em></button>
+                                                                <button mat-button (click)="deleteRole(i)"
+                                                                    *ngIf="i !== 0 || (i === 0 && role !== 'admin')">
+                                                                    <em class="material-icons">
+                                                                        delete_outline
+                                                                    </em></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="col-md-6" style="color: red" *ngIf="!unique" translate>
+                                                    project.security.roleExists
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="box-body text-right">
+                                                <button (click)="confirmChoice()" mat-raised-button id="confirm"
+                                                    style="cursor: pointer;text-decoration: none;color: white;"
+                                                    type="submit" color="primary" class="btn-w-md"
+                                                    [disabled]="!modified || !unique">
+                                                    <span translate>project.security.save</span></button>
+                                            </div>
+
+
+
+                                        </mat-tab>
+
+                                        <mat-tab label="{{'project.security.apiKeys' | translate}}"
+                                            *ngIf="project.type === 'authentication microservice'">
+                                            <br>
+                                            <div class="col-md-12">
+                                                <mat-form-field appearance="outline" class="col-md-6"
+                                                    style="float: left">
+                                                    <input matInput
+                                                        placeholder="{{'project.security.appName' | translate}}"
+                                                        (keyup)="onInput()" [(ngModel)]="appName"
+                                                        name="applicationAdded">
+                                                </mat-form-field>
+
+                                                <div class="col-md-6" style="float: left">
+                                                    <button mat-stroked-button class="addBtn" (click)="addNewApp()">
+                                                        <mat-icon class="material-icons">add</mat-icon>&nbsp; <span
+                                                            translate>project.security.addApp</span>
+                                                    </button>
+                                                </div>
+
+                                            </div><br>
+
+                                            <div *ngIf="project?.authorizedApps?.length > 0">
+                                                <table class="mdl-data-table" style="width: 100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="mdl-data-table__cell--non-numeric">Applications
+                                                            </th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let app of project?.authorizedApps; let i = index">
+                                                            <td class="mdl-data-table__cell--non-numeric">
+                                                                <button mat-button (click)="showApiKeysDetails(i)"
+                                                                    style="cursor:pointer">
+                                                                    <mat-icon class="material-icons">
+                                                                        {{toggleApiKeysDetails[i] ?
+                                                                        'keyboard_arrow_down' : 'keyboard_arrow_up' }}
+                                                                    </mat-icon> &nbsp;
+                                                                    <span>{{ app.clientId }}
+                                                                    </span>&nbsp;&nbsp;
+
+                                                                </button>
+                                                                <span style="flex: 1 1 auto;"></span>
+                                                                <div class="box-body bg-color-white"
+                                                                    [@slideUpDown]="toggleApiKeysDetails[i]">
+                                                                    <div class="form-group">
+                                                                        <mat-form-field appearance="outline"
+                                                                            class="full-width" style="width: 380px;">
+                                                                            <input matInput type="text"
+                                                                                style="color: black;"
+                                                                                value="{{app.clientId}}"
+                                                                                placeholder="{{'project.security.clientId' | translate}}"
+                                                                                disabled>
+                                                                            <mat-icon matSuffix
+                                                                                matTooltip="Copy clientId"
+                                                                                style="cursor: pointer"
+                                                                                (click)="copy(app.clientId)">file_copy</mat-icon>
+                                                                            <mat-icon matSuffix
+                                                                                class="material-icons">person</mat-icon>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <mat-form-field appearance="outline"
+                                                                            class="full-width" style="width: 380px;">
+                                                                            <input matInput
+                                                                                [type]="secKeyHide[i] ? 'text' : 'password'"
+                                                                                style="color: black;"
+                                                                                value="{{app.secretKey}}"
+                                                                                placeholder="{{'project.security.appSecretKey' | translate}}"
+                                                                                disabled>
+                                                                            <mat-icon matSuffix
+                                                                                matTooltip="Copy clientSecret"
+                                                                                style="cursor: pointer"
+                                                                                (click)="copy(app.secretKey)">file_copy</mat-icon>
+                                                                            <mat-icon matSuffix
+                                                                                (click)="showSecretKey(i)"
+                                                                                style="cursor: pointer">
+                                                                                {{secKeyHide[i] ? 'visibility_off' :
+                                                                                'visibility'}}</mat-icon>
+                                                                            <mat-icon matSuffix
+                                                                                class="material-icons">lock</mat-icon>
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                </div>
+
+                                                            </td>
+                                                            <td>
+                                                                <button mat-button (click)="deleteApp(app.clientId)">
+                                                                    <em class="material-icons">
+                                                                        delete_outline
+                                                                    </em></button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <br>
+
+
+                                        </mat-tab>
+
+                                    </mat-tab-group>
+
+                                </mat-card>
+                            </div>
+
+                            <!-- Documentation -->
+                            <div class="col-md-6"
+                                *ngIf="project.authMSRuntimeURL === null && project.type !== 'authentication microservice'">
+                                <mat-card>
+                                    <div class="widget-container"
+                                        style="margin-top: 0px; margin-bottom: -5px; margin-left: 10px;">
+                                        <h3 translate>project.authDocumentation.user</h3>
+                                    </div>
+                                    <br>
+                                    <mat-tab-group mat-stretch-tabs style="height: 700px; overflow-y: scroll;">
+
+                                        <mat-tab label="SignIn"><br>
+                                            <p translate style="margin-left: 10px;">
+                                                project.authDocumentation.description1</p>
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.signinModal</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinModal)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1; margin-left: 10px; margin-right: 10px;"
+                                                #signinModal>
+
+    {{'{'}}
+        "username":"string",
+        "password":"string"
+    {{'}'}}
+                      </pre>
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.curlRequest</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinCurl)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1; margin-left: 10px; margin-right: 10px;"
+                                                #signinCurl>
+
+    curl --header "Content-Type: application/json" \
+    --request POST \
+    --data '{{'{'}}"username":"admin","password":"admin"{{'}'}}' \
+    {{baseUrl}}/runtime/{{containerId}}/signin  
+                          </pre>
+
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.angularExample</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinAngular)">
+                                                file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signinAngular>
+
+    // Add the HttpClient in the constructor
+    constructor(private http: HttpClient) {{'{'}} {{'}'}}
+
+    // Declare the URL and the body content
+    const baseUrl = {{baseUrl}}/runtime/{{containerId}}/signin ;  
+    const bodyContent = {{'{'}}"username" : "admin", "password" : "admin"{{'};'}}
+
+    // Call the HTTP Request
+    this.http.post(baseUrl, bodyContent);             
+                              </pre>
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.response</strong>
+                                            <p translate style="margin-left: 10px;">
+                                                project.authDocumentation.tokenNotice</p>
+                                            <pre
+                                                style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;">
+
+    {{'{'}}
+      "token": 
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6ImFkbWluIn1dLCJpc3MiOiJ0ZXN0IiwiZXhwIjoxNTcxMTYxNjgyfQ.GTIl_7ch382MFLBZ8ywd_FXjz6rc6YUahm_TpXWS-Hw"
+    {{'}'}}
+                          </pre>
+                                        </mat-tab>
+                                        <mat-tab label="SignUp"><br>
+                                            <p translate style="margin-left: 10px;">
+                                                project.authDocumentation.description2</p>
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.signupModal</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signupModal)">file_copy
+                                            </mat-icon>
+                                            <p translate style="margin-left: 10px;">
+                                                project.authDocumentation.signupNotice</p>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signupModal>
+
+    {{'{'}}
+        "firstname": "string",
+        "lastname": "string",
+        "username": "string",
+        "password": "string",
+        "email": "string",
+        "phone": "string"
+    {{'}'}}
+                      </pre>
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.curlRequest</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signupCurl)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signupCurl>
+
+  curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{{'{'}}"firstname": "John","lastname": "Doe","username": "JohnDoe","password": "myPassword","email": "john.doe&#64;codeonce.fr","phone": "999999999"{{'}'}}' \
+  {{baseUrl}}/runtime/{{containerId}}/signup
+                            </pre>
+
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.angularExample</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signupAngular)">
+                                                file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signupAngular>
+
+  // Add the HttpClient in the constructor
+  constructor(private http: HttpClient) {{'{'}} {{'}'}}
+
+  // Declare the URL and the body content
+  const baseUrl = {{baseUrl}}/runtime/{{containerId}}/signup ;  
+  const bodyContent = '{{'{'}}firstname": "John","lastname": "Doe","username": "JohnDoe","password": "myPassword","email": "john.doe&#64;codeonce.fr","phone": "999999999"{{'}'}}'
+
+  // Call the HTTP Request
+  this.http.post(baseUrl, bodyContent);          
+                              </pre>
+
+                                            <strong translate
+                                                style="margin-left: 10px;">project.authDocumentation.response</strong>
+                                            <pre
+                                                style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;">
+
+  {{'{'}}
+  "firstname": "John",
+  "lastname": "Doe",
+  "username": "JohnDoe",
+  "password": "myPassword",
+  "email": "john.doe&#64;codeonce.fr",
+  "phone": "999999999"
+  "_id": "xxxxxxxxxxxxxxxxxx"
+  {{'}'}}
+                              </pre>
+                                        </mat-tab>
+                                    </mat-tab-group>
+
+                                </mat-card>
+                            </div>
+                            <div class="col-md-6" *ngIf="project?.type === 'authentication microservice'">
+                                <mat-card>
+                                    <div class="widget-container" style="margin-left: 10px;">
+                                        <h3 translate>project.authDocumentation.user</h3>
+                                    </div>
+                                    <br>
+
+                                    <mat-tab-group mat-stretch-tabs style="height: 700px; overflow-y: scroll;">
+
+                                        <br><br>
+                                        <mat-tab label="OauthAuthorization"><br>
+                                            <p style="margin-left: 10px;" translate>
+                                                project.authDocumentation.description1</p>
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.oauthModal</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinModal)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #eff1ef; margin-left: 10px; margin-right: 10px;"
+                                                #signinModal>
+
+  {{'{'}}
+  "username":"string",
+  "password":"string",
+  "identityProvider":"string",
+  {{'}'}}
+        </pre>
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.curlRequest</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinCurl)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signinCurl>
+
+  curl --request GET \
+  --data '{{'{'}}"username":"admin","password":"admin","identityProvider","identityProvider"{{'}'}}' \
+  {{baseUrl}}/runtime/{{containerId}}/authorization
+        </pre>
+
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.angularExample</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signinAngular)">
+                                                file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px; margin-right: 10px;"
+                                                #signinAngular>
+
+  // Add the HttpClient in the constructor
+  constructor(private http: HttpClient) {{'{'}} {{'}'}}
+
+  // Declare the URL and the headers
+  const baseUrl = {{baseUrl}}/runtime/{{containerId}}/authorization;
+
+  let queryParams = new HttpParams();
+  queryParams = queryParams.append("username",username);
+  queryParams = queryParams.append("password",password);
+  queryParams = queryParams.append("identityProvider","KEYCLOAK");
+                                                
+  // Call the HTTP Request
+  this.http.get(this.baseUrl + '/authorization', {{'{'}}params:queryParams{{'}'}});
+                        </pre>
+                                            <pre style="background-color: #EFF0F1; margin-left: 10px; margin-right: 10px;"
+                                                #signinAngular>
+//Google auth
+//Extract token from queryParams and put it in localStorage
+ngOnInit(): void {{'{'}}
+    if(this.route.snapshot.queryParamMap.get('token')) {{'{'}}
+        const token = this.route.snapshot.queryParamMap.get('token');
+        if(token) {{'{'}}
+            localStorage.setItem('grizzly-token', 'Bearer ' + token);
+        {{'}'}}
+    {{'}'}}
+{{'}'}}
+                            
+// Add the HttpClient in the constructor
+constructor(private http: HttpClient) {{'{'}} {{'}'}}
+                          
+// Declare the URL and the headers
+const baseUrl = {{baseUrl}}/runtime/{{containerId}}/authorization;
+                                                                          
+// Call the HTTP Request
+window.location.href = this.baseUrl + '/authorization?identityProvider=google&redirect_uri=redirect_uri
+                        </pre>
+
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.response</strong>
+                                            <p style="margin-left: 10px;" translate>
+                                                project.authDocumentation.tokenNotice</p>
+                                            <pre
+                                                style="background-color: #EFF0F1; margin-left: 10px; margin-right: 10px;">
+  {{'{'}}
+     "token": 
+         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGgiOlt7ImF1dGhvcml0eSI6ImFkbWluIn1dLCJpc3MiOiJ0ZXN0IiwiZXhwIjoxNTcxMTYxNjgyfQ.GTIl_7ch382MFLBZ8ywd_FXjz6rc6YUahm_TpXWS-Hw"
+  {{'}'}}
+                              </pre>
+                                        </mat-tab>
+                                        <mat-tab label="OauthUserinfo"><br>
+                                            <p style="margin-left: 10px;" translate>Your user informations</p>
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.curlRequest</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signupCurl)">file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1;margin-left: 10px;margin-right: 10px;"
+                                                #signupCurl>
+
+            curl --header "Authorization: Bearer USE_YOUR_TOKEN_HERE" \
+            curl --request GET \
+            {{baseUrl}}/runtime/{{containerId}}/userinfo
+        </pre>
+
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.angularExample</strong>&nbsp;
+                                            <mat-icon matTooltip="Copy Code" style="cursor: pointer"
+                                                (click)="copyText(signupAngular)">
+                                                file_copy
+                                            </mat-icon>
+                                            <pre style="background-color: #EFF0F1; margin-left: 10px; margin-right: 10px;"
+                                                #signupAngular>
+
+            // Add the HttpClient in the constructor
+            constructor(private http: HttpClient) {{'{'}} {{'}'}}
+                                                  
+            // Declare the URL and the headers
+            const baseUrl = {{baseUrl}}/runtime/{{containerId}}/userinfo;
+                                                  
+            let headers = new HttpHeaders();
+            headers.set('Authorization', 'Bearer ' + USE_YOUR_TOKEN_HERE);
+                                                  
+            // Call the HTTP Request with your token in the headers
+            this.http.get(baseUrl + '/userinfo?identityProvider=identityProvider', {{'{'}}headers : this.headers{{'}'}});
+                                  </pre>
+
+                                            <strong style="margin-left: 10px;"
+                                                translate>project.authDocumentation.response</strong>
+                                            <pre
+                                                style="background-color: #EFF0F1;margin-left: 10px;margin-right: 10px;">
+
+            {{'{'}}
+              "firstname": "John",
+              "lastname": "Doe",
+              "username": "JohnDoe",
+              "email": "john.doe&#64;codeonce.fr",
+            {{'}'}}
+        </pre>
+                                        </mat-tab>
+
+                                    </mat-tab-group>
+                                </mat-card>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </article>
+</section>
+
+
+
+<section class="container-fluid" *ngIf="project?.id">
+    <app-container [projectId]="project?.id" [provider]="provider"></app-container>
+</section>
+
+<!-- <section class=" gapi-section container-fluid" *ngIf="project?.id && project.type !== 'authentication microservice' && analyticMicroservice"> -->
+<section class=" gapi-section container-fluid" *ngIf="project?.id && project.type !== 'authentication microservice'">
+    <app-function [projectId]="project?.id"></app-function>
+</section>

@@ -1,0 +1,142 @@
+<app-loader></app-loader>
+<div class="container" id="importContainer">
+
+    <div style="height: 60vh">
+        <!-- MAIN SECTION -->
+        <div *ngIf="activeProject.dbsourceId && activeProject.databaseName">
+            <h1 mat-dialog-title class="center-text" *ngIf="!hierarchyLoaded">
+                <span translate *ngIf="mode==='clone'">actions.importProject</span>
+                <span translate *ngIf="mode==='pull'">actions.pullProject</span>
+                <span translate *ngIf="mode==='push'">actions.pushProject</span>
+                <span translate *ngIf="mode==='sync'">actions.syncProject</span>
+            </h1>
+        </div>
+        <div *ngIf="!activeProject.dbsourceId && !activeProject.databaseName && !hierarchyLoaded" style="text-align: center">
+            <mat-error translate>import-modal.dbError</mat-error>
+        </div>
+
+        <!-- GIT SECTION -->
+        <div *ngIf="showGitSection && !hierarchyLoaded" class="mt-5">
+            <form name="form" #f="ngForm">
+
+                <div mat-dialog-content>
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Git URL</mat-label>
+                        <input matInput type="text" [(ngModel)]="gitUrl" (input)="showCheckBtn()" name="gitUrl" [disabled]="hide" required>
+                    </mat-form-field  > 
+
+                    <div class="row mt-2">
+
+                        <div class="col-6" style="margin-left:-16px;">
+                            <mat-form-field appearance="outline"  *ngIf="!addBranchBool" class="col-12">
+                                <mat-label translate>import-modal.branch</mat-label>
+                                <mat-select matNativeControl [(ngModel)]="gitBranch" name="gitBranch" [disabled]="hide || loadingBranches" required>
+                                    <mat-option *ngFor="let branch of branchsList" [value]="branch">{{ branch }}</mat-option>
+                                </mat-select>
+                            </mat-form-field  >
+                            <mat-form-field appearance="outline"  *ngIf="addBranchBool" class="col-12">
+                                <mat-label>Git Branch</mat-label>
+                                <input matInput c type="text" [(ngModel)]="gitBranch" #gitbranch name="gitbranch">
+                            </mat-form-field  >
+                        </div>
+
+                        <div class="col-6">
+                            <button matSuffix mat-raised-button *ngIf="addBranchBool" (click)="confirmNewCollection()">
+                                                <em class="material-icons" style="color: #66BB6A">
+                                                    done
+                                                </em>
+                                            </button>
+                            <button matSuffix mat-raised-button style="float: right;" *ngIf="addBranchBool" (click)="cancelNewCollection()">
+                                                <em class="material-icons" style="color: #F93E3E">
+                                                    undo
+                                                </em>
+                                            </button>
+                            <!-- <span class="ml-1">
+                                <button *ngIf="!addBranchBool" mat-raised-button color="accent" class="btn-md" [disabled]="!gitUrl"
+                                  (click)="addNewBranch()" [disabled]="hide || loadingBranches" >
+                                  <span *ngIf="!loading" translate>
+                                    git.btn.addBranch
+                                  </span>
+                            </button>
+                            </span> 
+                            <span>
+  <button mat-raised-button *ngIf="!addBranchBool" color="accent" class="btn-md" [disabled]="!gitUrl"
+    (click)="getBranchsList(gitUrl)" [disabled]="hide || loadingBranches" style="float:left;" >
+    <span *ngIf="!loading" translate>
+      git.btn.check
+    </span>
+                            </button>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <mat-checkbox *ngIf="mode==='clone'" (click)="toggleGitRepoType()">
+                        <span translate>auth.authentication</span>
+                    </mat-checkbox>
+
+                    <div *ngIf="gitRepoType === 'private' || mode!=='clone'">
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" >
+                                    <mat-label translate>import-modal.username</mat-label>
+                                    <input matInput type="text" [(ngModel)]="gitUsername" name="gitUsername" [disabled]="hide" required>
+                                </mat-form-field  >
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field appearance="outline" >
+                                    <mat-label translate>import-modal.password</mat-label>
+                                    <input matInput type="password" [(ngModel)]="gitPassword" name="gitPassword" [disabled]="hide" required>
+                                </mat-form-field  >
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="alert alert-danger" style="text-align: center" role="alert" *ngIf="gitError && !unexpectedErrorMsg">
+            <span translate>git.import.error</span>
+        </div>
+        <div class="alert alert-danger" style="text-align: center" role="alert" *ngIf="gitError && unexpectedErrorMsg">
+            <span>{{ unexpectedErrorMsg }}</span>
+        </div>
+        <br>
+        <div *ngIf="hierarchyLoaded" style="height: 55vh; overflow: auto; text-align: center">
+            <app-file-explorer></app-file-explorer>
+        </div>
+
+        <div class="row" *ngIf="data && !data.showTree && !hierarchyLoaded ">
+            <div class="col-12" *ngIf="mode==='clone'">
+                <span translate>api.or</span>
+                <div class="space"></div>
+                <a href="Javascript: void(0);" (click)="inputFile.click()">
+                    <span translate>actions.importZipFile</span>
+                </a>
+                <input #inputFile type="file" name="file" [style.display]="'none'" accept=".zip" ng2FileSelect [uploader]="uploader" (change)="importZipFile()">
+            </div>
+        </div>
+
+    </div>
+
+    &nbsp;
+    <!-- <a *ngIf="hierarchyLoaded && container?.hierarchy" (click)="openConfirmDeleteFiles()" style="color: #b00; cursor: pointer">
+        <span translate>popups.resource.deleteAllFiles.action</span>
+    </a> -->
+
+                            <!-- CLOSE BUTTON -->
+                            <div class="text-right">
+
+                                <button mat-raised-button color="primary" [disabled]="!gitUrl" class="btn-w-md" style="float: right; margin-left: 5px;" (click)="importGitRepo()">
+      <span *ngIf="!loading && !hierarchyLoaded " translate>
+        git.btn.syncronise
+      </span>
+    </button>
+
+                                <button mat-raised-button (click)="dialogRef.close()" style="float: right;" class="btn-w-md">
+      <span translate>popups.buttons.close</span>
+    </button>
+
+                            </div>
+
+                        </div>

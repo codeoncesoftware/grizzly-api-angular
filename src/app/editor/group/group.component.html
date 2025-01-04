@@ -1,0 +1,57 @@
+
+<div class="row" >
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <mat-accordion multi *ngFor="let currentGroup of container.resourceGroups; let i = index" 
+    #{{currentGroup.name}}="cdkDropList"
+    class="box-list" id="{{currentGroup.name}}"
+    cdkDropList
+    cdkDropListOrientation="vertical"
+    [cdkDropListData]="currentGroup.resources"
+    [cdkDropListConnectedTo]="connectedTo"
+    (cdkDropListDropped)="dropTable($event, currentGroup)"><br>
+      <mat-expansion-panel #rgPanel  [id]="'group' + i"  [expanded]="expanded.includes(i)"
+       [@.disabled]="true" *ngIf="currentGroup.name !== 'Authentication Grizzly'">
+        <mat-expansion-panel-header (click)="openRg(container.id, i)" >
+          <mat-panel-title style="display: inline-block;
+          vertical-align: middle;
+          margin: 10px 0;">
+            <button mat-button>
+              <mat-icon>{{currentGroup.name !== 'Authentication Grizzly'  ? 'all_inbox' : 'lock' }}</mat-icon> {{currentGroup.name}}
+            </button> {{currentGroup.description}}
+          </mat-panel-title>
+          <mat-panel-description style="justify-content: flex-end; float:right"
+            >
+            <button mat-button class="cobtn" style=" color: #002659" (click)="openAddApiModal(currentGroup); $event.stopPropagation();">
+              <mat-icon>add</mat-icon>
+              &nbsp; <span translate>resource.add</span>
+            </button>
+            <button #deleteBtn id="{{currentGroup.name}}" mat-button disabled color="warn"
+              (click)="openConfirmDeleteAllDialog(currentGroup); $event.stopPropagation();">
+              <mat-icon>delete_forever</mat-icon>&nbsp;&nbsp;
+              <span translate>editor.btn.deleteEndpoints</span>
+            </button>
+            <button mat-button class="cobtn"  style=" color: #002659" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation();">
+              <mat-icon>more_vert</mat-icon>
+              &nbsp; <span translate>editor.btn.menuTag</span>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openEditGroupModal(currentGroup)">
+                <mat-icon>edit</mat-icon>&nbsp;&nbsp;
+                <span translate>editor.btn.editTag</span>
+              </button>
+              <button mat-menu-item (click)="openDeleteGroupModal(currentGroup)">
+                <mat-icon>delete_forever</mat-icon>&nbsp;&nbsp;
+                <span translate>editor.btn.deleteTag</span>
+              </button>
+            </mat-menu>
+    
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-api-editor  [refreshSwagger]="refreshSwagger" [ui]="ui" [swaggerBaseUrl]="swaggerBaseUrl" [el]="el" [container]="container"  [group]="currentGroup" 
+        (resourcesSelected)="updateResourcesToDelete($event)"></app-api-editor>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-md-1"></div>
+</div>

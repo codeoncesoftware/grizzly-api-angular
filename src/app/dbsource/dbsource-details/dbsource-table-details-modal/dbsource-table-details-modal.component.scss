@@ -1,0 +1,116 @@
+.cobtn {
+    background-color: #002659;
+    color: white;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.copyContent {
+    font-size: 14px;
+    transition: all 0.3s linear;
+}
+
+.copyContent:hover {
+    color: green;
+    cursor: pointer;
+}
+
+.container-fluid {
+    text-align: left;
+    height: 65vh;
+    position: relative;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+}
+
+.btn-edit {
+    text-align: right;
+}
+
+.actions {
+    border: none;
+    background: none;
+}
+
+.mat-column-name {
+    flex: 0 0 15%;
+}
+
+.mat-column-type {
+    flex: 0 0 15%;
+}
+
+.mat-column-category {
+    flex: 0 0 15%;
+}
+
+.mat-column-nullable {
+    flex: 0 0 15%;
+}
+
+.mat-column-autoIncrement {
+    flex: 0 0 15%;
+}
+
+.mat-column-action {
+    flex: 0 0 15%;
+}
+
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    flex: auto;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.queryReview {
+    background-color: #EFF0F1;
+    overflow-y: hidden;
+    margin-top: 25px;
+    padding: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 200px;
+    width: 100%;
+}
+
+.my-button{
+    //float:right; 
+    background-color:#002659; 
+    color:white; 
+    height:40px;
+}
+.my-button:disabled {
+    border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+.error{
+    font-family: Andale Mono, monospace; 
+    font-size:16px;
+}
+button {
+    cursor: pointer;
+  }
+  
+  button.mat-primary {
+    background-color: #002659;
+  }
+  
+  .dbContainer {
+    height: 50vh;
+    position: relative;
+  }
+  

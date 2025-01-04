@@ -1,0 +1,25 @@
+{
+    "extends": "../tslint.json",
+    "linterOptions": {
+        "exclude": [
+            "**/generated/**"
+        ]
+    },
+    "rules": {
+        "ignore-template-strings": true,
+        "directive-selector": [
+            true,
+            "attribute",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "app",
+            "kebab-case"
+        ]
+    },
+    "max-line-length": [
+        false
+    ]
+}

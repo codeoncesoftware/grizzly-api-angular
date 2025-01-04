@@ -1,0 +1,152 @@
+<div class="container dbContainer">
+    <form>
+        <div class="article">
+            <span *ngIf="dbSource.type==='nosql'">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider='MONGO'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='MONGO'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/mongo-activated.jpg" alt="Mongo DB"><br>4.2.11
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'ELASTICSEARCH'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='ELASTICSEARCH'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/elastic-activated.jpg" alt="ElasticSearch"><br>7.9.3
+                                <!-- <p style="font-size: 10px" translate>comingSoon</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'COUCHDB'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='COUCHDB'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/couchdb-activated.jpg" alt="Couch DB"><br>6.5.1
+                                <!-- <p style="font-size: 10px" translate>comingSoon</p> -->
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Coming Soon -->
+                    <!-- <div class="col-xl-3">
+                    <div [ngClass]="{'item-card-selected': dbSource.provider==='MARKLOGIC'}" class="item-card">
+                        <div class="img">
+                            <img src="assets/images/db/marklogic.png" alt="Mark Logic"><br>10.0.0
+                            <p style="font-size: 10px" translate="">comingSoon</p>
+                        </div>
+                    </div>
+                </div> -->
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'BIGQUERY'; dbSource.connectionMode = 'CLOUD'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='BIGQUERY'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/bigquery.jpg" alt="BigQuery"><br>
+                                <!-- <p style="font-size: 10px" translate>comingSoon</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </span>
+            <span *ngIf="dbSource.type==='sql'">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider='MYSQL'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='MYSQL'}" class="item-card">
+                            <div class="img">
+                                <img class="mysql" src="assets/images/db/mysql.png" alt="MySQL">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'POSTGRESQL'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='POSTGRESQL'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/pos.png" alt="POSTGRESQL">
+                                <!-- <p style="font-size: 10px" translate>comingSoon</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'MARIADB'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='MARIADB'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/maria.png" alt="MARIADB">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'SQLSERVER'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='SQLSERVER'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/SQLServer.jpg" alt="SQLSERVER">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div (click)="dbSource.provider = 'as400'; dbSource.connectionMode = 'ON-PREMISE'"
+                            [ngClass]="{'item-card-selected': dbSource.provider==='as400'}" class="item-card">
+                            <div class="img">
+                                <img src="assets/images/db/as400.png" alt="as400">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+            </span>
+            <div class="box box-default">
+                <div class="divider"></div>
+                <div class="row" *ngIf="dbSource.type==='nosql' && dbSource.provider === 'MONGO'">
+                    <div class="col-12">
+                        <span translate style="text-align: left; float: left; font-weight: bold;">&nbsp;&nbsp;&nbsp;dbsource-modal-provider.connection</span>
+                        <mat-radio-group class="mat-radio-group-spacing" [(ngModel)]="dbSource.connectionMode" name="connectionMode">
+                            <mat-radio-button value="FREE" *ngIf="dbSource.provider === 'MONGO'"><span translate>
+                                    dbsource-modal-provider.free</span></mat-radio-button>
+                            <mat-radio-button value="ON-PREMISE"><span translate>
+                                    dbsource-modal-provider.onpremise</span>
+                            </mat-radio-button>
+                            <mat-radio-button value="CLOUD"><span translate> dbsource-modal-provider.cloud</span>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+            </div>
+
+            <div class="row" *ngIf="dbSource.connectionMode==='FREE'">
+                <p>
+                    <em class="material-icons" style="vertical-align: middle"> info </em> <span translate>
+                        dbsource-modal-provider.info1</span>
+                </p>
+            </div>
+            <div class="row" *ngIf="dbSource.connectionMode==='CLOUD' && dbSource.provider==='mongo'">
+                <p>
+                    <i class="material-icons" style="vertical-align: middle"> info </i>
+                    <span translate> dbsource-modal-provider.info2</span>
+                </p>
+            </div>
+        </div>
+
+
+    </form>
+
+    <div class="box-body step-buttons text-right">
+        <span class="space"></span>
+        <button matStepperPrevious mat-raised-button class="btn-w-md"><span
+                translate>popups.buttons.back</span></button>&nbsp;
+        <button matStepperNext mat-raised-button color="primary" class="btn-w-md" [disabled]="!dbSource.provider || !dbSource.connectionMode" (click)="changeProvider()"><span translate>
+                dbsource-modal-provider.next</span></button>
+    </div>
+
+</div>

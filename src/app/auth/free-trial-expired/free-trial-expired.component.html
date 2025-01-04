@@ -1,0 +1,164 @@
+<app-loader></app-loader>
+<div class="page-auth">
+  <div class="main-body">
+    <div class="row justify-content-center">
+      <div class="" style="background-color: transparent; padding:10px; margin-bottom: 0px">
+        <a href="https://www.grizzly-api.com/">
+          <div style="cursor: pointer;">
+            <img style="vertical-align:middle; height: 50px;" src="../../../assets/images/logo/white-logo.png"
+              alt="Code Once Logo">
+            <span style="color: white; font-size: 50px; vertical-align:middle; font-family: 'Nunito', sans-serif;">&nbsp;
+              Grizzly API</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <br><br>
+    <div class="card card-white">
+      <h4 style="text-align: center" >
+        <div style="float: right; position: absolute; right: 0; top: 0">
+          <button mat-button [matMenuTriggerFor]="menu" class="md-button header-btn">
+            <span *ngIf="!isFr" class="flag-icon flag-icon-fr"> </span><span *ngIf="isFr"
+              class="flag-icon flag-icon-gb"></span>
+            {{selectedLanguage}} <mat-icon>keyboard_arrow_down</mat-icon></button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isFr" (click)="setLang('fr')"><span class="flag-icon flag-icon-fr"></span>
+              FR</button>
+            <button mat-menu-item *ngIf="!isFr" (click)="setLang('en')"><span class="flag-icon flag-icon-gb"></span>
+              EN</button>
+          </mat-menu>
+        </div>
+      </h4>
+
+
+
+      <div class="card-content">
+        <mat-icon style="font-size: 60px;position: relative;left: 46%;color: #FFCC00;">warning</mat-icon><br><br>
+<h2 style="text-align: center;font-size: 30px;"><span translate>trial.expiredMsg</span></h2>
+<p style="text-align: center;font-weight: 500;"><span translate>trial.msg1</span></p>
+<p style="text-align: center;font-weight: 500;"><span translate>trial.msg2</span></p>
+<p style="text-align: center;font-weight: 500;"><span translate>trial.msg3</span></p>
+
+<div class="row justify-content-center" style="display: -webkit-box;
+display: -webkit-flex;
+display: -ms-flexbox;
+display:         flex;
+flex-wrap: wrap;">
+    
+ 
+
+     <div class="col-md-4 col-lg-4 mb-lg-0  mb-3  pricing-single-wrap">
+
+        <div class="row justify-content-center">
+            <div class="col-6 flag gradient-free d-block d-sm-block d-md-none"
+                style="height: 30px; width: 150px; text-align: center; position: absolute; margin-top: 10px; border-top-right-radius: 3px; border-top-left-radius: 3px; text-align: center;">
+                <h4 style="color: white;">Cloud - SaaS</h4>
+            </div>
+        </div>
+
+        <div class="cardd  o-hidden" style="margin-top: 40px;">
+            <div style="border-radius: 10px 10px 0px 0px;" class="card-headerr gradient-essentials text-white text-center p-3 mb-2">
+                <h3 class="card-titlee text-white font-weight-bold mb-2 text-uppercase"><span
+                        translate>trial.scalability</span></h3>
+                <p class="text-uppercase mb-0"><span translate>STANDARD</span></p>
+            </div>
+            <div class="card-body pt-0 text-center">
+               <br>
+                <p style="margin-bottom: 10px;" class="card-text">
+                    <span style="font-weight: bold;" translate>trial.scalabilityPrice</span>
+                </p>
+                <div style="height: 90px;" class="offer-lists mb-4">
+
+                    <ul class="list-group  list-group-flush">
+
+                        <li class="list-group-item p-1 "><span translate>trial.scalabilityMsg</span></li>
+                      
+                    </ul>
+
+                </div>
+
+                <a  routerLink="/checkout/scalability"
+                    class="btn btn-gradient  pl-5 pr-5 pt-2 pb-2 "><span translate
+                        style="font-size: 12px;">trial.requestActivation</span></a>
+            </div>
+        </div>
+    </div> 
+
+    <div class="col-md-4 col-lg-4 mb-lg-0  mb-3  pricing-single-wrap">
+
+        <div class="row justify-content-center">
+            <div class="col-6 flag gradient-free d-block d-sm-block d-md-none"
+                style="height: 30px; width: 96px; text-align: center; position: absolute; margin-top: 10px; border-top-right-radius: 3px; border-top-left-radius: 3px; text-align: center;">
+                <h4 style="color: white;">Cloud - SaaS</h4>
+            </div>
+        </div>
+
+        <div class="cardd  o-hidden" style="margin-top: 40px;">
+            <div style="border-radius: 10px 10px 0px 0px;" class="card-headerr text-center p-3 mb-2 bg-gradient text-white">
+                <h3 class="card-titlee text-white font-weight-bold mb-2 text-uppercase"><span
+                        translate>trial.limitless</span></h3>
+                <p class="text-uppercase mb-0"><span translate>trial.profesionnal</span></p>
+            </div>
+            <div class="card-body pt-0 text-center">
+                <br>
+                <p style="margin-bottom: 10px;" class="card-text">
+                    <span style="font-weight: bold;" translate>trial.limitlessPrice</span>
+                    
+                </p>
+                <div style="height: 90px;"  class="offer-lists mb-4">
+
+                    <ul class="list-group  list-group-flush">
+                        <li class="list-group-item p-1 "><span translate>trial.profesionnalMsg</span></li>
+                    </ul>
+
+                </div>
+
+                <a routerLink="/checkout/limitless"
+                    class="btn btn-gradient  pl-5 pr-5 pt-2 pb-2 "><span translate
+                        style="font-size: 12px;">trial.requestActivation</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-lg-4 mb-lg-0  mb-3  pricing-single-wrap">
+
+        <div class="row justify-content-center">
+            <div class="col-6 flag gradient-free d-block d-sm-block d-md-none"
+                style="height: 30px; width: 150px; text-align: center; position: absolute; margin-top: 10px; border-top-right-radius: 3px; border-top-left-radius: 3px; text-align: center;">
+                <h4 style="color: white;">Cloud - SaaS</h4>
+            </div>
+        </div>
+
+        <div class="cardd  o-hidden" style="margin-top: 40px;">
+            <div style="border-radius: 10px 10px 0px 0px;" class="card-headerr bg-pink-gradient text-center p-3 mb-2 text-white">
+                <h3 class="card-titlee text-white font-weight-bold mb-2 text-uppercase"><span
+                        translate>trial.consulting</span></h3>
+                <p class="text-uppercase mb-0"><span translate>BUSINESS</span></p>
+            </div>
+            <div class="card-body pt-0 text-center">
+<br>
+                <p  style="margin-bottom: 10px;" class="card-text">
+                    <span style="font-weight: bold;" translate>trial.requestQuote</span>
+                    
+                    
+                </p>
+                <div style="height: 90px;" class="offer-lists mb-4">
+
+                    <ul class="list-group  list-group-flush">
+                        <li class="list-group-item p-1 "><span translate>trial.consultingMsg</span></li>
+                       
+                    </ul>
+
+                </div>
+
+                <a href="mailto:contact@grizzly-api.com?subject=Essential Subscription&body=Please complete your message..."
+                    class="btn btn-gradient  pl-5 pr-5 pt-2 pb-2 "><span translate
+                        style="font-size: 12px;">trial.requestQuote</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+    
+      </div>
+    </div>
+  </div>
+</div>

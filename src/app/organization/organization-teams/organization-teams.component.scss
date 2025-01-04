@@ -1,0 +1,39 @@
+.container-fluid {
+    padding: 80px 80px 80px 80px;
+    width: 95%;
+    margin-top: 40px;
+    background-color: white;
+    
+}
+.mat-fab-menu {
+    background-color: #002659;
+    width: 27px;
+    height: 27px;
+    margin-right: 20px;
+}
+.abrevName  {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    position: relative;
+    top: -8px;
+}
+.border-div {
+    border-top: 0px;
+    border-bottom: 5px solid #f7f7f7;
+    border-left: 0px;
+    border-right: 0px;
+    border-radius: 0px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+}
+
+mat-form-field {
+    width: 380px;
+    
+}
+.deleteButton {
+    background-color:#002659;
+    color: white;
+    
+}

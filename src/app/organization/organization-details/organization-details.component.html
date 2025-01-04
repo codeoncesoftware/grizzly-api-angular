@@ -1,0 +1,76 @@
+<app-loader></app-loader>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-9">
+            <button class="mat-fab-menu  mt-2 " mat-mini-fab  >
+                <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span> 
+            </button>
+            <span style="font-size: 25px;font-weight: bold;">{{organization?.name}}</span>
+        </div>
+   
+    </div>
+    
+    <div>
+        <h3>{{organization?.totalMembers}} <span translate>organization.membersTitle</span> / {{organization?.totalTeams}} <span translate>organization.teams</span> |  <span translate>team.created</span> {{organization?.creationDate | date}} </h3>
+      </div>
+    <div class="border-div"></div>
+    <br>
+<div>
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <mat-form-field appearance="outline"  appearance="outline">
+                        <mat-label><span translate>popups.organization.placeholder.name</span> </mat-label>
+                        <input  [(ngModel)]="organization.name" name="name" matInput placeholder="{{ 'popups.organization.placeholder.name' | translate}}"  >
+                      </mat-form-field  >
+                </div>
+                <div>
+                    <mat-form-field appearance="outline"   appearance="outline">
+                        <mat-label ><span translate>popups.organization.placeholder.email</span></mat-label>
+                        <input [(ngModel)]="organization.email" name="email"  matInput placeholder="{{ 'popups.organization.placeholder.email' | translate}}" >
+                    </mat-form-field  >
+                      <mat-error *ngIf="!emailFormatValid">
+                        <span translate>auth.signup.errors.emailValid</span>
+                      </mat-error>
+                </div>
+                <br *ngIf="!emailFormatValid">
+            </div>
+            <div class="col-md-6">
+                <div>
+                    <mat-form-field appearance="outline"  appearance="outline">
+                        <mat-label><span translate>popups.organization.placeholder.address</span></mat-label>
+                        <input  [(ngModel)]="organization.address" name="address" matInput placeholder="{{ 'popups.organization.placeholder.address' | translate}}" >
+                      </mat-form-field  >
+                </div>
+                <div>
+                    <mat-form-field appearance="outline"   appearance="outline">
+                        <mat-label ><span translate>popups.organization.placeholder.phone</span></mat-label>
+                        <input [(ngModel)]="organization.phone" name="phone"  matInput   placeholder="{{ 'popups.organization.placeholder.phone' | translate}}">
+                    </mat-form-field  >
+                    
+                </div>
+        
+            </div>
+        </div>
+  <div class="row">
+    <div class="col-md-6">
+        <mat-form-field appearance="outline"   appearance="outline">
+            <mat-label >Description</mat-label>
+            <textarea [(ngModel)]="organization.description" name="description" matInput placeholder="{{ 'popups.organization.placeholder.description' | translate}}" ></textarea>   
+          </mat-form-field  >
+    </div>
+    <div class="col-md-6">
+        <button  (click)="updateOrganization()" class="saveButton" mat-button><span translate>organization.save</span><mat-icon  style="margin-left: 10px;">check_circle</mat-icon></button> &nbsp;
+        <button  (click)="openConfirmDeleteDialog()" class="deleteButton" mat-raised-button color="warn"><span translate>organization.delete</span><mat-icon style="margin-left: 10px;">delete_forever</mat-icon></button>
+    </div>
+  
+   
+  </div>
+      
+
+          
+    </form>
+</div>
+    
+</section>

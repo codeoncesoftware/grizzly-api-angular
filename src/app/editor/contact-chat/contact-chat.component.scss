@@ -1,0 +1,58 @@
+.iconButton {
+  width: 100%;
+  padding: 10px 30px 10px 30px;
+  border-radius: 3px;
+  background: #002659 !important;
+}
+
+svg {
+  color: white;
+  border-radius: 5px;
+  path {
+    fill: white;
+  }
+}
+
+.card {
+  display: flex;
+  border-radius: 20px;
+}
+
+.chat-text {
+  background-color: #f1f0f0;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.contact-widget {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0px 30px 60px 0px;
+  z-index: 999;
+}
+
+.closeContactWidget {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0.4;
+  color: white;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.header {
+  background-color: #002659 !important;
+  color: white;
+  min-height: 100px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-align: left;
+}

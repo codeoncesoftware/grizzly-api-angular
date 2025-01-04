@@ -1,0 +1,135 @@
+<app-loader></app-loader>
+<section class="container-fluid">
+  <div class="row">
+    <div class="col-9">
+      <button class="mat-fab-menu  mt-2 " mat-mini-fab>
+        <span class="abrevName" style="position: static;">{{organizationNameAbrev}}</span>
+      </button>
+      <span style="font-size: 25px;font-weight: bold;">{{organization?.name}}</span>
+    </div>
+
+  </div>
+
+  <div>
+    <h3>{{organization?.totalMembers}} <span translate>organization.membersTitle</span> / {{organization?.totalTeams}}
+      <span translate>organization.teams</span> | <span translate>team.created</span> {{organization?.creationDate |
+      date}}
+    </h3>
+  </div>
+  <div class="border-div"></div>
+
+  <div>
+    <h2 translate>organization.member.invite</h2>
+    <form>
+      <h3 translate>organization.member.msg</h3>
+      <div class="row">
+        <div class="col-10">
+          <mat-form-field appearance="outline"  style="width: 820px;" appearance="outline">
+            <mat-label>User Email</mat-label>
+            <mat-chip-grid #chipList>
+              <mat-chip-row style="background-color: #357EC7;color: white;" *ngFor="let member of members"
+                [selectable]="selectable" [removable]="removable" (removed)="remove(member)">
+                {{member.name}}
+                <mat-icon style="color: white;" matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip-row>
+              <input type="email" placeholder="E.g. user@email.com" #memberInput [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)"
+                [formControl]="myControl" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-row *ngFor="let option of filteredOptions | async" (click)="addOption(option)" [value]="option">
+                  {{option}}
+                </mat-row>
+              </mat-autocomplete>
+            </mat-chip-grid>
+          </mat-form-field  >
+          <mat-error *ngIf="!emailFormatValid">
+            <span translate>auth.signup.errors.emailValid</span>
+          </mat-error>
+        </div>
+
+
+
+        <div class="col-2 mt-2">
+          <div matTooltip="{{ 'organization.inviteFormat' | translate}}" [matTooltipDisabled]="members.length !== 0">
+            <button (click)="invite()" [disabled]="members.length === 0" class="inviteButton" id="inviteButton"
+              mat-button><span translate>organization.invite</span><mat-icon
+                style="margin-left: 10px;">person_add</mat-icon></button>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+
+      <div *ngFor="let email of inOrganizationMembers" class="row errors">
+        <div>
+          <mat-error>
+            <span>{{email}} </span><span translate>organization.alreadyAssigned</span>
+          </mat-error>
+          <br />
+        </div>
+
+
+
+      </div>
+      <div *ngFor="let email of notUsers" class="row errors">
+        <div>
+          <mat-error>
+            <span>{{email}} </span><span translate>organization.notUser</span>
+          </mat-error>
+          <br />
+        </div>
+
+
+
+
+      </div>
+
+    </form>
+  </div>
+
+  <div>
+    <h2 translate>organization.members</h2>
+    <p translate>organization.adminNote</p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Member</th>
+          <th scope="col">Admin</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <ng-container *ngFor="let member of organizationMembers; let i = index; ">
+          <tr>
+
+            <td>{{member.email}}</td>
+            <td><mat-radio-button #consumValue name="{{i}}" value="member"
+                (click)="changeRole(member , consumValue.value )" [checked]="member.role === 'member'"
+                [disabled]="disableMember"></mat-radio-button>
+            </td>
+            <td><mat-radio-button #ownerValue name="{{i}}" value="admin" (click)="changeRole(member ,ownerValue.value )"
+                [checked]="member.role === 'admin'"></mat-radio-button>
+            </td>
+            <td>
+              <button mat-icon-button (click)="deleteMember(member.id)" style="position: relative;">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+
+
+            </td>
+          </tr>
+        </ng-container>
+
+      </tbody>
+    </table>
+  </div>
+  <div>
+
+  </div>
+
+</section>

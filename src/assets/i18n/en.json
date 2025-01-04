@@ -1,0 +1,1337 @@
+{
+    "chat": {
+        "msg": "Need a hand with Grizzly ? Feel free to contact us, we are more than happy to guide you",
+        "reply": "Typically replies in minutes",
+        "start": "Start chat with :"
+    },
+    "trial": {
+        "expiredMsg": "Your trial has expired",
+        "msg1": "We couldn't log you in because your trial is expired.",
+        "msg2": "All of your data will be safe for the next days , but no one will be able to log in util your account is upgrated.",
+        "msg3": "Choose from this 3 plans :",
+        "scalability": "SCALABILITY",
+        "limitless": "LIMITLESS",
+        "consulting": "CONSULTING",
+        "profesionnal": "PROFESSIONAL",
+        "scalabilityMsg": "The right offer if you create and modify up to 18 microservices per month",
+        "profesionnalMsg": "Work with your team on an unlimited number of microservices",
+        "consultingMsg": "You need experts advice to create your micro-service based architecture",
+        "requestQuote": "Request a Quote",
+        "requestActivation": "Request Activation",
+        "limitlessPrice": "5000 € / Month",
+        "scalabilityPrice": "290€ per modified microservice / Month"
+    },
+    "server": "Servers",
+    "host": "Host and Base URL",
+    "hostName": "Host",
+    "basePath": "Base Path",
+    "schemes": "Schemes",
+    "sidenav": {
+        "projects": "Microservices",
+        "datasources": "Data sources",
+        "database": "Database Linked : ",
+        "dashboard": "Dashboard",
+        "organization": "Organization",
+        "identityprovider": "Identity Providers"
+    },
+    "resources": "Resources",
+    "organization": {
+        "notUser": "is not a user. We sent him an email to complete his registration.",
+        "alreadyAssigned": "is already assigned to an organization.",
+        "noTeams": "has no teams created yet.",
+        "membersTitle": "Members",
+        "teams": "Teams",
+        "invite": "Invite",
+        "add": "Add",
+        "delete": "Delete",
+        "save": "Save",
+        "edit": "Edit",
+        "members": "Organization Members",
+        "member": {
+            "invite": "Invite Members",
+            "msg": "Invite members to join this Organization by email. To invite multiple Members, separate each with a comma."
+        },
+        "adminNote": "Each organization must have at least one Admin",
+        "inviteFormat": "Press enter or , to confirm the selection."
+    },
+    "team": {
+        "team": "Team",
+        "create": "Create Team",
+        "created": "Created",
+        "invite": "Invite",
+        "add": "Add",
+        "delete": "Delete",
+        "edit": "Edit",
+        "members": "Team Members",
+        "member": {
+            "invite": "Add Members to a Team",
+            "msg": "Invite members to join this Team by email. Separate each with a comma."
+        },
+        "warning": "You can only add users from your organization."
+    },
+    "auth": {
+        "authentication": "Authentication",
+        "signin": {
+            "title": "SIGN IN",
+            "placeholder": {
+                "email": "Email",
+                "password": "Password"
+            },
+            "account": "You don't have an account? ",
+            "errors": {
+                "email": "Please enter the associated email with your Grizzly account.",
+                "credentials": "The credentials are not valid.",
+                "validAccount": "Your account is not activated Yet ! \nPlease Check your email or ask for a new Confirmation link.",
+                "checkEmail": "Check your Email addess to reset your password."
+            },
+            "reset": "Reset Password",
+            "btn": "Login",
+            "signup": "Sign Up",
+            "forgotPass": "Forgot Password ?"
+        },
+        "signup": {
+            "title": "SIGN UP",
+            "placeholder": {
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "email": "Email",
+                "password": "Password",
+                "confirmPassword": "Confirm Password",
+                "phone": "Phone",
+                "organisation": "Organisation"
+            },
+            "errors": {
+                "emailValid": "Please enter a valid email.",
+                "phoneValid": "Please Enter a Valid Phone Number.",
+                "password": "Please enter your new password",
+                "passwordMatch": "Passwords do not match",
+                "emailUnicity": "This email already exists.",
+                "phone": "Please Enter your Phone Number.",
+                "firstName": "Please Enter your First name.",
+                "lastName": "Please Enter your Last name."
+            },
+            "welcome1": "Welcome aboard ",
+            "welcome2": "Your account has been created successfully. We’ve sent you an activation email to confirm your account.",
+            "welcome3": "Enjoy creating your CODELESS Microservices and let",
+            "us": " us ",
+            "welcome4": "know if there is anything we can help you with.",
+            "btn": "Sign Up",
+            "login": "Login",
+            "account": "Already have an account? "
+        },
+        "reset": {
+            "title": "RESET PASSWORD",
+            "placeholder": {
+                "password": "Password",
+                "confirmPassword": "Confirm Password"
+            },
+            "errors": {
+                "password": "Please enter your new password",
+                "passwordMatch": "Passwords do not match",
+                "notFound": "No user is registered with this email."
+            },
+            "welcome1": "Your password have been successfully submitted. You can now  ",
+            "welcome2": "with your new password.",
+            "btn": "Submit",
+            "signup": "Sign Up",
+            "login": "Login"
+        }
+    },
+    "header": {
+        "settings": "Settings",
+        "logout": "Logout",
+        "welcome": "Welcome",
+        "billing": "Billing",
+        "doc": "Guide"
+    },
+    "project": {
+        "edit": "Edit",
+        "shared": "Microservice shared with success",
+        "delete": "Delete",
+        "select": "Select a Datasource for this Microservice",
+        "required": "This field is required.",
+        "req": "This field is required.",
+        "letters": "Please enter letters or numbers only.",
+        "64": "Please enter at least 64 characters.",
+        "creationTime": "Creation Date",
+        "lastUpdate": "Last Update",
+        "noDescription": "Congratulations! Your new MicroService is created. You can now configure it by adding more Endpoints.",
+        "limit": "You've reached the limit for creating microservices",
+        "limitMsg": "Please upgrade your account to Limiteless or Scalability to add more microservices.",
+        "authDescription": "Congratulations! Your new MicroService of authentication is created.",
+        "share": "Share",
+        "markupType": "Markup Microservice",
+        "idpsSupported": "Supported Identity Providers: ",
+        "synchronisationGit":"Git synchronisation",
+        "datasource": {
+            "name": "Datasource",
+            "database": "Database",
+            "change": "Change"
+        },
+        "identityprovider": {
+            "idpmsg": "Choose an Identity Provider",
+            "keycloak": "Choose an Identity Provider Keycloak",
+            "google": "Choose an Identity Provider Google",
+            "userManagement": "Users management microservice",
+            "change": "Change",
+            "idpDefault": "Continue with a default Identity Provider"
+        },
+        "security": {
+            "title": "Security",
+            "config": "Security Configuration (JWT / JWS)",
+            "clientId": "Client ID",
+            "secretKey": "Secret Key (32 characters)",
+            "token": "Token Expiration (in seconds)",
+            "save": "Save",
+            "default": "Default Account",
+            "defaultDescription": "You have a default user with the role of \"admin\".",
+            "tokenConfig": "Token Configuration",
+            "manageRoles": "Manage Roles",
+            "addRole": "Add Role",
+            "roleExists": "This role already exists.",
+            "authMS": "Authentication microservice",
+            "link": "Go to this authentication microservice",
+            "apiKeys": "API Keys",
+            "addApp": "Add Application",
+            "appSecretKey": "Secret Key (16 characters)",
+            "appName": "Application Name"
+        },
+        "authDocumentation": {
+            "user": "Security Documentation",
+            "description1": "Use this Endpoint in order to receive a JWT to secure the rest of your APIs.",
+            "description2": "You can add users with roles using this Endpoint.",
+            "description3": "Add the Token to the Headers to use the secured Endpoints.",
+            "curlRequest": "CURL Request",
+            "angularExample": "Angular Example",
+            "signinModal": "Signin Modal",
+            "signupModal": "Signup Modal",
+            "oauthModal": "OauthAutorization Modal",
+            "response": "Response",
+            "signupNotice": "These fields are required. Feel free to add extra fields as well.",
+            "tokenNotice": "This is an example of a token that you can use with secured Endpoints."
+        }
+    },
+    "datasource": {
+        "add": "Add data source",
+        "error": "No Data source has been found, please add one first",
+        "default": "Link to a new free data base in MongoDB",
+        "limit": "You've reached the limit for creating datasources",
+        "limitMsg": "Please upgrade your account to Limiteless or Scalability to add more datasources."
+    },
+    "dbsource-modal": {
+        "clear": "Clear",
+        "cancel": "Cancel",
+        "add": "Add a New Data Source",
+        "select": "Select your database provider",
+        "fill": "Fill connection",
+        "type": "Select your database type",
+        "review": "Review",
+        "update": "Update Data Source",
+        "couchebase": {
+            "example": "Examples:",
+            "description": "To insert documents into the bucket, just set the HTTP method on PUT or POST and add the document to the HTTP request body on call. You don't have to provide a query body.",
+            "pagination": "Pagination Example:",
+            "offset": " is the page number while ",
+            "limit": " is the page size."
+        },
+        "sql": {
+            "example": "Examples:",
+            "description": "To insert rows into the table, just set the HTTP method on PUT or POST and add the document to the HTTP request body on call. You don't have to provide a query body.",
+            "pagination": "Pagination Example:",
+            "offset": " is the page number while ",
+            "limit": " is the page size."
+        }
+    },
+    "dbsource-details": {
+        "warning": "Only databases with at least one collection will be displayed.",
+        "warningSQL": "Only databases with at least one table will be displayed.",
+        "status": "Status",
+        "replaceData": "Replace the existing data in the collection by the new CSV file content"
+    },
+    "dbsource": {
+        "add": "Add a New DataSource",
+        "simpleAdd": "Add",
+        "fetch": "Fetching Data Sources",
+        "creationTime": "Creation Time",
+        "lastUpdate": "Last Update"
+    },
+    "identityprovider": {
+        "add": "Add a New Identity Provider",
+        "simpleAdd": "Add",
+        "fetch": "Fetching Identity Providers",
+        "creationTime": "Creation Time",
+        "lastUpdate": "Last Update",
+        "error": "No Identity Provider has been found, please add one first",
+        "default": "Continue automatically with a default Identity Provider",
+        "userManagement": "Users management",
+        "selectionerror": "No identity provider selected, Please choose one",
+        "limit": "You've reached the limit for creating identity providers",
+        "limitMsg": "Please upgrade your account to Limiteless or Scalability to add more identity providers."
+    },
+    "identityprovider-modal": {
+        "clear": "Clear",
+        "next": "Next",
+        "cancel": "Cancel",
+        "add": "Add a New Identity Provider",
+        "fill": "Fill connection",
+        "type": "Select your Identity Provider",
+        "review": "Review",
+        "update": "Update Identity Provider",
+        "placeholder": {
+            "clientId": "Client ID",
+            "secretKey": "Secret Key ",
+            "realmName": "Realm Name",
+            "acesstype": "Access Type",
+            "displayedName": "Name ",
+            "port": "Port",
+            "description": "Description",
+            "protocol": "Client protocol : OpenId Connect",
+            "grantType": "Grant Type",
+            "issuer": "Issuer (url)",
+            "userName": "Username",
+            "password": "Password"
+        }
+    },
+    "identityprovider-details": {
+        "status": "Status"
+    },
+    "identityprovider-modal-review": {
+        "review": "Review Connection",
+        "ip": "Provider  ",
+        "displayedName": "Name  ",
+        "realm": "Realm Name  ",
+        "clientID": "Client ID ",
+        "acessType": "Access Type ",
+        "grantType": "Grant Type ",
+        "issuer": "Issuer ",
+        "connection": " Connection : ",
+        "description": "Description ",
+        "previous": "Previous",
+        "create": "Create Identity Provider",
+        "save": "Save"
+    },
+    "identityprovider-modal-connection": {
+        "fail": "Fail to connect to Identity Provider, please check parameters !",
+        "success": "Connection Succeeded !"
+    },
+    "dbsource-modal-cloud-connection": {
+        "cloud": "Cloud Connection",
+        "fail": "Fail to connect to DataSource, please check parameters !",
+        "success": "Connection Succeeded !",
+        "placeholder": {
+            "name": "DataSource Name",
+            "mongo": "MongoDB SRV connection String"
+        },
+        "test": "Test connection",
+        "previous": "Previous",
+        "next": "Next"
+    },
+    "dbsource-modal-direct-connection": {
+        "connection": "Connection",
+        "database": "Database",
+        "perform": "Perform Authentication",
+        "auth": "Authentication",
+        "fail": "Fail to connect to DataSource, please check parameters !",
+        "success": "Connection Succeeded !",
+        "test": "Test connection",
+        "previous": "Previous",
+        "next": "Next",
+        "placeholder": {
+            "name": "Name",
+            "host": "Host",
+            "port": "Port",
+            "username": "Username",
+            "password": "Password",
+            "authb": "Authentication Database",
+            "bucketName": "Bucket Name",
+            "topic": "Topic",
+            "kafkausername": "Username (cluster api key)",
+            "kafkapassword": "Password (cluster api secret)"
+        }
+    },
+    "dbsource-modal-free": {
+        "free": "Free Database",
+        "previous": "Previous",
+        "next": "Next",
+        "placeholder": {
+            "dbname": "Datasource Name"
+        }
+    },
+    "dbsource-modal-provider": {
+        "connection": "Connection Mode",
+        "free": "Free",
+        "onpremise": "On-Premise",
+        "direct": "Direct",
+        "cloud": "Cloud",
+        "info1": "Free is a limited offer and is suitable for getting started. Please contact us fore more information.",
+        "info2": "If you have not created your database on the cloud yet, you can use MongoDB Atlas at https://www.mongodb.com/cloud/atlas",
+        "next": "Next"
+    },
+    "dbsource-modal-review": {
+        "review": "Review Connection",
+        "datasource": "DataSource Name : ",
+        "database": "Database Name : ",
+        "mongo": "MongoDB SRV connection String : ",
+        "connection": " Connection : ",
+        "previous": "Previous",
+        "create": "Create Database",
+        "save": "Save",
+        "unicity": "Datasource name is not unique! "
+    },
+    "dashboard": {
+        "totalStored": "Total Stored Data",
+        "dataStored": "Data Downloaded",
+        "fileStored": "Data Uploaded",
+        "requestCount": "Requests Delivered",
+        "apiCount": "Endpoints Count",
+        "usedData": "Uploaded Data",
+        "microserviceCount": "Microservices",
+        "datasourceCount": "Datasources",
+        "idpCount": "Identity Providers"
+    },
+    "not-found": {
+        "sorry": "Sorry, page not found",
+        "go": "Go Back to Home Page"
+    },
+    "settings": {
+        "placeholder": {
+            "first": "First Name",
+            "last": "Last Name",
+            "email": "Email",
+            "org": "Organization",
+            "current": "Current Password",
+            "new": "New Password",
+            "confirm": "Confirm Password",
+            "showChangeBtn": "Change Password",
+            "hideChangeBtn": "Hide Password Section"
+        },
+        "user": "User Profile",
+        "lock": "lock",
+        "please": "Please enter a valid email.",
+        "phone": "Phone",
+        "ph": "phone",
+        "valid": "Please enter a valid phone number",
+        "home": "Home",
+        "password": "Please enter your current password to update your profile.",
+        "change": "Change Password",
+        "enter": "Please enter your new password",
+        "match": "Passwords do not match.",
+        "thanks": "Thank you",
+        "profile": ", your profile has been updated successfully.",
+        "notvalid": "Your current Password is not valid.",
+        "number": "Please Enter a Valid Phone Number.",
+        "update": "Update Profile",
+        "pwdUpdate": ", your password has been updated successfully.",
+        "unlockBtn": "Unlock for profile update",
+        "confirmBtn": "Confirm",
+        "cancelBtn": "Cancel"
+    },
+    "container": {
+        "git": "Git Synchronization",
+        "title": "Versions",
+        "add": "Add",
+        "clone": "Clone",
+        "import": "Import",
+        "edit": "Edit",
+        "delete": "Delete",
+        "deleteAll": "Delete All Versions",
+        "creationTime": "Creation Date",
+        "lastUpdate": "Last Update",
+        "enable": "Enable Version",
+        "noContainers": "No version to display.",
+        "showFiles": "Show All resources",
+        "actions": "Version",
+        "export": "Export",
+        "load": "Import Swagger",
+        "publish": "Publish Swagger",
+        "file": "File",
+        "swagger": "Validate & Test",
+        "transformationDesc": "For any transformation Endpoint, you need to define a parameter in 'Body' named 'Body' which will contain the content of the template."
+    },
+    "container-modal": {
+        "placeholder": {
+            "description": "This is a description for this project version"
+        },
+        "zip": "You can add a ZIP file for an earlier version",
+        "import": "Import Container ZIP File",
+        "selected": "Selected file : "
+    },
+    "group": {
+        "actions": "Group",
+        "add": "Add Endpoints Group",
+        "edit": "Edit Group",
+        "delete": "Delete Group",
+        "deleteAll": "Delete All Groups",
+        "security": {
+            "action": "Secure Endpoint",
+            "secure": "Activate",
+            "insecure": "Disable"
+        }
+    },
+    "resource": {
+        "add": "Add Endpoint",
+        "edit": "Edit Endpoint",
+        "delete": "Delete Endpoint",
+        "deleteAll": "Delete",
+        "noResources": "No Endpoints to display.",
+        "method": "Method",
+        "path": "Path",
+        "invalid": "Endpoint missing attributes",
+        "valid": "Valid endpoint",
+        "missing": "Your resource is missing these attributes:",
+        "requestError": "Unsaved model: Save or exit the model editor.",
+        "responseError": "Unsaved model: Save or exit the model editor."
+    },
+    "popups": {
+        "members": {
+            "onlyBusiness": "Only for Limiteless or Scalability members",
+            "onlyBusinessMsg": "Please upgrade your account to Limiteless or Scalability to benefit from this feature."
+        },
+        "team": {
+            "add": "Add a new Team",
+            "edit": "Update Team",
+            "details": "Team Details",
+            "delete": {
+                "title": "Delete Team",
+                "msg": "Do you really want to delete this team ?"
+            },
+            "placeholder": {
+                "name": "Team name",
+                "description": "This is a description for this Team"
+            },
+            "errors": {
+                "unicity": "A Team with that name already exists",
+                "nullName": "Team name must not be empty",
+                "pattern": "You can use letters, numbers, - and _ only "
+            }
+        },
+        "member": {
+            "delete": {
+                "title": "Delete Member",
+                "msg": "Do you really want to delete this member ?"
+            },
+            "deleteAdmin": {
+                "title": "You cannot delete this member",
+                "msg": "This member has an admin role in this organization ."
+            }
+        },
+        "organization": {
+            "type": "Microservice's type",
+            "add": "Add a new Organization",
+            "edit": "Update Organization",
+            "details": "Organization Details",
+            "delete": {
+                "title": "Delete Organization",
+                "msg": "Do you really want to delete {{ name }} ?"
+            },
+            "placeholder": {
+                "name": "Name",
+                "email": "Email",
+                "description": "Description",
+                "address": "Address",
+                "phone": "Phone"
+            },
+            "errors": {
+                "unicity": "An Organization with that name already exists",
+                "nullName": "Organization name must not be empty",
+                "nullEmail": "Organization email must not be empty",
+                "pattern": "You can use letters, numbers, - and _ only "
+            }
+        },
+        "project": {
+            "git": "Git",
+            "add": "Create a new Microservice",
+            "edit": "Update Microservice",
+            "editIAM": "Update IAM",
+            "details": "Microservice Details",
+            "selectDb": "Select Database",
+            "selectIP": "Select Identity Provider",
+            "securityConfig": "Security configuration",
+            "outputDatasource": "Output Datasource",
+            "AnalyticMicroservice": "Analytic Microservice",
+            "userManagement": "Users management",
+            "addIAM": "Create a new IAM",
+            "authenticationMsg": "Create your identity and access management (IAM) service with the support of multiple identity providers: Keycloak, Google, Linkedin, Facebook, GitHub, Gitlab",
+            "delete": {
+                "title": "Delete Microservice",
+                "msg": "Do you really want to delete {{ projectName }} ?"
+            },
+            "typeMicroserviceMsg": "Create your microservice or REST Low Code API, based on the latest Java standars and the SQL / NoSQL database that suits you.",
+            "markupTypeMsg": "All the power of transformation languages (XSLT, FreeMarker, etc.) and binary numeric data import is in your hands, allowing you to design modern REST APIs.",
+            "madeBy": "Benefit from the power of modern technologies, the robustness of Java, the flexibility of Spring Boot, and the intelligence of OpenAI, all combined in one innovative tool. 💪",
+            "placeholder": {
+                "gitUrl": "Git Url",
+                "name": "Microservice name",
+                "nameIAM": "IAM name",
+                "collectionName": "Collection name",
+                "description": "This is a description for this Microservice",
+                "descriptionIAM": "IAM description",
+                "database": "Database"
+            },
+            "errors": {
+                "unicity": "A Microservice with that name already exists",
+                "null": "Microservice name must not be empty",
+                "pattern": "You can use letters, numbers and _ only ",
+                "url": "Please enter a valid URL (e.g https://grizzlyeditor.codeonce.fr)"
+            },
+            "role": {
+                "unicity": "This role is not unique"
+            },
+            "shareTitle": "This option is only for team members",
+            "shareMsg": "You need to be part of at least one team to share this microservice .",
+            "noDelete": "This authentication project cannot be deleted because it is already linked to other project"
+        },
+        "container": {
+            "name": "Title",
+            "version": "Version",
+            "termsOfService": "Terms of Service",
+            "infos": "Swagger Informations",
+            "add": "Add a new version",
+            "clone": "Clone the current version",
+            "edit": "Update version",
+            "delete": {
+                "title": "Delete Version",
+                "msg": "Are you sure to delete '{{version}}'"
+            },
+            "deleteAll": "Delete all versions",
+            "placeholder": "Version",
+            "errors": {
+                "unicity": "Version already exists",
+                "null": "Version must not be empty",
+                "pattern": "Invalid semantic version name. Please respect the naming convention of ",
+                "patternExample": "You may consult these naming examples"
+            }
+        },
+        "docker": {
+            "name": "Title",
+            "version": "Version",
+            "termsOfService": "Terms of Service",
+            "infos": "Swagger Informations",
+            "add": "Add a new version",
+            "clone": "Clone the current version",
+            "edit": "Update version",
+            "delete": {
+                "title": "Delete Docker",
+                "msg": "Are you sure to delete '{{version}}'"
+            },
+            "deleteAll": "Delete all versions",
+            "placeholder": "Version",
+            "errors": {
+                "unicity": "Version already exists",
+                "null": "Version must not be empty",
+                "pattern": "Invalid semantic version name. Please respect the naming convention of ",
+                "patternExample": "You may consult these naming examples"
+            }
+        },
+        "group": {
+            "add": "Add a new group",
+            "edit": "Update group",
+            "delete": {
+                "title": "Delete group",
+                "msg": "Confirm delete for group: '{{name}}'"
+            },
+            "deleteAll": "Delete all groups",
+            "errors": {
+                "unicity": "A group with that name already exists",
+                "null": "Group name must not be empty",
+                "pattern": "Spaces can be used only in the middle"
+            }
+        },
+        "resource": {
+            "add": "Add a new Endpoint",
+            "edit": "Update Endpoint",
+            "delete": {
+                "title": "Delete Endpoints",
+                "msg": "Do you want to delete the selected Endpoints ?"
+            },
+            "deleteAll": "Delete all Endpoints",
+            "placeholder": "Enter your Endpoint name",
+            "errors": {
+                "unicity": "An Endpoint with that name already exists",
+                "null": "Resource name must not be empty",
+                "pattern": "Spaces can be used only in the middle"
+            },
+            "jwt": {
+                "title": "Json Web Token",
+                "enable": "Do you want to enable the JWT Authentication?",
+                "disable": "Do you want to disable the JWT Authentication?",
+                "chooseRoles": "Choose Roles",
+                "rolesError": "You have to select a role"
+            },
+            "deleteAllFiles": {
+                "action": "Delete all Files",
+                "title": "Delete all Files",
+                "msg": "All files for version {{ containerName }} will be deleted permanently and cannot be recovered"
+            },
+            "index": "Index Type"
+        },
+        "dbsource": {
+            "table": {
+                "delete": {
+                    "title": "Delete Table",
+                    "msg": "Confirm delete for table [ {{ tableName }} ] {{linkedTables}} ?"
+                }
+            },
+            "delete": {
+                "title": "Delete Data Source",
+                "msg": "Confirm delete for datasource {{ datasourceName }} ?"
+            },
+            "noDelete": "This datasource cannot be deleted because it is already linked to project {{ projectName }}",
+            "collection": {
+                "drop": {
+                    "title": "Drop Collection",
+                    "msg": "Confirm drop for collection {{ collectionName }} ?"
+                },
+                "dropIndex": {
+                    "title": "Drop Index",
+                    "msg": "Confirm drop for index {{ collectionNameIndex }} ?"
+                }
+            },
+            "errors": {
+                "unicity": "A Datasource with that name already exists",
+                "pattern": "You can use letters, numbers and _ only "
+            }
+        },
+        "identityprovider": {
+            "delete": {
+                "title": "Delete Identity Provider",
+                "msg": "Confirm delete for Identity Provider {{ identityproviderName }} ?"
+            },
+            "edit": {
+                "title": "Update Identity Provider",
+                "msg": "You cannot update the Identity Provider {{ identityproviderName }} !"
+            },
+            "test": "Test connection",
+            "noDelete": "This Identity Provider cannot be deleted because it is already linked to a project"
+        },
+        "buttons": {
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "back": "Back",
+            "next": "Next",
+            "saveAndExit": "Save & Exit",
+            "close": "Close",
+            "download": "Download",
+            "selectAll": "Organization",
+            "team": "Team",
+            "upgrade": "Upgrade Account"
+        },
+        "search": {
+            "showTree": "Show Tree",
+            "hideTree": "Hide Tree",
+            "import": "Import File"
+        },
+        "domain": {
+            "open": "Open Domain Modal"
+        },
+        "model": {
+            "delete": {
+                "title": "Delete Model",
+                "msg": "Confirm delete for model {{ modelName }} ?"
+            },
+            "tsIndication": "Add your Typescript model with this editor",
+            "tsEditIndication": "Edit your Typescript model with this editor",
+            "nameNotEditable": "PS : The model name cannot be changed ."
+        },
+        "contact": {
+            "name": "The name of the contact person/organization",
+            "url": "The URL pointing to the contact information",
+            "email": "The email address of the contact person/organization"
+        },
+        "function": {
+            "delete": {
+                "title": "Delete Function",
+                "message": "Confirm delete for function {{name}} ?"
+            }
+        }
+    },
+    "actions": {
+        "importProject": "Import Resources",
+        "pullProject": "Pull From Git",
+        "pushProject": "Push To Git",
+        "syncProject": "Git Synchronization",
+        "importFromGit": "Import From Git Repository",
+        "importZipFile": "Import .ZIP File",
+        "importSwaggerFile": "Import Swagger File"
+    },
+    "git": {
+        "import": {
+            "error": "Check GIT repo URL and Credentials"
+        },
+        "btn": {
+            "syncronise": "Synchronize",
+            "addBranch": "Add Branch",
+            "clone": "Clone",
+            "check": "Check Branchs"
+        }
+    },
+    "api": {
+        "addHeaders": "Add Headers",
+        "definition": "Endpoint Definition",
+        "doc": "Documentation",
+        "enumMsg": "You can add one or more values by separating them with a comma or an entry .",
+        "jsonEditorMsg": "You can use this JSON editor to add you response example.",
+        "responseDetails": "Response Details",
+        "examples": "Examples",
+        "view": "View Model",
+        "exitEditor": "Exit Editor",
+        "required": "Required",
+        "addParams": "Add Parameter",
+        "addCodes": "Add Response",
+        "emptyCollection": "Collection is required",
+        "emptyTable": "Table is required",
+        "emptySqlQuery": "SQL query is required",
+        "emptyCode": "Code is required",
+        "emptyDescription": "Description is required",
+        "headerExisting": "This header is already existing !",
+        "placeholder": {
+            "name": "Name",
+            "http": "HTTP Method",
+            "endpoint": "Endpoint path",
+            "request": "Request Content Type",
+            "response": "Response Content Type",
+            "this": "This is the content of the transformation",
+            "default": "Default Value",
+            "collection": "Collection Name",
+            "language": "Programming Language",
+            "fname": "File name in parameters",
+            "selectCollection": "Please select a collection from the database",
+            "selectLanguage": "Please select a programming Language",
+            "selectIndex": "Please select an Index",
+            "uploadFile": "Upload a file",
+            "snippet": "Select a default query",
+            "selectModel": "Select a model",
+            "noModel": "No models added yet",
+            "selectFunction": "Please select a function"
+        },
+        "qtype": "Query Type",
+        "cancel": "Cancel",
+        "close": "Close",
+        "query": "Query",
+        "fichier": "Files Management",
+        "one": "Object",
+        "many": "Array",
+        "in": "In order to manipulate files, retreive or delete, please provide a parameter called '",
+        "id": "id",
+        "htt": "' in the HTTP request with the value of the file id.",
+        "page": "Pageable",
+        "please": "Please provide the following query parameters when you call this Endpoint :",
+        "hold": ": parameter to hold the page number",
+        "per": ": parameter to hold the number of elements per page",
+        "insert": "To insert an object in the database, add it to the HTTP request Body on Endpoint call.",
+        "update": "To update an object in the database, define a query for find operation and add the columns to update in the HTTP request Body on Endpoint call.",
+        "string": "String",
+        "integer": "Integer",
+        "boolean": "Boolean",
+        "char": "Char",
+        "ad": "Add",
+        "name": "Name",
+        "value": "Value",
+        "body": "Body Content",
+        "or": "Or",
+        "n": "Name :",
+        "desc": "Description : ",
+        "summary": "Summary : ",
+        "validity": "Validity : ",
+        "http": "HTTP Method : ",
+        "prod": "Produces : ",
+        "cons": "Consumes : ",
+        "selected": "Selected File : ",
+        "path": "Path of execution : ",
+        "second": "Secondary Selected File :",
+        "list": "List of parameters : ",
+        "respo": "List of Responses : ",
+        "under": "Under each Http method, the Endpoint path needs to be unique.",
+        "add": "Add Endpoint",
+        "edit": "Edit Endpoint",
+        "addCollection": "Add New Collection",
+        "hideDetails": "Hide Details",
+        "advancedDetails": "Advanced Details",
+        "insertData": "Insert Data",
+        "updateData": "UpdateData",
+        "readData": "Read data",
+        "parameters": "Parameters List",
+        "recap": "Recapitulation",
+        "reqDetails": "Execution Request",
+        "funcInterceptorDetails": "Interceptors",
+        "inInterceptor": "Input Interceptor ",
+        "outInterceptor": "Output Interceptor",
+        "resDetails": "200 - HTTP Request | Response",
+        "file": "File Management",
+        "importedFile": "Fichier importé",
+        "staticRes": "CSS, Images, Media",
+        "returnNumber": "Response Type",
+        "requestNumber": "Request Body Type",
+        "returnElementNumber": "Your endpoint will return an object or an array ?",
+        "requestElementNumber": "Is your request body an object or an array ?",
+        "template": "Markup template",
+        "resources": "Select your Markup Template and all resources to inject (CSS, Js, Images,Media...)",
+        "noSelectedFiles": "No Files Selected",
+        "templateStep": "Markup, CSS, Js, Images...",
+        "httpCodes": "HTTP Response Status Codes",
+        "type": "Endpoint Type",
+        "insertUpdate": "Please choose the type of this Endpoint, whether it is a data insertion, an update or function execution",
+        "read": "Please choose the type of this Endpoint, whether it is a data reading or a function execution",
+        "interceptor": "Please choose the type of Interceptor",
+        "reqBody": "You can define the body of the query to execute",
+        "paramList": "List of parameters",
+        "emptyPath": "Endpoint can't be empty",
+        "copy": "Copy Endpoint URL",
+        "requestModel": "Request Model",
+        "responseModel": "Response Model",
+        "functions": "Functions",
+        "viewFunction": "view the function",
+        "hideFunction": "hide the function",
+        "inFunction": "Input Function",
+        "outFunction": "Output Function",
+        "previewInFunction": "Preview Input Function",
+        "previewOutFunction": "Preview Output Function",
+        "chooseFunction": "Choose a Function",
+        "function": "Execute a function",
+        "apiFunction": "Function",
+        "previewFunction": "Preview Function",
+        "insertFunction": "Insert the function please",
+        "requiredFunction": "Please provide the function",
+        "deleteData": "Delete Data",
+        "createFunction": "Create Function"
+    },
+    "query-api-modal": {
+        "close": "Close",
+        "file": "File Name",
+        "placeholder": {
+            "name": "Name...",
+            "default": "Default Value..."
+        },
+        "string": "String",
+        "integer": "Integer",
+        "boolean": "Boolean",
+        "reqType": "Request Type",
+        "interceptorType": "Interceptor Type",
+        "char": "Char",
+        "name": "Name",
+        "type": "Type",
+        "value": "Value",
+        "confirm": "Confirm"
+    },
+    "staticresource": {
+        "add": "Add Static Resource "
+    },
+    "reset": {
+        "resetPassword": "Reset Password",
+        "enterPassword": "Please enter your new password",
+        "passwordNotMatch": "Passwords do not match",
+        "resetSuccessReset": "Your password have been successfully submitted. We have sent a confirmation link to your Email that expires in 24 hours",
+        "submit": "Submit",
+        "signup": "Sign up",
+        "login": "Log in"
+    },
+    "resource-details-modal": {
+        "resource": "Resource Parameters",
+        "value": "Value",
+        "no": " No parameters attached to this resource.",
+        "close": "Close"
+    },
+    "help": {
+        "apiPath": "Set the Endpoint method (ex: GET) and the path (ex: '/users/all')",
+        "collection": "Select a collection from the dropdown list. \n You can use the \"Add New Collection\" button to add a new collection by typing the new collection's name and approve.",
+        "contentTypeReq": "The Content-Type entity header is used to indicate the media type of the resource in the request.",
+        "contentTypeRes": "The Content-Type entity header is used to indicate the media type of the resource in the response.",
+        "resNumber": "Return all the elements in the result array or only the first element.",
+        "reqNumber": "Pass one element as a request input or an array of elements.",
+        "fileName": "Set the name of the request parameter to host the file to upload on API call. \n (ex: 'fileToUpload')",
+        "reqType": "This Endpoint can be used to Insert or Update data. \n You need to select one option. \n By default, 'Insert' is selected.",
+        "projection": "Set the fields to return for all matching objects. Only the named properties will be returned.",
+        "query": "You can set the Query to be executed in order to manipulate data. The query needs to respect a specific format. Every field name needs to have a parameter as value that begins with '%'.\n (ex : { \"name\": \"%name\" } and you set a new parameter '%name' in parameters section)",
+        "addParam": "After setting the query body, add your parameters (that start with '%') in this section. \n (ex: {\"field\":\"%val\"}, add a parameter with these properties \n name : val, type : String, and a default value on the need )",
+        "httpStatus": "HTTP defines forty standard status codes that can be used to convey the results of a client’s request. You can override the status codes messages.",
+        "primaryRessource": "Select the file of the transformation.",
+        "secondaryRessource": "Select the static files to inject into the file of the transformation.",
+        "requestModel": "Select your request body model.",
+        "responseModel": "Select your response model.",
+        "addParamEditor": "You can add the necessary parameters for your endpoints and manipulate them",
+        "outFunction": "You can add a function that acts as an output interceptor to your API, query parameters and path variables",
+        "inFunction": "You can add a function that acts as an input interceptor to your API, you can pass inserted body to it, query parameters and path variables "
+    },
+    "file-explorer": {
+        "noResources": "No resources to display, to import click ",
+        "here": "here"
+    },
+    "import-modal": {
+        "dbError": "Please Link a Database to this Microservice before trying to upload resources.",
+        "fromGit": "From Git",
+        "clone": "Clone",
+        "branch": "Branch",
+        "public": "Public",
+        "private": "Private",
+        "username": "Username",
+        "password": "Password",
+        "token": "Token (For Github Repos)"
+    },
+    "swagger": {
+        "placeholder": {
+            "fileUrl": "Swagger File URL"
+        },
+        "inspector": "Swagger Inspector",
+        "open": "Open Inspector",
+        "errorMsg": "Swagger File can't be imported, please check the URL and try again"
+    },
+    "comingSoon": "Coming soon",
+    "toastr": {
+        "projectUpdated": "Microservice has been updated"
+    },
+    "messageBox": {
+        "project": {
+            "delete": "When you delete a microservice, this immediately happens",
+            "msgDeleteAllVersion": "All versions within this microservice are going to be deleted",
+            "msgDeleteAllFiles": "All files related to the versions of this microservice are going to be deleted"
+        },
+        "dbsource": {
+            "delete": "When you delete a Datasource, this immediately happens",
+            "msgDeleteAllcontent": "All the stored content will be deleted",
+            "msgNoBackup": "No possible backup for this datasource"
+        },
+        "identityprovider": {
+            "delete": "When you delete an Identity Provider, this immediately happens",
+            "msgDeleteAllcontent": "All the stored content will be deleted",
+            "msgNoBackup": "No possible backup for this Identity Provider"
+        },
+        "model": {
+            "delete": "The delete operation will impact the endpoints which use this model."
+        },
+        "organization": {
+            "delete": "When you delete an organization, this immediately happens"
+        },
+        "member": {
+            "delete": "When you delete a member, this immediately happens"
+        },
+        "team": {
+            "delete": "When you delete a team, this immediately happens"
+        }
+    },
+    "swaggerModal": {
+        "descOpenApi": "We rely on OpenAPI Specification (formerly Swagger Specification), an API description format for REST APIs, to generate an OpenAPI file which allows you to describe your entire API.",
+        "afterConfig": "After configuring the microservice version by setting all the endpoints definitions, you have several options to validate, execute and share this version.",
+        "inspectorDesc": "Test and validate your endpoints",
+        "inscpectorVerify": "You can use this Swagger Inspector to verify that your APIs work as they should. This inspector should be used to test your Query APIs only.",
+        "inspectorValidate": "If your API definition contains any incoherence, the inspector will outline that error. You can execute any valid API directly from the inspector.",
+        "postmanDesc": "Import API definitions into Postman",
+        "executeLocal": "Test API locally",
+        "executeWays": "You can import your API definitions into Postman in two ways. you can choose to use :",
+        "json": "Swagger Content",
+        "file": "Swagger File",
+        "jsonStep1": "Copy the Swagger JSON content.",
+        "jsonStep2": "Click on the 'Import' button in the top left corner of Postman UI.",
+        "jsonStep3": "You will see multiple options to import the API doc. Click on the 'Paste Raw Text'.",
+        "jsonStep4": "Paste the JSON format in the text area and click import.",
+        "jsonStep5": "You will see all your APIs as 'Postman Collection' and you can use them from the Postman.",
+        "downloadStep1": "Download the Swagger JSON file.",
+        "downloadStep2": "Click on the 'Import' button in the top left corner of Postman UI.",
+        "downloadStep3": "You will see multiple options to import the API doc. Click on the 'Import File'.",
+        "downloadStep4": "Drag the Swagger file directly from it and select it from the file system.",
+        "downloadStep5": "You will see all your APIs as 'Postman Collection' and you can use them from the Postman.",
+        "shareFile": "Share Swagger File",
+        "downloadShare": "Download and share your API Definition",
+        "shareTwoWays": "Grizzly provides two ways to share your API definition depending on your needs :",
+        "withDevs": "1 - Share with other Grizzly-API users",
+        "devDesc": "In order to share your work with other users of Grizzly-API plateform you simply download the Swagger file dedicated for developement",
+        "forDev": "Download Swagger For Developement",
+        "openApiforDev": "Download OpenApi For Developement",
+        "withUsers": "2 - Share with final users",
+        "usersDesc": "In order to share your work with final users or clients, please download the Swagger file dedicated for Production",
+        "forProd": "Download Swagger For Production",
+        "openApiforProd": "Download OpenApi For Production",
+        "click": " click here",
+        "swagFileJson": "Swagger (JSON)",
+        "openApiFileJson": "OpenApi (JSON)",
+        "serverUrl": "Server URL for ",
+        "tsExport": "Export Swagger Models in Typescript classes",
+        "downloadTypescript": "Download your Swagger Models in Typescript format",
+        "exportOption": "Grizzly allows you to download your Swagger models as Typescript files to easily add them in your projects.",
+        "usefulLinks": "Useful Links",
+        "usefulLinksMsg": "Visualize and share your microservice"
+    },
+    "github": {
+        "emailExists": "Your Github email is already linked with an account on Grizzly. If you forgot your password ask for password reset.",
+        "login": "Login with Github"
+    },
+    "google": {
+        "emailExists": "Your Google email is already linked with an account on Grizzly. If you forgot your password ask for password reset.",
+        "login": "Login with Google"
+    },
+    "toaster": {
+        "docker": {
+            "exported": "Docker exported successfully",
+            "pending": "Another export is in pending state"
+        },
+        "editor": {
+            "shared": "Microservice shared with success"
+        },
+        "organization": {
+            "added": "Organization Added",
+            "updated": "Organization Updated",
+            "deleted": "Organization Deleted",
+            "limit": "Limit Reached!"
+        },
+        "team": {
+            "added": "Team Added",
+            "updated": "Team Updated",
+            "deleted": "Team Deleted",
+            "limit": "Limit Reached!"
+        },
+        "member": {
+            "added": "Member Added",
+            "updated": "Member Updated",
+            "deleted": "Member Deleted",
+            "limit": "Limit Reached!"
+        },
+        "project": {
+            "added": "Microservice Added",
+            "updated": "Microservice Updated",
+            "deleted": "Microservice Deleted",
+            "limit": "Limit Reached!",
+            "integrated": "Project integrated",
+            "name": "Project name already exists"
+        },
+        "container": {
+            "added": "Version Added",
+            "updated": "Version Updated",
+            "deleted": "Version Deleted",
+            "allDeleted": "All versions have been deleted",
+            "filesDeleted": "All files have been deleted",
+            "imported": "Version Imported",
+            "exported": "Version Exported",
+            "cloned": "Version Cloned",
+            "fileLimit": "Your file size is too big!! You have exceeded the limit of your offer.",
+            "cloneLimit": "Your cloned container size is too big!! You have exceeded the limit of your offer.",
+            "gitLimit": "Your repository size is too big!! You have exceeded the limit of your offer."
+        },
+        "group": {
+            "added": "Endpoint group Added",
+            "updated": "Endpoint group Updated",
+            "deleted": "Endpoint group Deleted"
+        },
+        "resource": {
+            "copy": "Copied to clipboard"
+        },
+        "datasource": {
+            "added": "Datasource Added",
+            "updated": "Datasource Updated",
+            "deleted": "Datasource Deleted",
+            "limit": "Data source Limit Reached!",
+            "uploadcsv": {
+                "added": "File Added",
+                "error": "Check the type your file"
+            },
+            "collection": {
+                "added": "Collection Added",
+                "error": "Collection cannot be added",
+                "dropped": " Collection Dropped"
+            },
+            "table": {
+                "added": "Table Added",
+                "error": "Table cannot be dropped",
+                "dropped": "Table dropped successfully"
+            }
+        },
+        "identityprovider": {
+            "added": "Identity Provider Added",
+            "updated": "Identity Provider Updated",
+            "deleted": "Identity Provider Deleted",
+            "limit": "Identity Provider Limit Reached!",
+            "name": "Identity Provider name already exists"
+        },
+        "model": {
+            "added": "Model Added",
+            "updated": "Model Updated",
+            "deleted": "Model Deleted",
+            "request": "Request Model Defined",
+            "response": "Response Model Defined",
+            "error": {
+                "classModel": "You need to provide a class or an interface !",
+                "emptyName": "Your need to provide a model name !",
+                "undefinedName": "There is an attribute without a name !",
+                "undefinedType": "There is an attribute without a type !",
+                "missingBraces": "You are missing a brace !",
+                "typeError": "{{type}} is undefined !",
+                "alreadyExists": "Model already exists",
+                "noNameEdit": "Model name cannot be changed"
+            }
+        },
+        "function": {
+            "added": "Function Saved",
+            "updated": "Function Updated",
+            "deleted": "Function Deleted",
+            "notUnique": "You need to insert non existing version please",
+            "null": "Please insert the required fields",
+            "attachedFunction ": "Attached Functions "
+        }
+    },
+    "editor": {
+        "history": {
+            "title": "Your Local History",
+            "msg": "The list of microservices saved in your history"
+        },
+        "model": "Manage your swagger models",
+        "tip1": "Just drag endpoints between tags to move them.",
+        "tip2": "Just click on the Share button to make it accessible for your teammates.",
+        "tip3": "Previewing your Swagger/OpenAPI is available in JSON and YAML format.",
+        "tip4": "You can add custom models with Typescript files.",
+        "tip5": "To secure your endpoints, use the integrate into GrizzlyAPI feature.",
+        "tip6": "Did you know that GrizzlyEditor offers the possibility to export in Swagger V2 and OpenAPI V3.0.1?",
+        "btn": {
+            "history": "Local History",
+            "model": "Model",
+            "integrate": "Integrate",
+            "integrateApi": "Integrate Grizzly API",
+            "integrateHub": "Integrate Grizzly Hub",
+            "clear": "Clear",
+            "new": "New",
+            "share": "Share",
+            "login": "Login",
+            "addTag": "Add Tag",
+            "load": "Import",
+            "jsonFile": "File",
+            "yamlFile": "YAML File",
+            "export": "Export",
+            "exportSwagger": "Export Swagger",
+            "exportOpenApi": "Export OpenAPI",
+            "preview": "Preview",
+            "deleteEndpoints": "Delete Endpoint",
+            "menuTag": "Tag",
+            "editTag": "Edit",
+            "deleteTag": "Delete",
+            "copyJson": "Copy Json Content",
+            "featureGrizzlyAPI": "Integrate your swagger in GrizzlyAPI",
+            "featureGrizzlyHUB": "Integrate your swagger in GrizzlyHUB",
+            "add": "Add model",
+            "copyYaml": "Copy Yaml Content",
+            "generateServerClient": "Generate Server/Client",
+            "generate": "Generate",
+            "copyTooltip": "Copy your microservice URL",
+            "cloneTooltip": "Clone a copy your microservice",
+            "generateTooltip": "Generate new microservice",
+            "clearTooltip": "Clear the editor",
+            "addModelTootlip": "Add your model in Typescript format",
+            "manageModelTootlip": "Manage your swagger models",
+            "importTooltip": "Import your Typescript model",
+            "saveTooltip": "Save",
+            "deleteContainer": "Delete Microservice",
+            "deleteContainerMsg": "Do you really want to delete '{{name}}' ?"
+        },
+        "placeholder": {
+            "swaggerTitle": "Swagger Title",
+            "swaggerVersion": "Swagger Version"
+        },
+        "description": "Did you know that GrizzlyEditor offers the possibility to export in Swagger V2 and OpenAPI V3.0.1?",
+        "tip": "TIP: Just drag endpoints between tags to move them",
+        "msg": {
+            "importSwaggerMsg": "While importing a new swagger , the existing one will be lost . If you want to keep it please use the New button above instead.",
+            "tagAdded": "Tag Added",
+            "tagUpdated": "Tag Updated",
+            "tagDeleted": "Tag Deleted",
+            "editorCleared": "Editor Cleared",
+            "clearEditor": "Clear Editor",
+            "importSwagger": "Import Swagger",
+            "newProject": "New Microservice",
+            "clearMsg": "All tags, endpoints and models will be deleted",
+            "newMsg": "You will be redirected to a new page.",
+            "swaggerUpdated": "Swagger Updated",
+            "swaggerImported": "Swagger Imported",
+            "deletedEndpoints": "All selected endpoints are deleted",
+            "endpointUpdated": "Endpoint Updated",
+            "cloneProject": "Clone Microservice",
+            "cloneMsg": "Do you want to clone this microservice."
+        },
+        "tag": {
+            "add": "Add a new tag",
+            "edit": "Update tag",
+            "delete": {
+                "title": "Delete tag",
+                "msg": "Confirm delete for tag: '{{name}}'"
+            },
+            "deleteAll": "Delete all tags",
+            "errors": {
+                "unicity": "A tag with this name already exists",
+                "null": "Tag name must not be empty",
+                "pattern": "Spaces can be used only in the middle"
+            }
+        },
+        "export": {
+            "title": "Export Swagger"
+        },
+        "share": {
+            "title": "Share your microservices with multiple emails",
+            "msg": "Enter the email addresses by separating them with a comma, an entry or a space.",
+            "choices": "Shared Elements",
+            "link": "Get a link"
+        },
+        "goto": "Go To Editor",
+        "copy": "URL copied to Clipboard",
+        "server": "Server"
+    },
+    "function": {
+        "awsKeyId": "Please choose AWS key Id",
+        "codeEditor": "Code Editor",
+        "testCode": "Test your code",
+        "addFunction": "Add ",
+        "delete": "Delete the function",
+        "save": "Add Function",
+        "edit": "Edit Function",
+        "clone": "Clone the function",
+        "test": "Test the function",
+        "name": "Name",
+        "language": "Language",
+        "functionName": "Function Name",
+        "programmingLanguage": "Runtime",
+        "update": "Update",
+        "back": "Cancel",
+        "chooseFunction": "Choose a Function",
+        "className": "Class Name",
+        "methodName": "Method Name",
+        "modelName": "Model Name",
+        "noFunction": "No Functions to display.",
+        "save&&exit": "Save & Exit",
+        "selectFunctionLanguage": "Please choose the function's language ",
+        "insertFunctionName": "Please choose the function's name ",
+        "insertFunctionVersion": "Please choose the function's version ",
+        "format": " Format",
+        "notUnique": "Please choose an unique combination of function Name and function Version",
+        "awsFunctionName": "Please choose your AWS Lambda function's name",
+        "openFaasPort": "Please choose OpenFaas Port",
+        "openFaasURI": "Please insert OpenFaas URI",
+        "openFaasHeaderName": "Please insert Header name",
+        "openFaasHeaderValue": "Please insert Header value",
+        "openFaasHeaderType": "Please insert Header type"
+    },
+    "docker": {
+        "info": {
+            "commands": "Using docker commands",
+            "compose": "Using docker compose",
+            "pull": "Pull image",
+            "run": "Run image",
+            "import": "Import and run docker image locally"
+        },
+        "title": "Export your microservice in docker",
+        "export": "Export",
+        "latest": "Latest exports"
+    },
+    "bigquery": {
+        "key": "Service account key"
+    },
+    "plan": "Subscription",
+    "daysLeft": " remaining days ",
+    "switchAUTH": "Switch To Grizzly Auth",
+    "openFaasWarning": "For the endpoints based on OpenFaas functions , it's recommanded to use POST endpoint.",
+    "grizzlyai": {
+        "ask": "Ask",
+        "message1": "<i><b>Welcome to Grizzly AI</b></i>",
+        "message2": "Create API/microservices like a pro? <br>I’m your intelligent assistant, here to guide you every step of the way on this exciting journey!",
+        "message3": "<b>Let’s get started!</b>",
+        "message4": "<b>How to create your API/microservice? 🐾</b><br><br>1️⃣ <b>Create an API/Microservice</b>: Start by providing a brief description of your microservice.<br>2️⃣ <b>Define your data model</b>: Create the model that suits your needs.<br>3️⃣ <b>Create your endpoints</b>: Define your endpoints as you see fit.<br><br>",
+        "message5": "And there you go, your microservice is taking shape! Shall we continue together?",
+        "placeholder": "Ask Grizzly AI",
+        "downloadConversation": "Download",
+        "clearConversation": "New Session",
+        "listOfMs": "Created microservices:"
+    }
+}
